@@ -1,0 +1,27 @@
+#category-view-manager{
+  .category-products-page-wrap{
+    .category-product-wrap{
+      .box{
+        position: relative;
+        // 产品目录页的产品的 Brand 的 Logo
+        .cp-brand-wrap{
+          position: absolute;
+          z-index: 100;
+          top: 9px;
+          left: 9px;
+          .cp-brand{
+            max-height: 50px;
+            max-width: 100px;
+          }
+        }
+        // 产品目录页的产品的图片
+        .p-img{
+          .image{
+            max-height: 150px;
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+  }
+}

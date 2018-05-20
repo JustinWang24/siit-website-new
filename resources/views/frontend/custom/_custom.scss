@@ -1,0 +1,372 @@
+$container-padding-left-desktop: 67px;  // 左侧的留白
+$color-logo-blue: #00427f;              // Logo蓝色
+$color-deep-blue: #08203c;              // Logo蓝色
+$color-super-light: #f8f8f7;
+$color-page-blue-bg: #06162f;
+$color-page-blue-bg-light: #0d345f;
+
+body{
+  background-color: $color-super-light;
+}
+.bg-transparent{
+  background: transparent;
+}
+// Navigation bar
+.header-bg-bar{
+  z-index: -1;
+  height: 117px;
+  //background-color: $color-deep-blue;
+  background-color: #12243a;
+}
+#navbar{
+  background: white;
+  margin-top: -117px;
+  #home-nav-header{
+    height: 831px;
+    background-image: url("/images/frontend/custom/header_bg3.jpg");
+  }
+}
+.navbar-brand{
+  height: 117px;
+  #logo-top{
+    margin-left: $container-padding-left-desktop;
+  }
+}
+
+#navDesktopWrap{
+  padding-top: 20px;
+  padding-bottom: 17px;
+  display: block;
+  background: transparent;
+  position: relative;
+  height: 117px;
+  .navbar-menu{
+    width: 95%;
+    .sm-nav{
+      .navbar-item{
+        font-size: 13px;
+        color: white;
+        &:hover{
+          background: transparent;
+          color: red;
+        }
+      }
+    }
+    .big-nav{
+      .navbar-item{
+        color: white;
+        &:hover{
+          background: transparent;
+          color: red;
+        }
+        .navbar-link{
+          font-size: 16px;
+          color: white;
+          background: transparent;
+          &:hover{
+            background: transparent;
+            color: red;
+          }
+          &::after{
+            border-color: white;
+          }
+        }
+        .navbar-dropdown{
+          .navbar-item{
+            color: #333;
+            &:hover{
+              background: transparent;
+              color: red;
+            }
+          }
+        }
+      }
+    }
+  }
+  #search-form-wrap{
+    position: absolute;
+    top:20px;
+    right: 1px;
+    display: block;
+    #search-btn{
+      display: block;
+      height: 70px;
+      background-color: $color-deep-blue;
+      color: white;
+      &:hover{
+        background-color: $color-logo-blue;
+      }
+      p{
+        padding: 10px;
+        line-height: 50px;
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+// Header Widgets Wrap
+.header-widget-wrap{
+  padding-left: $container-padding-left-desktop;
+  margin-top: -700px;
+  background: transparent;
+  .headline-box{
+    h2{
+      font-size: 60px;
+      color: white;
+      font-weight: 100;
+      font-family: "Roboto";
+      line-height: 140px;
+      .super-bold{
+        font-weight: 900;
+        font-size: 70px;
+      }
+    }
+  }
+  .header-widget{
+    .column{
+      .card{
+        background: transparent;
+        box-shadow: none;
+        .card-image{
+          .image{
+            img{
+              height: 216px;
+            }
+          }
+        }
+        .card-content{
+          padding-left: 0;
+          .media{
+            .media-content{
+              p{
+                color: white;
+              }
+            }
+          }
+          .content{
+            color: white;
+            a{
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.header-events-wrap{
+  padding-top: 16px;
+  background: transparent;
+  padding-right: $container-padding-left-desktop;
+  overflow: hidden;
+  .content{
+    background-color: $color-super-light;
+    padding-left: $container-padding-left-desktop;
+    .event-box{
+      background-color: $color-super-light;
+      padding-left: 0;
+      padding-bottom: 0;
+      .card{
+        box-shadow: none;
+        .card-content{
+          border: none;
+          padding: 0.6rem;
+          background-color: $color-super-light;
+          .event-title{
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-family: "Roboto";
+          }
+          time{
+            font-size: 12px;
+            color: #cccccc;
+          }
+          .brief{
+            border-right: solid 1px $color-super-light;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+// Page
+.company-brief-wrap, .campus-life-wrap, .story-success-wrap, .we-social-wrap{
+  background-color: white;
+  margin-top: 0;
+  overflow: hidden;
+  min-height: 594px;
+  .container{
+    background-color: $color-page-blue-bg;
+    padding-left: $container-padding-left-desktop;
+    padding-right: $container-padding-left-desktop;
+    .first-visiting{
+      padding-top: 40px;
+      h2{
+        font-size: 64px;
+        font-weight: lighter;
+        font-family: "Roboto";
+        margin: 2px;
+        line-height: 66px;
+        color: white;
+        .super-bold{
+          font-weight: bold;
+        }
+      }
+      p{
+        color: white;
+        font-size: 16px;
+        line-height: 26px;
+      }
+      .card{
+        background: transparent;
+        box-shadow: none;
+      }
+    }
+    .first-visiting-sidebar{
+      background-color: $color-page-blue-bg-light;
+      color: white;
+      .box{
+        background: transparent;
+        box-shadow: none;
+        h4, h5, p{
+          color: white;
+        }
+        h4{
+          font-size: 30px;
+        }
+      }
+    }
+  }
+}
+.campus-life-wrap{
+  background-image: url("/images/frontend/custom/header_bg_ts.jpg");
+  background-position: top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 0;
+  .container{
+    background: transparent;
+    .content{
+      background: transparent;
+      position: relative;
+      .feature-img-box{
+        border-radius: 0;
+      }
+      .brochure-box{
+        position: absolute;
+        right: -$container-padding-left-desktop;
+        bottom:-45px;
+        border-radius: 0;
+        background-color: #e32316;
+        width: 63%;
+        float: right;
+        h2{
+          color: white;
+          padding:11px;
+        }
+        .view-more-btn{
+          color: white;
+          background-color: #c41d17;
+          padding: 11px;
+          margin-right: $container-padding-left-desktop;
+        }
+      }
+    }
+  }
+}
+
+.story-success-wrap{
+  background-image: url("/images/frontend/custom/smile3.jpg");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 680px;
+  margin-top: 0;
+  .container {
+    background: transparent;
+    .box{
+      background: white;
+      padding: 30px;
+      border-radius: 0;
+      h3, p{
+        color: #333;
+      }
+      h3{
+        font-size: 30px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+.we-social-wrap{
+  background-color: $color-page-blue-bg-light;
+  min-height: 320px;
+  margin-top: 0;
+  .container{
+    background: transparent;
+    .social-msg{
+      background: transparent;
+      border-radius: 0;
+      width: 80%;
+      p{
+        color: white;
+      }
+    }
+    .facebook-btn, .twitter-btn{
+      border-radius: 0;
+      background-color: #00477f;
+      a{
+        color: white;
+        font-size: 30px;
+        .fa-facebook-f{
+          margin-right: 20px;
+        }
+      }
+    }
+    .twitter-btn{
+      background-color: #0294cd;
+      a{
+        .fa-twitter{
+          margin-right: 9px;
+        }
+      }
+    }
+  }
+}
+
+// Footer
+.footer{
+  background: #06162f;
+  .container{
+    background: transparent;
+    p{
+      color: white;
+      margin-bottom: 10px;
+      a{
+        color: white;
+        &:hover{
+          color: red;
+        }
+      }
+    }
+    label{
+      color: white;
+      text-transform: uppercase;
+    }
+    .social-icons{
+      font-size: 40px;
+      a{
+        color: #505b6d;
+        &:hover{
+          color: white;
+        }
+      }
+    }
+  }
+}
