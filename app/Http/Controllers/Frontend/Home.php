@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Models\Catalog\Product;
 use App\Models\Page;
+use App\Models\Catalog\Category;
 
 class Home extends Controller
 {

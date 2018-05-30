@@ -168,18 +168,17 @@
     <div class="container header-events-wrap">
         <div class="content">
             <div class="columns is-marginless">
-                @foreach(range(1,3) as $key)
+                @foreach($topStories as $blog)
                 <div class="column event-box">
                     <div class="card">
                         <div class="card-content">
                             <div class="content is-paddingless">
-                                <h3 class="event-title">Event {{ $key }}</h3>
-                                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                                <h3 class="event-title">{{ $blog->title }}</h3>
+                                <time datetime="2016-1-1">{{ $blog->created_at->format('H:i A - d M Y') }}</time>
                                 <br>
                                 <div class="brief">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.<a href="#">@siit_twitter</a>.
+                                    {!! $blog->teasing !!}
                                 </div>
-
                             </div>
                         </div>
                     </div>

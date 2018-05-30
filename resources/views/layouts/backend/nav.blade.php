@@ -1,5 +1,30 @@
 <nav id="menu" class="menu slideout-menu slideout-menu-left">
     <section class="menu-section">
+        <h3 class="menu-section-title">Content</h3>
+        <ul class="menu-section-list">
+            <li>
+                <a class="{{ $menuName=='pages' ? 'is-active' : null }}" href="{{ url('/backend/pages/index') }}">
+                    <i class="fas fa-paperclip"></i>&nbsp{{ trans('admin.menu.pages') }}
+                </a>
+            </li>
+            <li><a class="{{ $menuName=='blog' ? 'is-active' : null }}" href="{{ url('/backend/blog/index') }}">
+                    <i class="fab fa-blogger"></i>&nbsp{{ trans('admin.menu.blog') }}
+                </a>
+            </li>
+            <li>
+                <a class="{{ $menuName=='news' ? 'is-active' : null }}" href="{{ url('/backend/news/index') }}">
+                    <i class="far fa-newspaper"></i>{{ trans('admin.menu.news') }}
+                </a>
+            </li>
+            <li>
+                <a class="{{ $menuName=='events' ? 'is-active' : null }}" href="{{ url('/backend/events/index') }}">
+                    <i class="fas fa-calendar-alt"></i>Events
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <section class="menu-section">
         <h3 class="menu-section-title">Widgets</h3>
         <ul class="menu-section-list">
             <li><a class="{{ $menuName=='blocks' ? 'is-active' : null }}" href="{{ url('/backend/widgets/blocks') }}"><i class="fas fa-columns"></i>Blocks</a></li>

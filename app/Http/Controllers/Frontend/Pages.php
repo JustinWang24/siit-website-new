@@ -44,6 +44,11 @@ class Pages extends Controller
         $this->dataForView['featureProducts'] = Category::LoadFeatureProducts();
         $this->dataForView['promotionProducts'] = Category::LoadPromotionProducts();
 
+        $this->dataForView['topStories'] = Page::where('type',Page::$TYPE_BLOG)
+            ->orderBy('id','desc')
+            ->take(3)
+            ->get();
+
         event(new StartLoading($page,$this->dataForView));
         return view($this->_getPageViewTemplate($page),$this->dataForView);
     }

@@ -30,7 +30,10 @@ class CreatePagesTable extends Migration
             $table->text('seo_description')->nullable();
             $table->text('teasing')->nullable();
 
+            $table->unsignedInteger('clicks')->default(0);
+
             $table->softDeletes();
+            $table->timestamps();
         });
 
         Page::Persistent([

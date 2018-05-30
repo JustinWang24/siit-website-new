@@ -33,7 +33,7 @@ class Page extends Model implements ISupportWidget
         'teasing',
     ];
 
-    public $timestamps = false;
+    public $timestamps = true;
     // 本页面包含的 Widgets
     public $widgets = [];
 

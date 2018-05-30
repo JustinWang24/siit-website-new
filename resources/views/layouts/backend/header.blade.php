@@ -12,15 +12,6 @@
             <a class="navbar-item {{ $menuName=='menus' ? 'is-active' : null }}" href="{{ url('/backend/menus/index') }}">
                 <i class="fas fa-compass"></i>&nbsp;{{ trans('admin.menu.menus') }}
             </a>
-            <a class="navbar-item {{ $menuName=='pages' ? 'is-active' : null }}" href="{{ url('/backend/pages/index') }}">
-                <i class="fas fa-paperclip"></i>&nbsp;{{ trans('admin.menu.pages') }}
-            </a>
-            <a class="navbar-item {{ $menuName=='blog' ? 'is-active' : null }}" href="{{ url('/backend/blog/index') }}">
-                <i class="fab fa-blogger"></i>&nbsp;{{ trans('admin.menu.blog') }}
-            </a>
-            <a class="navbar-item {{ $menuName=='news' ? 'is-active' : null }}" href="{{ url('/backend/news/index') }}">
-                <i class="far fa-newspaper"></i>&nbsp;{{ trans('admin.menu.news') }}
-            </a>
             @if(env('activate_ecommerce',false))
                 <a class="navbar-item {{ $menuName=='categories' ? 'is-active' : null }}" href="{{ url('/backend/categories') }}">
                     <i class="fab fa-bitbucket"></i>&nbsp;{{ trans('admin.menu.categories') }}
