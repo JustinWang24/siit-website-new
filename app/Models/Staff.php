@@ -91,7 +91,7 @@ class Staff extends Model
     public static function RetrieveStaffMembers(){
         return self::where('type',self::STAFF_MEMBERS)
             ->where('status',true)
-            ->orderBy('job_group','asc')
+            ->orderBy('division','asc')
             ->orderBy('name')
             ->get();
     }
