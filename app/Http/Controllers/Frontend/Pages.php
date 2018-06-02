@@ -6,6 +6,7 @@ use App\Events\Contact\LeadReceived;
 use App\Events\Page\Content\StartLoading;
 use App\Models\Configuration;
 use App\Models\Lead;
+use App\Models\Staff;
 use App\Models\Utils\ContentTool;
 use App\Models\Utils\JsonBuilder;
 use App\Models\Widget\Slider;
@@ -82,6 +83,13 @@ class Pages extends Controller
         }
 
         $this->dataForView['page'] = $page;
+
+        // 检查是否为特殊页面
+        if($pageUri == Staff::PAGE_TRAINING_STAFF){
+            $this->dataForView['trainingStaffItems'] = Staff::RetrieveTrainingStaffItems(Staff::TRAINING_STAFF);
+        }
+
+//        dd($this->dataForView['trainingStaffItems']);
 
         $this->dataForView['pageTitle'] = app()->getLocale()=='cn' ? $page->title_cn : $page->title;
         $this->dataForView['metaKeywords'] = $page->seo_keyword;

@@ -26,6 +26,10 @@ class Staff extends Model
     const DIVISION_MARKETING                = 2;
     const DIVISION_FINANCE                  = 3;
 
+    // 特殊页面
+    const PAGE_TRAINING_STAFF = 'training-staff';
+    const PAGE_STAFF_MEMBERS = 'staff-members';
+
     protected $fillable = [
         'type',
         'job_group',
@@ -59,6 +63,25 @@ class Staff extends Model
      */
     public function getAvatarUrl(){
         return asset($this->feature_image);
+    }
+
+    /**
+     * 获取Training Staff
+     * @param $type
+     * @return array
+     */
+    public static function RetrieveTrainingStaffItems($type){
+        $campuses = Brand::where('status',true)->get();
+        $data = [];
+        foreach ($campuses as $campus) {
+            $data[$campus->name] = self::where('type',$type)
+                ->where('status',true)
+                ->where('brand_id',$campus->id)
+                ->orderBy('job_group','asc')
+                ->orderBy('name')
+                ->get();
+        }
+        return $data;
     }
 
     /**

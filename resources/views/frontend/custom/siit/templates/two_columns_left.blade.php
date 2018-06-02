@@ -1,11 +1,15 @@
 @extends(_get_frontend_layout_path('frontend'))
 @section('content')
 <div class="container">
+    @if(!empty($page->feature_image))
     <div class="columns mt-0 pt-0 mb-0 pb-0">
         <div class="column pt-0 pb-0">
             <img src="{{ $page->getFeatureImageUrl() }}" alt="{{ $page->title }}" style="width: 100%;">
         </div>
     </div>
+    @else
+        <div style="height: 6px;"></div>
+    @endif
     <div class="content">
         <div class="columns is-marginless">
             <div class="column is-one-quarter left-side-bar-wrap">
@@ -42,6 +46,43 @@
                 <div class="content page-content-wrap">
                     {!! $page->rebuildContent() !!}
                 </div>
+                @if(isset($trainingStaffItems))
+                <div class="content">
+                    <hr>
+                    @foreach($trainingStaffItems as $campusName=>$staffItems)
+                        <h2 class="has-text-centered">{{ $campusName }}</h2>
+                        <div class="columns is-multiline">
+                            @foreach($staffItems as $staffItem)
+                            <div class="column is-one-third">
+                                <div class="card">
+                                    <div class="card-image pt-10">
+                                        <figure class="image">
+                                            <img src="{{ $staffItem->getAvatarUrl() }}" alt="Avatar: {{ $staffItem->name }}">
+                                        </figure>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="media">
+                                            <div class="media-content">
+                                                <p class="title is-4">
+                                                    <a href="#">{{ $staffItem->name }}</a>
+                                                </p>
+                                                <p class="subtitle is-5 mt-10">{{ $staffItem->job_title }}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="content">
+                                            <a href="mailto:{{ $staffItem->email }}"><i class="fas fa-envelope-square"></i>&nbsp;{{ $staffItem->email }}</a>
+                                            <br>
+                                            <a href="tel:{{ $staffItem->phone }}"><i class="fas fa-phone-square"></i>&nbsp;{{ $staffItem->phone }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    @endforeach
+                </div>
+                @endif
             </div>
         </div>
     </div>
