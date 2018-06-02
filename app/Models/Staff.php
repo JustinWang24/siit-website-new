@@ -71,7 +71,7 @@ class Staff extends Model
      * @return array
      */
     public static function RetrieveTrainingStaffItems($type){
-        $campuses = Brand::where('status',true)->get();
+        $campuses = Brand::where('status',true)->orderBy('name','desc')->get();
         $data = [];
         foreach ($campuses as $campus) {
             $data[$campus->name] = self::where('type',$type)
