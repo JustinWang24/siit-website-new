@@ -8,7 +8,8 @@ window.Vue = require('vue');
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import { Loading } from 'element-ui';
-Vue.use(ElementUI);
+import locale from 'element-ui/lib/locale/lang/en'
+Vue.use(ElementUI, {locale});
 
 // 导入子定义的 vue js editor组件
 Vue.component('VuejsEditor', require('./components/vuejs-editor/VuejsEditor.vue'));

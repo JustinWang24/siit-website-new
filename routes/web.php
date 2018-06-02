@@ -106,6 +106,13 @@ Route::prefix('backend')->middleware('auth')->group(function(){
     Route::get('news/delete/{id}','Backend\Press@delete');
     Route::post('news/save','Backend\Press@persistent');
 
+    // Events 相关
+    Route::get('events/index','Backend\Events@index');
+    Route::get('events/add','Backend\Events@add');
+    Route::get('events/edit/{id}','Backend\Events@edit');
+    Route::get('events/delete/{id}','Backend\Events@delete');
+    Route::post('events/save','Backend\Events@persistent');
+
     // Widgets
     Route::get('widgets/sliders','Backend\Widgets@list_sliders');
     Route::get('widgets/blocks','Backend\Widgets@list_blocks');

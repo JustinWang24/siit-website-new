@@ -143,19 +143,19 @@
             <h2>A BRIDGE <span class="super-bold">ACROSS</span> CULTURES</h2>
         </div>
         <div class="columns header-widget">
-            @foreach(range(1,3) as $key)
+            @foreach($latestNews as $key=>$pageNews)
                 <div class="column is-3-desktop is-4-tablet is-12-mobile">
                     <div class="card">
                         <div class="card-image">
                             <figure>
-                                <img src="{{ asset('images/frontend/custom/widget/campus'.$key.'.jpg') }}" alt="Placeholder image">
+                                <img src="{{ $pageNews->getFeatureImageUrl() }}" alt="{{ $pageNews->title }}">
                             </figure>
                         </div>
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-content">
-                                    <p class="title is-4">SIIT news title {{ $key }}</p>
-                                    <p class="subtitle is-6 mt-20"><i>Subtitle {{ $key }}</i></p>
+                                    <p class="title is-4">{{ $pageNews->title }}</p>
+                                    <p class="subtitle is-6 mt-20"><i>{{ $pageNews->teasing }}</i></p>
                                 </div>
                             </div>
                         </div>
@@ -168,16 +168,16 @@
     <div class="container header-events-wrap">
         <div class="content">
             <div class="columns is-marginless">
-                @foreach($topStories as $blog)
+                @foreach($latestEvents as $event)
                 <div class="column event-box">
                     <div class="card">
                         <div class="card-content">
                             <div class="content is-paddingless">
-                                <h3 class="event-title">{{ $blog->title }}</h3>
-                                <time datetime="2016-1-1">{{ $blog->created_at->format('H:i A - d M Y') }}</time>
+                                <h3 class="event-title">{{ $event->title }}</h3>
+                                <time datetime="2016-1-1">{{ $event->start->format('H:i A - d M Y') }}</time>
                                 <br>
                                 <div class="brief">
-                                    {!! $blog->teasing !!}
+                                    {!! $event->teasing !!}
                                 </div>
                             </div>
                         </div>

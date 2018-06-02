@@ -13,42 +13,28 @@
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed nulla mollis, ornare mi ac, consequat velit. Pellentesque nec fringilla nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dignissim rutrum lorem, bibendum vehicula orci commodo non. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam nec pulvinar ligula. Sed odio felis, pulvinar nec pretium in
                             </p>
                         </div>
+                        @foreach($topStories as $key=>$blog)
+                            @if($key < 2)
                         <div class="column">
                             <div class="card">
                                 <div class="card-image">
                                     <figure>
-                                        <img src="{{ asset('images/frontend/custom/widget/campus1.jpg') }}" alt="Placeholder image">
+                                        <img src="{{ $blog->getFeatureImageUrl() }}" alt="{{ $blog->title }}">
                                     </figure>
                                 </div>
                                 <div class="card-content pl-0">
                                     <div class="media">
                                         <div class="media-content">
-                                            <p class="title is-4">SIIT Title 1</p>
-                                            <p class="subtitle is-6"><i>Subtitle: consectetur adipiscing elit</i></p>
-                                            <p class="mt-10 has-text-grey-light">Consectetur adipiscing elit</p>
+                                            <p class="title is-4">{{ $blog->title }}</p>
+                                            <p class="subtitle is-6"><i>{{ $blog->title_cn }}</i></p>
+                                            <p class="mt-10 has-text-grey-light">{!! $blog->teasing !!}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="column">
-                            <div class="card">
-                                <div class="card-image">
-                                    <figure>
-                                        <img src="{{ asset('images/frontend/custom/widget/campus2.jpg') }}" alt="Placeholder image">
-                                    </figure>
-                                </div>
-                                <div class="card-content pl-0">
-                                    <div class="media">
-                                        <div class="media-content">
-                                            <p class="title is-4">SIIT Title 1</p>
-                                            <p class="subtitle is-6"><i>Subtitle: consectetur adipiscing elit</i></p>
-                                            <p class="mt-10 has-text-grey-light">Consectetur adipiscing elit</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
                 <div class="column is-paddingless first-visiting-sidebar">
@@ -73,43 +59,29 @@
                     <h2><span class="super-bold">LIFE</span></h2>
                     <br>
                     <div class="columns mt-20">
-
-                        <div class="column">
-                            <div class="card">
-                                <div class="card-image">
-                                    <figure>
-                                        <img src="{{ asset('images/frontend/custom/widget/campus1.jpg') }}" alt="Placeholder image">
-                                    </figure>
-                                </div>
-                                <div class="card-content pl-0">
-                                    <div class="media">
-                                        <div class="media-content">
-                                            <p class="title is-4">SIIT Title 1</p>
-                                            <p class="subtitle is-6"><i>Subtitle: consectetur adipiscing elit</i></p>
-                                            <p class="mt-10 has-text-grey-light">Consectetur adipiscing elit</p>
+                        @foreach($topStories as $key=>$blog)
+                            @if($key > 1)
+                                <div class="column">
+                                    <div class="card">
+                                        <div class="card-image">
+                                            <figure>
+                                                <img src="{{ $blog->getFeatureImageUrl() }}" alt="{{ $blog->title }}">
+                                            </figure>
+                                        </div>
+                                        <div class="card-content pl-0">
+                                            <div class="media">
+                                                <div class="media-content">
+                                                    <p class="title is-4">{{ $blog->title }}</p>
+                                                    <p class="subtitle is-6"><i>{{ $blog->title_cn }}</i></p>
+                                                    <p class="mt-10 has-text-grey-light">{!! $blog->teasing !!}</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div class="card">
-                                <div class="card-image">
-                                    <figure>
-                                        <img src="{{ asset('images/frontend/custom/widget/campus2.jpg') }}" alt="Placeholder image">
-                                    </figure>
-                                </div>
-                                <div class="card-content pl-0">
-                                    <div class="media">
-                                        <div class="media-content">
-                                            <p class="title is-4">SIIT Title 1</p>
-                                            <p class="subtitle is-6"><i>Subtitle: consectetur adipiscing elit</i></p>
-                                            <p class="mt-10 has-text-grey-light">Consectetur adipiscing elit</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            @endif
+                        @endforeach
+                        
                     </div>
                 </div>
                 <div class="column is-paddingless">

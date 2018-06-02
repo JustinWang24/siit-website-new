@@ -157,4 +157,8 @@ class Page extends Model implements ISupportWidget
         }
         return $this->content;
     }
+
+    public function getFeatureImageUrl(){
+        return asset($this->feature_image);
+    }
 }

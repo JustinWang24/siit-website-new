@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Page;
 use App\Models\Widget\Block;
 use App\Models\Catalog\Category;
+use App\Models\Blog\Event;
 
 class Pages extends Controller
 {
@@ -44,7 +45,20 @@ class Pages extends Controller
         $this->dataForView['featureProducts'] = Category::LoadFeatureProducts();
         $this->dataForView['promotionProducts'] = Category::LoadPromotionProducts();
 
+        // 搜索最新的博客
         $this->dataForView['topStories'] = Page::where('type',Page::$TYPE_BLOG)
+            ->orderBy('id','desc')
+            ->take(4)
+            ->get();
+
+        // 搜索最新的Events
+        $this->dataForView['latestEvents'] = Event::where('type',Event::PUBLIC_EVENT)
+            ->orderBy('id','desc')
+            ->take(3)
+            ->get();
+
+        // 搜索最新的 News
+        $this->dataForView['latestNews'] = Page::where('type',Page::$TYPE_NEWS)
             ->orderBy('id','desc')
             ->take(3)
             ->get();

@@ -19,6 +19,7 @@ return [
         'groups'=>'Dealers',
         'brands'=>'Campus',
         'shipment'=>'Shipment',
+        'events'=>'Events',
     ],
     'new'=>[
         'menu'=>'Create Menu',
@@ -36,6 +37,7 @@ return [
         'brands'=>'New Campus',
         'group_product'=>'Create Course Package',
         'shipment_rule'=>'Add Shipment Rule',
+        'events'=>'Create Event',
     ],
     'mgr'=>'Management',
     'edit'=>[
@@ -53,5 +55,6 @@ return [
         'groups'=>'Modify Dealer',
         'brands'=>'Modify Campus',
         'shipment_rule'=>'Edit Shipment Rule',
+        'events'=>'Edit Event',
     ]
 ];

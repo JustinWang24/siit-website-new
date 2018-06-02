@@ -19,6 +19,12 @@ Route::prefix('page')->group(function(){
     Route::post('search_ajax','Api\Pages@search_ajax');
 });
 
+Route::prefix('events')->group(function(){
+    // Save event
+    Route::post('save','Api\Events@save');
+    Route::post('is-uri-unique','Api\Events@is_uri_unique');
+});
+
 // 为上传图片提供的接口
 Route::prefix('images')->group(function(){
     // 保存图片
