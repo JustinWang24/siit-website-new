@@ -56,6 +56,14 @@ class Menu extends Model
     }
 
     /**
+     * 获取当前菜单的同级菜单
+     * @return mixed
+     */
+    public function siblings(){
+        return self::where('parent_id',$this->parent_id)->orderBy('position','asc')->get();
+    }
+
+    /**
      * 取得当前菜单对象的下一级菜单
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

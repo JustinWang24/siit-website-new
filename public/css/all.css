@@ -13148,8 +13148,20 @@ ul.tight-list li {
 }
 
 
-body {
-  background-color: #f8f8f7;
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.pt-0 {
+  padding-top: 0 !important;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.pb-0 {
+  padding-bottom: 0 !important;
 }
 
 .bg-transparent {
@@ -13303,6 +13315,12 @@ body {
 
 .header-widget-wrap .header-widget .column .card .card-content .content a {
   color: white;
+}
+
+#home-nav-header-general {
+  background-color: #00427f;
+  background-image: url("/images/frontend/custom/general_header_by.jpg");
+  background-repeat: repeat-y;
 }
 
 .header-events-wrap {
@@ -13567,6 +13585,43 @@ body {
 
 .we-social-wrap .container .twitter-btn a .fa-twitter {
   margin-right: 9px;
+}
+
+.left-side-bar-wrap {
+  background-color: #00427f;
+  margin-top: -6px;
+}
+
+.left-side-bar-wrap h1,
+.left-side-bar-wrap h2,
+.left-side-bar-wrap h3,
+.left-side-bar-wrap p,
+.left-side-bar-wrap a {
+  color: white;
+}
+
+.left-side-bar-wrap .parent-item {
+  margin-top: 33px;
+}
+
+.left-side-bar-wrap .sibling-item {
+  padding-left: 12px;
+}
+
+.left-side-bar-wrap .sibling-item a:hover {
+  color: red;
+}
+
+.left-side-bar-wrap .current-item {
+  text-decoration: underline;
+}
+
+.page-title-wrap {
+  padding-left: 20px;
+}
+
+.page-content-wrap {
+  padding-left: 20px;
 }
 
 .footer {

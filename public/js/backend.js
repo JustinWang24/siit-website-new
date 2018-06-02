@@ -90943,7 +90943,7 @@ var _elementUi2 = _interopRequireDefault(_elementUi);
 
 __webpack_require__(168);
 
-var _en = __webpack_require__(282);
+var _en = __webpack_require__(257);
 
 var _en2 = _interopRequireDefault(_en);
 
@@ -90957,7 +90957,7 @@ window.Vue = __webpack_require__(3);
 Vue.use(_elementUi2.default, { locale: _en2.default });
 
 // 导入子定义的 vue js editor组件
-Vue.component('VuejsEditor', __webpack_require__(257));
+Vue.component('VuejsEditor', __webpack_require__(258));
 
 // Slide out菜单
 if (document.getElementById('menu')) {
@@ -91490,16 +91490,134 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+exports.__esModule = true;
+exports.default = {
+  el: {
+    colorpicker: {
+      confirm: 'OK',
+      clear: 'Clear'
+    },
+    datepicker: {
+      now: 'Now',
+      today: 'Today',
+      cancel: 'Cancel',
+      clear: 'Clear',
+      confirm: 'OK',
+      selectDate: 'Select date',
+      selectTime: 'Select time',
+      startDate: 'Start Date',
+      startTime: 'Start Time',
+      endDate: 'End Date',
+      endTime: 'End Time',
+      prevYear: 'Previous Year',
+      nextYear: 'Next Year',
+      prevMonth: 'Previous Month',
+      nextMonth: 'Next Month',
+      year: '',
+      month1: 'January',
+      month2: 'February',
+      month3: 'March',
+      month4: 'April',
+      month5: 'May',
+      month6: 'June',
+      month7: 'July',
+      month8: 'August',
+      month9: 'September',
+      month10: 'October',
+      month11: 'November',
+      month12: 'December',
+      // week: 'week',
+      weeks: {
+        sun: 'Sun',
+        mon: 'Mon',
+        tue: 'Tue',
+        wed: 'Wed',
+        thu: 'Thu',
+        fri: 'Fri',
+        sat: 'Sat'
+      },
+      months: {
+        jan: 'Jan',
+        feb: 'Feb',
+        mar: 'Mar',
+        apr: 'Apr',
+        may: 'May',
+        jun: 'Jun',
+        jul: 'Jul',
+        aug: 'Aug',
+        sep: 'Sep',
+        oct: 'Oct',
+        nov: 'Nov',
+        dec: 'Dec'
+      }
+    },
+    select: {
+      loading: 'Loading',
+      noMatch: 'No matching data',
+      noData: 'No data',
+      placeholder: 'Select'
+    },
+    cascader: {
+      noMatch: 'No matching data',
+      loading: 'Loading',
+      placeholder: 'Select'
+    },
+    pagination: {
+      goto: 'Go to',
+      pagesize: '/page',
+      total: 'Total {total}',
+      pageClassifier: ''
+    },
+    messagebox: {
+      title: 'Message',
+      confirm: 'OK',
+      cancel: 'Cancel',
+      error: 'Illegal input'
+    },
+    upload: {
+      deleteTip: 'press delete to remove',
+      delete: 'Delete',
+      preview: 'Preview',
+      continue: 'Continue'
+    },
+    table: {
+      emptyText: 'No Data',
+      confirmFilter: 'Confirm',
+      resetFilter: 'Reset',
+      clearFilter: 'All',
+      sumText: 'Sum'
+    },
+    tree: {
+      emptyText: 'No Data'
+    },
+    transfer: {
+      noMatch: 'No matching data',
+      noData: 'No data',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
+    }
+  }
+};
+
+/***/ }),
+/* 258 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(258)
+  __webpack_require__(259)
 }
 var normalizeComponent = __webpack_require__(78)
 /* script */
-var __vue_script__ = __webpack_require__(260)
+var __vue_script__ = __webpack_require__(261)
 /* template */
-var __vue_template__ = __webpack_require__(276)
+var __vue_template__ = __webpack_require__(277)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -91538,13 +91656,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 258 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(259);
+var content = __webpack_require__(260);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -91564,7 +91682,7 @@ if(false) {
 }
 
 /***/ }),
-/* 259 */
+/* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(15)(false);
@@ -91578,7 +91696,7 @@ exports.push([module.i, "", ""]);
 
 
 /***/ }),
-/* 260 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -91596,7 +91714,6 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
-__webpack_require__(261);
 __webpack_require__(262);
 __webpack_require__(263);
 __webpack_require__(264);
@@ -91611,6 +91728,7 @@ __webpack_require__(272);
 __webpack_require__(273);
 __webpack_require__(274);
 __webpack_require__(275);
+__webpack_require__(276);
 exports.default = {
     name: 'VuejsEditor',
     props: {
@@ -91686,7 +91804,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 261 */
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -105831,7 +105949,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })();
 
 /***/ }),
-/* 262 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -106027,7 +106145,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })(Redactor);
 
 /***/ }),
-/* 263 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -106193,7 +106311,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })(Redactor);
 
 /***/ }),
-/* 264 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -106362,7 +106480,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })(Redactor);
 
 /***/ }),
-/* 265 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -106443,7 +106561,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })(Redactor);
 
 /***/ }),
-/* 266 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -106535,7 +106653,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })(Redactor);
 
 /***/ }),
-/* 267 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -106933,7 +107051,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })(Redactor);
 
 /***/ }),
-/* 268 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -107005,7 +107123,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })(Redactor);
 
 /***/ }),
-/* 269 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -107061,7 +107179,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })(Redactor);
 
 /***/ }),
-/* 270 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -107156,7 +107274,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })(Redactor);
 
 /***/ }),
-/* 271 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -107216,7 +107334,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })(Redactor);
 
 /***/ }),
-/* 272 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -107276,7 +107394,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })(Redactor);
 
 /***/ }),
-/* 273 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -107448,7 +107566,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })(Redactor);
 
 /***/ }),
-/* 274 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -107638,7 +107756,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })(Redactor);
 
 /***/ }),
-/* 275 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -107752,7 +107870,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })(Redactor);
 
 /***/ }),
-/* 276 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -107785,129 +107903,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-0f4b322f", module.exports)
   }
 }
-
-/***/ }),
-/* 277 */,
-/* 278 */,
-/* 279 */,
-/* 280 */,
-/* 281 */,
-/* 282 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-exports.default = {
-  el: {
-    colorpicker: {
-      confirm: 'OK',
-      clear: 'Clear'
-    },
-    datepicker: {
-      now: 'Now',
-      today: 'Today',
-      cancel: 'Cancel',
-      clear: 'Clear',
-      confirm: 'OK',
-      selectDate: 'Select date',
-      selectTime: 'Select time',
-      startDate: 'Start Date',
-      startTime: 'Start Time',
-      endDate: 'End Date',
-      endTime: 'End Time',
-      prevYear: 'Previous Year',
-      nextYear: 'Next Year',
-      prevMonth: 'Previous Month',
-      nextMonth: 'Next Month',
-      year: '',
-      month1: 'January',
-      month2: 'February',
-      month3: 'March',
-      month4: 'April',
-      month5: 'May',
-      month6: 'June',
-      month7: 'July',
-      month8: 'August',
-      month9: 'September',
-      month10: 'October',
-      month11: 'November',
-      month12: 'December',
-      // week: 'week',
-      weeks: {
-        sun: 'Sun',
-        mon: 'Mon',
-        tue: 'Tue',
-        wed: 'Wed',
-        thu: 'Thu',
-        fri: 'Fri',
-        sat: 'Sat'
-      },
-      months: {
-        jan: 'Jan',
-        feb: 'Feb',
-        mar: 'Mar',
-        apr: 'Apr',
-        may: 'May',
-        jun: 'Jun',
-        jul: 'Jul',
-        aug: 'Aug',
-        sep: 'Sep',
-        oct: 'Oct',
-        nov: 'Nov',
-        dec: 'Dec'
-      }
-    },
-    select: {
-      loading: 'Loading',
-      noMatch: 'No matching data',
-      noData: 'No data',
-      placeholder: 'Select'
-    },
-    cascader: {
-      noMatch: 'No matching data',
-      loading: 'Loading',
-      placeholder: 'Select'
-    },
-    pagination: {
-      goto: 'Go to',
-      pagesize: '/page',
-      total: 'Total {total}',
-      pageClassifier: ''
-    },
-    messagebox: {
-      title: 'Message',
-      confirm: 'OK',
-      cancel: 'Cancel',
-      error: 'Illegal input'
-    },
-    upload: {
-      deleteTip: 'press delete to remove',
-      delete: 'Delete',
-      preview: 'Preview',
-      continue: 'Continue'
-    },
-    table: {
-      emptyText: 'No Data',
-      confirmFilter: 'Confirm',
-      resetFilter: 'Reset',
-      clearFilter: 'All',
-      sumText: 'Sum'
-    },
-    tree: {
-      emptyText: 'No Data'
-    },
-    transfer: {
-      noMatch: 'No matching data',
-      noData: 'No data',
-      titles: ['List 1', 'List 2'], // to be translated
-      filterPlaceholder: 'Enter keyword', // to be translated
-      noCheckedFormat: '{total} items', // to be translated
-      hasCheckedFormat: '{checked}/{total} checked' // to be translated
-    }
-  }
-};
 
 /***/ })
 /******/ ]);

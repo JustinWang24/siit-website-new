@@ -6,7 +6,20 @@ $color-page-blue-bg: #06162f;
 $color-page-blue-bg-light: #0d345f;
 
 body{
-  background-color: $color-super-light;
+  //background-color: $color-super-light;
+}
+// 通用rules
+.mt-0{
+  margin-top: 0 !important;
+}
+.pt-0{
+  padding-top: 0 !important;
+}
+.mb-0{
+  margin-bottom: 0 !important;
+}
+.pb-0{
+  padding-bottom: 0 !important;
 }
 .bg-transparent{
   background: transparent;
@@ -154,6 +167,13 @@ body{
       }
     }
   }
+}
+
+// 普通页面的顶部wrap
+#home-nav-header-general{
+  background-color: $color-logo-blue;
+  background-image: url("/images/frontend/custom/general_header_by.jpg");
+  background-repeat: repeat-y;
 }
 
 .header-events-wrap{
@@ -338,6 +358,35 @@ body{
       }
     }
   }
+}
+
+// 2栏的页面的rules
+.left-side-bar-wrap{
+  background-color: $color-logo-blue;
+  margin-top: -6px;
+  h1, h2, h3, p, a{
+    color: white;
+  }
+  .parent-item{
+    margin-top: 33px;
+  }
+  .sibling-item{
+    padding-left: 12px;
+    a{
+      &:hover{
+        color: red;
+      }
+    }
+  }
+  .current-item{
+    text-decoration: underline;
+  }
+}
+.page-title-wrap{
+  padding-left: 20px;
+}
+.page-content-wrap{
+  padding-left: 20px;
 }
 
 // Footer
