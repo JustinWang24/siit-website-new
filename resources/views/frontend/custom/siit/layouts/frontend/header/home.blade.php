@@ -16,13 +16,10 @@
             <div id="navDesktopWrap" class="full-width is-marginless">
                 <div class="navbar-menu">
                     <div class="navbar-end sm-nav">
-                        <a class="navbar-item" href="">
+                        <a class="navbar-item" href="{{ url('/') }}" title="Home page">
                             Home
                         </a>
-                        <a class="navbar-item" href="">
-                            About Us
-                        </a>
-                        <a class="navbar-item" href="">
+                        <a class="navbar-item" href="" title="Student Login">
                             Student Login
                         </a>
                     </div>
@@ -30,102 +27,34 @@
 
                 <div class="navbar-menu">
                     <div class="navbar-end big-nav">
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link has-text-white" href="#">
-                                SIIT News
-                            </a>
-                            <div class="navbar-dropdown is-boxed">
-                                <a class="navbar-item" href="#">
-                                    Sub Menu 1
+                        @foreach($rootMenus as $key=>$rootMenu)
+                            <div class="navbar-item has-dropdown is-hoverable">
+                                <?php
+                                $tag = $rootMenu->html_tag;
+                                $children = $rootMenu->getSubMenus();
+                                if($tag && $tag !== 'a'){
+                                    echo '<'.$tag.'>';
+                                }
+                                ?>
+                                <a class="navbar-link has-text-white {{ $rootMenu->css_classes }}" href="{{ url($rootMenu->link_to=='/' ? '/' : '/page'.$rootMenu->link_to) }}" title="{{ app()->getLocale()=='cn' && !empty($rootMenu->name_cn) ? $rootMenu->name_cn : $rootMenu->name }}">
+                                    {{ app()->getLocale()=='cn' && !empty($rootMenu->name_cn) ? $rootMenu->name_cn : $rootMenu->name }}
                                 </a>
-                                <a class="navbar-item" href="#">
-                                    Sub Menu 2
-                                </a><a class="navbar-item" href="#">
-                                    Sub Menu 3
-                                </a><a class="navbar-item" href="#">
-                                    Sub Menu 4
-                                </a>
-                                <hr class="navbar-divider">
-                                <a class="navbar-item" href="#">
-                                    Sub Menu 5
-                                </a>
-                                <a class="navbar-item" href="#">
-                                    Sub Menu 5
-                                </a>
+                                @if(count($children) > 0)
+                                    <div class="navbar-dropdown is-boxed">
+                                        @foreach($children as $sub)
+                                            <a class="navbar-item" href="{{ url($sub->link_to=='/' ? '/' : '/page'.$sub->link_to) }}" title="{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}">
+                                                {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                @endif
+                                <?php
+                                if($tag && $tag !== 'a'){
+                                    echo '</'.$tag.'>';
+                                }
+                                ?>
                             </div>
-                        </div>
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link has-text-white" href="#">
-                                Courses
-                            </a>
-                            <div class="navbar-dropdown is-boxed">
-                                <a class="navbar-item" href="#">
-                                    Sub Menu 1
-                                </a>
-                                <a class="navbar-item" href="#">
-                                    Sub Menu 2
-                                </a><a class="navbar-item" href="#">
-                                    Sub Menu 3
-                                </a><a class="navbar-item" href="#">
-                                    Sub Menu 4
-                                </a>
-                                <hr class="navbar-divider">
-                                <a class="navbar-item" href="#">
-                                    Sub Menu 5
-                                </a>
-                                <a class="navbar-item" href="#">
-                                    Sub Menu 5
-                                </a>
-                            </div>
-                        </div>
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link has-text-white" href="#">
-                                Campus
-                            </a>
-                            <div class="navbar-dropdown is-boxed">
-                                <a class="navbar-item" href="#">
-                                    Sub Menu 1
-                                </a>
-                                <a class="navbar-item" href="#">
-                                    Sub Menu 2
-                                </a><a class="navbar-item" href="#">
-                                    Sub Menu 3
-                                </a><a class="navbar-item" href="#">
-                                    Sub Menu 4
-                                </a>
-                                <hr class="navbar-divider">
-                                <a class="navbar-item" href="#">
-                                    Sub Menu 5
-                                </a>
-                                <a class="navbar-item" href="#">
-                                    Sub Menu 5
-                                </a>
-                            </div>
-                        </div>
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link has-text-white" href="#">
-                                Admission
-                            </a>
-                            <div class="navbar-dropdown is-boxed">
-                                <a class="navbar-item" href="#">
-                                    Sub Menu 1
-                                </a>
-                                <a class="navbar-item" href="#">
-                                    Sub Menu 2
-                                </a><a class="navbar-item" href="#">
-                                    Sub Menu 3
-                                </a><a class="navbar-item" href="#">
-                                    Sub Menu 4
-                                </a>
-                                <hr class="navbar-divider">
-                                <a class="navbar-item" href="#">
-                                    Sub Menu 5
-                                </a>
-                                <a class="navbar-item" href="#">
-                                    Sub Menu 5
-                                </a>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 

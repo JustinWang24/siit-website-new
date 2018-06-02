@@ -81,7 +81,7 @@
                                 </div>
                             @endif
                         @endforeach
-                        
+
                     </div>
                 </div>
                 <div class="column is-paddingless">
