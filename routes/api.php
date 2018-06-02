@@ -25,6 +25,11 @@ Route::prefix('events')->group(function(){
     Route::post('is-uri-unique','Api\Events@is_uri_unique');
 });
 
+Route::prefix('staff')->group(function(){
+    // Save event
+    Route::post('save','Api\StaffController@save');
+});
+
 // 为上传图片提供的接口
 Route::prefix('images')->group(function(){
     // 保存图片

@@ -77,6 +77,11 @@
             </li>
             @endif
             <li>
+                <a class="{{ $menuName=='staff' ? 'is-active' : null }}" href="{{ url('/backend/staff/index') }}">
+                    <i class="fas fa-user-circle"></i>&nbsp;Staff Manager
+                </a>
+            </li>
+            <li>
                 <a class="{{ $menuName=='update-password' ? 'is-active' : null }}" href="{{ url('/backend/update-password') }}">
                     <i class="fa fa-key"></i>Update My Password
                 </a>

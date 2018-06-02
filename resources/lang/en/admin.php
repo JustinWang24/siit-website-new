@@ -20,6 +20,7 @@ return [
         'brands'=>'Campus',
         'shipment'=>'Shipment',
         'events'=>'Events',
+        'staff'=>'Staff',
     ],
     'new'=>[
         'menu'=>'Create Menu',
@@ -38,6 +39,7 @@ return [
         'group_product'=>'Create Course Package',
         'shipment_rule'=>'Add Shipment Rule',
         'events'=>'Create Event',
+        'staff'=>'New Staff',
     ],
     'mgr'=>'Management',
     'edit'=>[
@@ -56,5 +58,6 @@ return [
         'brands'=>'Modify Campus',
         'shipment_rule'=>'Edit Shipment Rule',
         'events'=>'Edit Event',
+        'staff'=>'Edit Staff',
     ]
 ];

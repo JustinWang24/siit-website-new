@@ -113,6 +113,12 @@ Route::prefix('backend')->middleware('auth')->group(function(){
     Route::get('events/delete/{id}','Backend\Events@delete');
     Route::post('events/save','Backend\Events@persistent');
 
+    // Staff 相关
+    Route::get('staff/index','Backend\StaffController@index');
+    Route::get('staff/add','Backend\StaffController@add');
+    Route::get('staff/edit/{id}','Backend\StaffController@edit');
+    Route::get('staff/delete/{id}','Backend\StaffController@delete');
+
     // Widgets
     Route::get('widgets/sliders','Backend\Widgets@list_sliders');
     Route::get('widgets/blocks','Backend\Widgets@list_blocks');

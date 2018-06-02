@@ -17,10 +17,9 @@
             <table class="table full-width is-hoverable">
                 <thead>
                 <tr>
-                    <th>名称</th>
-                    <th>状态</th>
-                    <th>图片</th>
-                    <th>分校区</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Feature Image</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -31,9 +30,7 @@
                             {!! $value->name !!}
                         </td>
                         <td>
-                            {!! $value->status ? '<span class="tag is-success">上线</span>' : '<span class="tag is-danger">下线</span>' !!}
-                            &nbsp;
-                            {!! $value->status ? '<span class="tag is-success">推广中</span>' : '<span class="tag is-light">未推广</span>' !!}
+                            {!! $value->status ? '<span class="tag is-success">Open</span>' : '<span class="tag is-danger">Pending</span>' !!}
                         </td>
                         <td>
                             <figure class="image" style="width: 100px;">
@@ -41,16 +38,6 @@
                             </figure>
                         </td>
                         <td>
-                            <div id="brand-serials-{{ $value->id }}" class="tags">
-                                @foreach($value->serials as $key=>$brandSerial)
-                                <span class="tag" v-on:click="editSerialForm({{ $brandSerial->id }})">{{ $brandSerial->name }}</span>
-                                @endforeach
-                            </div>
-                        </td>
-                        <td>
-                            <a class="button is-small" v-on:click="showSerialForm({{ $value->id }},'{{ $value->name }}',$event)" href="#">
-                                <i class="fa fa-plus"></i>&nbsp;Serial
-                            </a>
                             <a class="button is-small" href="{{ url('backend/brands/edit/'.$value->id) }}">
                                 <i class="fa fa-edit"></i>&nbsp;Edit
                             </a>

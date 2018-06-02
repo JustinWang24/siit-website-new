@@ -35,25 +35,12 @@
                     </div>
                     <div class="column">
                         <div class="field">
-                            <label class="label">状态</label>
+                            <label class="label">Status</label>
                             <div class="control">
                                 <div class="select full-width">
                                     <select class="full-width" name="status">
-                                        <option value="1" {{ $brand->status ? 'selected' : null }}>上线</option>
-                                        <option value="0" {{ $brand->status ? null : 'selected' }}>下线</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="field">
-                            <label class="label">推广</label>
-                            <div class="control">
-                                <div class="select full-width">
-                                    <select class="full-width" name="promotion">
-                                        <option value="1" {{ $brand->promotion ? 'selected' : null }}>加入推广组</option>
-                                        <option value="0" {{ $brand->promotion ? null : 'selected' }}>退出推广组</option>
+                                        <option value="1" {{ $brand->status ? 'selected' : null }}>Open</option>
+                                        <option value="0" {{ $brand->status ? null : 'selected' }}>Pending</option>
                                     </select>
                                 </div>
                             </div>
