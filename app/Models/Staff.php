@@ -85,6 +85,18 @@ class Staff extends Model
     }
 
     /**
+     * 获取 Staff Members
+     * @return array
+     */
+    public static function RetrieveStaffMembers(){
+        return self::where('type',self::STAFF_MEMBERS)
+            ->where('status',true)
+            ->orderBy('job_group','asc')
+            ->orderBy('name')
+            ->get();
+    }
+
+    /**
      * 持久化Staff
      * @param $data
      * @return int

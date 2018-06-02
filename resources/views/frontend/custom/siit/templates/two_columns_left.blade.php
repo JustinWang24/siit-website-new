@@ -46,13 +46,22 @@
                 <div class="content page-content-wrap">
                     {!! $page->rebuildContent() !!}
                 </div>
-                @if(isset($trainingStaffItems))
-                <div class="content">
+            @if(isset($trainingStaffItems))
+                <?php
+                    $currentJobGroup = null;
+                ?>
+                <div class="content pl-20">
                     <hr>
                     @foreach($trainingStaffItems as $campusName=>$staffItems)
                         <h2 class="has-text-centered">{{ $campusName }}</h2>
                         <div class="columns is-multiline">
                             @foreach($staffItems as $staffItem)
+                                @if($currentJobGroup != $staffItem->job_group)
+                                    <?php
+                                    $currentJobGroup = $staffItem->job_group;
+                                    ?>
+                                    <div class="column is-12"><h3>{{ \App\Models\Staff::GetJobGroupName($currentJobGroup) }}</h3></div>
+                                @endif
                             <div class="column is-one-third">
                                 <div class="card">
                                     <div class="card-image pt-10">
@@ -82,7 +91,51 @@
                         </div>
                     @endforeach
                 </div>
-                @endif
+            @endif
+
+            @if(isset($StaffMembers))
+                <?php
+                $currentDivision = null;
+                ?>
+                <div class="content pl-20">
+                    <hr>
+                    <div class="columns is-multiline">
+                    @foreach($StaffMembers as $StaffMember)
+                        @if($currentDivision != $StaffMember->division)
+                            <?php
+                            $currentDivision = $StaffMember->division;
+                            ?>
+                            <div class="column is-12"><h2>{{ \App\Models\Staff::GetDivisionName($currentDivision) }}</h2></div>
+                        @endif
+                        <div class="column is-one-third">
+                            <div class="card">
+                                <div class="card-image pt-10">
+                                    <figure class="image">
+                                        <img src="{{ $StaffMember->getAvatarUrl() }}" alt="Avatar: {{ $StaffMember->name }}">
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <div class="media">
+                                        <div class="media-content">
+                                            <p class="title is-4">
+                                                <a href="#">{{ $StaffMember->name }}</a>
+                                            </p>
+                                            <p class="subtitle is-5 mt-10">{{ $StaffMember->job_title }}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="content">
+                                        <a href="mailto:{{ $StaffMember->email }}"><i class="fas fa-envelope-square"></i>&nbsp;{{ $StaffMember->email }}</a>
+                                        <br>
+                                        <a href="tel:{{ $StaffMember->phone }}"><i class="fas fa-phone-square"></i>&nbsp;{{ $StaffMember->phone }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    </div>
+                </div>
+            @endif
             </div>
         </div>
     </div>

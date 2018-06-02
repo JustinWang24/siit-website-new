@@ -88,8 +88,9 @@ class Pages extends Controller
         if($pageUri == Staff::PAGE_TRAINING_STAFF){
             $this->dataForView['trainingStaffItems'] = Staff::RetrieveTrainingStaffItems(Staff::TRAINING_STAFF);
         }
-
-//        dd($this->dataForView['trainingStaffItems']);
+        if($pageUri == Staff::PAGE_STAFF_MEMBERS){
+            $this->dataForView['StaffMembers'] = Staff::RetrieveStaffMembers();
+        }
 
         $this->dataForView['pageTitle'] = app()->getLocale()=='cn' ? $page->title_cn : $page->title;
         $this->dataForView['metaKeywords'] = $page->seo_keyword;
