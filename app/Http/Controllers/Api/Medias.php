@@ -59,7 +59,7 @@ class Medias extends Controller
     /**
      * 保存设备的图片
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return array
      */
     public function upload_ajax(Request $request){
         // 提交的信息 Content-Disposition: form-data; name="image"; filename="9.jpeg"
@@ -96,8 +96,6 @@ class Medias extends Controller
             'url'=>_buildFrontendAssertPath($path)
         ];
     }
-
-
 
     /**
      * 根据给定MEDIA的ID删除记录

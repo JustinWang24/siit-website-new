@@ -8,6 +8,9 @@ use DB;
 
 class Menu extends Model
 {
+    const TYPE_STATIC_CONTENT  = 1; // 指向静态内容页
+    const TYPE_DYNAMIC_CONTENT = 2; // 指向动态内容页
+
     protected $fillable = [
         'name',
         'name_cn',
@@ -18,10 +21,21 @@ class Menu extends Model
         'link_to',
         'css_classes',
         'html_tag',
-        'extra_html'
+        'extra_html',
+        'link_type'
     ];
 
     public $timestamps = false;
+
+    /**
+     * 获取Menu的链接
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
+    public function getMenuUrl(){
+        return $this->link_type == self::TYPE_STATIC_CONTENT
+            ? url('/page'.$this->link_to)
+            : url($this->link_to);
+    }
 
     /**
      * 获取主菜单
