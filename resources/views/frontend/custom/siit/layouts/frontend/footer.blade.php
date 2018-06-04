@@ -11,30 +11,35 @@
                         <p>Australian Professional Education Institute</p>
                     </div>
                 </div>
-                <div class="column is-half">
+                <nav class="column is-half">
                     <div class="columns">
-                        <div class="column">
-                            @foreach(range(1,7) as $key)
-                                <p><a href="">Footer Link {{ $key }}</a></p>
-                            @endforeach
-                        </div>
-                        <div class="column">
-                            @foreach(range(8,11) as $key)
-                                <p><a href="">Footer Link {{ $key }}</a></p>
-                            @endforeach
-                        </div>
-                        <div class="column">
-                            @foreach(range(12,14) as $key)
-                                <p><a href="">Footer Link {{ $key }}</a></p>
-                            @endforeach
-                        </div>
-                        <div class="column">
-                            @foreach(range(15,20) as $key)
-                                <p><a href="">Footer Link {{ $key }}</a></p>
-                            @endforeach
-                        </div>
+
+                        @foreach($rootMenus as $key=>$rootMenu)
+                            <div class="column">
+                                <?php
+                                $tag = $rootMenu->html_tag;
+                                $children = $rootMenu->getSubMenus();
+                                ?>
+                                <p style="border-bottom: solid 1px white;line-height: 36px;">
+                                <a class="is-size-4" href="{{ $rootMenu->link_to=='/' ? '/' : $rootMenu->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($rootMenu->name_cn) ? $rootMenu->name_cn : $rootMenu->name }}">
+                                    {{ app()->getLocale()=='cn' && !empty($rootMenu->name_cn) ? $rootMenu->name_cn : $rootMenu->name }}
+                                </a>
+                                </p>
+                                @if(count($children) > 0)
+
+                                        @foreach($children as $sub)
+                                            <p>
+                                            <a class="" href="{{ $sub->link_to=='/' ? '/' : $sub->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}">
+                                                {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
+                                            </a>
+                                            </p>
+                                        @endforeach
+
+                                @endif
+                            </div>
+                        @endforeach
                     </div>
-                </div>
+                </nav>
                 <div class="column">
                     <label class="label">Sign up for our newsletter</label>
                     <div class="field has-addons">
