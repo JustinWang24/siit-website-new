@@ -25,7 +25,7 @@
                 <a class="navbar-item {{ $menuName=='attribute_sets' ? 'is-active' : null }}" href="{{ url('/backend/attribute-sets') }}">
                     <i class="fas fa-book"></i>&nbsp;{{ trans('admin.menu.attribute_sets') }}
                 </a>
-                <a class="navbar-item {{ $menuName=='intakes' ? 'is-active' : null }}" href="{{ url('/backend/intakes') }}">
+                <a class="navbar-item {{ $menuName=='intakes' ? 'is-active' : null }}" href="{{ url('/backend/intakes/index') }}">
                     <i class="fas fa-bullhorn"></i>&nbsp;{{ trans('admin.menu.intakes') }}
                 </a>
                 <a class="navbar-item {{ $menuName=='orders' ? 'is-active' : null }}" href="{{ url('/backend/orders') }}">

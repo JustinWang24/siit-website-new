@@ -20,10 +20,12 @@ class CreateInTakensTable extends Migration
             $table->date('online_date')->nullable();
             $table->date('offline_date')->nullable();
             $table->unsignedInteger('clicks')->default(0);
+            $table->unsignedInteger('seats')->default(0);
             $table->unsignedInteger('enrolment_count')->default(0);
 
             // 最后操作该项记录的人
             $table->unsignedInteger('last_updated_user_id')->default(0);
+            $table->unsignedSmallInteger('type')->default(0);
 
             $table->string('title')->nullable();    // 入学录取记录名称
             $table->string('code')->nullable();     // 入学录取记录唯一代码

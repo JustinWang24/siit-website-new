@@ -113,8 +113,6 @@ class Staff extends Model
 
         if(!isset($data['id']) || is_null($data['id']) || empty(trim($data['id']))){
             unset($data['id']);
-            $data['content'] = $data['content'];
-
             $page = self::create(
                 $data
             );

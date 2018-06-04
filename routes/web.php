@@ -119,6 +119,12 @@ Route::prefix('backend')->middleware('auth')->group(function(){
     Route::get('staff/edit/{id}','Backend\StaffController@edit');
     Route::get('staff/delete/{id}','Backend\StaffController@delete');
 
+    // Staff 相关
+    Route::get('intakes/index','Backend\IntakesController@index');
+    Route::get('intakes/add','Backend\IntakesController@add');
+    Route::get('intakes/edit/{id}','Backend\IntakesController@edit');
+    Route::get('intakes/delete/{id}','Backend\IntakesController@delete');
+
     // Widgets
     Route::get('widgets/sliders','Backend\Widgets@list_sliders');
     Route::get('widgets/blocks','Backend\Widgets@list_blocks');

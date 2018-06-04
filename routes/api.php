@@ -30,6 +30,11 @@ Route::prefix('staff')->group(function(){
     Route::post('save','Api\StaffController@save');
 });
 
+Route::prefix('intakes')->group(function(){
+    // Save event
+    Route::post('save','Api\IntakesController@save');
+});
+
 // 为上传图片提供的接口
 Route::prefix('images')->group(function(){
     // 保存图片
@@ -41,6 +46,13 @@ Route::prefix('images')->group(function(){
     Route::post('product','Api\Medias@load_by_product');
     // 删除图片
     Route::post('delete','Api\Medias@delete_ajax');
+});
+
+Route::prefix('files')->group(function(){
+    // 保存图片
+    Route::post('upload','Api\Medias@upload_file_ajax');
+    // 加载所有的图片
+    Route::get('load-all','Api\Medias@load_all_files');
 });
 
 /**
