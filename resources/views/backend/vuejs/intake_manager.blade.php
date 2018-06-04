@@ -5,6 +5,7 @@
             savingPage: false,
             currentPage: {
                 id: '{{ $intake->id }}',
+                last_updated_user_id: '{{ session('user_data.id') }}',
                 type:'{{ $intake->type ? $intake->type : \App\Models\Catalog\InTake::TYPE_PUBLIC }}',
                 title:'{{ $intake->title }}',
                 code:'{{ $intake->code }}',

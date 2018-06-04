@@ -37,6 +37,15 @@
                             </el-select>
                         </el-form-item>
                     </div>
+                    <div class="column">
+                        <el-form-item label="Schedule Date" prop="scheduled" required>
+                            <el-date-picker
+                                    v-model="currentPage.scheduled"
+                                    type="date"
+                                    placeholder="Required: Schedule Date">
+                            </el-date-picker>
+                        </el-form-item>
+                    </div>
                 </div>
 
                 <el-form-item label="Seats" prop="seats" required>
@@ -48,14 +57,6 @@
                 </el-form-item>
                 <el-form-item label="Code">
                     <el-input placeholder="Optional: Employee code" v-model="currentPage.code"></el-input>
-                </el-form-item>
-
-                <el-form-item label="Schedule Date" prop="scheduled" required>
-                    <el-date-picker
-                            v-model="currentPage.scheduled"
-                            type="date"
-                            placeholder="Required: Schedule Date">
-                    </el-date-picker>
                 </el-form-item>
 
                 <div class="columns">

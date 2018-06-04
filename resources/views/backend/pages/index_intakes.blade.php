@@ -36,13 +36,13 @@
                             </a>
                         </td>
                         <td>
-                            {{ $value->scheduled }}
+                            {{ $value->scheduled->format('D d/M/Y') }}
                         </td>
                         <td>
-                            {{ $value->online_date }}
+                            {{ $value->online_date->format('D d/M/Y') }}
                         </td>
                         <td>
-                            {{ $value->offline_date }}
+                            {{ $value->offline_date->format('D d/M/Y') }}
                         </td>
                         <td>
                             {{ $value->title }} {{ $value->code ? '('.$value->code.')' : null }}
@@ -50,7 +50,11 @@
                         <td>{{ $value->account->name }}</td>
                         <td>
                             {{ $value->seats }}/
+                            @if($value->enrolment_count > 0)
                             <a href="#" title="View detail">{{ $value->enrolment_count }}</a>
+                            @else
+                            0
+                            @endif
                         </td>
                         <td>
                             <a class="button is-small" href="{{ url('backend/intakes/edit/'.$value->id) }}">

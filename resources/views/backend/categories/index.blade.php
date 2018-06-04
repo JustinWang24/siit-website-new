@@ -57,15 +57,6 @@
                             <el-switch v-model="currentCategory.as_link"></el-switch>
                         </el-form-item>
 
-                        <el-form-item label="Brands">
-                            <el-transfer
-                                v-model="currentCategory.brands"
-                                :data="brandsData"
-                                :titles="['所有品牌', '已选定品牌']"
-                            >
-                            </el-transfer>
-                        </el-form-item>
-
                         <el-form-item label="Position" prop="position">
                             <el-input placeholder="排序: 选填 默认为0" v-model="currentCategory.position"></el-input>
                         </el-form-item>
@@ -76,10 +67,7 @@
                                     class="rich-text-editor"
                                     placeholder="(必填) 填入目录的简要描述"
                                     text-area-id="category-short-description-editor"
-                                    image-upload-url="/api/images/upload"
-                                    existed-images="/api/images/load-all"
                                     :original-content="currentCategory.short_description"
-                                    short-codes-load-url="/api/widgets/load-short-codes"
                             ></vuejs-editor>
                         </el-form-item>
                         <hr>

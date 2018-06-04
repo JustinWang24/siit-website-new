@@ -3,6 +3,7 @@
 namespace App\Models\Catalog;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Utils\ContentTool;
@@ -79,8 +80,19 @@ class InTake extends Model
     public static function Persistent($data){
         $data = ContentTool::RemoveNewLine($data);
 
+        if(!empty($data['scheduled'])){
+            $data['scheduled'] = Carbon::parse($data['scheduled'])->setTimezone('Australia/Melbourne');
+        }
+        if(!empty($data['online_date'])){
+            $data['online_date'] = Carbon::parse($data['online_date'])->setTimezone('Australia/Melbourne');
+        }
+        if(!empty($data['offline_date'])){
+            $data['offline_date'] = Carbon::parse($data['offline_date'])->setTimezone('Australia/Melbourne');
+        }
+
         if(!isset($data['id']) || is_null($data['id']) || empty(trim($data['id']))){
             unset($data['id']);
+
             $page = self::create(
                 $data
             );
