@@ -393,11 +393,20 @@ body{
     font-size: 22px;
     margin-top: 12px;
   }
+  h2{
+    padding-left: 10px;
+    font-size: 18px;
+  }
   hr{
     background-color: #063973;
   }
   .course-special-attributes{
     margin: 8px;
+    a{
+      &:hover{
+        color: red;
+      }
+    }
     li{
       list-style: none;
       margin-bottom: 20px;
