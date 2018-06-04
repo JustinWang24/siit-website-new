@@ -27,8 +27,7 @@
                         <th>Stock</th>
                         <th>Price</th>
                         <th>Attribute Set</th>
-                        <th>Min Order Quantity</th>
-                        <th></th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -52,7 +51,6 @@
                             <td>{{ $value->stock === 0 ? 'In stock' : $value->stock }}</td>
                             <td>${{ $value->default_price }}</td>
                             <td>{{ $value->attribute_set_id==\App\Models\Utils\ProductType::$BASIC_PRODUCT_ATTRIBUTE_SET ? 'General' : $value->attributeSet->name }}</td>
-                            <td>{{ $value->min_quantity }}</td>
                             <td>
                                 <div class="btn-group">
                                     <a class="button is-small" href="{{ url('backend/products/edit/'.$value->id) }}" title="Edit Product">
