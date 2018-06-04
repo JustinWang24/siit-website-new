@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Catalog\Brand;
+use App\Models\Catalog\CategoryProduct;
 use App\Models\Catalog\Product;
 use App\Models\Widget\Block;
 use Illuminate\Http\Request;
@@ -29,10 +30,17 @@ class Products extends Controller
         $this->dataForView['metaKeywords'] = $product->keywords;
         $this->dataForView['metaDescription'] = $product->seo_description;
 
-
         $this->dataForView['product'] = $product;
         $this->dataForView['relatedProducts'] = $product->relatedProduct;
         $this->dataForView['product_images'] = $product->get_AllImages();
+
+        /**
+         * 加载同样目录下的产品
+         */
+        $this->dataForView['categoryProducts'] = CategoryProduct::whereIn('category_id',$product->getCategoriesId())
+            ->where('product_id','<>',$product->id)
+            ->orderBy('position','asc')
+            ->get();
 
         /**
          * 产品的属性集的值
@@ -50,7 +58,8 @@ class Products extends Controller
         $this->dataForView['productShortDescriptionTop'] = Block::where('short_code','like','product_short_description_block_top%')->get();
         $this->dataForView['productShortDescriptionBottom'] = Block::where('short_code','like','product_short_description_block_bottom%')->get();
 
-        return view('frontend.default.catalog.product',$this->dataForView);
+        return view(_get_frontend_theme_path('catalog.product'),$this->dataForView);
+//        return view('frontend.default.catalog.product',$this->dataForView);
     }
 
     /**

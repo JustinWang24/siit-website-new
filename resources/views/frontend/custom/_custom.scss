@@ -388,6 +388,36 @@ body{
 .page-content-wrap{
   padding-left: 20px;
 }
+.product-additional-wrap{
+  h1{
+    font-size: 22px;
+    margin-top: 12px;
+  }
+  hr{
+    background-color: #063973;
+  }
+  .course-special-attributes{
+    margin: 8px;
+    li{
+      list-style: none;
+      margin-bottom: 20px;
+      h2{
+        .attr-name{
+          font-size: 18px;
+          color: white;
+        }
+        .attr-value{
+          font-size: 16px;
+          margin-left: 10px;
+          color: #f9f9f9;
+          p, strong{
+            color: #f9f9f9;
+          }
+        }
+      }
+    }
+  }
+}
 
 // Footer
 .footer{

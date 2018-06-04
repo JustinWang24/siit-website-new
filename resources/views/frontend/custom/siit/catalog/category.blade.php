@@ -55,7 +55,7 @@
                     <?php
                 }
                 ?>
-                
+
                 <div class="content">
                     <div class="is-pulled-right">
                         {{ $cps->appends($paginationAppendParams)->links() }}
