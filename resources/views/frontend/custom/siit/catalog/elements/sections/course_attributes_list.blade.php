@@ -28,10 +28,11 @@
         @endforeach
     </ul>
     <hr>
+    <br>
     <h1>Courses</h1>
     @foreach($categoryProducts as $categoryProduct)
-        <h2>
-            <a href="">{{ $categoryProduct->product->name }}</a>
+        <h2 style="font-size: 18px;">
+            <a href="{{ $categoryProduct->product->getProductUrl() }}">{{ $categoryProduct->product->name }}</a>
         </h2>
     @endforeach
 </div>
