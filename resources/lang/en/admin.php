@@ -21,6 +21,7 @@ return [
         'shipment'=>'Shipment',
         'events'=>'Events',
         'staff'=>'Staff',
+        'intakes'=>'Intakes',
     ],
     'new'=>[
         'menu'=>'Create Menu',
@@ -40,6 +41,7 @@ return [
         'shipment_rule'=>'Add Shipment Rule',
         'events'=>'Create Event',
         'staff'=>'New Staff',
+        'intakes'=>'New Intake',
     ],
     'mgr'=>'Management',
     'edit'=>[
@@ -59,5 +61,6 @@ return [
         'shipment_rule'=>'Edit Shipment Rule',
         'events'=>'Edit Event',
         'staff'=>'Edit Staff',
+        'intakes'=>'Edit Intake',
     ]
 ];

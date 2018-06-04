@@ -19,6 +19,9 @@ class UserGroup
     public static $GENERAL_CUSTOMER     = 5;
     public static $WHOLESALE_CUSTOMER   = 6;
 
+    public static $AXCELERATE_CONTACT   = 7; // 这个是表示为Axcelerate的用户
+    public static $MOODLE_USER          = 8; // 这个是表示为 Moodle 的用户
+
     public static $ADMIN_LOGIN_REDIRECT = '/backend/configurations';
     public static $CUSTOMER_LOGIN_REDIRECT = '/frontend/home';
     public static $FINANCE_CONTROLLER_LOGIN_REDIRECT = '/frontend/my_orders';
