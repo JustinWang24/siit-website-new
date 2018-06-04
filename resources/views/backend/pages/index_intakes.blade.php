@@ -36,13 +36,13 @@
                             </a>
                         </td>
                         <td>
-                            {{ $value->scheduled->format('D d/M/Y') }}
+                            {{ $value->scheduled ? $value->scheduled->format('D d/M/Y') : null }}
                         </td>
                         <td>
-                            {{ $value->online_date->format('D d/M/Y') }}
+                            {{ $value->online_date ? $value->online_date->format('D d/M/Y') : null }}
                         </td>
                         <td>
-                            {{ $value->offline_date->format('D d/M/Y') }}
+                            {{ $value->offline_date ? $value->offline_date->format('D d/M/Y') : null }}
                         </td>
                         <td>
                             {{ $value->title }} {{ $value->code ? '('.$value->code.')' : null }}
