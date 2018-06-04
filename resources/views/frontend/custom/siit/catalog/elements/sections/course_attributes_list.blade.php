@@ -1,4 +1,5 @@
 <div class="content product-additional-wrap pt-40">
+    @if(count($product_attributes)>0)
     <h1>{{ $product->name }}&nbsp;</h1>
     <hr>
     <ul class="course-special-attributes">
@@ -27,8 +28,9 @@
             @endif
         @endforeach
     </ul>
-    <hr>
-    <br>
+    <hr><br>
+    @endif
+
     <h1>Courses</h1>
     @foreach($categoryProducts as $categoryProduct)
         <h2>
