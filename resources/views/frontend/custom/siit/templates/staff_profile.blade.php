@@ -38,6 +38,7 @@
                             </p>
                         </div>
                     </div>
+                    @if($staff->campus)
                     <div class="columns">
                         <div class="column is-3">
                             <p class="has-text-centered">
@@ -50,6 +51,7 @@
                             </p>
                         </div>
                     </div>
+                    @endif
                 </div>
                 <div class="column is-three-quarter">
                     <div class="page-title-wrap">
