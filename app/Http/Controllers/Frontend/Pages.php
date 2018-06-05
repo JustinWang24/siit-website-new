@@ -101,6 +101,29 @@ class Pages extends Controller
     }
 
     /**
+     * 加载员工的信息页
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function view_staff_profile(Request $request){
+        $staffName = $request->get('name');
+        $staff = Staff::where('name',$staffName)->first();
+
+        if(!$staff){
+            // 404 Error
+            return view('frontend.'.config('system.frontend_theme').'.pages.404', $this->dataForView);
+        }
+
+        $this->dataForView['staff'] = $staff;
+
+        $this->dataForView['pageTitle'] = $staff->name;
+        $this->dataForView['metaKeywords'] = $staff->name;
+        $this->dataForView['metaDescription'] = $staff->name;
+
+        return view(_get_frontend_theme_path('templates.staff_profile'), $this->dataForView);
+    }
+
+    /**
      * 联系我们页面专属
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

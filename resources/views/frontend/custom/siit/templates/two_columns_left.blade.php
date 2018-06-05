@@ -1,6 +1,6 @@
 @extends(_get_frontend_layout_path('frontend'))
 @section('content')
-<div class="container">
+<div class="container mt-10 mb-10">
     @if(!empty($page->feature_image))
     <div class="columns mt-0 pt-0 mb-0 pb-0">
         <div class="column pt-0 pb-0">
@@ -66,14 +66,16 @@
                                 <div class="card">
                                     <div class="card-image pt-10">
                                         <figure class="image">
+                                            <a href="{{ url( '/staff-profile?name='.$staffItem->name ) }}" title="{{ $staffItem->name }}">
                                             <img src="{{ $staffItem->getAvatarUrl() }}" alt="Avatar: {{ $staffItem->name }}">
+                                            </a>
                                         </figure>
                                     </div>
                                     <div class="card-content">
                                         <div class="media">
                                             <div class="media-content">
                                                 <p class="title is-4">
-                                                    <a href="#">{{ $staffItem->name }}</a>
+                                                    <a href="{{ url( '/staff-profile?name='.$staffItem->name ) }}" title="{{ $staffItem->name }}">{{ $staffItem->name }}</a>
                                                 </p>
                                                 <p class="subtitle is-5 mt-10">{{ $staffItem->job_title }}</p>
                                             </div>
@@ -111,14 +113,16 @@
                             <div class="card">
                                 <div class="card-image pt-10">
                                     <figure class="image">
+                                        <a href="{{ url( '/staff-profile?name='.$StaffMember->name ) }}" title="{{ $StaffMember->name }}">
                                         <img src="{{ $StaffMember->getAvatarUrl() }}" alt="Avatar: {{ $StaffMember->name }}">
+                                        </a>
                                     </figure>
                                 </div>
                                 <div class="card-content">
                                     <div class="media">
                                         <div class="media-content">
                                             <p class="title is-4">
-                                                <a href="#">{{ $StaffMember->name }}</a>
+                                                <a href="{{ url( '/staff-profile?name='.$StaffMember->name ) }}" title="{{ $StaffMember->name }}">{{ $StaffMember->name }}</a>
                                             </p>
                                             <p class="subtitle is-5 mt-10">{{ $StaffMember->job_title }}</p>
                                         </div>

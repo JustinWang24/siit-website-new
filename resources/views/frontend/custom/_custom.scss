@@ -36,7 +36,7 @@ body{
   margin-top: -117px;
   #home-nav-header{
     height: 831px;
-    background-image: url("/images/frontend/custom/header_bg6.jpg");
+    background-image: url("/images/frontend/custom/header_bg3.jpg");
   }
 }
 .navbar-brand{
@@ -172,8 +172,8 @@ body{
 // 普通页面的顶部wrap
 #home-nav-header-general{
   background-color: $color-logo-blue;
-  background-image: url("/images/frontend/custom/general_header_by.jpg");
-  background-repeat: repeat-y;
+  //background-image: url("/images/frontend/custom/general_header_by.jpg");
+  //background-repeat: repeat-y;
 }
 
 .header-events-wrap{
@@ -366,6 +366,9 @@ body{
   margin-top: -6px;
   h1, h2, h3, p, a{
     color: white;
+  }
+  hr{
+    background-color: #063973;
   }
   .parent-item{
     margin-top: 33px;

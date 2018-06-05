@@ -15,6 +15,7 @@ Route::get('/', 'Frontend\Pages@index')->name('home');
 Route::get('/contact-us', 'Frontend\Pages@contact_us')->name('contact_us');
 Route::post('/contact-us', 'Frontend\Pages@contact_us_handler');
 Route::get('/terms', 'Frontend\Pages@terms')->name('terms');
+Route::get('/staff-profile', 'Frontend\Pages@view_staff_profile');
 
 // 特定的URI
 Route::prefix('page')->group(function(){

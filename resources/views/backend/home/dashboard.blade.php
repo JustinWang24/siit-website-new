@@ -165,7 +165,7 @@
                         </div>
 
                         <div class="field is-expanded">
-                            <label class="label">Twitter</label>
+                            <label class="label">新浪微博</label>
                             <div class="field has-addons">
                                 <p class="control">
                                     <a class="button is-static">
@@ -179,7 +179,7 @@
                         </div>
 
                         <div class="field is-expanded">
-                            <label class="label">Google+</label>
+                            <label class="label">微信公众号</label>
                             <div class="field has-addons">
                                 <p class="control">
                                     <a class="button is-static">
