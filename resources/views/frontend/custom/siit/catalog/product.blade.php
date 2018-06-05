@@ -1,6 +1,6 @@
 @extends(_get_frontend_layout_path('catalog'))
 @section('content')
-    <div class="container mt-20" id="product-view-manager-app">
+    <div class="container mt-20 mb-20" id="product-view-manager-app">
         <div class="content">
             <div class="columns is-marginless">
                 <div class="column is-one-quarter left-side-bar-wrap" style="margin-top: 1px;">
