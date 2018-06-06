@@ -19,6 +19,15 @@ class Brand extends Model
         'promotion' => 'boolean',
     ];
 
+    /**
+     * 获取所属的课程
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function courses(){
+        return $this->hasMany(Product::class,'brand','name')
+            ->orderBy('position','asc');
+    }
+
     public static function Persistent($data){
         return self::create($data);
     }

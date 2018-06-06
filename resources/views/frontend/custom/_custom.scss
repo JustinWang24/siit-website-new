@@ -461,3 +461,20 @@ body{
     }
   }
 }
+
+.intake-page-app{
+  .intake-item-box{
+    padding: 8px 0;
+    .intake-book-link-btn{
+      font-size: 12px;
+      .control{
+        .tag{
+          &:hover{
+            background-color: $color-logo-blue;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}

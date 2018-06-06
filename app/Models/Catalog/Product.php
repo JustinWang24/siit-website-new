@@ -98,6 +98,19 @@ class Product extends Model
     }
 
     /**
+     * 获取跟课程相关的开学信息
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function intakes(){
+        $today = Carbon::now()->format('Y-m-d');
+        return $this->hasMany(InTake::class,'course_id')
+            ->where('type',InTake::TYPE_PUBLIC)
+            ->where('online_date','<=',$today)
+            ->where('offline_date','>',$today)
+            ->orderBy('online_date','asc');
+    }
+
+    /**
      * @param bool $asArray
      * @return array
      */

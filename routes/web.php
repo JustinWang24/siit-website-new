@@ -40,6 +40,7 @@ Route::post('/checkout','Frontend\ShoppingCartController@prepare_checkout');
 Route::prefix('catalog')->group(function(){
     Route::get('product/{uri}', 'Frontend\Products@view');
     Route::get('brand/load', 'Frontend\Products@view_by_brand');
+    Route::get('course/book/{id}', 'Frontend\Products@course_book');
 });
 
 // 前端页面显示相关路由组

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Events\Contact\LeadReceived;
 use App\Events\Page\Content\StartLoading;
+use App\Models\Catalog\Brand;
 use App\Models\Catalog\InTake;
+use App\Models\Catalog\Product;
 use App\Models\Configuration;
 use App\Models\Lead;
 use App\Models\Staff;
@@ -134,9 +136,16 @@ class Pages extends Controller
         $this->dataForView['metaKeywords'] = 'Intake Latest';
         $this->dataForView['metaDescription'] = 'Intake Latest';
 
-        $this->dataForView['intakes'] = InTake::GetLatest();
+        // 分校区来逐步加载课程
+        $campuses = Brand::all();
+//        foreach ($campuses as $campus) {
+//            dump($campus->courses);
+//        }
+//        $this->dataForView['courses'] = Product::all();
+//        $this->dataForView['intakes'] = InTake::GetLatest();
+        $this->dataForView['campuses'] = $campuses;
 
-        return view(_get_frontend_theme_path('templates.intake_latest'), $this->dataForView);
+        return view(_get_frontend_theme_path('pages.intake_latest'), $this->dataForView);
     }
 
     /**
