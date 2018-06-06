@@ -15,8 +15,11 @@ class AxcelerateClient
 
     private function __construct()
     {
-        self::$WEB_SERVICE_TOKEN = env('AXCELERATE_WEB_TOKEN', false);
-        self::$API_TOKEN = env('AXCELERATE_API_TOKEN', false);
+        /**
+         * 默认使用 staging 的API 信息
+         */
+        self::$WEB_SERVICE_TOKEN = env('AXCELERATE_WEB_TOKEN', '4A19582D-67AE-469E-A0D8CD5DEEE87082');
+        self::$API_TOKEN = env('AXCELERATE_API_TOKEN', 'E6B33A65-2DD7-4FB1-9FC9B2B3C927F03C');
         self::$BASE_URL = env('AXCELERATE_BASE_URL', 'https://admin.axcelerate.com.au/api/');
         self::$restfulClient = new GuzzleHttpClient();
     }
