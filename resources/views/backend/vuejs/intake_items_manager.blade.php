@@ -16,7 +16,10 @@
                 offline_date:'{{ $intake->offline_date }}',
                 description: '{!! $intake->description !!}',
                 description_cn: '{!! $intake->description_cn !!}'
-            }
+            },
+            scheduled: [
+                @forEach($intakeItems as $intakeItem){!! "'".$intakeItem->scheduled."'," !!}@endforeach
+            ]
         },
         created: function(){
             $('#intake-manager-app').removeClass('invisible');

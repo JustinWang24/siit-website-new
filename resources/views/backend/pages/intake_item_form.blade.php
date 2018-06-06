@@ -52,8 +52,9 @@
                             </div>
                         </div>
                         <div class="column">
-                            <el-form-item label="Schedule Date" prop="scheduled">
+                            <el-form-item label="Schedule Date">
                                 <el-date-picker
+                                        v-model="scheduled[{{ $key - 1 }}]"
                                         name="scheduled[]"
                                         type="date"
                                         value="{{ $currentItemScheduled }}"

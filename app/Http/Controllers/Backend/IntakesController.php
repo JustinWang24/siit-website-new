@@ -84,18 +84,32 @@ class IntakesController extends Controller
         return view('backend.pages.intake_item_form', $this->dataForView);
     }
 
+    /**
+     * 保存 Intake 的 Items
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function save_items(Request $request){
         $inTakeId = $request->get('in_take_id');
         $itemIds = $request->get('item_id');
         $seats = $request->get('seats');
         $scheduled = $request->get('scheduled');
         foreach ($itemIds as $index => $id) {
-            IntakeItem::where('id',$id)
-                ->where('in_take_id',$inTakeId)
-                ->update([
+            if(is_null($id)){
+                IntakeItem::create([
+                    'in_take_id'=>$inTakeId,
+                    'language_id'=>$index+1,
                     'seats'=>$seats[$index],
                     'scheduled'=>$scheduled[$index],
                 ]);
+            }else{
+                IntakeItem::where('id',$id)
+                    ->where('in_take_id',$inTakeId)
+                    ->update([
+                        'seats'=>$seats[$index],
+                        'scheduled'=>$scheduled[$index],
+                    ]);
+            }
         }
         return redirect('/backend/intakes/index');
     }
