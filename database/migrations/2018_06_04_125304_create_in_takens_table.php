@@ -16,12 +16,8 @@ class CreateInTakensTable extends Migration
         Schema::create('in_takes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('course_id');
-            $table->date('scheduled');
             $table->date('online_date')->nullable();
             $table->date('offline_date')->nullable();
-            $table->unsignedInteger('clicks')->default(0);
-            $table->unsignedInteger('seats')->default(0);
-            $table->unsignedInteger('enrolment_count')->default(0);
 
             // 最后操作该项记录的人
             $table->unsignedInteger('last_updated_user_id')->default(0);

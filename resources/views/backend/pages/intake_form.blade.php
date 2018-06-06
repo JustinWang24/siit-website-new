@@ -37,20 +37,7 @@
                             </el-select>
                         </el-form-item>
                     </div>
-                    <div class="column">
-                        <el-form-item label="Schedule Date" prop="scheduled" required>
-                            <el-date-picker
-                                    v-model="currentPage.scheduled"
-                                    type="date"
-                                    placeholder="Required: Schedule Date">
-                            </el-date-picker>
-                        </el-form-item>
-                    </div>
                 </div>
-
-                <el-form-item label="Seats" prop="seats" required>
-                    <el-input placeholder="Required: Max. seats" v-model="currentPage.seats"></el-input>
-                </el-form-item>
 
                 <el-form-item label="Title">
                     <el-input placeholder="Optional: Title, it will use course name as default" v-model="currentPage.title"></el-input>
@@ -99,7 +86,7 @@
                     ></vuejs-editor>
                 </el-form-item>
                 <el-button type="primary" v-on:click="savePage('currentPage')">
-                    <i class="el-icon-upload2"></i>&nbsp; Save
+                    <i class="el-icon-upload2"></i>&nbsp;Save and Next
                 </el-button>
             </el-form>
         </div>

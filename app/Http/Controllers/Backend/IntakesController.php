@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Catalog\IntakeItem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Catalog\InTake;
 use App\Models\Catalog\Product;
+use Symfony\Component\Routing\Matcher\RedirectableUrlMatcher;
 
 class IntakesController extends Controller
 {
@@ -25,7 +27,6 @@ class IntakesController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function add(){
-
         $this->dataForView['menuName'] = 'intakes';
         $intake = new InTake();
         $this->dataForView['courses'] = Product::all();
@@ -64,5 +65,38 @@ class IntakesController extends Controller
             $page->delete();
         }
         return redirect('backend/intakes/index');
+    }
+
+    /**
+     * 加载 Intake 的所有 Items 并编辑
+     * @param $intakeId
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function items_manager($intakeId, Request $request){
+        $this->dataForView['intake'] = InTake::find($intakeId);
+        $this->dataForView['intakeItems'] = IntakeItem::where('in_take_id',$intakeId)->get();
+        $this->dataForView['languages'] = IntakeItem::GetSupportedLanguages();
+        $this->dataForView['menuName'] = 'intakes';
+        $this->dataForView['vuejs_libs_required'] = [
+            'intake_items_manager'
+        ];
+        return view('backend.pages.intake_item_form', $this->dataForView);
+    }
+
+    public function save_items(Request $request){
+        $inTakeId = $request->get('in_take_id');
+        $itemIds = $request->get('item_id');
+        $seats = $request->get('seats');
+        $scheduled = $request->get('scheduled');
+        foreach ($itemIds as $index => $id) {
+            IntakeItem::where('id',$id)
+                ->where('in_take_id',$inTakeId)
+                ->update([
+                    'seats'=>$seats[$index],
+                    'scheduled'=>$scheduled[$index],
+                ]);
+        }
+        return redirect('/backend/intakes/index');
     }
 }

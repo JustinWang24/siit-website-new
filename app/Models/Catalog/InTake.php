@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Utils\ContentTool;
+use DB;
 
 /**
  * 入学通知记录表
@@ -26,12 +27,8 @@ class InTake extends Model
     protected $fillable = [
         'course_id',
         'type',
-        'scheduled',
         'online_date',
         'offline_date',
-        'clicks',
-        'seats',    // 最多报名人数
-        'enrolment_count',  // 已报名人数
         'title',
         'code',
         'description',
@@ -40,7 +37,7 @@ class InTake extends Model
     ];
 
     public $dates = [
-        'scheduled','online_date','offline_date','created_at','updated_at'
+        'online_date','offline_date','created_at','updated_at'
     ];
 
     public function course(){
@@ -49,6 +46,14 @@ class InTake extends Model
 
     public function account(){
         return $this->belongsTo(User::class, 'last_updated_user_id');
+    }
+
+    public function intakeItems(){
+        return $this->hasMany(IntakeItem::class);
+    }
+
+    public static function GetLatest(){
+
     }
 
     /**
@@ -79,10 +84,6 @@ class InTake extends Model
      */
     public static function Persistent($data){
         $data = ContentTool::RemoveNewLine($data);
-
-        if(!empty($data['scheduled'])){
-            $data['scheduled'] = Carbon::parse($data['scheduled'])->setTimezone('Australia/Melbourne');
-        }
         if(!empty($data['online_date'])){
             $data['online_date'] = Carbon::parse($data['online_date'])->setTimezone('Australia/Melbourne');
         }
@@ -91,14 +92,35 @@ class InTake extends Model
         }
 
         if(!isset($data['id']) || is_null($data['id']) || empty(trim($data['id']))){
+            // 添加新的, 这个时候, 要同时生成所有的 ITEMS
             unset($data['id']);
-
+            DB::beginTransaction();
             $page = self::create(
                 $data
             );
             if($page){
-                return $page->id;
+                $langs = IntakeItem::GetSupportedLanguages();
+                $allDone = true;
+                foreach ($langs as $key=>$lang){
+                    $allDone = IntakeItem::create(
+                        [
+                            'in_take_id'=>$page->id,
+                            'language_id'=>$key,
+                        ]
+                    );
+                    if(!$allDone){
+                        break;
+                    }
+                }
+                if($allDone){
+                    DB::commit();
+                    return $page->id;
+                }else{
+                    DB::rollback();
+                    return 0;
+                }
             }else{
+                DB::rollback();
                 return 0;
             }
         }else{

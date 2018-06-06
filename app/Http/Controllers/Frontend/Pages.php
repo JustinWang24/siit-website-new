@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Events\Contact\LeadReceived;
 use App\Events\Page\Content\StartLoading;
+use App\Models\Catalog\InTake;
 use App\Models\Configuration;
 use App\Models\Lead;
 use App\Models\Staff;
@@ -121,6 +122,21 @@ class Pages extends Controller
         $this->dataForView['metaDescription'] = $staff->name;
 
         return view(_get_frontend_theme_path('templates.staff_profile'), $this->dataForView);
+    }
+
+    /**
+     * 获取最新的 Intake 列表
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function intake_latest(Request $request){
+        $this->dataForView['pageTitle'] = 'Intake Latest';
+        $this->dataForView['metaKeywords'] = 'Intake Latest';
+        $this->dataForView['metaDescription'] = 'Intake Latest';
+
+        $this->dataForView['intakes'] = InTake::GetLatest();
+
+        return view(_get_frontend_theme_path('templates.intake_latest'), $this->dataForView);
     }
 
     /**

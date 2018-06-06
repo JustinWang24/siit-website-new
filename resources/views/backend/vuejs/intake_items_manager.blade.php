@@ -9,19 +9,13 @@
                 type:'{{ $intake->type ? $intake->type : \App\Models\Catalog\InTake::TYPE_PUBLIC }}',
                 title:'{{ $intake->title }}',
                 code:'{{ $intake->code }}',
+                seats:'{{ $intake->seats }}',
                 course_id:'{{ $intake->course_id ? $intake->course_id : 0 }}',   // 所属的课程，可以为0
+                scheduled:'{{ $intake->scheduled }}',   // 部门
                 online_date:'{{ $intake->online_date }}',   // 工种
                 offline_date:'{{ $intake->offline_date }}',
                 description: '{!! $intake->description !!}',
                 description_cn: '{!! $intake->description_cn !!}'
-            },
-            rules: {
-                course_id: [
-                    { required: true, message: 'Course is Required', trigger: 'blur' }
-                ],
-                online_date: [
-                    { required: true, message: 'Online date is Required', trigger: 'blur' }
-                ]
             }
         },
         created: function(){
@@ -30,19 +24,10 @@
         methods: {
             savePage: function(formName){
                 // 验证并保存当前正在编辑的目录信息
-                var that = this;
-                this.$refs[formName].validate(
-                    function(valid){
-                        if (valid) {
-                            that._savePage();
-                        } else {
-                            that._notify('error','Error','表单验证失败');
-                            return false;
-                        }
-                    }
-                );
+                this._savePage();
             },
             _savePage: function(){
+                $('#intake-items-form').submit();
                 // 保存 event 信息到服务器的方法
                 this.savingPage = true;
                 var that = this;
@@ -57,8 +42,7 @@
                     if(res.data.error_no == 100){
                         // 成功
                         that._notify('success','DONE!','Intake Saved!');
-                        // 下一步, 添加具体的开学日期, 人数等
-                        window.location.href = '/backend/intakes/items-manager/'+res.data.data.msg;
+                        that.currentPage.id = res.data.data.msg;
                     }else{
                         // 失败
                         that._notify('error','Error','Can not save Intake, please try later!');

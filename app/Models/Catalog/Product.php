@@ -10,6 +10,7 @@ use App\Models\Catalog\Product\ProductOption;
 use App\Models\Group;
 use App\Models\Utils\MediaTool;
 use App\Models\Utils\ProductType;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use phpDocumentor\Reflection\Types\Null_;
@@ -57,6 +58,20 @@ class Product extends Model
         'is_group_product' => 'boolean',
         'is_configurable_product' => 'boolean'
     ];
+
+    /**
+     * 获取某个课程的开学时间记录
+     * @return mixed
+     */
+    public function getAvailableIntakes(){
+        $today = Carbon::now();
+        return InTake::where('course_id',$this->id)
+            ->where('scheduled','>',$today)
+            ->where('seats','>',0)
+            ->where('online_date','<=',$today)
+            ->orderBy('scheduled','asc')
+            ->get();
+    }
 
     /**
      * 关联的Group

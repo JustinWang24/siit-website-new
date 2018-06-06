@@ -16,6 +16,7 @@ Route::get('/contact-us', 'Frontend\Pages@contact_us')->name('contact_us');
 Route::post('/contact-us', 'Frontend\Pages@contact_us_handler');
 Route::get('/terms', 'Frontend\Pages@terms')->name('terms');
 Route::get('/staff-profile', 'Frontend\Pages@view_staff_profile');
+Route::get('/intake-latest', 'Frontend\Pages@intake_latest')->name('intake_latest');
 
 // 特定的URI
 Route::prefix('page')->group(function(){
@@ -125,6 +126,8 @@ Route::prefix('backend')->middleware('auth')->group(function(){
     Route::get('intakes/add','Backend\IntakesController@add');
     Route::get('intakes/edit/{id}','Backend\IntakesController@edit');
     Route::get('intakes/delete/{id}','Backend\IntakesController@delete');
+    Route::get('intakes/items-manager/{id}','Backend\IntakesController@items_manager');
+    Route::post('intakes/save-items','Backend\IntakesController@save_items');
 
     // Widgets
     Route::get('widgets/sliders','Backend\Widgets@list_sliders');
