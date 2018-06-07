@@ -3,11 +3,11 @@
     <div class="container mb-10 intake-page-app" id="intake-page-app">
         <div class="columns mt-0 pt-0 mb-0 pb-0">
             <div class="column pt-0 pb-0">
-                <img src="{{ asset('/images/frontend/intake-date.jpg') }}" alt="Intake date" style="width: 100%;">
+                <img src="{{ asset('/images/frontend/study.jpg') }}" alt="Intake date" style="width: 100%;">
             </div>
         </div>
 
-        <div class="content">
+        <div class="content mt-10">
             <div class="columns is-marginless">
                 <div class="column is-one-quarter left-side-bar-wrap">
                     <h2 class="mt-20 pt-10">Latest Intake Schedule</h2>

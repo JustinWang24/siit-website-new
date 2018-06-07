@@ -50,15 +50,15 @@ class FormHelper
             $label = ucwords(str_replace('_',' ',$fieldName));
         }
         if($isRequired){
-            $placeholder = 'Required:'.$placeholder;
+            $placeholder = 'Required: '.$placeholder;
             $label = $label.' <span class="has-text-danger">*</span>';
         }else{
-            $placeholder = 'Optional:'.$placeholder;
+            $placeholder = 'Optional: '.$placeholder;
         }
         ?>
         <div class="field">
             <label class="label"><?php echo $label; ?></label>
-            <div class="control"><input name="<?php echo $fieldName; ?>" class="input" type="text" placeholder="<?php echo $placeholder; ?>" value="<?php echo $fieldValue; ?>"<?php echo $isRequired?' required':null ?>></div>
+            <div class="control"><input name="form[<?php echo $fieldName; ?>]" class="input" type="text" placeholder="<?php echo $placeholder; ?>" value="<?php echo $fieldValue; ?>"<?php echo $isRequired?' required':null ?>></div>
         </div>
         <?php
     }
@@ -87,7 +87,7 @@ class FormHelper
             <label class="label"><?php echo $label; ?></label>
             <div class="control">
                 <div class="select">
-                    <select name="<?php echo $fieldName; ?>"<?php echo $isRequired?' required':null ?>><?php echo $options; ?></select>
+                    <select name="form[<?php echo $fieldName; ?>]"<?php echo $isRequired?' required':null ?>><?php echo $options; ?></select>
                 </div>
             </div>
         </div>

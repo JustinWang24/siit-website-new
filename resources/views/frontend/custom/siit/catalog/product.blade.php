@@ -107,7 +107,7 @@
                                 @endif
                             </div>
                         </form>
-                        <blockquote class="mt-10">Note: students are encouraged to contact SIIT Marketing team for exact timetable and training arrangement.</blockquote>
+                        <blockquote class="mt-10">Note: students are encouraged to contact {{ env('APP_NAME') }} Marketing team for exact timetable and training arrangement.</blockquote>
                     </div>
 
                     <div class="content pr-20">

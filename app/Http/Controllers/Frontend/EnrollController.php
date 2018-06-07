@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Catalog\IntakeItem;
+use App\Models\Group;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,6 +19,12 @@ class EnrollController extends Controller
      */
     public function course_enroll($intakeItemId, Request $request){
         $intakeItem = IntakeItem::GetById($intakeItemId);
+
+        // 检查是否为agent来的信息
+        $agentCode = $request->get('agent');
+        if($agentCode){
+            $this->dataForView['dealer'] = Group::where('group_code',$agentCode)->first();
+        }
 
         if($intakeItem){
             $today = Carbon::today();

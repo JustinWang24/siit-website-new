@@ -12,11 +12,12 @@
                             </h1>
                             <h2><span class="has-text-danger">({{ $course->brand }})</span> - Intake Date: {{ $intakeItem->scheduled->format('d-M-Y') }}</h2>
                         </div>
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="intake_item" value="{{ $intakeItem->id }}">
                             <input type="hidden" name="course" value="{{ $course->uuid }}">
                             <input type="hidden" name="student" value="{{ session('student.id') }}">
+                            <input type="hidden" name="dealer" value="{{ isset($dealer)&&$dealer ? $dealer->group_code : null  }}">
                             <hr>
                             <div class="row">
                                 <h2 class="is-size-4 has-text-grey">1: Personal Details(as they appear on your passport)</h2>
@@ -251,35 +252,46 @@
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('agent_name',false) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('agent_name',false,(isset($dealer)&&$dealer ? $dealer->name : null)) }}
                                 </div>
                                 <div class="column">
                                     {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('contact_person',false) }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('telephone',false) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('telephone',false,(isset($dealer)&&$dealer ? $dealer->phone : null)) }}
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column is-8">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('email',false) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('email',false,(isset($dealer)&&$dealer ? $dealer->email : null)) }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('fax',false) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('fax',false,(isset($dealer)&&$dealer ? $dealer->fax : null)) }}
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="field is-grouped">
-                                    <div class="control">
-                                        <button class="button is-link">Apply Now</button>
-                                    </div>
+                                <h2 class="is-size-4 has-text-grey">10: If you have our voucher?</h2>
+                            </div>
+                            <div class="columns">
+                                <div class="column is-8">
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('voucher',false,null,null,env('APP_NAME').' Voucher Number') }}
+                                </div>
+                                <div class="column">
+
                                 </div>
                             </div>
-
                         </form>
+                        <div class="row">
+                            <div class="field">
+                                <div class="control">
+                                    <br>
+                                    <button class="button is-large is-link">Apply Now</button>
+                                </div>
+                            </div>
+                        </div>
                         <br>
-                        <br>
+                        <blockquote class="mt-10">Note: students are encouraged to contact {{ env('APP_NAME') }} Marketing team for exact timetable and training arrangement.</blockquote>
                         <br>
                         <br>
                     </div>
