@@ -19,7 +19,7 @@
                         <a class="navbar-item" href="{{ url('/') }}" title="Home page">
                             Home
                         </a>
-                        <a class="navbar-item" href="" title="Student Login">
+                        <a class="navbar-item" href="{{ url('/frontend/customers/login') }}" title="Student Login">
                             Student Login
                         </a>
                     </div>

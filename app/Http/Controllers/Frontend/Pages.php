@@ -132,17 +132,13 @@ class Pages extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function intake_latest(Request $request){
-        $this->dataForView['pageTitle'] = 'Intake Latest';
-        $this->dataForView['metaKeywords'] = 'Intake Latest';
-        $this->dataForView['metaDescription'] = 'Intake Latest';
+        $date = date('Y');
+        $this->dataForView['pageTitle'] = 'Intake Dates for '.$date;
+        $this->dataForView['metaKeywords'] = 'Intake Dates for '.$date;
+        $this->dataForView['metaDescription'] = 'Intake Dates for '.$date;
 
         // 分校区来逐步加载课程
         $campuses = Brand::all();
-//        foreach ($campuses as $campus) {
-//            dump($campus->courses);
-//        }
-//        $this->dataForView['courses'] = Product::all();
-//        $this->dataForView['intakes'] = InTake::GetLatest();
         $this->dataForView['campuses'] = $campuses;
 
         return view(_get_frontend_theme_path('pages.intake_latest'), $this->dataForView);

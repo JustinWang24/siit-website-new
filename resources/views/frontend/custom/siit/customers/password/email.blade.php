@@ -1,7 +1,11 @@
 @extends(_get_frontend_layout_path('catalog'))
 
 @section('content')
+    <div class="container mt-20 mb-20">
     <div class="content">
+        <br>
+        <br>
+        <br>
         <div class="columns">
             <div class="column is-3"></div>
             <div class="column">
@@ -29,6 +33,7 @@
 
                             <div class="columns">
                                 <div class="column">
+                                    <p><a class="is-danger" href="{{ url('frontend/customers/login') }}">Student Login</a></p>
                                 </div>
                                 <div class="column">
                                     <button type="submit" class="button is-link is-pulled-right">Send Password Reset Link</button>
@@ -41,5 +46,9 @@
             </div>
             <div class="column is-3"></div>
         </div>
+        <br>
+        <br>
+        <br>
+    </div>
     </div>
 @endsection

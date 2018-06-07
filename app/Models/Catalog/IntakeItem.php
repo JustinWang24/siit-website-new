@@ -22,6 +22,14 @@ class IntakeItem extends Model
     }
 
     /**
+     * @param $id
+     * @return IntakeItem
+     */
+    public static function GetById($id){
+        return self::find($id);
+    }
+
+    /**
      * 获取语言的名称
      * @param $key
      * @return mixed|string

@@ -30,6 +30,7 @@
 
     @include( _get_frontend_layout_path('frontend.session_flash_msg_box'))
     @yield('content')
+    @include( _get_frontend_layout_path('frontend.social_media_section') )
     @include( _get_frontend_layout_path('frontend.footer') )
     @include( _get_frontend_layout_path('frontend.floating_box'))
 

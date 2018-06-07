@@ -19,6 +19,7 @@ class Products extends Controller
      * @param $uuid
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
     public function delete($uuid, Request $request){
         $product = Product::GetByUuid($uuid);
