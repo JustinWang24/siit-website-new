@@ -109,6 +109,7 @@ class FormHelper
         }
         $fileElementId = uniqid($fieldName);
         $fileNameElementId = uniqid($fieldName.'-name');
+        $jsFileVariableName = uniqid($fieldName.'file_');
         ?>
         <div class="field">
             <label class="label"><?php echo $label; ?></label>
@@ -129,9 +130,9 @@ class FormHelper
                 </div>
             </div>
             <script type="application/javascript">
-                var file = document.getElementById("<?php echo $fileElementId; ?>");
-                file.onchange = function(){
-                    if(file.files.length > 0){document.getElementById('<?php echo $fileNameElementId; ?>').innerHTML = file.files[0].name;}
+                var <?php echo $jsFileVariableName ?> = document.getElementById("<?php echo $fileElementId; ?>");
+                <?php echo $jsFileVariableName ?>.onchange = function(){
+                    if(<?php echo $jsFileVariableName ?>.files.length > 0){document.getElementById('<?php echo $fileNameElementId; ?>').innerHTML = <?php echo $jsFileVariableName ?>.files[0].name;}
                 };
             </script>
         </div>
