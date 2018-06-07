@@ -53,6 +53,7 @@
                                 <?php
 //                                dump($product->getFutureIntakes());
                                     $languages = \App\Models\Catalog\IntakeItem::GetSupportedLanguages();
+                                    $today = \Carbon\Carbon::today();
                                 ?>
                                     <hr>
                                     <table>
@@ -68,6 +69,7 @@
                                         @foreach($product->intakes as $intake)
                                             <tr>
                                                 @foreach($intake->intakeItems as $item)
+                                                    @if($item->scheduled > $today)
                                                     <td class="intake-item-box">
                                                         @if($item->seats && $item->seats>$item->enrolment_count && $item->scheduled)
                                                             <a class="intake-book-link-btn" href="{{ url('/catalog/course/book/'.$item->id) }}" title="Click me to enroll now!">
@@ -80,6 +82,7 @@
                                                             </a>
                                                         @endif
                                                     </td>
+                                                    @endif
                                                 @endforeach
                                             </tr>
                                         @endforeach

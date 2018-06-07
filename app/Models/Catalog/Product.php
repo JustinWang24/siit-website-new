@@ -13,7 +13,6 @@ use App\Models\Utils\ProductType;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use phpDocumentor\Reflection\Types\Null_;
 use Ramsey\Uuid\Uuid;
 use DB;
 use App\Models\Media;
