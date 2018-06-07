@@ -1,6 +1,6 @@
 @extends(_get_frontend_layout_path('catalog'))
 @section('content')
-    <div class="container mt-20 mb-20" id="product-view-manager-app">
+    <div class="container mt-20 mb-20 product-view-manager-app" id="product-view-manager-app">
         <div class="content">
             <div class="columns is-marginless">
                 <div class="column is-one-quarter left-side-bar-wrap" style="margin-top: 1px;">
@@ -14,14 +14,15 @@
                     </div>
 
                     <div class="content pl-20 pr-20">
-                        <br>
-                        <h2>
+                        <h1 class="mt-20">
                             Course name: {{ $product->name }}&nbsp;
                             @if($product->manage_stock && $product->stock<$product->min_quantity)
                                 <span class="badge badge-pill badge-danger">Out of Stock</span>
                             @endif
-                        </h2>
-                        <p class="sku-txt">SKU: {{ $product->sku }}</p>
+                        </h1>
+                        <hr>
+                        <h2 class="is-size-5 has-text-danger">Campus: {{ $product->brand }}</h2>
+                        <p class="sku-txt">CODE: {{ $product->sku }}</p>
 
                         @include(_get_frontend_theme_path('catalog.elements.sections.short_description'))
 
@@ -48,32 +49,48 @@
                                 </div>
                             @endif
 
-                            <div class="add-to-cart-form-wrap">
-                                <div class="field mb-20">
-                                    <label class="label">
-                                        Quantity
-                                        @if(!empty($product->unit_text))
-                                            <span class="has-text-danger is-size-7">(Unit: {{ $product->unit_text }})</span>
-                                        @endif
-                                    </label>
-                                    <div class="control quantity-input-wrap">
-                                        <input
-                                                data-name="quantity"
-                                                name="quantity"
-                                                type="number"
-                                                class="input quantity-input"
-                                                placeholder="Quantity"
-                                                value="{{ $product->min_quantity }}"
-                                                min="{{ $product->min_quantity }}"
-                                        >
-                                    </div>
-                                    <small id="emailHelp" class="form-text text-muted">
-                                        Notice: Minimum quantity is <strong>{{ $product->min_quantity }}{{ !empty($product->unit_text)?' '.$product->unit_text:null }}</strong> per order.
-                                    </small>
-                                </div>
+                            <div class="row">
+                                <?php
+//                                dump($product->getFutureIntakes());
+                                    $languages = \App\Models\Catalog\IntakeItem::GetSupportedLanguages();
+                                ?>
+                                    <hr>
+                                    <table>
+                                        <thead>
+                                        <tr><h2 class="is-size-4-desktop is-size-4-mobile has-text-grey">Proposed Intake Date <span class="has-text-link">(Click intake date to enroll)</span></h2></tr>
+                                        <tr>
+                                            @foreach($languages as $languageIndex=>$language)
+                                                <th>{{ $language }}</th>
+                                            @endforeach
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($product->intakes as $intake)
+                                            <tr>
+                                                @foreach($intake->intakeItems as $item)
+                                                    <td class="intake-item-box">
+                                                        @if($item->seats && $item->seats>$item->enrolment_count && $item->scheduled)
+                                                            <a class="intake-book-link-btn" href="{{ url('/catalog/course/book/'.$item->id) }}" title="Click me to enroll now!">
+                                                                <div class="control">
+                                                                    <div class="tags has-addons">
+                                                                        <span class="tag">{{ $item->scheduled->format('d/M/Y') }}</span>
+                                                                        <span class="tag is-success">{{ $item->seats }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        @endif
+                                                    </td>
+                                                @endforeach
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div class="add-to-cart-form-wrap is-invisible">
+                                <input type="hidden" name="quantity" value="1"><!-- 一次报名1人 -->
                                 @if(!$product->manage_stock)
                                     <button v-on:click="addToCartAction($event)" id="add-to-cart-btn" type="submit" class="button is-danger">
-                                        <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Add to Cart
+                                        <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Enroll Now
                                     </button>
                                     <a href="{{ url('/frontend/place_order_checkout') }}" id="shortcut-checkout-btn" class="button is-link shortcut-checkout-btn is-invisible">
                                         <i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp;Checkout Now!
@@ -82,7 +99,7 @@
                                     @if($product->stock<$product->min_quantity)
                                         <button id="send-enquiry-for-shopping-btn" type="submit" class="button">Send Enquiry</button>
                                     @else
-                                        <button id="add-to-cart-btn" type="submit" class="button add-to-cart-btn">Add to Cart</button>
+                                        <button id="add-to-cart-btn" type="submit" class="button add-to-cart-btn">Enroll Now</button>
                                     @endif
                                 @endif
                             </div>

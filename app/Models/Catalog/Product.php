@@ -111,6 +111,34 @@ class Product extends Model
     }
 
     /**
+     * 根据当前的日期，获取某个课程的接下来的入学日期
+     */
+    public function getFutureIntakes(){
+        $today = Carbon::now()->format('Y-m-d');
+        $intakes = InTake::where('online_date','<=',$today)
+            ->where('offline_date','>',$today)
+            ->orderBy('online_date','asc')
+            ->get();
+        $intakeIds = [];
+        foreach ($intakes as $intake) {
+            $intakeIds[] = $intake->id;
+        }
+
+        if(count($intakeIds)>0){
+            $intakeItems = IntakeItem::whereIn('in_take_id',$intakeIds)
+                ->whereNotNull('seats')
+                ->whereNotNull('enrolment_count')
+                ->where('scheduled','>',$today)
+                ->get();
+        }
+
+        return [
+            'intakes' => $intakes,
+            'intakeItems' => isset($intakeItems) ? $intakeItems : [],
+        ];
+    }
+
+    /**
      * @param bool $asArray
      * @return array
      */
