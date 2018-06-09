@@ -44,6 +44,9 @@ Vue.component('VuejsSlider', require('./components/vuejs-slider/VuejsSlider.vue'
 
 fastclick.attach(document.body);
 
+// 注册课程的程序全局变量
+let enrollApplication = null;
+
 /**
  * 全局可用的通知函数
  * @param vm
@@ -229,5 +232,127 @@ $(document).ready(function(){
         $('.show-mask-on-hover').on('mouseout',function(e){
             $(this).children('.mask').eq(0).css('top','-201px');
         });
+    }
+
+    // 学生注册报名的功能
+    if($('#course-enroll-app')){
+        enrollApplication = new Vue({
+                el: '#course-enroll-app',
+                data: {
+                    user:{
+                        email: '',
+                        verificationCode: '',
+                        password: '',
+                        name: '',
+                        captcha:'',
+                        group_id:null
+                    },
+                    hasAccount: true,
+                    showVerificationField: false,
+                    emailField:{
+                        errorMsg: '',
+                        infoMsg: '',
+                        infoMsg2: '',
+                        isVerifyingEmail: false,
+                        isEmailVerified: false,
+                    },
+                    verificationField:{
+                        errorMsg:'',
+                        isVerifyingCode: false
+                    },
+                    vCode:'',
+                    captcha:'',
+                    captchaMatched: false,
+                    // 开学日期的相关数据
+                    enrollData:{
+                        intake_item: null,
+                        course_id: null
+                    }
+                },
+                watch:{
+                  'user.captcha': function(val){
+                    this.captchaMatched = this.captcha == val;
+                  }
+                },
+                created: function(){
+                    // 获取可能的经销商的ID
+                    this.user.group_id          = $('#current-group-id').val();
+                    this.enrollData.intake_item = $('#current-intake-item').val();
+                    this.enrollData.course_id   = $('#current-course-id').val();
+                },
+                mounted: function(){
+                    $('#course-enroll-app-form').removeClass('is-invisible');
+                },
+                methods:{
+                    onSubmit: function(){
+
+                    },
+                    getVerificationCode: function(){
+                        if(this.user.email.trim().length == 0){
+                            this.emailField.errorMsg = 'Please enter a valid email address';
+                            return;
+                        }
+                        this.emailField.errorMsg = '';
+                        this.emailField.isVerifyingEmail = true;
+                        let that = this;
+                        axios.post('/api/students/verify-email',{email: this.user.email,name: this.user.name})
+                            .then((res)=>{
+                                that.emailField.isVerifyingEmail = false;
+                                // 验证方法成功返回数据
+                                if(res.data.error_no == 100){
+                                    if(res.data.data.result == 'not_valid'){
+                                        // 给定的邮件已经不存在
+                                        that.emailField.errorMsg = 'Please enter a valid email address';
+                                    }else if(res.data.data.result == 'valid'){
+                                        if(!res.data.data.emailExisted){
+                                            that.vCode = that._decodeVcode(res.data.data.vCode, res.data.data.id);
+                                            that.emailField.infoMsg = 'The verification code is sent to ' + that.user.email;
+                                            that.emailField.infoMsg2 = '';
+                                            that.showVerificationField = true;
+                                            that.captcha = Math.floor((Math.random() * 1000000) + 1) + '';
+                                        }else{
+                                            // 用户的邮件已经是学生了, 显示让用户输入登录密码的表格, 6位数字
+                                            // 给定的邮件已经存在, 需要用户去登录
+                                            that.emailField.infoMsg = '';
+                                            that.emailField.infoMsg2 = 'This email has been registered, please login';
+                                            that.hasAccount = true;
+                                        }
+                                    }
+                                }
+                            });
+                    },
+                    verifyCode: function(){
+                        this.verificationField.isVerifyingCode = true;
+                        if(this.vCode == this.user.verificationCode){
+                            // 验证vCode成功
+                            this.user.password = Math.floor((Math.random() * 1000000) + 1);
+                            let that = this;
+                            axios.post(
+                                '/api/students/verify-register',{
+                                student:this.user
+                            }).then((res)=>{
+                                if(res.data.error_no == 100){
+                                    // 表示注册成功, 从新加载注册页面
+                                    window.location.href = '/catalog/course/book/2?agent='
+                                        + that.user.group_id
+                                        + '&sd='+res.data.data.uuid;
+                                }else{
+                                    // 表示注册失败, 从新加载注册页面
+                                    window._notify(that,'error','System is busy, please try again!');
+                                }
+                            });
+                        }else{
+                            this.verificationField.isVerifyingCode = false;
+                            return;
+                        }
+                    },
+                    _decodeVcode: function(code, index){
+                        let first = code.substring(0,index);
+                        let last = code.substring(index);
+                        return last + first;
+                    }
+                }
+            }
+        );
     }
 });

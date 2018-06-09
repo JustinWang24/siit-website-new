@@ -479,3 +479,18 @@ body{
     }
   }
 }
+
+.captcha-box{
+  display: block;
+  background: $color-logo-blue;
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  float: right;
+  color: white;
+  border-radius: 10px;
+  font-size: 24px;
+  -webkit-box-shadow: 10px 10px 34px -4px rgba(0,0,0,0.13);
+  -moz-box-shadow: 10px 10px 34px -4px rgba(0,0,0,0.13);
+  box-shadow: 10px 10px 34px -4px rgba(0,0,0,0.13);
+}

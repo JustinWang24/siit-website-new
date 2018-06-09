@@ -1,7 +1,7 @@
 @extends(_get_frontend_layout_path('frontend'))
 @section('content')
     <div class="container mb-20 mt-20">
-        <div class="content">
+        <div class="content" id="course-enroll-app">
             <div class="columns">
                 <div class="column is-1"></div>
                 <div class="column">
@@ -12,52 +12,128 @@
                             </h1>
                             <h2><span class="has-text-danger">({{ $course->brand }})</span> - Intake Date: {{ $intakeItem->scheduled->format('d-M-Y') }}</h2>
                         </div>
-                        <form action="" method="post" enctype="multipart/form-data">
+                        @if(!session('user_data.uuid'))
+                            <hr>
+                        <el-form ref="user" :model="user" label-width="100px" class="is-invisible" id="course-enroll-app-form">
+                            <div class="columns" v-show="hasAccount">
+                                <div class="column">
+                                    <el-form-item label="Please Choose" class="full-width">
+                                        <el-select v-model="hasAccount" placeholder="Please choose your status" class="full-width">
+                                            <el-option label="I already have an account" :value="true"></el-option>
+                                            <el-option label="I don't have account" :value="false"></el-option>
+                                        </el-select>
+                                    </el-form-item>
+                                </div>
+
+                            </div>
+                            <div class="columns" v-show="hasAccount">
+                                <div class="column">
+                                    <el-form-item label="Your Email">
+                                        <el-input v-model="user.email" placeholder="Your Email"></el-input>
+                                    </el-form-item>
+                                    <p class="has-text-success has-text-centered" v-if="emailField.infoMsg2.length>0" v-html="emailField.infoMsg2"></p>
+                                </div>
+                                <div class="column">
+                                    <el-form-item label="Password">
+                                        <el-input v-model="user.password" placeholder="Password"></el-input>
+                                    </el-form-item>
+                                </div>
+                                <div class="column">
+                                    <el-form-item>
+                                        <el-button icon="el-icon-arrow-right" type="primary" @click="onSubmit">Log Me In</el-button>
+                                    </el-form-item>
+                                </div>
+                            </div>
+                            <div class="columns" v-show="!hasAccount">
+                                <div class="column"  v-if="!showVerificationField">
+                                    <el-form-item label="Your Name">
+                                        <el-input v-model="user.name" placeholder="Your Name"></el-input>
+                                    </el-form-item>
+                                </div>
+                                <div class="column"  v-if="!showVerificationField">
+                                    <el-form-item label="Your Email" v-show="!emailField.isEmailVerified">
+                                        <el-input v-model="user.email" placeholder="Your email address"></el-input>
+                                    </el-form-item>
+                                    <p class="has-text-danger has-text-centered" v-if="emailField.errorMsg.length>0">@{{ emailField.errorMsg }}</p>
+                                    <p class="has-text-success has-text-centered" v-if="emailField.infoMsg.length>0">@{{ emailField.infoMsg }}</p>
+                                </div>
+                                <div class="column" v-if="showVerificationField">
+                                    <el-form-item label="Code">
+                                        <el-input v-model="user.verificationCode" placeholder="Your verification code"></el-input>
+                                    </el-form-item>
+                                    <p class="has-text-link has-text-centered" v-if="emailField.infoMsg.length>0">@{{ emailField.infoMsg }}</p>
+                                    <p class="has-text-danger has-text-centered" v-if="verificationField.errorMsg.length>0">@{{ verificationField.errorMsg }}</p>
+                                </div>
+                                <div class="column" v-if="showVerificationField">
+                                    <el-form-item label="CAPTCHA">
+                                        <el-input v-model="user.captcha" placeholder="Enter code below"></el-input>
+                                    </el-form-item>
+                                    <p class="has-text-centered" v-show="!captchaMatched">
+                                        <span class="captcha-box">CAPTCHA: @{{ captcha }}</span>
+                                    </p>
+                                </div>
+                                <div class="column">
+                                    <el-form-item v-if="!showVerificationField">
+                                        <el-button :loading="emailField.isVerifyingEmail" icon="el-icon-circle-check" type="success" @click="getVerificationCode">
+                                            Verify My Email
+                                        </el-button>
+                                    </el-form-item>
+                                    <el-form-item v-if="showVerificationField">
+                                        <el-button :disabled="!captchaMatched" :loading="verificationField.isVerifyingCode" icon="el-icon-circle-check" type="primary" @click="verifyCode">
+                                            Verify My Code
+                                        </el-button>
+                                    </el-form-item>
+                                </div>
+                            </div>
+                        </el-form>
+                        @endif
+
+                        <form action="" method="post" enctype="multipart/form-data" class="{{ session('user_data.uuid')?null:'is-invisible' }}">
                             @csrf
-                            <input type="hidden" name="intake_item" value="{{ $intakeItem->id }}">
-                            <input type="hidden" name="course" value="{{ $course->uuid }}">
-                            <input type="hidden" name="student" value="{{ session('student.id') }}">
-                            <input type="hidden" name="dealer" value="{{ isset($dealer)&&$dealer ? $dealer->group_code : null  }}">
+                            <input id="current-intake-item" type="hidden" name="enroll[intake_item]" value="{{ $intakeItem->id }}">
+                            <input id="current-course-id" type="hidden" name="enroll[course_id]" value="{{ $course->uuid }}">
+                            <input type="hidden" name="student[user_id]" value="{{ session('user_data.uuid') }}">
+                            <input id="current-group-id" type="hidden" name="student[agent_id]" value="{{ isset($dealer)&&$dealer ? $dealer->id : 0  }}">
                             <hr>
                             <div class="row">
                                 <h2 class="is-size-4 has-text-grey">1: Personal Details(as they appear on your passport)</h2>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('family_name') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','family_name') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('given_name') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','given_name') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('previous_name',false) }}
-                                </div>
-                            </div>
-                            <div class="columns">
-                                <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('birthday') }}
-                                </div>
-                                <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('gender',[1=>'Male',0=>'Female']) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','previous_name',false) }}
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('country_of_citizenship') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','birthday') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('passport') }}
-                                </div>
-                                <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('visa_category',false) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','gender',[1=>'Male',0=>'Female']) }}
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('disability_required',['NO','YES'],null,true,'Do you have a disability for which additional assistance may be required?') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','country_of_citizenship') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleFileField('disability_required_file',false,'If YES, please attach a separate sheet outlining this disability and assistance required') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','passport') }}
+                                </div>
+                                <div class="column">
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','visa_category',false) }}
+                                </div>
+                            </div>
+                            <div class="columns">
+                                <div class="column">
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','disability_required',['NO','YES'],null,true,'Do you have a disability for which additional assistance may be required?') }}
+                                </div>
+                                <div class="column">
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleFileField('student','disability_required_file',false,'If YES, please attach a separate sheet outlining this disability and assistance required') }}
                                 </div>
                             </div>
                             <hr>
@@ -66,58 +142,58 @@
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('home_address',true, null, null,'Home Address(in home country)') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','home_address',true, null, null,'Home Address(in home country)') }}
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('province') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','province') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('post_code',false) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','post_code',false) }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('country',false) }}
-                                </div>
-                            </div>
-                            <div class="columns">
-                                <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('current_address') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','country',false) }}
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('province_current',true, null, null,'Province') }}
-                                </div>
-                                <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('post_code_current',false, null, null,'Post Code') }}
-                                </div>
-                                <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('country_current',false, null, null,'Country') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','current_address') }}
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('current_residing',['Australia','Offshore'],null,true) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','province_current',true, null, null,'Province') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('is_pr',['No','Yes'],null,true,'Are you a permanent resident or citizen of Australia?') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','post_code_current',false, null, null,'Post Code') }}
                                 </div>
-                            </div>
-                            <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('email',true, null, null,'If YES, please attach document evidence. If NO, please provide copies of current visa and evidence of your current OSHC.') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','country_current',false, null, null,'Country') }}
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('Telephone_country_code') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','current_residing',['Australia','Offshore'],null,true) }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('area_code') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','is_pr',['No','Yes'],null,true,'Are you a permanent resident or citizen of Australia?') }}
+                                </div>
+                            </div>
+                            <div class="columns">
+                                <div class="column">
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','document_evidence',true, null, null,'If YES, please attach document evidence. If NO, please provide copies of current visa and evidence of your current OSHC.') }}
+                                </div>
+                            </div>
+                            <div class="columns">
+                                <div class="column">
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','telephone_country_code') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('phone_number') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','area_code') }}
+                                </div>
+                                <div class="column">
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','phone_number') }}
                                 </div>
                             </div>
 
@@ -127,21 +203,21 @@
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('form_of_test',['IELTS','TOEFL','CAE','PTE Academic','Other'],null,true) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','form_of_test',['IELTS','TOEFL','CAE','PTE Academic','Other'],null,true) }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('form_of_test',false, null, null,'What test if you choose "Other"') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','form_of_test_other',false, null, null,'What test if you choose "Other"') }}
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('test_score') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','test_score') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('test_taken_date',true, null, 'Required: dd/mm/yyyy') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','test_taken_date',true, null, 'Required: dd/mm/yyyy') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('english_proficiency_certificate') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','english_proficiency_certificate') }}
                                 </div>
                             </div>
 
@@ -150,30 +226,30 @@
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('course_1') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','course_1') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('institute_1') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','institute_1') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('date_commenced') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','date_commenced') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('date_completed') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','date_completed') }}
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('course_2') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','course_2') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('institute_2') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','institute_2') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('date_commenced_2') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','date_commenced_2') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('date_completed_2') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','date_completed_2') }}
                                 </div>
                             </div>
 
@@ -182,10 +258,10 @@
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('applying_exemptions',['NO','YES'],null,true,'Are you applying for exemptions??') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','applying_exemptions',['NO','YES'],null,true,'Are you applying for exemptions??') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleFileField('applying_exemptions_files',false,'If Yes, please complete the application form for exemption with your supporting documents such as unit outline and qualifications before commencement of your desired course(s).') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleFileField('student','applying_exemptions_files',false,'If Yes, please complete the application form for exemption with your supporting documents such as unit outline and qualifications before commencement of your desired course(s).') }}
                                 </div>
                             </div>
 
@@ -233,7 +309,7 @@
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('from',['Government Website','Advertisements','Friends/Relatives','Agent','Other'],null,true) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','heard_from',['Government Website','Advertisements','Friends/Relatives','Agent','Other'],null,true) }}
                                 </div>
                             </div>
 
@@ -243,7 +319,7 @@
 
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('authorize_to_agent',['NO','YES, please fill in the question No.9 below'],null,true) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('enroll','authorize_to_agent',['NO','YES, please fill in the question No.9 below'],null,true) }}
                                 </div>
                             </div>
 
@@ -252,21 +328,21 @@
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('agent_name',false,(isset($dealer)&&$dealer ? $dealer->name : null)) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','agent_name',false,(isset($dealer)&&$dealer ? $dealer->name : null)) }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('contact_person',false) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','contact_person',false) }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('telephone',false,(isset($dealer)&&$dealer ? $dealer->phone : null)) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','telephone',false,(isset($dealer)&&$dealer ? $dealer->phone : null)) }}
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column is-8">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('email',false,(isset($dealer)&&$dealer ? $dealer->email : null)) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','agent_email',false,(isset($dealer)&&$dealer ? $dealer->email : null)) }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('fax',false,(isset($dealer)&&$dealer ? $dealer->fax : null)) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','agent_fax',false,(isset($dealer)&&$dealer ? $dealer->fax : null)) }}
                                 </div>
                             </div>
 
@@ -275,21 +351,21 @@
                             </div>
                             <div class="columns">
                                 <div class="column is-8">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('voucher',false,null,null,env('APP_NAME').' Voucher Number') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','voucher',false,null,null,env('APP_NAME').' Voucher Number') }}
                                 </div>
                                 <div class="column">
 
                                 </div>
                             </div>
-                        </form>
-                        <div class="row">
-                            <div class="field">
-                                <div class="control">
-                                    <br>
-                                    <button class="button is-large is-link">Apply Now</button>
+                            <div class="row">
+                                <div class="field">
+                                    <div class="control">
+                                        <br>
+                                        <button class="button is-large is-link">Apply Now</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                         <br>
                         <blockquote class="mt-10">Note: students are encouraged to contact {{ env('APP_NAME') }} Marketing team for exact timetable and training arrangement.</blockquote>
                         <br>

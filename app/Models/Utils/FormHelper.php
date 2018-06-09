@@ -35,13 +35,14 @@ class FormHelper
 
     /**
      * 输出最基本的 text field
+     * @param $modelName
      * @param $fieldName
      * @param bool $isRequired
      * @param null $fieldValue
      * @param null $placeholder
      * @param null $label
      */
-    public function simpleTextField($fieldName, $isRequired = true, $fieldValue=null, $placeholder=null, $label=null){
+    public function simpleTextField($modelName,$fieldName, $isRequired = true, $fieldValue=null, $placeholder=null, $label=null){
         if(is_null($placeholder)){
             $placeholder = ucwords(str_replace('_',' ',$fieldName));
         }
@@ -71,7 +72,7 @@ class FormHelper
      * @param bool $isRequired
      * @param null $label
      */
-    public function simpleSelectField($fieldName, $fieldOptions=[], $defaultValue=null, $isRequired=true, $label=null){
+    public function simpleSelectField($modelName,$fieldName, $fieldOptions=[], $defaultValue=null, $isRequired=true, $label=null){
         if(is_null($label)){
             $label = ucwords(str_replace('_',' ',$fieldName));
         }
@@ -100,7 +101,7 @@ class FormHelper
      * @param bool $isRequired
      * @param null $label
      */
-    public function simpleFileField($fieldName, $isRequired=true, $label=null){
+    public function simpleFileField($modelName,$fieldName, $isRequired=true, $label=null){
         if(is_null($label)){
             $label = ucwords(str_replace('_',' ',$fieldName));
         }
