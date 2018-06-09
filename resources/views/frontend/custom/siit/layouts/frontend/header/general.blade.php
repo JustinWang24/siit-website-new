@@ -17,11 +17,20 @@
                 <div class="navbar-menu">
                     <div class="navbar-end sm-nav">
                         <a class="navbar-item" href="{{ url('/') }}" title="Home page">
-                            Home
+                            <i class="fas fa-home"></i>&nbsp;Home
                         </a>
-                        <a class="navbar-item" href="" title="Student Login">
-                            Student Login
-                        </a>
+                        @if(empty(session('user_data')))
+                            <a class="navbar-item" href="{{ url('/frontend/customers/login') }}" title="Student Login">
+                                <i class="fas fa-sign-in-alt"></i>&nbsp;Student Login
+                            </a>
+                        @elseif(!empty(session('user_data.uuid')))
+                            <a class="navbar-item" href="{{ url('/frontend/my_profile/'.session('user_data.uuid')) }}" title="Student Dashboard">
+                                <i class="fas fa-tachometer-alt"></i>&nbsp;My Dashboard
+                            </a>
+                            <a class="navbar-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();" title="Logout">
+                                <i class="fas fa-sign-out-alt"></i>&nbsp;Logout
+                            </a>
+                        @endif
                     </div>
                 </div>
 

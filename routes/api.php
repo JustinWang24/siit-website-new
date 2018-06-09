@@ -35,6 +35,12 @@ Route::prefix('intakes')->group(function(){
     Route::post('save','Api\IntakesController@save');
 });
 
+Route::prefix('students')->group(function(){
+    // 验证学生的邮件是否存在
+    Route::post('verify-email','Api\StudentsController@verify_email');
+    Route::post('verify-register','Api\StudentsController@verify_register');
+});
+
 // 为上传图片提供的接口
 Route::prefix('images')->group(function(){
     // 保存图片
@@ -133,8 +139,8 @@ Route::prefix('product-attributes')->group(function(){
 
 // 支付API的回调接口
 Route::prefix('payment')->group(function(){
-    Route::get('weixin/notify','Api\Payment@weixin_notify');
-    Route::get('weixin/success','Api\Payment@weixin_success');
+//    Route::get('weixin/notify','Api\Payment@weixin_notify');
+//    Route::get('weixin/success','Api\Payment@weixin_success');
 });
 
 // Brand的功能接口
