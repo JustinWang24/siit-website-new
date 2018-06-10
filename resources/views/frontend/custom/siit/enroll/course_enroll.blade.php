@@ -24,7 +24,6 @@
                                         </el-select>
                                     </el-form-item>
                                 </div>
-
                             </div>
                             <div class="columns" v-show="hasAccount">
                                 <div class="column">

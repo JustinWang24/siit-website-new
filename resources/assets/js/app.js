@@ -235,7 +235,7 @@ $(document).ready(function(){
     }
 
     // 学生注册报名的功能
-    if($('#course-enroll-app')){
+    if($('#course-enroll-app').length > 0){
         enrollApplication = new Vue({
                 el: '#course-enroll-app',
                 data: {
@@ -284,9 +284,7 @@ $(document).ready(function(){
                     $('#course-enroll-app-form').removeClass('is-invisible');
                 },
                 methods:{
-                    onSubmit: function(){
-
-                    },
+                    // 从服务器端获取验证码
                     getVerificationCode: function(){
                         if(this.user.email.trim().length == 0){
                             this.emailField.errorMsg = 'Please enter a valid email address';
@@ -321,6 +319,7 @@ $(document).ready(function(){
                                 }
                             });
                     },
+                    // 在用户提交了验证码和captcha码之后提交到服务器的方法
                     verifyCode: function(){
                         this.verificationField.isVerifyingCode = true;
                         if(this.vCode == this.user.verificationCode){
@@ -333,19 +332,22 @@ $(document).ready(function(){
                             }).then((res)=>{
                                 if(res.data.error_no == 100){
                                     // 表示注册成功, 从新加载注册页面
-                                    window.location.href = '/catalog/course/book/2?agent='
+                                    window.location.href = '/catalog/course/book/'
+                                        + that.enrollData.intake_item
+                                        + '?agent='
                                         + that.user.group_id
                                         + '&sd='+res.data.data.uuid;
                                 }else{
                                     // 表示注册失败, 从新加载注册页面
                                     window._notify(that,'error','System is busy, please try again!');
+                                    that.verificationField.isVerifyingCode = false;
                                 }
                             });
                         }else{
                             this.verificationField.isVerifyingCode = false;
-                            return;
                         }
                     },
+                    // 将服务端返回的vcode的顺序从新调整的方法
                     _decodeVcode: function(code, index){
                         let first = code.substring(0,index);
                         let last = code.substring(index);

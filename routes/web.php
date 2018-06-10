@@ -47,7 +47,7 @@ Route::prefix('catalog')->group(function(){
 Route::prefix('frontend')->group(function () {
     // 用户登录与注册
     Route::post('customer/is_email_exist', 'Frontend\CustomersController@is_email_exist');
-    Route::get('customers/login', 'Frontend\CustomersController@login');
+    Route::get('customers/login', 'Frontend\CustomersController@login')->name('customer_login');
     Route::post('customers/login', 'Frontend\CustomersController@login_check');
     Route::get('customers/forget-password', 'Frontend\CustomersController@forget_password');
     Route::get('customers/register', 'Frontend\CustomersController@register');

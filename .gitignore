@@ -15,10 +15,11 @@ yarn-error.log
 .env
 /package-lock.json
 /composer.lock
-/public/css/_custom.css
-/public/css/all.css
-/public/css/backend.css
-/public/js/all.js
-/public/js/app.js
-/public/js/backend.js
 package-lock.json
+public/js/_custom.js
+public/js/all.js
+public/js/app.js
+public/js/backend.js
+public/css/backend.css
+public/css/all.css
+public/css/_custom.css

@@ -25,7 +25,8 @@ class UserConfirmEmail extends Mailable
     {
         $this->user = $user;
         $this->password = $password;
-        $this->url = url('login');
+        // 默认为后台用户的登录路径
+        $this->url = url('/login');
     }
 
     /**
@@ -35,6 +36,8 @@ class UserConfirmEmail extends Mailable
      */
     public function build()
     {
+        // 前端用户的登录路径
+        $this->url = route('customer_login');
         if($this->user->role == UserGroup::$GENERAL_CUSTOMER){
             return $this->subject($this->user->name.', Your '.config('app.name').' account has been created!')
                 ->markdown(
