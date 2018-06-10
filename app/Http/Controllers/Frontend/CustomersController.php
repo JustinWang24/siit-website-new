@@ -38,15 +38,11 @@ class CustomersController extends Controller
     /**
      * Customer Login Check
      * @param Request $request
-     * @return \Illuminate\Http\Response|void
-     * @throws \Illuminate\Validation\ValidationException
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function login_check(Request $request){
         $this->validateLogin($request);
-
-        $user = User::where('email',$request->get('email'))
-            ->where('role',UserGroupTool::$GENERAL_CUSTOMER)
-            ->first();
+        $user = $this->_getUserFromRequestData($request);
 
         if($user && Hash::check($request->get('password'), $user->password)){
             $this->_saveUserInSession($user);
@@ -58,6 +54,33 @@ class CustomersController extends Controller
         }else{
             return redirect('frontend/customers/login');
         }
+    }
+
+    /**
+     * 用户登录的Ajax方法
+     * @param Request $request
+     * @return string
+     */
+    public function login_check_ajax(Request $request){
+        $user = $this->_getUserFromRequestData($request);
+        if($user && Hash::check($request->get('password'), $user->password)){
+            // 登录成功
+            $this->_saveUserInSession($user);
+            return JsonBuilder::Success(['uuid'=>$user->uuid]);
+        }else{
+            return JsonBuilder::Error(['msg'=>'You entered an incorrect username or password.']);
+        }
+    }
+
+    /**
+     * 从request的email数据中提取email
+     * @param Request $request
+     * @return mixed
+     */
+    private function _getUserFromRequestData(Request $request){
+        return User::where('email',$request->get('email'))
+            ->where('role',UserGroupTool::$GENERAL_CUSTOMER)
+            ->first();
     }
 
     /**

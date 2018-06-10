@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\UserGroup;
+use App\Models\User\StudentProfile;
 
 class User extends Authenticatable
 {
@@ -34,6 +35,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * 获取用户所关联的学生profile数据
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function studentProfile(){
+        return $this->hasOne(StudentProfile::class);
+    }
 
     public static function GetByUuid($uuid){
         return self::where('uuid',$uuid)->first();

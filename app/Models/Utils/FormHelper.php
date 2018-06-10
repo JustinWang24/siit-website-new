@@ -97,11 +97,13 @@ class FormHelper
 
     /**
      * 生成最基本的文件上传field
+     * @param $modelName
      * @param $fieldName
      * @param bool $isRequired
      * @param null $label
+     * @param null $defaultFilePath 默认的已经存在的文件路径
      */
-    public function simpleFileField($modelName,$fieldName, $isRequired=true, $label=null){
+    public function simpleFileField($modelName,$fieldName, $isRequired=true, $label=null,$defaultFilePath=null){
         if(is_null($label)){
             $label = ucwords(str_replace('_',' ',$fieldName));
         }
@@ -128,6 +130,11 @@ class FormHelper
                         </span>
                         <span class="file-name" id="<?php echo $fileNameElementId; ?>"></span>
                     </label>
+                    <?php
+                    if($defaultFilePath){
+                        ?><p><a href="<?php echo asset($defaultFilePath) ?>" target="_blank">View my uploaded file</a></p><?php
+                    }
+                    ?>
                 </div>
             </div>
             <script type="application/javascript">

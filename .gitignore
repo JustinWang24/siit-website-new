@@ -16,6 +16,7 @@ yarn-error.log
 /package-lock.json
 /composer.lock
 package-lock.json
+public/css/
 public/js/_custom.js
 public/js/all.js
 public/js/app.js

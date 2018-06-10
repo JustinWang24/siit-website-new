@@ -49,6 +49,7 @@ Route::prefix('frontend')->group(function () {
     Route::post('customer/is_email_exist', 'Frontend\CustomersController@is_email_exist');
     Route::get('customers/login', 'Frontend\CustomersController@login')->name('customer_login');
     Route::post('customers/login', 'Frontend\CustomersController@login_check');
+    Route::post('customers/login-ajax','Frontend\CustomersController@login_check_ajax');    // 客户登录的ajax方式
     Route::get('customers/forget-password', 'Frontend\CustomersController@forget_password');
     Route::get('customers/register', 'Frontend\CustomersController@register');
     Route::post('customer/register', 'Frontend\CustomersController@save');

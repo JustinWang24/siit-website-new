@@ -263,6 +263,8 @@ $(document).ready(function(){
                     vCode:'',
                     captcha:'',
                     captchaMatched: false,
+                    loginAttemptCount: 0,
+                    isDoingLogin: false, // 是否正在执行登录操作
                     // 开学日期的相关数据
                     enrollData:{
                         intake_item: null,
@@ -270,8 +272,11 @@ $(document).ready(function(){
                     }
                 },
                 watch:{
-                  'user.captcha': function(val){
-                    this.captchaMatched = this.captcha == val;
+                  'hasAccount': function(val){
+                    if(!val){
+                        // 如果选择 I don't have an account
+                        this.user.password = '';
+                    }
                   }
                 },
                 created: function(){
@@ -279,11 +284,41 @@ $(document).ready(function(){
                     this.user.group_id          = $('#current-group-id').val();
                     this.enrollData.intake_item = $('#current-intake-item').val();
                     this.enrollData.course_id   = $('#current-course-id').val();
+                    this.loginAttemptCount = 0;
                 },
                 mounted: function(){
                     $('#course-enroll-app-form').removeClass('is-invisible');
                 },
                 methods:{
+                    onSubmit: function(){
+                        if(this.loginAttemptCount < 5){
+                            this.loginAttemptCount++;
+                        }else{
+                            window._notify(this,'error','You have tried too many times!');
+                            return;
+                        }
+                        this.isDoingLogin = true;
+                        // 学生如果有账号, 可以直接登录
+                        if(this.user.email.length > 0 && this.user.password.length > 0){
+                            let that = this;
+                            axios.post(
+                                '/frontend/customers/login-ajax',
+                                {email:this.user.email, password: this.user.password}
+                            ).then((res)=>{
+                                if(res.data.error_no == 100){
+                                    that.emailField.infoMsg2 = 'Login succeed, we are redirecting ...';
+                                    // 登录成功, 那么就要从新加载一下当前页
+                                    window.location.href = that._generateReloadUrl(res.data.data.uuid);
+                                }else {
+                                    // 操作失败
+                                    window._notify(that,'error',res.data.data.msg);
+                                    // 重置密码为空
+                                    that.user.password = '';
+                                }
+                                that.isDoingLogin = false;
+                            });
+                        }
+                    },
                     // 从服务器端获取验证码
                     getVerificationCode: function(){
                         if(this.user.email.trim().length == 0){
@@ -332,11 +367,7 @@ $(document).ready(function(){
                             }).then((res)=>{
                                 if(res.data.error_no == 100){
                                     // 表示注册成功, 从新加载注册页面
-                                    window.location.href = '/catalog/course/book/'
-                                        + that.enrollData.intake_item
-                                        + '?agent='
-                                        + that.user.group_id
-                                        + '&sd='+res.data.data.uuid;
+                                    window.location.href = that._generateReloadUrl(res.data.data.uuid);
                                 }else{
                                     // 表示注册失败, 从新加载注册页面
                                     window._notify(that,'error','System is busy, please try again!');
@@ -352,6 +383,15 @@ $(document).ready(function(){
                         let first = code.substring(0,index);
                         let last = code.substring(index);
                         return last + first;
+                    },
+                    // 获取从新加载当前页面的url
+                    _generateReloadUrl: function(userUuid){
+                        return '/catalog/course/book/'
+                            + this.enrollData.intake_item
+                            + '?agent='
+                            + this.user.group_id
+                            + '&sd='
+                            + userUuid;
                     }
                 }
             }

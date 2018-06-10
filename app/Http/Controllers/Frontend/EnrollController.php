@@ -8,6 +8,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User\StudentProfile;
 
 class EnrollController extends Controller
 {
@@ -31,12 +32,15 @@ class EnrollController extends Controller
         }
 
         // 检查是否能够提取出用户的信息
+        $this->dataForView['studentProfile'] = null;
         if($request->has('sd') && empty($request->session()->get('user_data'))){
             // 表示用户没有登录
             $uuid = $request->get('sd');
             $user = User::GetByUuid($uuid);
             if($user){
                 $this->_saveUserInSession($user);
+                // 将学生的档案数据传给 View
+                $this->dataForView['studentProfile'] = $user->studentProfile;
             }
         }
 

@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="column">
                                     <el-form-item>
-                                        <el-button icon="el-icon-arrow-right" type="primary" @click="onSubmit">Log Me In</el-button>
+                                        <el-button :loading="isDoingLogin" icon="el-icon-arrow-right" type="primary" @click="onSubmit">Log Me In</el-button>
                                     </el-form-item>
                                 </div>
                             </div>
@@ -99,37 +99,37 @@
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','family_name') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','family_name',true,($studentProfile ? $studentProfile->family_name : null)) }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','given_name') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','given_name',true,($studentProfile ? $studentProfile->given_name : null)) }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','previous_name',false) }}
-                                </div>
-                            </div>
-                            <div class="columns">
-                                <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','birthday') }}
-                                </div>
-                                <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','gender',[1=>'Male',0=>'Female']) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','previous_name',false,($studentProfile ? $studentProfile->previous_name : null)) }}
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','country_of_citizenship') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','birthday',true,($studentProfile ? $studentProfile->birthday : null)) }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','passport') }}
-                                </div>
-                                <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','visa_category',false) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','gender',[1=>'Male',0=>'Female'],($studentProfile ? $studentProfile->gender : 1)) }}
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','disability_required',['NO','YES'],null,true,'Do you have a disability for which additional assistance may be required?') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','country_of_citizenship',true,($studentProfile ? $studentProfile->country_of_citizenship : null)) }}
+                                </div>
+                                <div class="column">
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','passport',true,($studentProfile ? $studentProfile->passport : null)) }}
+                                </div>
+                                <div class="column">
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','visa_category',false,($studentProfile ? $studentProfile->visa_category : null)) }}
+                                </div>
+                            </div>
+                            <div class="columns">
+                                <div class="column">
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','disability_required',['NO','YES'],($studentProfile ? $studentProfile->disability_required : 0),true,'Do you have a disability for which additional assistance may be required?') }}
                                 </div>
                                 <div class="column">
                                     {{ \App\Models\Utils\FormHelper::getInstance()->simpleFileField('student','disability_required_file',false,'If YES, please attach a separate sheet outlining this disability and assistance required') }}
@@ -141,58 +141,58 @@
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','home_address',true, null, null,'Home Address(in home country)') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','home_address',true, ($studentProfile ? $studentProfile->home_address : null), null,'Home Address(in home country)') }}
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','province') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','province',true, ($studentProfile ? $studentProfile->province : null)) }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','post_code',false) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','post_code',false, ($studentProfile ? $studentProfile->post_code : null)) }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','country',false) }}
-                                </div>
-                            </div>
-                            <div class="columns">
-                                <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','current_address') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','country',false,($studentProfile ? $studentProfile->country : null)) }}
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','province_current',true, null, null,'Province') }}
-                                </div>
-                                <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','post_code_current',false, null, null,'Post Code') }}
-                                </div>
-                                <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','country_current',false, null, null,'Country') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','current_address', true, ($studentProfile ? $studentProfile->current_address : null)) }}
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','current_residing',['Australia','Offshore'],null,true) }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','province_current',true, ($studentProfile ? $studentProfile->province_current : null), null,'Province') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','is_pr',['No','Yes'],null,true,'Are you a permanent resident or citizen of Australia?') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','post_code_current',false, ($studentProfile ? $studentProfile->post_code_current : null), null,'Post Code') }}
                                 </div>
-                            </div>
-                            <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','document_evidence',true, null, null,'If YES, please attach document evidence. If NO, please provide copies of current visa and evidence of your current OSHC.') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','country_current',false, ($studentProfile ? $studentProfile->country_current : null), null,'Country') }}
                                 </div>
                             </div>
                             <div class="columns">
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','telephone_country_code') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','current_residing',['Australia','Offshore'],($studentProfile ? $studentProfile->current_residing : 1),true) }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','area_code') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','is_pr',['No','Yes'],($studentProfile ? $studentProfile->is_pr : 0),true,'Are you a permanent resident or citizen of Australia?') }}
+                                </div>
+                            </div>
+                            <div class="columns">
+                                <div class="column">
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','document_evidence',true, ($studentProfile ? $studentProfile->document_evidence : null), null,'If YES, please attach document evidence. If NO, please provide copies of current visa and evidence of your current OSHC.') }}
+                                </div>
+                            </div>
+                            <div class="columns">
+                                <div class="column">
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','telephone_country_code',true,($studentProfile ? $studentProfile->telephone_country_code : null)) }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','phone_number') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','area_code',true, ($studentProfile ? $studentProfile->area_code : null)) }}
+                                </div>
+                                <div class="column">
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','phone_number', true, ($studentProfile ? $studentProfile->phone_number : null)) }}
                                 </div>
                             </div>
 
