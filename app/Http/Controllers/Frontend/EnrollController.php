@@ -146,13 +146,11 @@ class EnrollController extends Controller
                 $orderPlaced = Order::PlaceOrder(
                     $user,
                     $cart,
-                    $enrollData['instance'],null,null);
+                    $enrollData['instance'],null,null,$axcelerateInstance);
                 // todo 保存订单操作完成
 
                 if($orderPlaced){
-                    // todo 2: 删除清空购物车的语句
-                    $this->getCart()->destroy();
-
+                    $cart->destroy();
                     // todo 3: 订单保存成功, 开始向 Axcelerate 提交数据
                     $result = $contact->enrolmentForInstance($axcelerateInstance)
                         ->enrol($orderPlaced,$enrollData);
@@ -162,13 +160,8 @@ class EnrollController extends Controller
                         $orderPlaced->save();
 
                         // todo 4: 订单已经提交到了 Axcelerate, 显示界面, 让用户去查收邮件
-                        $this->dataForView['pageTitle'] = 'Enrollment Done';
-                        $this->dataForView['metaKeywords'] = 'Enrollment Done';
-                        $this->dataForView['metaDescription'] = 'Enrollment Done';
-                        $this->dataForView['order'] = $orderPlaced;
-
                         session()->flash('msg', ['content' => 'Hi , thank you very much for your enrollment, one of our staff will contact you very soon!', 'status' => 'success']);
-                        return redirect('/frontend/my_orders/'.$user->uuid);
+                        return redirect()->route('customer.checkout');
                     }else{
                         // 向 Axcelerate 进行 enrol 失败了
                         $orderPlaced->removeAll();

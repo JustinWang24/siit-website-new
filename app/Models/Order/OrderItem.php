@@ -3,6 +3,7 @@
 namespace App\Models\Order;
 
 use App\Models\Utils\OrderStatus;
+use FlipNinja\Axcelerate\Courses\Instance;
 use Gloudemans\Shoppingcart\CartItem;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
@@ -14,7 +15,7 @@ class OrderItem extends Model
         'uuid','serial_number','operator_id',
         'user_id','product_id','operator_name','product_name',
         'subtotal','quantity','price','order_id',
-        'status','payment_type','notes','discount','discount_reason'
+        'status','payment_type','notes','discount','discount_reason','intake_start_date'
     ];
 
     public function product(){
@@ -27,15 +28,15 @@ class OrderItem extends Model
      * @param CartItem $cartItem
      * @param string $operatorName
      * @param int $cartItemIndex
+     * @param Instance $instance
      * @return bool
      */
-    public static function Persistent(Order $order, CartItem $cartItem, $operatorName='n.a', $cartItemIndex=0){
+    public static function Persistent(Order $order, CartItem $cartItem, $operatorName='n.a', $cartItemIndex=0, Instance $instance){
         $product = Product::GetByUuid($cartItem->id);
 
         if($product){
             $notes = '';
             $options = $cartItem->options;
-
 
             // 用来保存订单项中的产品的附加Option所带来的价格增量
             $priceExtra = 0;
@@ -68,7 +69,6 @@ class OrderItem extends Model
             }
             $priceFinal = $theProductPrice + $priceExtra;
 
-
             $dataOrderItem = [
                 'order_id'=>$order->id,
                 'uuid'=>Uuid::uuid4()->toString(),
@@ -86,7 +86,8 @@ class OrderItem extends Model
                  */
                 'status'=>OrderStatus::$PENDING,
                 'payment_type'=>$order->payment_type,
-                'notes'=>$notes
+                'notes'=>$notes,
+                'intake_start_date'=>$instance->get('startdate')
             ];
             $orderItem = self::create($dataOrderItem);
             if($orderItem){

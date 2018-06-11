@@ -32,7 +32,7 @@ class OrderPlaced
      * @param Request $request
      * @param Order $order
      */
-    public function __construct(Cart $cart, User $customer, Request $request, Order $order)
+    public function __construct(Cart $cart=null, User $customer, Request $request, Order $order)
     {
         $this->cart = $cart;
         $this->customer = $customer;

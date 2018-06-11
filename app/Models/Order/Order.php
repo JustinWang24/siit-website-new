@@ -6,6 +6,7 @@ use App\Models\Utils\OrderStatus;
 use App\Models\Utils\PaymentTool;
 use App\User;
 use Carbon\Carbon;
+use FlipNinja\Axcelerate\Courses\Instance;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Gloudemans\Shoppingcart\Cart;
@@ -131,14 +132,15 @@ class Order extends Model
 
     /**
      * 保存 Place Order 类型订单的数据
-     * @param User $customer
+     * @param $customer
      * @param Cart $cart
-     * @param string $placeOrderNumber
-     * @param string $notes
-     * @param int $paymentMethod
+     * @param $placeOrderNumber
+     * @param $notes
+     * @param null $paymentMethod
+     * @param Instance|null $instance
      * @return null
      */
-    public static function PlaceOrder($customer,Cart $cart,$placeOrderNumber,$notes, $paymentMethod=null){
+    public static function PlaceOrder($customer,Cart $cart,$placeOrderNumber,$notes, $paymentMethod=null,Instance $instance = null){
         $now = Carbon::now();
 
         DB::beginTransaction();
@@ -147,7 +149,8 @@ class Order extends Model
             'user_id'=>$customer->id,
             'total'=>self::_calculateTotal($cart),
             // 计算可能产生的额外邮寄费用
-            'delivery_charge'=>Group::CalculateDeliveryCharge($customer, $cart->total()),
+            'delivery_charge'=>0,
+//            'delivery_charge'=>Group::CalculateDeliveryCharge($customer, $cart->total()),
             'status'=>OrderStatus::$PENDING,
             'payment_type'=>$paymentMethod ? $paymentMethod : PaymentTool::$TYPE_PLACE_ORDER,
             'day'=>$now->day,
@@ -166,7 +169,7 @@ class Order extends Model
             $orderTotal = 0;
             foreach ($dataOrderItems as $key=>$dataOrderItem) {
                 // 这里的 Order Item 是订单的每个子项, 不是具体的options, 别忘了
-                $subTotal = OrderItem::Persistent($order,$dataOrderItem,config('app.name'),$key);
+                $subTotal = OrderItem::Persistent($order,$dataOrderItem,config('app.name'),$key,$instance);
                 if($subTotal){
                     $orderTotal += $subTotal;
                 }
