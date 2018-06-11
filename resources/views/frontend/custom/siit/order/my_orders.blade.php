@@ -33,7 +33,7 @@
                         <tr>
                             <th scope="col">Order #</th>
                             <th scope="col">Date</th>
-                            <th scope="col">Items</th>
+                            <th scope="col">Course</th>
                             <th scope="col">Total(GST)</th>
                             <th scope="col">Status</th>
                             <th scope="col"></th>
@@ -45,9 +45,6 @@
                                 <th scope="row">
                                     <a class="text-primary" href="{{ url('frontend/view_order/'.session('user_data.uuid').'/'.$value->uuid) }}">
                                         {{ $value->serial_number }}
-                                        @if(!empty($value->place_order_number))
-                                        (Place order: {{ $value->place_order_number }})
-                                        @endif
                                     </a>
                                 </th>
                                 <td>{{ substr($value->created_at, 0, 11) }}</td>
@@ -93,7 +90,6 @@
                         @endforeach
                         </tbody>
                     </table>
-                        {{ $orders->links() }}
                     @endif
                 </div>
             </div>

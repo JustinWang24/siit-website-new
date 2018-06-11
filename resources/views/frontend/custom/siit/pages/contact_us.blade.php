@@ -1,5 +1,6 @@
 @extends(_get_frontend_layout_path('frontend'))
 @section('content')
+<div class="container mt-10 mb-20">
     <div class="content pl-20 pr-20 page-content-wrap">
     <br>
     <h1 class="is-size-1 has-text-centered is-uppercase">{{ trans('general.menu_contact') }}</h1>
@@ -114,4 +115,5 @@
         </div>
     </div>
     </div>
+</div>
 @endsection

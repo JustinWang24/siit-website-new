@@ -21,8 +21,14 @@
                 @if($menuItem && $menuItem->parent)
                     <h2 class="parent-item"><a href="{{ url($menuItem->parent->link_to) }}" title="{{ $menuItem->parent->name }}">{{ $menuItem->parent->name }}</a></h2>
                     @foreach($siblings as $menuSibling)
+                        <?php
+                            $urlLink = '/page'.$menuSibling->link_to;
+                            if($menuSibling->link_type == \App\Models\Utils\ContentTool::$CONTENT_TYPE_DYNAMIC){
+                                $urlLink = $menuSibling->link_to;
+                            }
+                        ?>
                     <h3 class="sibling-item {{ $menuItem->id == $menuSibling->id ? 'current-item' : null }}">
-                        <a href="{{ url('/page'.$menuSibling->link_to) }}" title="{{ $menuSibling->name }}">{{ $menuSibling->name }}</a>
+                        <a href="{{ url($urlLink) }}" title="{{ $menuSibling->name }}">{{ $menuSibling->name }}</a>
                     </h3>
                     @endforeach
                 @endif
