@@ -36,6 +36,7 @@ class OrderItem extends Model
             $notes = '';
             $options = $cartItem->options;
 
+
             // 用来保存订单项中的产品的附加Option所带来的价格增量
             $priceExtra = 0;
 
@@ -67,13 +68,14 @@ class OrderItem extends Model
             }
             $priceFinal = $theProductPrice + $priceExtra;
 
+
             $dataOrderItem = [
                 'order_id'=>$order->id,
                 'uuid'=>Uuid::uuid4()->toString(),
                 'serial_number'=>$order->serial_number.'-'.$cartItemIndex,
                 'user_id'=>$order->user_id,
                 'product_id'=>$product->id,
-                'operator_name'=>$operatorName,
+                'operator_name'=>$operatorName.'-'.$product->brand,
                 'product_name'=>$product->name,
                 // Use special price if possible
                 'price'=>$priceFinal,

@@ -66,6 +66,7 @@ class HeadUtil
         }
 
         return $head. $this->_getAmpBoilerplateCode();
+//        return $head;
     }
 
     private function initSchemasGenerator(){

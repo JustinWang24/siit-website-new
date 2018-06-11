@@ -15,6 +15,55 @@ use PHPUnit\Util\Json;
 class Products extends Controller
 {
     /**
+     * 获取远程的Axcelerate instances的API接口方法
+     * 在提供的参数中, 如果没有提交 enrollmentOnly 和 publicOnly, 那么默认就是必须为可预约和公开的
+     * @param Request $request
+     * @return string
+     */
+    public function load_instances_by_course_name(Request $request){
+        $courseName     = $request->get('name');
+        $location       = $request->get('location');
+        $enrollmentOnly = $request->has('enrollmentOnly') ? $request->get('enrollmentOnly') : true;
+        $publicOnly     = $request->has('publicOnly') ? $request->get('publicOnly') : true;
+        if($courseName){
+            $instances = Product::GetAxcelerateInstanceByName(
+                $courseName,$location,$enrollmentOnly,$publicOnly
+            );
+            $data = [];
+
+            if($instances){
+                $today = date('Y-m-d');
+                foreach ($instances as $instance) {
+                    $instanceData = $instance->toArray();
+                    $startDate = isset($instanceData['startdate']) ? substr($instanceData['startdate'],0,10) : null;
+                    if(is_null($startDate) || $startDate > $today ){
+                        // 如果有起始日期, 并且起始日期晚于今天
+                        $finishDate = isset($instanceData['finishdate']) ? substr($instanceData['finishdate'],0,10) : null;
+                        $label = (isset($instanceData['code']) ? $instanceData['code'].': ' : '')
+                            .(isset($instanceData['name']) ? $instanceData['name'].' ' : '')
+                            .(isset($instanceData['duration']) ? '('.$instanceData['duration'].')' : '');
+                        if($startDate){
+                            $label .= ' from '.$startDate;
+                        }
+                        if($finishDate){
+                            $label .= ' to '.$finishDate;
+                        }
+                        if(!empty($label)){
+                            $data[] = [
+                                'value'=>$instanceData['instanceid'].'_'.$instanceData['type'], // 值为 id 与 type 的组合
+                                'label'=>$label
+                            ];
+                        }
+                    }
+                }
+            }
+            return JsonBuilder::Success(['instances'=>$data]);
+        }else{
+            return JsonBuilder::Error();
+        }
+    }
+
+    /**
      * 删除产品, 通过UUID
      * @param $uuid
      * @param Request $request

@@ -20,6 +20,8 @@ class Products extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function view($uri, Request $request){
+        $this->dataForView['agentCode'] = $request->has('agent') ? $request->get('agent') : 0;
+
         $product = Product::GetByUri($uri);
 
         if(!$product){

@@ -12,7 +12,6 @@
                             <img class="" src="{{ $media->url }}" alt="{{ $product->name.$idx }}" />
                         @endforeach
                     </div>
-
                     <div class="content pl-20 pr-20">
                         <h1 class="mt-20">
                             Course name: {{ $product->name }}&nbsp;
@@ -51,18 +50,17 @@
 
                             <div class="row">
                                 <?php
-//                                dump($product->getFutureIntakes());
                                     $languages = \App\Models\Catalog\IntakeItem::GetSupportedLanguages();
                                     $today = \Carbon\Carbon::today();
                                 ?>
                                     <hr>
                                     <table>
                                         <thead>
-                                        <tr><h2 class="is-size-4-desktop is-size-4-mobile has-text-grey">Proposed Intake Date <span class="has-text-link">(Click intake date to enroll)</span></h2></tr>
+                                        <tr><h2 class="is-size-4-desktop is-size-4-mobile has-text-grey">Proposed Language <span class="has-text-link">(Please choose language)</span></h2></tr>
                                         <tr>
-                                            @foreach($languages as $languageIndex=>$language)
-                                                <th>{{ $language }}</th>
-                                            @endforeach
+                                        @foreach($languages as $languageIndex=>$language)
+                                            <th>{{ $language }}</th>
+                                        @endforeach
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -73,13 +71,12 @@
                                                     <td class="intake-item-box">
                                                         @if($item->seats && $item->seats>$item->enrolment_count && $item->scheduled)
                                                             <a class="intake-book-link-btn" href="{{ url('/catalog/course/book/'.$item->id) }}" title="Click me to enroll now!">
-                                                                <div class="control">
-                                                                    <div class="tags has-addons">
-                                                                        <span class="tag">{{ $item->scheduled->format('d/M/Y') }}</span>
-                                                                        <span class="tag is-success">{{ $item->seats }}</span>
-                                                                    </div>
-                                                                </div>
                                                             </a>
+                                                            <p>
+                                                                <span class="tag is-success seats-select-tag" :class="{'item-selected':intakeItemId==<?php echo $item->id ?>}" v-on:click="chooseIntakeItem({{ $item->id }})">
+                                                                    {{ $item->seats }} Seats&nbsp;<span v-html="(intakeItemId=={{$item->id}}?'&#10004;':'')"></span>
+                                                                </span>
+                                                            </p>
                                                         @endif
                                                     </td>
                                                     @endif
@@ -89,25 +86,30 @@
                                         </tbody>
                                     </table>
                             </div>
-                            <div class="add-to-cart-form-wrap is-invisible">
+                            <div class="row">
+                                <h2 class="is-size-4-desktop is-size-4-mobile has-text-grey mt-10">Scheduled Intake</h2>
+                                <el-select v-model="selectedAxcelerateInstanceId" placeholder="Please choose intake ..." class="full-width">
+                                    <el-option
+                                            v-for="(item,idx) in axcelerateInstances"
+                                            :key="idx"
+                                            :label="item.label"
+                                            :value="item.value">
+                                    </el-option>
+                                </el-select>
+                            </div>
+                            <div class="add-to-cart-form-wrap">
                                 <input type="hidden" name="quantity" value="1"><!-- 一次报名1人 -->
-                                @if(!$product->manage_stock)
-                                    <button v-on:click="addToCartAction($event)" id="add-to-cart-btn" type="submit" class="button is-danger">
-                                        <i class="fa fa-cart-plus" aria-hidden="true"></i>&nbsp;Enroll Now
-                                    </button>
-                                    <a href="{{ url('/frontend/place_order_checkout') }}" id="shortcut-checkout-btn" class="button is-link shortcut-checkout-btn is-invisible">
-                                        <i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp;Checkout Now!
-                                    </a>
-                                @else
-                                    @if($product->stock<$product->min_quantity)
-                                        <button id="send-enquiry-for-shopping-btn" type="submit" class="button">Send Enquiry</button>
-                                    @else
-                                        <button id="add-to-cart-btn" type="submit" class="button add-to-cart-btn">Enroll Now</button>
-                                    @endif
-                                @endif
+                                <button v-on:click="enrollNow($event)" type="submit" class="button is-danger" :disabled="selectedAxcelerateInstanceId.length==0 || intakeItemId==0">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Enroll Now
+                                </button>
                             </div>
                         </form>
-                        <blockquote class="mt-10">Note: students are encouraged to contact {{ env('APP_NAME') }} Marketing team for exact timetable and training arrangement.</blockquote>
+                        <blockquote class="mt-20">
+                            <p>
+                                Students are encouraged to contact {{ env('APP_NAME') }} Marketing team for exact timetable and training arrangement.
+                            </p>
+                            <p>Email to <a href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a>or Call <span class="has-text-link">{{ $siteConfig->contact_phone }}</span></p>
+                        </blockquote>
                     </div>
 
                     <div class="content pr-20">

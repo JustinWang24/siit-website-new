@@ -27,6 +27,7 @@ class CreateStudentProfilesTable extends Migration
             $table->string('passport')->nullable();
             $table->string('visa_category')->nullable();
             $table->boolean('disability_required')->default(false);
+            $table->string('disability_required_file')->nullable();
 
             $table->string('home_address')->nullable();
             $table->string('province')->nullable();
@@ -58,7 +59,8 @@ class CreateStudentProfilesTable extends Migration
             $table->string('date_commenced_2')->nullable();
             $table->string('date_completed_2')->nullable();
             $table->boolean('applying_exemptions')->default(false);
-            $table->string('applying_exemptions_files')->nullable();
+            $table->json('applying_exemptions_files')->nullable();  // 可能是多个文件
+
             $table->unsignedSmallInteger('heard_from')->default(0);
             $table->boolean('authorize_to_agent')->default(false);
 

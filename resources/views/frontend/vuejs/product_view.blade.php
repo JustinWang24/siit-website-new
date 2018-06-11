@@ -23,19 +23,20 @@ $theSpecialPrice = $product->getSpecialPriceGST();
             // 和产品的颜色相关
             productColours:{!! count($product_colours)>0 ? json_encode($product_colours) : '[]' !!},
             selectedColour:null,
-            /*
-             验证规则
-             */
+            // 和课程相关的有效的Instances
+            axcelerateInstances:[],
+            selectedAxcelerateInstanceId:'',
+            intakeItemId:0,
+            agentCode:'{{ $agentCode }}',
             rules:{
                 not_null: '{{ trans('validation_rules.not_null') }}'
             }
         },
         created: function(){
-            // 计算一下价格, 因为有可能option 有默认的
             this._refreshPrice();
+            this._loadRemoteAxcelerateInstances();
         },
         mounted: function(){
-            // 为了页面显示可以美观
             $('.hidden-first').removeClass('hidden-first');
         },
         watch:{
@@ -45,13 +46,35 @@ $theSpecialPrice = $product->getSpecialPriceGST();
             }
         },
         methods: {
+            enrollNow: function(e){
+                e.preventDefault();
+                var params = '?agent='+this.agentCode + '&instance=' + this.selectedAxcelerateInstanceId;
+                window.location.href='/catalog/course/book/' + this.intakeItemId + params;
+            },
+            chooseIntakeItem: function(intakeItemId){
+                this.intakeItemId = intakeItemId;//选择intakeItem
+            },
+            _loadRemoteAxcelerateInstances: function(){
+                var that = this;
+                axios.post(
+                    '/api/axe/courses/instances/load',{
+                        name:"{{ $product->name }}",location:"{{ $product->brand }}"
+                    }
+                ).then(function(res){
+                    if(res.data.error_no == 100){
+                        that.axcelerateInstances = res.data.data.instances;
+                    }else {
+                        console.log(res.data);
+                    }
+                });
+            },
             addToCartAction: function (e) {
                 e.preventDefault();
                 var that = this;
                 if(this._buildColourItem() && this._buildOrderItem() && !this._hasError()){
                     axios.post(
-                            '/products/add_to_cart',
-                            {items: this.orderItem, colour: this.selectedColour}
+                        '/products/add_to_cart',
+                        {items: this.orderItem, colour: this.selectedColour}
                     ).then(function(res){
                         if(res.data.error_no == 100){
                             // 成功 刷新购物车的count

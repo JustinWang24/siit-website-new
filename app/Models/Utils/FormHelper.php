@@ -59,7 +59,7 @@ class FormHelper
         ?>
         <div class="field">
             <label class="label"><?php echo $label; ?></label>
-            <div class="control"><input name="form[<?php echo $fieldName; ?>]" class="input" type="text" placeholder="<?php echo $placeholder; ?>" value="<?php echo $fieldValue; ?>"<?php echo $isRequired?' required':null ?>></div>
+            <div class="control"><input name="<?php echo $modelName.'['.$fieldName.']'; ?>" class="input" type="text" placeholder="<?php echo $placeholder; ?>" value="<?php echo $fieldValue; ?>"<?php echo $isRequired?' required':null ?>></div>
         </div>
         <?php
     }
@@ -88,7 +88,7 @@ class FormHelper
             <label class="label"><?php echo $label; ?></label>
             <div class="control">
                 <div class="select">
-                    <select name="form[<?php echo $fieldName; ?>]"<?php echo $isRequired?' required':null ?>><?php echo $options; ?></select>
+                    <select name="<?php echo $modelName.'['.$fieldName.']'; ?>"<?php echo $isRequired?' required':null ?>><?php echo $options; ?></select>
                 </div>
             </div>
         </div>
@@ -97,36 +97,35 @@ class FormHelper
 
     /**
      * 生成最基本的文件上传field
-     * @param $modelName
      * @param $fieldName
      * @param bool $isRequired
      * @param null $label
      * @param null $defaultFilePath 默认的已经存在的文件路径
+     * @param boolean $allowMultiple 是否可以上传多个文件
      */
-    public function simpleFileField($modelName,$fieldName, $isRequired=true, $label=null,$defaultFilePath=null){
+    public function simpleFileField($fieldName, $isRequired=true, $label=null,$defaultFilePath=null,$allowMultiple=false){
         if(is_null($label)){
             $label = ucwords(str_replace('_',' ',$fieldName));
         }
         if($isRequired){
             $label = $label.' <span class="has-text-danger">*</span>';
         }
-        $fileElementId = uniqid($fieldName);
-        $fileNameElementId = uniqid($fieldName.'-name');
-        $jsFileVariableName = uniqid($fieldName.'file_');
+        $fileElementId = 'input_'.$fieldName;
+        $fileNameElementId = $fileElementId.'_name';
+        $onFileChangeCodes = 'if(this.files.length>0){document.getElementById(\''.$fileNameElementId.'\').innerHTML = this.files[0].name;};';
+        if($allowMultiple){
+            $onFileChangeCodes = 'if(this.files.length>0){document.getElementById(\''.$fileNameElementId.'\').innerHTML = this.files.length+\' files are selected.\';};';
+        }
         ?>
         <div class="field">
             <label class="label"><?php echo $label; ?></label>
             <div class="control">
                 <div class="file has-name">
                     <label class="file-label">
-                        <input id="<?php echo $fileElementId; ?>" class="file-input" type="file" name="<?php echo $fieldName; ?>"<?php echo $isRequired?' required':null ?>>
+                        <input<?php echo $allowMultiple?' multiple':null ?> id="<?php echo $fileElementId; ?>" class="file-input" type="file" name="<?php echo $fieldName; ?><?php echo $allowMultiple?'[]':null; ?>"<?php echo $isRequired?' required':null ?> onchange="<?php echo $onFileChangeCodes; ?>">
                         <span class="file-cta">
-                          <span class="file-icon">
-                            <i class="fas fa-upload"></i>
-                          </span>
-                          <span class="file-label">
-                            Choose a file…
-                          </span>
+                          <span class="file-icon"><i class="fas fa-upload"></i></span>
+                          <span class="file-label"><?php echo $allowMultiple?'Choose files..':'Choose a file..' ?></span>
                         </span>
                         <span class="file-name" id="<?php echo $fileNameElementId; ?>"></span>
                     </label>
@@ -137,12 +136,6 @@ class FormHelper
                     ?>
                 </div>
             </div>
-            <script type="application/javascript">
-                var <?php echo $jsFileVariableName ?> = document.getElementById("<?php echo $fileElementId; ?>");
-                <?php echo $jsFileVariableName ?>.onchange = function(){
-                    if(<?php echo $jsFileVariableName ?>.files.length > 0){document.getElementById('<?php echo $fileNameElementId; ?>').innerHTML = <?php echo $jsFileVariableName ?>.files[0].name;}
-                };
-            </script>
         </div>
         <?php
     }

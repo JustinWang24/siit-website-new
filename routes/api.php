@@ -41,6 +41,12 @@ Route::prefix('students')->group(function(){
     Route::post('verify-register','Api\StudentsController@verify_register');
 });
 
+// 和 Axcelerate 相关的API接口
+Route::prefix('axe')->group(function(){
+    // 验证学生的邮件是否存在
+    Route::post('courses/instances/load','Api\Products@load_instances_by_course_name');
+});
+
 // 为上传图片提供的接口
 Route::prefix('images')->group(function(){
     // 保存图片

@@ -234,6 +234,9 @@ $(document).ready(function(){
         });
     }
 
+    // 处理file 类型的表单field
+
+
     // 学生注册报名的功能
     if($('#course-enroll-app').length > 0){
         enrollApplication = new Vue({
@@ -268,22 +271,29 @@ $(document).ready(function(){
                     // 开学日期的相关数据
                     enrollData:{
                         intake_item: null,
-                        course_id: null
+                        course_id: null,
+                        instance: null
                     }
                 },
                 watch:{
-                  'hasAccount': function(val){
-                    if(!val){
-                        // 如果选择 I don't have an account
-                        this.user.password = '';
+                    'hasAccount': function(val){
+                        if(!val){
+                            // 如果选择 I don't have an account
+                            this.user.password = '';
+                        }
+                    },
+                    'user.captcha': function(val){
+                        if(val == this.captcha){
+                            this.captchaMatched = true;
+                        }
                     }
-                  }
                 },
                 created: function(){
                     // 获取可能的经销商的ID
                     this.user.group_id          = $('#current-group-id').val();
                     this.enrollData.intake_item = $('#current-intake-item').val();
                     this.enrollData.course_id   = $('#current-course-id').val();
+                    this.enrollData.instance   = $('#current-instance-id').val();
                     this.loginAttemptCount = 0;
                 },
                 mounted: function(){
@@ -391,7 +401,12 @@ $(document).ready(function(){
                             + '?agent='
                             + this.user.group_id
                             + '&sd='
-                            + userUuid;
+                            + userUuid
+                            + '&instance=' + this.enrollData.instance;
+                    },
+                    confirmToEnroll: function(e){
+                        e.preventDefault();
+                        $('#catalog-course-enroll-form').submit();
                     }
                 }
             }

@@ -154,12 +154,13 @@ class Order extends Model
             'month'=>$now->month,
             'year'=>$now->year,
             'hour'=>$now->hour,
-            'place_order_number'=>strtoupper($placeOrderNumber),  // 这个项目字母永远大写, 为了搜索
+            'place_order_number'=>$placeOrderNumber,
             'uuid'=>Uuid::uuid4()->toString(),
             'notes'=>$notes
         ];
 
         $order = self::create($orderData);
+
         if($order){
             $dataOrderItems = $cart->content();
             $orderTotal = 0;
@@ -214,5 +215,23 @@ class Order extends Model
      */
     public function getOrderDescription(){
         return 'This is the order description: '.$this->uuid;
+    }
+
+    /**
+     * 删除订单的方法
+     * @return bool
+     * @throws \Exception
+     */
+    public function removeAll(){
+        DB::beginTransaction();
+        $result = OrderItem::where('order_id',$this->id)->delete();
+        if($result){
+            if($this->delete()){
+                DB::commit();
+                return true;
+            }
+        }
+        DB::rollback();
+        return false;
     }
 }

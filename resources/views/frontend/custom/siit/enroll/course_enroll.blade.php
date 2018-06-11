@@ -10,7 +10,7 @@
                             <h1 class="is-size-1-desktop is-size-1-mobile mt-0">
                                 Apply Online: {{ $course->name }}
                             </h1>
-                            <h2><span class="has-text-danger">({{ $course->brand }})</span> - Intake Date: {{ $intakeItem->scheduled->format('d-M-Y') }}</h2>
+                            <h2><span class="has-text-danger">({{ $course->brand }})</span> - Intake Date: {{ $axcelerateInstance->get('startdate') }}</h2>
                         </div>
                         @if(!session('user_data.uuid'))
                             <hr>
@@ -87,10 +87,11 @@
                         </el-form>
                         @endif
 
-                        <form action="" method="post" enctype="multipart/form-data" class="{{ session('user_data.uuid')?null:'is-invisible' }}">
+                        <form id="catalog-course-enroll-form" action="{{ url('/catalog/course/confirm-book') }}" method="post" enctype="multipart/form-data" class="{{ session('user_data.uuid')?null:'is-invisible' }}">
                             @csrf
                             <input id="current-intake-item" type="hidden" name="enroll[intake_item]" value="{{ $intakeItem->id }}">
                             <input id="current-course-id" type="hidden" name="enroll[course_id]" value="{{ $course->uuid }}">
+                            <input id="current-instance-id" type="hidden" name="enroll[instance]" value="{{ $instanceIdAndType }}">
                             <input type="hidden" name="student[user_id]" value="{{ session('user_data.uuid') }}">
                             <input id="current-group-id" type="hidden" name="student[agent_id]" value="{{ isset($dealer)&&$dealer ? $dealer->id : 0  }}">
                             <hr>
@@ -132,7 +133,7 @@
                                     {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','disability_required',['NO','YES'],($studentProfile ? $studentProfile->disability_required : 0),true,'Do you have a disability for which additional assistance may be required?') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleFileField('student','disability_required_file',false,'If YES, please attach a separate sheet outlining this disability and assistance required') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleFileField('disability_required_file',false,'If YES, please attach a separate sheet outlining this disability and assistance required') }}
                                 </div>
                             </div>
                             <hr>
@@ -260,7 +261,7 @@
                                     {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','applying_exemptions',['NO','YES'],null,true,'Are you applying for exemptions??') }}
                                 </div>
                                 <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleFileField('student','applying_exemptions_files',false,'If Yes, please complete the application form for exemption with your supporting documents such as unit outline and qualifications before commencement of your desired course(s).') }}
+                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleFileField('applying_exemptions_files',false,'If Yes, please complete the application form for exemption with your supporting documents such as unit outline and qualifications before commencement of your desired course(s).',null,true) }}
                                 </div>
                             </div>
 
@@ -360,7 +361,7 @@
                                 <div class="field">
                                     <div class="control">
                                         <br>
-                                        <button class="button is-large is-link">Apply Now</button>
+                                        <button class="button is-large is-link" v-on:click="confirmToEnroll($event)">Apply Now</button>
                                     </div>
                                 </div>
                             </div>

@@ -64,7 +64,8 @@ class StudentsController extends Controller
             'password'=>Hash::make($data['password']),
             'uuid'=>Uuid::uuid4()->toString(),
             'role'=>UserGroup::$GENERAL_CUSTOMER,
-            'group_id'=>$data['group_id']
+            'group_id'=>$data['group_id'],
+            'status'=>false
         ]);
 
         if($user){

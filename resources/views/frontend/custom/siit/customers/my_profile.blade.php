@@ -1,14 +1,13 @@
 @extends(_get_frontend_layout_path('catalog'))
 @section('content')
-    <div class="container pt-40 pl-20 pr-20" id="user-profile-manager-app">
-        <br>
-        <h2 class="is-size-4">
-            My Profile
-        </h2>
-        <hr>
+    <div class="container mt-20 mb-20 user-profile-manager-app" id="user-profile-manager-app">
         <div class="content">
-            <div class="columns">
-                <div class="column is-3 panel">
+            <div class="columns is-marginless">
+                <div class="column is-one-quarter" style="margin-top: 1px;">
+                    <h2 class="parent-item">
+                        My Profile
+                    </h2>
+                    <hr>
                     <div class="content-title-line">
                         <h3 class="is-size-5 pl-10"><i class="far fa-check-square"></i>&nbsp;My Shipping Details</h3>
                     </div>
@@ -19,7 +18,7 @@
                     </div>
                 </div>
 
-                <div class="column is-9 content-block content-two-third-right">
+                <div class="column is-three-quarter content-block content-two-third-right">
                     <div class="content-title-line">
                         <h3>Shipping Address</h3>
                     </div>

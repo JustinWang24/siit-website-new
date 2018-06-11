@@ -15,11 +15,17 @@
                         </div>
                         <small>课程的基本信息</small>
                     </a>
+                    <a href="#" class="box" v-on:click="changeTab('basic_in_chinese')" v-bind:class="{ 'active': currentTab=='basic_in_chinese' }">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><i class="fas fa-language"></i>&nbsp;课程中文信息 <small>(可选)</small></h5>
+                        </div>
+                        <small>中文信息</small>
+                    </a>
                     <a href="#" class="box" v-on:click="changeTab('category')" v-bind:class="{ 'active': currentTab=='category' }">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;课程分类与属性 <small>(必填)</small></h5>
                         </div>
-                        <small>课程的分类和特殊属性信息.</small>
+                        <small>课程的分类和特殊属性信息</small>
                     </a>
                     <a href="#" class="box" v-on:click="changeTab('price')" v-bind:class="{ 'active': currentTab=='price' }">
                         <div class="d-flex w-100 justify-content-between">
@@ -60,7 +66,6 @@
                             <i class="el-icon-arrow-left"></i>&nbsp; Back
                         </el-button>
 
-
                         <el-button type="success" :loading="cloningProduct" v-on:click="cloneProduct('currentProductForm')" v-if="product.id">
                             <i class="el-icon-share"></i>&nbsp; Clone
                         </el-button>
@@ -82,7 +87,9 @@
                     <div v-show="currentTab=='basic'">
                         @include('backend.products.elements.basic')
                     </div>
-
+                    <div v-show="currentTab=='basic_in_chinese'">
+                        @include('backend.products.elements.basic_in_chinese')
+                    </div>
                     <div v-show="currentTab=='category'">
                         @include('backend.products.elements.categories')
                     </div>

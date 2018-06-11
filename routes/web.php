@@ -29,7 +29,6 @@ Route::prefix('page')->group(function(){
     Route::get('/{uri}', 'Frontend\Pages@view');
 });
 
-
 // 加载产品目录的内容
 Route::get('/category/view/{uri}', 'Frontend\Categories@view');
 Route::post('/products/add_to_cart','Frontend\ShoppingCartController@add_to_cart');
@@ -41,6 +40,7 @@ Route::prefix('catalog')->group(function(){
     Route::get('product/{uri}', 'Frontend\Products@view');
     Route::get('brand/load', 'Frontend\Products@view_by_brand');
     Route::get('course/book/{id}', 'Frontend\EnrollController@course_enroll');
+    Route::post('course/confirm-book', 'Frontend\EnrollController@course_enroll_confirm');
 });
 
 // 前端页面显示相关路由组

@@ -18,6 +18,7 @@ use DB;
 use App\Models\Media;
 use Storage;
 use App\Models\Utils\ContentTool;
+use App\Models\Utils\Axcelerate\AxcelerateClient;
 
 class Product extends Model
 {
@@ -26,37 +27,72 @@ class Product extends Model
         'uuid','name','sku',
         'type',
         'attribute_set_id',
-        'min_quantity',
-        'manage_stock',
-        'stock',
-        'promote',
-        'position',
-        'group_id',
-        'uri',
-        'default_price',
-        'special_price',
-        'tax',
+        'min_quantity','manage_stock','stock','promote',
+        'position','group_id','uri',
+        'default_price','special_price','tax',
         'unit_text',
         'image_path',
-        'short_description',
-        'description',
-        'keywords',
-        'seo_description',
-        'brand',
-        'brand_serial_id',              // 产品所属的序列
+        'short_description','description',
+        'keywords','seo_description',
+        'brand','brand_serial_id',      // 产品所属的序列
         'serial_name',                  // 产品所属的序列名称
         'is_group_product',             // 组合产品, 比如一套家具
         'is_configurable_product',      // 可配置产品, 比如 DIY 电脑
         'axcelerate_course_id',         // Axcelerate ID
-        'axcelerate_course_type',       // Axcelerate Type
+        'axcelerate_course_json',       // Axcelerate Type
         'moodle_course_id',             // Moodle id
-        'moodle_course_type',           // Moodle type
+        'moodle_course_json',           // Moodle type
+        // 和中文相关
+        'name_cn','description_cn','short_description_cn',
+        'keywords_cn','seo_description_cn',
     ];
 
     protected $casts = [
         'is_group_product' => 'boolean',
+        'manage_stock' => 'boolean',
+        'promote' => 'boolean',
         'is_configurable_product' => 'boolean'
     ];
+
+    /**
+     * 获取本课程关联的 Axcelerate 的 instances
+     * @param null $enrollmentOpenOnly
+     * @param null $publicOnly
+     * @return \FlipNinja\Axcelerate\Courses\Instance[]
+     */
+    public function getAxcelerateInstances($enrollmentOpenOnly = null,$publicOnly = null){
+        return self::GetAxcelerateInstanceByName(
+            $this->getProductName(),
+            $this->brand,
+            $enrollmentOpenOnly,
+            $publicOnly
+        );
+    }
+
+    /**
+     * 获取本课程相关的 instances 的静态方法
+     * @param string $productName
+     * @param string $location
+     * @param null $enrollmentOpenOnly
+     * @param null $publicOnly
+     * @return \FlipNinja\Axcelerate\Courses\Instance[]
+     */
+    public static function GetAxcelerateInstanceByName($productName,$location,$enrollmentOpenOnly = null,$publicOnly = null){
+        $courseManager = AxcelerateClient::GetCourseManager();
+        $query = [
+            'name'          =>$productName,
+            'startDate_min' =>date('Y-m-d'),
+            'location'      =>strtoupper($location),
+            'sortColumn'=>10,
+        ];
+        if(!is_null($publicOnly)){
+            $query['public'] = $publicOnly;
+        }
+        if(!is_null($enrollmentOpenOnly)){
+            $query['enrolmentOpen'] = $enrollmentOpenOnly;
+        }
+        return $courseManager->searchInstances($query);
+    }
 
     /**
      * 获取某个课程的开学时间记录
@@ -248,9 +284,7 @@ class Product extends Model
             try{
                 // 删除对应该产品的目录关联关系
                 CategoryProduct::where('product_id',$product->id)->delete();
-
                 ProductOption::TerminateByProduct($product->id);
-
                 AttributeValue::where('product_id',$product->id)->delete();
 
                 // 删除所有关联的多媒体文件
@@ -315,8 +349,9 @@ class Product extends Model
                                 'product_id'=>$product->id,
                                 'category_id'=>$categoryId,
                                 'product_name'=>$product->name,
+                                'product_name_cn'=>$product->name_cn,
                                 'position'=>$product->position,
-                                'price'=>$product->default_price
+                                'price'=>$product->getFinalPriceGst()
                             ]
                         );
                     }
@@ -411,8 +446,9 @@ class Product extends Model
                                 'product_id'=>$product->id,
                                 'category_id'=>$categoryId,
                                 'product_name'=>$product->name,
+                                'product_name_cn'=>$product->name_cn,
                                 'position'=>$product->position,
-                                'price'=>$product->default_price
+                                'price'=>$product->getFinalPriceGst()
                             ]
                         );
                     }
@@ -471,8 +507,9 @@ class Product extends Model
                                 'product_id'=>$product->id,
                                 'category_id'=>$categoryId,
                                 'product_name'=>$product->name,
+                                'product_name_cn'=>$product->name_cn,
                                 'position'=>$product->position,
-                                'price'=>$product->default_price
+                                'price'=>$product->getFinalPriceGst()
                             ]
                         );
                     }
@@ -548,7 +585,15 @@ class Product extends Model
     }
 
     /**
-     * 获取产品最终价格
+     * 获取产品最终价格, 数字类型
+     * @return mixed
+     */
+    public function getFinalPriceGstNumeric(){
+        return str_replace(',','',$this->getFinalPriceGst());
+    }
+
+    /**
+     * 获取产品最终价格, 字符串形式
      * @return bool|string
      */
     public function getFinalPriceGst(){
@@ -613,7 +658,8 @@ class Product extends Model
     public static function GetByUuid($uuid){
         return self::where(
             'uuid',
-            ProductType::RestoreProductUuidWithoutTail($uuid))
+            ProductType::RestoreProductUuidWithoutTail($uuid)
+        )->orWhere('id',$uuid)
             ->first();
     }
 
@@ -733,5 +779,31 @@ class Product extends Model
             return $brand->getImageUrl();
         }
         return null;
+    }
+
+    /**
+     * 获取产品的名称, 根据当前的语言自动选择
+     * @return string
+     */
+    public function getProductName(){
+        return app()->getLocale() == 'cn' && $this->name_cn ? $this->name_cn : $this->name;
+    }
+
+    /**
+     * 获取产品的详情, 根据当前的语言自动选择
+     * @return string
+     */
+    public function getProductDescription(){
+        return app()->getLocale() == 'cn' && $this->description_cn
+            ? $this->description_cn : $this->description;
+    }
+
+    /**
+     * 获取产品的详情简介, 根据当前的语言自动选择
+     * @return string
+     */
+    public function getProductShortDescription(){
+        return app()->getLocale() == 'cn' && $this->short_description_cn
+            ? $this->short_description_cn : $this->short_description;
     }
 }

@@ -466,14 +466,25 @@ body{
 .intake-page-app, .product-view-manager-app{
   .intake-item-box{
     padding: 8px 0;
+    p{
+      padding-left: 12px;
+      .seats-select-tag{
+        &:hover{
+          background-color: $color-logo-blue;
+          color: #fff;
+          cursor: pointer;
+        }
+      }
+      .item-selected{
+        background-color: $color-logo-blue;
+        color: #fff;
+      }
+    }
     .intake-book-link-btn{
       font-size: 12px;
       .control{
         .tag{
-          &:hover{
-            background-color: $color-logo-blue;
-            color: #fff;
-          }
+
         }
       }
     }
