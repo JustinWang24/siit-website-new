@@ -9,7 +9,7 @@
                     </h2>
                     <hr>
                     <div class="content-title-line">
-                        <h3 class="is-size-5 pl-10"><i class="far fa-check-square"></i>&nbsp;My Shipping Details</h3>
+                        <h3 class="is-size-5 pl-10"><i class="far fa-check-square"></i>&nbsp;My Profile</h3>
                     </div>
                     <div class="content-title-line">
                         <h3 class="is-size-5 pl-10">

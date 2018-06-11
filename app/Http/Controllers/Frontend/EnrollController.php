@@ -168,7 +168,7 @@ class EnrollController extends Controller
                         $this->dataForView['order'] = $orderPlaced;
 
                         session()->flash('msg', ['content' => 'Hi , thank you very much for your enrollment, one of our staff will contact you very soon!', 'status' => 'success']);
-                        return redirect('/frontend/my_profile/'.$user->uuid);
+                        return redirect('/frontend/my_orders/'.$user->uuid);
                     }else{
                         // 向 Axcelerate 进行 enrol 失败了
                         $orderPlaced->removeAll();

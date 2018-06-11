@@ -1,6 +1,6 @@
 @extends(_get_frontend_layout_path('catalog'))
 @section('content')
-    <div class="container pt-40 pl-20 pr-20" id="my-orders-manager-app">
+    <div class="container mt-10 pt-40 pl-20 pr-20" id="my-orders-manager-app">
         <br>
         <h2 class="is-size-4">
             My Orders
@@ -12,7 +12,7 @@
                     <div class="content-title-line">
                         <h3 class="is-size-5 pl-10">
                             <a href="{{ url('frontend/my_profile/'.session('user_data.uuid')) }}">
-                                My Shipping Details
+                                My Profile
                             </a>
                         </h3>
                     </div>

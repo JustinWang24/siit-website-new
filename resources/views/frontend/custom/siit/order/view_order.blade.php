@@ -1,7 +1,7 @@
 @extends(_get_frontend_layout_path('catalog'))
 @section('content')
-    <div class="container pt-40 pl-20 pr-20" id="view-orders-manager-app">
-        <div class="box">
+    <div class="container mt-10 mb-20 pt-20 pl-20 pr-20" id="view-orders-manager-app">
+        <div class="box pt-20">
             <div class="col is-pulled-left">
                 <h4 class="is-size-4">
                     Order #: {{ $order->serial_number }} {!! \App\Models\Utils\OrderStatus::GetName($order->status) !!}
