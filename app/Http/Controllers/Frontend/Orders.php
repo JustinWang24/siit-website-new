@@ -27,7 +27,7 @@ class Orders extends Controller
      */
     public function my_orders($userUuid=null,$clearCart=null)
     {
-        $this->dataForView['menuName'] = 'my_orders';
+        $this->dataForView['menuName'] = 'orders_history';
         $this->dataForView['orders'] = Order::where('user_id',session('user_data.id'))
             ->orderBy('id','desc')->paginate(config('system.PAGE_SIZE'));
 

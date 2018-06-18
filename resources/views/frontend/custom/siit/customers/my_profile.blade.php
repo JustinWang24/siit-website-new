@@ -3,20 +3,7 @@
     <div class="container mt-20 mb-20 user-profile-manager-app" id="user-profile-manager-app">
         <div class="content">
             <div class="columns is-marginless">
-                <div class="column is-one-quarter" style="margin-top: 1px;">
-                    <h2 class="parent-item">
-                        My Profile
-                    </h2>
-                    <hr>
-                    <div class="content-title-line">
-                        <h3 class="is-size-5 pl-10"><i class="far fa-check-square"></i>&nbsp;My Profile</h3>
-                    </div>
-                    <div class="content-title-line">
-                        <h3 class="is-size-5 pl-10">
-                            <a href="{{ url('frontend/my_orders/'.session('user_data.uuid')) }}">Orders History</a>
-                        </h3>
-                    </div>
-                </div>
+                @include(_get_frontend_theme_path('customers.elements.dashboard.left_nav'))
 
                 <div class="column is-three-quarter content-block content-two-third-right">
                     <div class="content-title-line">
@@ -44,7 +31,6 @@
                                     <input type="text" readonly class="input" value="{{ $user->email }}">
                                 </div>
                             </div>
-
                             <div class="field">
                                 <label class="label">Name</label>
                                 <div class="control">

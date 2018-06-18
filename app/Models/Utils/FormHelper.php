@@ -59,7 +59,7 @@ class FormHelper
         ?>
         <div class="field">
             <label class="label"><?php echo $label; ?></label>
-            <div class="control"><input name="<?php echo $modelName.'['.$fieldName.']'; ?>" class="input" type="text" placeholder="<?php echo $placeholder; ?>" value="<?php echo $fieldValue; ?>"<?php echo $isRequired?' required':null ?>></div>
+            <div class="control"><input name="<?php echo $modelName.'['.$fieldName.']'; ?>" class="input" type="<?php echo $fieldName=='password'?'password':'text'; ?>" placeholder="<?php echo $placeholder; ?>" value="<?php echo $fieldValue; ?>"<?php echo $isRequired?' required':null ?>></div>
         </div>
         <?php
     }

@@ -77,6 +77,7 @@
                 // 课程中文
                 name_cn: '<?php echo $product->name_cn; ?>',
                 short_description_cn: '<?php echo str_replace(PHP_EOL,'', $product->short_description_cn); ?>',
+                short_description_cn: '<?php echo str_replace(PHP_EOL,'', $product->short_description_cn); ?>',
                 description_cn: '<?php echo str_replace(PHP_EOL,'', $product->description_cn); ?>',
                 keywords_cn: '<?php echo $product->keywords_cn; ?>',
                 seo_description_cn: '<?php echo $product->seo_description_cn; ?>',

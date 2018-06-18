@@ -2,26 +2,9 @@
 @section('content')
     <div class="container mt-10 pt-40 pl-20 pr-20" id="my-orders-manager-app">
         <br>
-        <h2 class="is-size-4">
-            My Orders
-        </h2>
-        <hr>
         <div class="content">
             <div class="columns">
-                <div class="column is-3 panel">
-                    <div class="content-title-line">
-                        <h3 class="is-size-5 pl-10">
-                            <a href="{{ url('frontend/my_profile/'.session('user_data.uuid')) }}">
-                                My Profile
-                            </a>
-                        </h3>
-                    </div>
-                    <div class="content-title-line">
-                        <h3 class="is-size-5 pl-10">
-                            <i class="far fa-check-square"></i>&nbsp;Orders History
-                        </h3>
-                    </div>
-                </div>
+                @include(_get_frontend_theme_path('customers.elements.dashboard.left_nav'))
                 <div class="column">
                     @if(count($orders) == 0)
                         <p class="is-size-5 has-text-danger">

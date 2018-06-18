@@ -61,6 +61,14 @@ Route::prefix('frontend')->group(function () {
         ->name('customer.checkout');
     Route::post('place_order_checkout','Frontend\CheckoutController@place_order_checkout');
 
+    /**
+     * 学生的课程相关开始
+     */
+    Route::get('my_courses','Frontend\Courses@my_courses')->name('student_courses');
+    Route::post('login-my-courses','Frontend\Courses@my_courses_login');
+    /**
+     * 学生的课程相关结束
+     */
     Route::get('my_orders/{userUuid?}/{clearCart?}','Frontend\Orders@my_orders');
     // 客户的个人档案
     Route::get('my_profile/{userUuid?}','Frontend\CustomersController@my_profile');

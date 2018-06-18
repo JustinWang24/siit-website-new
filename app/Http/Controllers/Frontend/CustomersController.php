@@ -408,7 +408,7 @@ class CustomersController extends Controller
         if($uuid && $uuid == session('user_data.uuid')){
             // 表示当前的用户是正常的
             $user = User::find(session('user_data.id'));
-            $this->dataForView['menuName'] = 'customers';
+            $this->dataForView['menuName'] = 'my_profile';
             $this->dataForView['user'] = $user;
             $this->dataForView['vuejs_libs_required'] = ['my_profile'];
             return view(

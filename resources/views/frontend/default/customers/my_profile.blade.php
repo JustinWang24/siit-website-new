@@ -18,7 +18,6 @@
                         </h3>
                     </div>
                 </div>
-
                 <div class="column is-9 content-block content-two-third-right">
                     <div class="content-title-line">
                         <h3>Shipping Address</h3>

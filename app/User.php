@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\UserGroup;
 use App\Models\User\StudentProfile;
 use FlipNinja\Axcelerate\Contacts\Contact;
+use Illuminate\Support\Facades\Crypt;
 
 class User extends Authenticatable
 {
@@ -18,6 +19,8 @@ class User extends Authenticatable
     const ERROR_CODE_EMAIL_UNIQUE       = 70;       // Email字段为unique
     const ERROR_CODE_EMAIL_REQUIRED     = 71;       // Email字段为必须
     const ERROR_CODE_CREATE_NEW_FAILED  = 72;       // 创建新用户记录失败
+
+    const AXE_USERNAME_PASSWORD_SEPARATOR = ',,__,,'; // 保存用户名和密码的分隔符
 
     /**
      * The attributes that are mass assignable.
@@ -28,7 +31,7 @@ class User extends Authenticatable
         'name', 'email', 'password','role','phone','fax',
         'address','city','postcode','state','country','uuid','group_id','status',
         'axcelerate_contact_json','axcelerate_contact_id',
-        'moodle_id','moodle_data_json',
+        'moodle_id','moodle_data_json','axc_login_details','moodle_login_details'
     ];
 
     protected $casts = [
@@ -43,6 +46,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @param $id
+     * @return User
+     */
+    public static function GetById($id){
+        return self::find($id);
+    }
 
     /**
      * 获取学生用户关联的Axcelerate Contact 对象
@@ -148,4 +159,36 @@ class User extends Authenticatable
             'sex'=>$this->studentProfile->gender ? 'M' : 'F',
         ];
     }
+
+    /**
+     * 获取已经解密的Axe登录信息. 如果提供了参数 user_data.axe_login, 那么使用它; 否则使用 $this->axc_login_details
+     * @return array|null
+     */
+    public function getDecryptAxeLoginDetail(){
+        $result = [];
+        $decryptString = session()->get('user_data.ax_login') ?
+            session()->get('user_data.ax_login') :
+            $this->axc_login_details;
+        if($decryptString){
+            $decrypted = Crypt::decryptString($decryptString);
+            list($username, $password) = explode(self::AXE_USERNAME_PASSWORD_SEPARATOR,$decrypted);
+            $result['username'] = $username;
+            $result['password'] = $password;
+        }
+        return empty($result) ? null : $result;
+    }
+
+    /**
+     * 加密Axe的登录信息并保存到 axc_login_details 属性中
+     * @param $username
+     * @param $password
+     * @return mixed
+     */
+    public function getEncryptAxeLoginDetail($username, $password){
+        if($username && $password){
+            return $this->axc_login_details = Crypt::encryptString($username.self::AXE_USERNAME_PASSWORD_SEPARATOR.$password);
+        }
+        return null;
+    }
+
 }

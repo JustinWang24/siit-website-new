@@ -177,6 +177,7 @@
                         // 成功
                         that._notify('success','DONE!','Category Saved!');
                         that.loadCategoriesTree();
+                        that.currentCategory.id = res.data.data.msg;
                     }else{
                         // 失败
                         that._notify('error','Error','Can not save category, please try later!');

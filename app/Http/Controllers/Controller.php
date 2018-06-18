@@ -76,7 +76,12 @@ class Controller extends BaseController
             'email'=>$user->email,
             'role'=>$user->role,
             'group'=>$user->group_id,
-            'status'=>$user->status
+            'status'=>$user->status,
+            // 和Axe使用相关的信息
+            'ax_login'      =>$user->axc_login_details,
+            'ax_user_id'    =>null,
+            'ax_token'      =>null,
+            'ax_expired_at' =>null
         ]);
     }
 
@@ -114,5 +119,17 @@ class Controller extends BaseController
         $session = app()->make('session');
         $events = app()->make('events');
         return new Cart($session, $events);
+    }
+
+    /**
+     * 根据当前的session状态, 决定是否需要登录的操作
+     * @return bool
+     */
+    public function _needLoginToAxcelerate(){
+        // 有任何一项为null或者过期, 都需要从新登录 axe
+        return is_null(session()->get('user_data.ax_user_id'))
+            || is_null(session()->get('user_data.ax_token'))
+            || is_null(session()->get('user_data.ax_expired_at'))
+            || session()->get('user_data.ax_expired_at') <= date('Y-m-d H:i:s');
     }
 }

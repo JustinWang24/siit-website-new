@@ -6,6 +6,7 @@ use FlipNinja\Axcelerate\Connection\ConnectionContract;
 use FlipNinja\Axcelerate\Connection\HttpConnection;
 use FlipNinja\Axcelerate\Contacts\ContactManager;
 use FlipNinja\Axcelerate\Courses\CourseManager;
+use FlipNinja\Axcelerate\Users\UserManager;
 
 class Axcelerate
 {
@@ -20,6 +21,9 @@ class Axcelerate
 
     /** @var CourseManager $courses */
     protected $courses;
+
+    /** @var UserManager $users */
+    protected $users;
 
     /**
      * Initialise the aXcelerate library
@@ -51,5 +55,14 @@ class Axcelerate
     public function courses()
     {
         return $this->courses ?: $this->courses = new CourseManager($this->connection);
+    }
+
+    /**
+     * Get the manager for Axcelerate users
+     * Created and appended by Justin Wang
+     * @return UserManager
+     */
+    public function users(){
+        return $this->users ?: $this->users = new UserManager($this->connection);
     }
 }
