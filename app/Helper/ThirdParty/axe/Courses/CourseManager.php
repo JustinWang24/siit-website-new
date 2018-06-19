@@ -2,6 +2,8 @@
 
 namespace FlipNinja\Axcelerate\Courses;
 
+use FlipNinja\Axcelerate\Contacts\Contact;
+use FlipNinja\Axcelerate\Contacts\Enrolment;
 use FlipNinja\Axcelerate\Manager;
 use FlipNinja\Axcelerate\ManagerContract;
 use FlipNinja\Axcelerate\Exceptions\AxcelerateException;

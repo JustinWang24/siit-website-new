@@ -66,6 +66,7 @@ Route::prefix('frontend')->group(function () {
      */
     Route::get('my_courses','Frontend\Courses@my_courses')->name('student_courses');
     Route::post('login-my-courses','Frontend\Courses@my_courses_login');
+    Route::post('change-axuser-password','Frontend\Courses@change_axuser_password');
     /**
      * 学生的课程相关结束
      */

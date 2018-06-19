@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Utils\Axcelerate\AxcelerateClient;
 use App\User;
+use FlipNinja\Axcelerate\Contacts\Contact;
 use FlipNinja\Axcelerate\Users\AxUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -39,6 +40,10 @@ class Courses extends Controller
                     }else{
                         // 不算登录成功
                         $request->session()->flash('msg',['content'=>$axUser->getLoginErrorMessage(),'status'=>'danger']);
+                        // 检查是否需要用户强行更新密码
+                        if($axUser->FLAG_NEED_TO_CHANGE_PASSWORD){
+                            return view(_get_frontend_theme_path('customers.axe.change_password'),$this->dataForView);
+                        }
                     }
                 }
             }
@@ -50,9 +55,44 @@ class Courses extends Controller
             // 自动登录成功了
         }
 
-        // todo 不需要登录操作
+        // todo 不需要登录操作或者登录已经成功
+        AxcelerateClient::GetInstance()->courses()->enrolments($user->axcelerate_contact_json);
     }
 
+    /**
+     * 学生修改自己 Axcelerate 密码的操作
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function change_axuser_password(Request $request){
+        $student = $request->get('student');
+
+        $result = AxcelerateClient::GetInstance()->users()->changePassword(
+            $student['username'],
+            $student['old_password'],
+            $student['new_password'],
+            $student['verify_password']
+        );
+
+        if($result){
+            // 修改成功: Your password has been changed successfully
+            $request->session()->flash('msg',['status'=>'success','content'=>'Your password has been changed successfully!']);
+            return redirect()->route('student_courses');
+        }
+        else{
+            // 修改失败
+            $request->session()->flash('msg',['status'=>'danger','content'=>'You can not change your password, please try again!']);
+            $this->dataForView['user'] = User::GetById($request->session()->get('user_data.id'));
+            return view(_get_frontend_theme_path('customers.axe.change_password'),$this->dataForView);
+        }
+    }
+
+    /**
+     * 学生登录Axcelerate的操作
+     * 具体方法，只是将用户提交的用户名和密码保存到数据和session中, 然后跳转到 my_courses 即可
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function my_courses_login(Request $request){
         $student = $request->get('student');
         $user = User::GetById($request->session()->get('user_data.id'));
@@ -84,11 +124,8 @@ class Courses extends Controller
      * @param AxUser $axUser
      */
     private function _saveAxUserInSession(AxUser $axUser){
-        Session::put('user_data',[
-            // 和Axe使用相关的信息
-            'ax_user_id'    =>$axUser->id,
-            'ax_token'      =>$axUser->get('axtoken'),
-            'ax_expired_at' =>$axUser->get('expires')
-        ]);
+        Session::put('user_data.ax_user_id',$axUser->id);
+        Session::put('user_data.ax_token',$axUser->get('axtoken'));
+        Session::put('user_data.ax_expired_at',$axUser->get('expires'));
     }
 }

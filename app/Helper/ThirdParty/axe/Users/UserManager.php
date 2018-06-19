@@ -14,6 +14,7 @@ use FlipNinja\Axcelerate\Exceptions\AxcelerateException;
 class UserManager extends Manager implements ManagerContract
 {
     const SUCCESS = 'success';
+
     /**
      * User Login
      * @param $username
@@ -24,7 +25,13 @@ class UserManager extends Manager implements ManagerContract
         try{
             $response = $this->getConnection()
                 ->post('user/login',['username'=>$username, 'password'=>$password]);
-            return new AxUser($response, $this);
+            $axUser = new AxUser($response, $this);
+
+            // Check the response message for Axcelerate Change_password flag
+            if($axUser->get('message') == 'You must change your password'){
+                $axUser->FLAG_NEED_TO_CHANGE_PASSWORD = true;
+            }
+            return $axUser;
         }catch (AxcelerateException $e){
             // Log your error
             return false;
@@ -41,15 +48,14 @@ class UserManager extends Manager implements ManagerContract
      */
     public function changePassword($username, $oldPassword, $newPassword, $verifyPassword){
         try{
+            $params = [
+                'username'=>$username,
+                'oldPassword'=>$oldPassword,
+                'newPassword'=>$newPassword,
+                'verifyPassword'=>$verifyPassword,
+            ];
             $response = $this->getConnection()
-                ->post('user/changePassword',
-                    [
-                        'username'=>$username,
-                        'oldPassword'=>$oldPassword,
-                        'newPassword'=>$newPassword,
-                        'verifyPassword'=>$verifyPassword,
-                    ]
-                );
+                ->post('user/changePassword',$params);
             return $response && isset($response['STATUS']) ? $response['STATUS']==self::SUCCESS : false;
         }catch (AxcelerateException $e){
             // Log your error

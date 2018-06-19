@@ -36,6 +36,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'status' => 'boolean',
+        'axcelerate_contact_json' => 'array',
     ];
 
     /**
@@ -190,5 +191,4 @@ class User extends Authenticatable
         }
         return null;
     }
-
 }

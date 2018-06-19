@@ -14,6 +14,12 @@ class AxUser extends Resource
     public $idAttribute = 'userid';
 
     /**
+     * @var boolean $_FLAG_NEED_TO_CHANGE_PASSWORD
+     * Indicate if the current user need to change password right now
+     */
+    public $FLAG_NEED_TO_CHANGE_PASSWORD = false;
+
+    /**
      * Check if login action succeeded
      * @return bool
      */
@@ -28,4 +34,6 @@ class AxUser extends Resource
     public function getLoginErrorMessage(){
         return $this->get('status').': '.$this->get('message');
     }
+
+
 }

@@ -20,12 +20,23 @@ class Enrolment extends Resource
     /** @var Instance $instance */
     protected $instance;
 
+    protected $activitiesArray;
+
     public function __construct(ManagerContract $manager, Contact $contact, Instance $instance)
     {
         $this->contact = $contact;
         $this->instance = $instance;
-
         parent::__construct([], $manager); // This ins't an actual resource and doesn't have it's own attributes
+    }
+
+    /**
+     * Set activities array
+     * @param $activitiesArray
+     * @return Enrolment
+     */
+    public function setActivitiesArray($activitiesArray){
+        $this->activitiesArray = $activitiesArray;
+        return $this;
     }
 
     /**
