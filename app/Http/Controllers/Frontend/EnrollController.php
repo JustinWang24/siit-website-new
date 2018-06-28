@@ -152,8 +152,14 @@ class EnrollController extends Controller
                 if($orderPlaced){
                     $cart->destroy();
                     // todo 3: 订单保存成功, 开始向 Axcelerate 提交数据
-                    $result = $contact->enrolmentForInstance($axcelerateInstance)
-                        ->enrol($orderPlaced,$enrollData);
+
+                    try{
+                        $result = $contact->enrolmentForInstance($axcelerateInstance)
+                            ->enrol($orderPlaced,$enrollData);
+                    }catch (\Exception $e){
+                        $result = false;
+                    }
+
                     if($result && isset($result['LEARNERID'])){
                         $orderPlaced->axe_learner_id = $result['LEARNERID'];
                         $orderPlaced->axe_invoice_id = $result['INVOICEID'];
