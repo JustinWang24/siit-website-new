@@ -16,19 +16,19 @@
             <div id="navDesktopWrap" class="full-width is-marginless">
                 <div class="navbar-menu">
                     <div class="navbar-end sm-nav">
-                        <a class="navbar-item" href="{{ url('/') }}" title="Home page">
-                            <i class="fas fa-home"></i>&nbsp;Home
+                        <a class="navbar-item" href="{{ url('/') }}" title="{{ trans('general.menu_home') }}">
+                            <i class="fas fa-home"></i>&nbsp;{{ trans('general.menu_home') }}
                         </a>
                         @if(empty(session('user_data')))
-                            <a class="navbar-item" href="{{ url('/frontend/customers/login') }}" title="Student Login">
-                                <i class="fas fa-sign-in-alt"></i>&nbsp;Student Login
+                            <a class="navbar-item" href="{{ url('/frontend/customers/login') }}" title="{{ trans('general.student_login') }}">
+                                <i class="fas fa-sign-in-alt"></i>&nbsp;{{ trans('general.student_login') }}
                             </a>
                         @elseif(!empty(session('user_data.uuid')))
                             <a class="navbar-item" href="{{ url('/frontend/my_profile/'.session('user_data.uuid')) }}" title="Student Dashboard">
-                                <i class="fas fa-tachometer-alt"></i>&nbsp;My Dashboard
+                                <i class="fas fa-tachometer-alt"></i>&nbsp;{{ trans('general.my_dashboard') }}
                             </a>
                             <a class="navbar-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();" title="Logout">
-                                <i class="fas fa-sign-out-alt"></i>&nbsp;Logout
+                                <i class="fas fa-sign-out-alt"></i>&nbsp;{{ trans('general.menu_logout') }}
                             </a>
                         @endif
                     </div>
@@ -64,6 +64,19 @@
                                 ?>
                             </div>
                         @endforeach
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link has-text-white" href="#" title="{{ trans('general.switch_language') }}">
+                                {{ trans('general.switch_language') }}
+                            </a>
+                            <div class="navbar-dropdown is-boxed">
+                                <a class="navbar-item" href="{{ url('/switch-language/cn') }}" title="切换为中文">
+                                    切换为中文
+                                </a>
+                                <a class="navbar-item" href="{{ url('/switch-language/en') }}" title="Switch to English">
+                                    English
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

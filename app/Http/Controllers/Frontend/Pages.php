@@ -19,6 +19,7 @@ use App\Models\Page;
 use App\Models\Widget\Block;
 use App\Models\Catalog\Category;
 use App\Models\Blog\Event;
+use Illuminate\Support\Facades\URL;
 
 class Pages extends Controller
 {
@@ -69,6 +70,21 @@ class Pages extends Controller
 
         event(new StartLoading($page,$this->dataForView));
         return view($this->_getPageViewTemplate($page),$this->dataForView);
+    }
+
+    /**
+     * 切换当前的显示语言
+     * @param $lang
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function switch_language($lang, Request $request){
+        if($lang == 'cn'){
+            $request->session()->put('prefer-lang','cn');
+        }else{
+            $request->session()->put('prefer-lang','en');
+        }
+        return redirect(URL::previous());
     }
 
     /**
