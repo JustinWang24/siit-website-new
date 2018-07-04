@@ -71,7 +71,6 @@ class EnrollController extends Controller
         $this->dataForView['metaKeywords'] = 'Intake Latest';
         $this->dataForView['metaDescription'] = 'Intake Latest';
 
-        $this->dataForView['vuejs_libs_required'] = ['course_enroll'];
         return view(_get_frontend_theme_path('enroll.course_enroll'),$this->dataForView);
     }
 
