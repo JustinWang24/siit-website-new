@@ -1,5 +1,5 @@
 <div class="row">
-    <h2 class="is-size-4 has-text-grey">1: Personal Details(as they appear on your passport)</h2>
+    <h2 class="is-size-4 enrol-subtitle">1: {{ trans('enrolment.title_Personal_Detail') }}</h2>
 </div>
 <div class="columns">
     <div class="column">
@@ -17,7 +17,7 @@
         {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','birthday',true,($studentProfile ? $studentProfile->birthday : null)) }}
     </div>
     <div class="column">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','gender',[1=>'Male',0=>'Female'],($studentProfile ? $studentProfile->gender : 1)) }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','gender',[1=>trans('general.Male'),0=>trans('general.Female')],($studentProfile ? $studentProfile->gender : 1)) }}
     </div>
     <div class="column">
         {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','country_of_citizenship',true,($studentProfile ? $studentProfile->country_of_citizenship : null)) }}
@@ -37,9 +37,9 @@
 </div>
 <div class="columns">
     <div class="column">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','disability_required',['NO','YES'],($studentProfile ? $studentProfile->disability_required : 0),true,'Do you have a disability for which additional assistance may be required?') }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','disability_required',['NO','YES'],($studentProfile ? $studentProfile->disability_required : 0),true,trans('enrolment.disability_input')) }}
     </div>
     <div class="column">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleFileField('disability_required_file',false,'If YES, please attach a separate sheet outlining this disability and assistance required') }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleFileField('disability_required_file',false,trans('enrolment.disability_input_attachment')) }}
     </div>
 </div>

@@ -1,0 +1,23 @@
+<?php
+return [
+    'Apply_Online' => '在线申请',
+    'Intake_Date' => '开学日期',
+    'Please_choose_your_status' => '选择你当前的状态',
+    'I_already_have_an_account' => '我已经有账户了',
+    'I_dont_have_account' => '我还没有账户',
+    'Your_Email' => '你的邮件',
+    'Password' => '密码',
+    'Log_Me_In' => '登陆',
+    'Your_Name' => '你的名字',
+    'Code' => '验证码',
+    'Code_placeholder' => '输入你收到的验证码',
+    'CAPTCHA'=>'CAPTCHA',
+    'CAPTCHA_placeholder'=>'输入下面的数字',
+    'Verify_My_Email'=>'验证我的邮件',
+    'Verify_My_Code'=>'确认我的验证码',
+    'title_Personal_Detail'=>'个人信息(必须和你护照上的信息一样)',
+    'disability_input'=>'请问您是否身有残疾, 并有特殊的需求?',
+    'disability_input_attachment'=>'如果是, 请准备一个单独的文件进行说明, 并在这里提交',
+    'Contact_Details'=>'联系方式',
+    'notes'=>'注意: 任何学生都可以联系'.env('APP_NAME').'官方以获取详细的开学时间表和入学协助服务.',
+];

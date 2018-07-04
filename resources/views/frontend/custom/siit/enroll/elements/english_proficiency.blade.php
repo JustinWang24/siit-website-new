@@ -1,5 +1,5 @@
 <div class="row">
-    <h2 class="is-size-4 has-text-grey">3:English Proficiency</h2>
+    <h2 class="is-size-4 enrol-subtitle">3:English Proficiency</h2>
 </div>
 <div class="columns">
     <div class="column">

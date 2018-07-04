@@ -1,0 +1,23 @@
+<?php
+return [
+    'Apply_Online' => 'Apply Online',
+    'Intake_Date' => 'Intake Date',
+    'Please_choose_your_status' => 'Please choose your status',
+    'I_already_have_an_account' => 'I already have an account',
+    'I_dont_have_account' => 'I don\'t have account',
+    'Your_Email' => 'Your Email',
+    'Password' => 'Password',
+    'Log_Me_In' => 'Log Me In',
+    'Your_Name' => 'Your Name',
+    'Code' => 'Code',
+    'Code_placeholder' => 'Your verification code',
+    'CAPTCHA'=>'CAPTCHA',
+    'CAPTCHA_placeholder'=>'Enter code below',
+    'Verify_My_Email'=>'Verify My Email',
+    'Verify_My_Code'=>'Verify My Code',
+    'title_Personal_Detail'=>'Personal Details(as they appear on your passport)',
+    'disability_input'=>'Do you have a disability for which additional assistance may be required?',
+    'disability_input_attachment'=>'If YES, please attach a separate sheet outlining this disability and assistance required',
+    'Contact_Details'=>'Contact Details',
+    'notes'=>'Note: students are encouraged to contact '.env('APP_NAME').' Marketing team for exact timetable and training arrangement.',
+];

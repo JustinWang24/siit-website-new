@@ -239,6 +239,15 @@ ul.tight-list{
   }
 }
 
+// Enrollment
+#catalog-course-enroll-form{
+  .enrol-subtitle{
+    padding: 10px;
+    color: white;
+    background-color: $main-color-green;
+  }
+}
+
 @import "category";
 @import "catalog";
 @import "checkout";

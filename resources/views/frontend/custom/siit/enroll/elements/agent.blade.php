@@ -1,6 +1,5 @@
-
 <div class="row">
-    <h2 class="is-size-4 has-text-grey">6: How did you hear about us?</h2>
+    <h2 class="is-size-4 enrol-subtitle">6: How did you hear about us?</h2>
 </div>
 <div class="columns">
     <div class="column">
@@ -9,7 +8,7 @@
 </div>
 
 <div class="row">
-    <h2 class="is-size-4 has-text-grey">7: Would you like to authorize any education agent to represent you in relation to this application:</h2>
+    <h2 class="is-size-4 enrol-subtitle">7: Would you like to authorize any education agent to represent you in relation to this application:</h2>
 </div>
 
 <div class="columns">
@@ -19,7 +18,7 @@
 </div>
 
 <div class="row">
-    <h2 class="is-size-4 has-text-grey">8: Details of the Agent</h2>
+    <h2 class="is-size-4 enrol-subtitle">8: Details of the Agent</h2>
 </div>
 <div class="columns">
     <div class="column">
@@ -42,7 +41,7 @@
 </div>
 
 <div class="row">
-    <h2 class="is-size-4 has-text-grey">9: If you have our voucher?</h2>
+    <h2 class="is-size-4 enrol-subtitle">9: If you have our voucher?</h2>
 </div>
 <div class="columns">
     <div class="column is-8">
@@ -54,7 +53,7 @@
 </div>
 
 <div class="row">
-    <h2 class="is-size-4 has-text-grey">10: Declaration</h2>
+    <h2 class="is-size-4 enrol-subtitle">10: Declaration</h2>
 </div>
 <div class="row">
     <blockquote>

@@ -33,6 +33,11 @@ class FormHelper
         return self::$INSTANCE;
     }
 
+    private function _i18n($model=null,$key){
+        $model = $model ? $model : 'enrolment';
+        return trans($model.'.'.$key);
+    }
+
     /**
      * 输出最基本的 text field
      * @param $modelName
@@ -44,17 +49,17 @@ class FormHelper
      */
     public function simpleTextField($modelName,$fieldName, $isRequired = true, $fieldValue=null, $placeholder=null, $label=null){
         if(is_null($placeholder)){
-            $placeholder = ucwords(str_replace('_',' ',$fieldName));
+            $placeholder = $this->_i18n($modelName,$fieldName.'_placeholder');
         }
 
         if(is_null($label)){
-            $label = ucwords(str_replace('_',' ',$fieldName));
+            $label = $this->_i18n($modelName,$fieldName);
         }
         if($isRequired){
-            $placeholder = 'Required: '.$placeholder;
+            $placeholder = trans('general.Required').': '.$placeholder;
             $label = $label.' <span class="has-text-danger">*</span>';
         }else{
-            $placeholder = 'Optional: '.$placeholder;
+            $placeholder = trans('general.Optional').': '.$placeholder;
         }
         ?>
         <div class="field">
@@ -66,7 +71,8 @@ class FormHelper
 
     /**
      * 生成最基本的下拉列表表单
-     * @param $fieldName
+     * @param string $modelName
+     * @param string $fieldName
      * @param array $fieldOptions
      * @param null $defaultValue
      * @param bool $isRequired
@@ -74,7 +80,7 @@ class FormHelper
      */
     public function simpleSelectField($modelName,$fieldName, $fieldOptions=[], $defaultValue=null, $isRequired=true, $label=null){
         if(is_null($label)){
-            $label = ucwords(str_replace('_',' ',$fieldName));
+            $label = $this->_i18n($modelName,$fieldName);
         }
         if($isRequired){
             $label = $label.' <span class="has-text-danger">*</span>';
@@ -104,9 +110,6 @@ class FormHelper
      * @param boolean $allowMultiple 是否可以上传多个文件
      */
     public function simpleFileField($fieldName, $isRequired=true, $label=null,$defaultFilePath=null,$allowMultiple=false){
-        if(is_null($label)){
-            $label = ucwords(str_replace('_',' ',$fieldName));
-        }
         if($isRequired){
             $label = $label.' <span class="has-text-danger">*</span>';
         }
@@ -125,7 +128,7 @@ class FormHelper
                         <input<?php echo $allowMultiple?' multiple':null ?> id="<?php echo $fileElementId; ?>" class="file-input" type="file" name="<?php echo $fieldName; ?><?php echo $allowMultiple?'[]':null; ?>"<?php echo $isRequired?' required':null ?> onchange="<?php echo $onFileChangeCodes; ?>">
                         <span class="file-cta">
                           <span class="file-icon"><i class="fas fa-upload"></i></span>
-                          <span class="file-label"><?php echo $allowMultiple?'Choose files..':'Choose a file..' ?></span>
+                          <span class="file-label"><?php echo $allowMultiple? trans('general.Choose_files'):trans('general.Choose_files') ?></span>
                         </span>
                         <span class="file-name" id="<?php echo $fileNameElementId; ?>"></span>
                     </label>

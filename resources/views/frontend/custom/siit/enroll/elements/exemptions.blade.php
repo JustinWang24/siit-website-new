@@ -1,5 +1,5 @@
 <div class="row">
-    <h2 class="is-size-4 has-text-grey">5: Would you like to seek exemptions based on your previous qualifications and/or working experience?</h2>
+    <h2 class="is-size-4 enrol-subtitle">5: Would you like to seek exemptions based on your previous qualifications and/or working experience?</h2>
 </div>
 <div class="columns">
     <div class="column">

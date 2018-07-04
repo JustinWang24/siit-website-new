@@ -8,9 +8,12 @@
                     <div class="content pt-40">
                         <div class="page-title-wrap  mt-20 is-paddingless">
                             <h1 class="is-size-1-desktop is-size-1-mobile mt-0">
-                                Apply Online: {{ $course->name }}
+                                {{ trans('enrolment.Apply_Online') }}: {{ $course->name }}
                             </h1>
-                            <h2><span class="has-text-danger">({{ $course->brand }})</span> - Intake Date: {{ $axcelerateInstance->get('startdate') }}</h2>
+                            <h2>
+                                <span class="has-text-danger">({{ $course->brand }})</span> -
+                                {{ trans('enrolment.Intake_Date') }}: {{ $axcelerateInstance->get('startdate') }}
+                            </h2>
                         </div>
                         @if(!session('user_data.uuid'))
                             <hr>
@@ -18,68 +21,70 @@
                             <div class="columns" v-show="hasAccount">
                                 <div class="column">
                                     <el-form-item label="Please Choose" class="full-width">
-                                        <el-select v-model="hasAccount" placeholder="Please choose your status" class="full-width">
-                                            <el-option label="I already have an account" :value="true"></el-option>
-                                            <el-option label="I don't have account" :value="false"></el-option>
+                                        <el-select v-model="hasAccount" placeholder="{{ trans('enrolment.Please_choose_your_status') }}" class="full-width">
+                                            <el-option label="{{ trans('enrolment.I_already_have_an_account') }}" :value="true"></el-option>
+                                            <el-option label="{{ trans('enrolment.I_dont_have_account') }}" :value="false"></el-option>
                                         </el-select>
                                     </el-form-item>
                                 </div>
                             </div>
                             <div class="columns" v-show="hasAccount">
                                 <div class="column">
-                                    <el-form-item label="Your Email">
-                                        <el-input v-model="user.email" placeholder="Your Email"></el-input>
+                                    <el-form-item label="{{ trans('enrolment.Your_Email') }}">
+                                        <el-input v-model="user.email" placeholder="{{ trans('enrolment.Your_Email') }}"></el-input>
                                     </el-form-item>
                                     <p class="has-text-success has-text-centered" v-if="emailField.infoMsg2.length>0" v-html="emailField.infoMsg2"></p>
                                 </div>
                                 <div class="column">
-                                    <el-form-item label="Password">
-                                        <el-input v-model="user.password" placeholder="Password"></el-input>
+                                    <el-form-item label="{{ trans('enrolment.Password') }}">
+                                        <el-input v-model="user.password" placeholder="{{ trans('enrolment.Password') }}"></el-input>
                                     </el-form-item>
                                 </div>
                                 <div class="column">
                                     <el-form-item>
-                                        <el-button :loading="isDoingLogin" icon="el-icon-arrow-right" type="primary" @click="onSubmit">Log Me In</el-button>
+                                        <el-button :loading="isDoingLogin" icon="el-icon-arrow-right" type="primary" @click="onSubmit">
+                                            {{ trans('enrolment.Log_Me_In') }}
+                                        </el-button>
                                     </el-form-item>
                                 </div>
                             </div>
                             <div class="columns" v-show="!hasAccount">
                                 <div class="column"  v-if="!showVerificationField">
-                                    <el-form-item label="Your Name">
-                                        <el-input v-model="user.name" placeholder="Your Name"></el-input>
+                                    <el-form-item label="{{ trans('enrolment.Your_Name') }}">
+                                        <el-input v-model="user.name" placeholder="{{ trans('enrolment.Your_Name') }}"></el-input>
                                     </el-form-item>
                                 </div>
                                 <div class="column"  v-if="!showVerificationField">
-                                    <el-form-item label="Your Email" v-show="!emailField.isEmailVerified">
-                                        <el-input v-model="user.email" placeholder="Your email address"></el-input>
+                                    <el-form-item label="{{ trans('enrolment.Your_Email') }}" v-show="!emailField.isEmailVerified">
+                                        <el-input v-model="user.email" placeholder="{{ trans('enrolment.Your_Email') }}"></el-input>
                                     </el-form-item>
                                     <p class="has-text-danger has-text-centered" v-if="emailField.errorMsg.length>0">@{{ emailField.errorMsg }}</p>
                                     <p class="has-text-success has-text-centered" v-if="emailField.infoMsg.length>0">@{{ emailField.infoMsg }}</p>
                                 </div>
                                 <div class="column" v-if="showVerificationField">
-                                    <el-form-item label="Code">
-                                        <el-input v-model="user.verificationCode" placeholder="Your verification code"></el-input>
+                                    <el-form-item label="{{ trans('enrolment.Code') }}">
+                                        <el-input v-model="user.verificationCode" placeholder="{{ trans('enrolment.Code_placeholder') }}"></el-input>
                                     </el-form-item>
                                     <p class="has-text-link has-text-centered" v-if="emailField.infoMsg.length>0">@{{ emailField.infoMsg }}</p>
                                     <p class="has-text-danger has-text-centered" v-if="verificationField.errorMsg.length>0">@{{ verificationField.errorMsg }}</p>
                                 </div>
                                 <div class="column" v-if="showVerificationField">
-                                    <el-form-item label="CAPTCHA">
-                                        <el-input v-model="user.captcha" placeholder="Enter code below"></el-input>
+                                    <el-form-item label="{{ trans('enrolment.CAPTCHA') }}">
+                                        <el-input v-model="user.captcha" placeholder="{{ trans('enrolment.CAPTCHA_placeholder') }}"></el-input>
                                     </el-form-item>
                                     <p class="has-text-centered" v-show="!captchaMatched">
-                                        <span class="captcha-box">CAPTCHA: @{{ captcha }}</span>
+                                        <span class="captcha-box">{{ trans('enrolment.CAPTCHA') }}: @{{ captcha }}</span>
                                     </p>
                                 </div>
                                 <div class="column">
                                     <el-form-item v-if="!showVerificationField">
                                         <el-button :loading="emailField.isVerifyingEmail" icon="el-icon-circle-check" type="success" @click="getVerificationCode">
-                                            Verify My Email
+                                            {{ trans('enrolment.Verify_My_Email') }}
                                         </el-button>
                                     </el-form-item>
                                     <el-form-item v-if="showVerificationField">
                                         <el-button :disabled="!captchaMatched" :loading="verificationField.isVerifyingCode" icon="el-icon-circle-check" type="primary" @click="verifyCode">
-                                            Verify My Code
+                                            {{ trans('enrolment.Verify_My_Code') }}
                                         </el-button>
                                     </el-form-item>
                                 </div>
@@ -123,16 +128,16 @@
                             <hr>
                             <div class="columns">
                                 <div class="column">
-                                    <button :disabled="!prevBtnEnable" class="button is-primary is-large" v-on:click="goPrev($event)">Prev</button>
+                                    <button :disabled="!prevBtnEnable" class="button is-primary is-large" v-on:click="goPrev($event)"><&nbsp;{{ trans('general.Prev') }}</button>
                                 </div>
                                 <div class="column">
-                                    <button v-show="nextBtnEnable" class="button is-link is-large pull-right" v-on:click="goNext($event)">Next</button>
-                                    <button v-show="showSubmitButton" class="button is-large is-link pull-right" v-on:click="confirmToEnroll($event)">Apply Now</button>
+                                    <button v-show="nextBtnEnable" class="button is-link is-large pull-right" v-on:click="goNext($event)">{{ trans('general.Next') }}&nbsp;></button>
+                                    <button v-show="showSubmitButton" class="button is-large is-link pull-right" v-on:click="confirmToEnroll($event)">{{ trans('general.Apply_Now') }}</button>
                                 </div>
                             </div>
                         </form>
                         <br>
-                        <blockquote class="mt-10">Note: students are encouraged to contact {{ env('APP_NAME') }} Marketing team for exact timetable and training arrangement.</blockquote>
+                        <blockquote class="mt-10">{{ trans('enrolment.notes') }}</blockquote>
                         <br>
                         <br>
                     </div>
