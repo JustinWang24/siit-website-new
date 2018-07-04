@@ -302,7 +302,7 @@ $(document).ready(function(){
                         }
                     },
                     'user.captcha': function(val){
-                        if(val == this.captcha){
+                        if(val === this.captcha){
                             this.captchaMatched = true;
                         }
                     }
