@@ -46,7 +46,7 @@ class HeadUtil
     public function output($title, $keywords = null, $description = null)
     {
         $head = '<meta charset="utf-8">';
-        $head .= '<script async src="https://cdn.ampproject.org/v0.js"></script>';
+//        $head .= '<script async src="https://cdn.ampproject.org/v0.js"></script>';
         $head .= '<title>'.$title.'</title>';
 
         if($keywords){
