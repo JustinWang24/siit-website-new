@@ -351,7 +351,7 @@ class Product extends Model
                                 'product_name'=>$product->name,
                                 'product_name_cn'=>$product->name_cn,
                                 'position'=>$product->position,
-                                'price'=>$product->getFinalPriceGst()
+                                'price'=>$product->getFinalPriceGstNumeric()
                             ]
                         );
                     }
@@ -448,7 +448,7 @@ class Product extends Model
                                 'product_name'=>$product->name,
                                 'product_name_cn'=>$product->name_cn,
                                 'position'=>$product->position,
-                                'price'=>$product->getFinalPriceGst()
+                                'price'=>$product->getFinalPriceGstNumeric()
                             ]
                         );
                     }
@@ -509,7 +509,7 @@ class Product extends Model
                                 'product_name'=>$product->name,
                                 'product_name_cn'=>$product->name_cn,
                                 'position'=>$product->position,
-                                'price'=>$product->getFinalPriceGst()
+                                'price'=>$product->getFinalPriceGstNumeric()
                             ]
                         );
                     }

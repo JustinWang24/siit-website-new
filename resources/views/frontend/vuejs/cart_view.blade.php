@@ -9,7 +9,6 @@
             fullscreenLoading: false
         },
         created: function(){
-//            console.log(this.cartData);
             this.calculateTotal();
         },
         methods: {

@@ -31,6 +31,9 @@ require('!style-loader!css-loader!slick-carousel/slick/slick.css');
 require('!style-loader!css-loader!slick-carousel/slick/slick-theme.css');
 import 'slick-carousel';
 
+// 导入 animate.css 动画库
+require('vue2-animate/dist/vue2-animate.min.css');
+
 window.Vue = require('vue');
 // 加载Element UI 库
 import ElementUI from 'element-ui';
@@ -273,6 +276,22 @@ $(document).ready(function(){
                         intake_item: null,
                         course_id: null,
                         instance: null
+                    },
+                    // steps
+                    step:{
+                        current: 1,
+                        total: 4
+                    }
+                },
+                computed: {
+                    prevBtnEnable: function(){
+                        return this.step.current > 1;
+                    },
+                    nextBtnEnable: function(){
+                        return this.step.current < this.step.total;
+                    },
+                    showSubmitButton: function(){
+                        return this.step.current === this.step.total;
                     }
                 },
                 watch:{
@@ -300,6 +319,18 @@ $(document).ready(function(){
                     $('#course-enroll-app-form').removeClass('is-invisible');
                 },
                 methods:{
+                    // 控制表单一页页显示的几个方法
+                    goNext: function(e){
+                        e.preventDefault();
+                        this.step.current++;
+                    },
+                    goPrev: function(e){
+                        e.preventDefault();
+                        if(this.step.current > 0){
+                            this.step.current--;
+                        }
+                    },
+                    // 控制表单一页页显示的几个方法结束
                     onSubmit: function(){
                         if(this.loginAttemptCount < 5){
                             this.loginAttemptCount++;

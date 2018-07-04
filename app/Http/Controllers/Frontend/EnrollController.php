@@ -22,17 +22,6 @@ class EnrollController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
     public function course_enroll($intakeItemId, Request $request){
-
-//        $courseManager = AxcelerateClient::GetCourseManager();
-//        $courses = $courseManager->searchInstances(
-//            [
-//                'name'=>'Advanced Diploma of Interpreting',
-//                'startDate_min'=>Carbon::today()
-//            ]
-//        );
-//        dump($courses);
-//        die();
-
         // 检查是否为agent来的信息
         $agentCode = $request->get('agent');
         $instanceIdAndType = $request->get('instance');
@@ -81,6 +70,8 @@ class EnrollController extends Controller
         $this->dataForView['pageTitle'] = 'Intake Latest';
         $this->dataForView['metaKeywords'] = 'Intake Latest';
         $this->dataForView['metaDescription'] = 'Intake Latest';
+
+        $this->dataForView['vuejs_libs_required'] = ['course_enroll'];
         return view(_get_frontend_theme_path('enroll.course_enroll'),$this->dataForView);
     }
 

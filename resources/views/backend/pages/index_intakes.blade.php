@@ -28,6 +28,7 @@
                 </thead>
                 <tbody>
                 @foreach($intakes as $key=>$value)
+                    @if($value->course)
                     <tr>
                         <td>
                             <a href="#" target="_blank">
@@ -62,7 +63,8 @@
                             </a>
                         </td>
                     </tr>
-                @endforeach
+                    @endif
+                    @endforeach
                 </tbody>
             </table>
             {{ $intakes->links() }}

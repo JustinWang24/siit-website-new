@@ -24,10 +24,10 @@
                                 <i class="fas fa-sign-in-alt"></i>&nbsp;{{ trans('general.student_login') }}
                             </a>
                         @elseif(!empty(session('user_data.uuid')))
-                            <a class="navbar-item" href="{{ url('/frontend/my_profile/'.session('user_data.uuid')) }}" title="Student Dashboard">
+                            <a class="navbar-item" href="{{ url('/frontend/my_profile/'.session('user_data.uuid')) }}" title="{{ trans('general.my_dashboard') }}">
                                 <i class="fas fa-tachometer-alt"></i>&nbsp;{{ trans('general.my_dashboard') }}
                             </a>
-                            <a class="navbar-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();" title="Logout">
+                            <a class="navbar-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();" title="{{ trans('general.menu_logout') }}">
                                 <i class="fas fa-sign-out-alt"></i>&nbsp;{{ trans('general.menu_logout') }}
                             </a>
                         @endif

@@ -2,6 +2,7 @@
 
 namespace App\Models\Order;
 
+use App\Models\Utils\JsonBuilder;
 use App\Models\Utils\OrderStatus;
 use App\Models\Utils\PaymentTool;
 use App\User;
