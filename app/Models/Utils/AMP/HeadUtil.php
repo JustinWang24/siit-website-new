@@ -65,8 +65,8 @@ class HeadUtil
             $head .= $schema->toScript();
         }
 
-        return $head. $this->_getAmpBoilerplateCode();
-//        return $head;
+//        return $head. $this->_getAmpBoilerplateCode();
+        return $head;
     }
 
     private function initSchemasGenerator(){
