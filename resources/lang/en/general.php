@@ -20,4 +20,10 @@ return [
     'Next'=>'Next',
     'Prev'=>'Prev',
     'Apply_Now'=>'Apply Now',
+    'Government_Website'=>'Government Website',
+    'Advertisements'=>'Advertisements',
+    'Friends_Relatives'=>'Friends/Relatives',
+    'Agent'=>'Agent',
+    'Other'=>'Other',
+    'Declaration'=>'Declaration',
 ];

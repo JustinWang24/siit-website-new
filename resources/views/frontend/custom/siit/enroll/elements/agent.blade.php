@@ -1,14 +1,14 @@
 <div class="row">
-    <h2 class="is-size-4 enrol-subtitle">6: How did you hear about us?</h2>
+    <h2 class="is-size-4 enrol-subtitle">6: {{ trans('enrolment.How_did_you_hear_about_us') }}</h2>
 </div>
 <div class="columns">
     <div class="column">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','heard_from',['Government Website','Advertisements','Friends/Relatives','Agent','Other'],null,true) }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','heard_from',[trans('general.Government_Website'),trans('general.Advertisements'),trans('general.Friends_Relatives'),trans('general.Agent'),trans('general.Other')],null,true) }}
     </div>
 </div>
 
 <div class="row">
-    <h2 class="is-size-4 enrol-subtitle">7: Would you like to authorize any education agent to represent you in relation to this application:</h2>
+    <h2 class="is-size-4 enrol-subtitle">7: {{ trans('enrolment.Authorize_any_education') }}</h2>
 </div>
 
 <div class="columns">
@@ -18,7 +18,7 @@
 </div>
 
 <div class="row">
-    <h2 class="is-size-4 enrol-subtitle">8: Details of the Agent</h2>
+    <h2 class="is-size-4 enrol-subtitle">8: {{ trans('enrolment.Details_of_the_Agent') }}</h2>
 </div>
 <div class="columns">
     <div class="column">
@@ -41,11 +41,11 @@
 </div>
 
 <div class="row">
-    <h2 class="is-size-4 enrol-subtitle">9: If you have our voucher?</h2>
+    <h2 class="is-size-4 enrol-subtitle">9: {{ trans('enrolment.If_you_have_our_voucher') }}</h2>
 </div>
 <div class="columns">
     <div class="column is-8">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','voucher',false,null,null,env('APP_NAME').' Voucher Number') }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','voucher',false) }}
     </div>
     <div class="column">
 
@@ -53,7 +53,7 @@
 </div>
 
 <div class="row">
-    <h2 class="is-size-4 enrol-subtitle">10: Declaration</h2>
+    <h2 class="is-size-4 enrol-subtitle">10: {{ trans('general.Declaration') }}</h2>
 </div>
 <div class="row">
     <blockquote>

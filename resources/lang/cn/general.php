@@ -19,4 +19,10 @@ return [
     'Next'=>'下一步',
     'Prev'=>'上一步',
     'Apply_Now'=>'立刻申请',
+    'Government_Website'=>'政府网站',
+    'Advertisements'=>'广告',
+    'Friends_Relatives'=>'亲戚朋友',
+    'Agent'=>'中介公司',
+    'Other'=>'其他',
+    'Declaration'=>'声明',
 ];

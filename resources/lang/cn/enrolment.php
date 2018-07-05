@@ -19,5 +19,13 @@ return [
     'disability_input'=>'请问您是否身有残疾, 并有特殊的需求?',
     'disability_input_attachment'=>'如果是, 请准备一个单独的文件进行说明, 并在这里提交',
     'Contact_Details'=>'联系方式',
+    'English_Proficiency'=>'英文 shuiping',
+    'Personal_Details_passport'=>'个人资料(按护照上的内容填写)',
+    'Exemptions_title'=>'您是否希望根据您之前的资格/或工作经验寻求豁免?',
+    'applying_exemptions_files'=>'如果是，请在开始所需课程之前填写申请表以获得豁免，并附上您的证明文件，如单元大纲和资格恒明.',
+    'How_did_you_hear_about_us'=>'你是如何知道我们的课程?',
+    'Authorize_any_education'=>'您是否希望授权任何教育中介代表您处理此申请',
+    'Details_of_the_Agent'=>'教育中介信息',
+    'If_you_have_our_voucher'=>'您有我们的优惠码吗?',
     'notes'=>'注意: 任何学生都可以联系'.env('APP_NAME').'官方以获取详细的开学时间表和入学协助服务.',
 ];

@@ -1,5 +1,5 @@
 <div class="row">
-    <h2 class="is-size-4 enrol-subtitle">4: Personal Details(as they appear on your passport)</h2>
+    <h2 class="is-size-4 enrol-subtitle">4: {{ trans('enrolment.Personal_Details_passport') }}</h2>
 </div>
 <div class="columns">
     <div class="column">
