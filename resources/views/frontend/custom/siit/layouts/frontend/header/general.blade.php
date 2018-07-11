@@ -64,18 +64,10 @@
                                 ?>
                             </div>
                         @endforeach
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link has-text-white" href="#" title="{{ trans('general.switch_language') }}">
-                                {{ trans('general.switch_language') }}
+                        <div class="navbar-item">
+                            <a class="has-text-white" href="{{ url('/switch-language/'.(app()->getLocale()=='cn' ? 'en':'cn')) }}" title="{{ trans('general.switch_language') }}">
+                                {{ trans('general.switch_language') }} <i class="fas fa-language"></i>
                             </a>
-                            <div class="navbar-dropdown is-boxed">
-                                <a class="navbar-item" href="{{ url('/switch-language/cn') }}" title="切换为中文">
-                                    切换为中文
-                                </a>
-                                <a class="navbar-item" href="{{ url('/switch-language/en') }}" title="Switch to English">
-                                    English
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>

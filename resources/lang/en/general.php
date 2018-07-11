@@ -8,7 +8,7 @@ return [
     'student_login'=>'Student Login',
     'my_dashboard'=>'My Dashboard',
     'menu_logout'=>'Logout',
-    'switch_language'=>'Switch Language',
+    'switch_language'=>'中文',
     'Choose_a_file'=>'Choose a file ..',
     'Choose_files'=>'Choose files ..',
     'Optional'=>'Optional',

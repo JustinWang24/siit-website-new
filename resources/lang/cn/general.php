@@ -7,7 +7,7 @@ return [
     'student_login'=>'学生登陆',
     'my_dashboard'=>'我的主页',
     'menu_logout'=>'退出',
-    'switch_language'=>'切换语言',
+    'switch_language'=>'English',
     'Choose_a_file'=>'选取一个文件 ..',
     'Choose_files'=>'选取文件 ..',
     'Optional'=>'可选',
