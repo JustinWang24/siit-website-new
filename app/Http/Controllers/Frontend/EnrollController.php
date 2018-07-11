@@ -171,4 +171,21 @@ class EnrollController extends Controller
         }
         return redirect()->route('customer_login');
     }
+
+    /**
+     * 显示offer letter的页面
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show_offer_letter(Request $request){
+        $this->dataForView['pageTitle'] = trans('enrolment.title_offer_letter');
+        $this->dataForView['metaKeywords'] = '';
+        $this->dataForView['metaDescription'] = '';
+
+        $this->dataForView['vuejs_libs_required'] = [
+            'offer_letter',
+        ];
+
+        return view(_get_frontend_theme_path('enroll.offer_letter'),$this->dataForView);
+    }
 }

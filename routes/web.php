@@ -42,6 +42,8 @@ Route::prefix('catalog')->group(function(){
     Route::get('brand/load', 'Frontend\Products@view_by_brand');
     Route::get('course/book/{id}', 'Frontend\EnrollController@course_enroll');
     Route::post('course/confirm-book', 'Frontend\EnrollController@course_enroll_confirm');
+    // 显示Offer Letter
+    Route::get('course/offer-letter', 'Frontend\EnrollController@show_offer_letter');
 });
 
 // 前端页面显示相关路由组
