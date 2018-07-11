@@ -36,7 +36,8 @@
             "database/seeds",
             "database/factories",
             "app/Helper/ThirdParty/axe",
-            "app/Helper/ThirdParty/moodle"
+            "app/Helper/ThirdParty/moodle",
+            "app/Helper/ThirdParty/myob"
         ],
         "psr-4": {
             "App\\": "app/"

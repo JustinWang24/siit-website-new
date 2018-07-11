@@ -162,3 +162,7 @@ Route::prefix('group-products')->group(function(){
 //    Route::get('get-serial','Api\Brands@get_serial');
 //    Route::get('delete-serial','Api\Brands@delete_serial');
 });
+
+Route::prefix('myob')->group(function(){
+    Route::any('test','Api\MyobController@test');
+});
