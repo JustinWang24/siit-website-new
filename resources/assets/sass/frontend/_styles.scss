@@ -248,6 +248,23 @@ ul.tight-list{
   }
 }
 
+.word-page-style{
+  padding: 40px;
+  width: 800px;
+  margin: 0 auto;
+  border: solid 1px #ccc;
+  -webkit-box-shadow: 10px 10px 20px -8px rgba(191,185,191,0.66);
+  -moz-box-shadow: 10px 10px 20px -8px rgba(191,185,191,0.66);
+  box-shadow: 10px 10px 20px -8px rgba(191,185,191,0.66);
+}
+.page-pad{
+  width: 400px;
+  margin: 0 auto;
+  h3{
+    font-size: 16px;
+  }
+}
+
 @import "category";
 @import "catalog";
 @import "checkout";

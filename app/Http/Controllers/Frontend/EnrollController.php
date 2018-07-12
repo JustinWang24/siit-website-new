@@ -182,6 +182,8 @@ class EnrollController extends Controller
         $this->dataForView['metaKeywords'] = '';
         $this->dataForView['metaDescription'] = '';
 
+        $this->dataForView['siteConfig'] = $this->siteConfig;
+
         $this->dataForView['vuejs_libs_required'] = [
             'offer_letter',
         ];
