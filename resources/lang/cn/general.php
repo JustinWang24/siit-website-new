@@ -28,4 +28,5 @@ return [
     'General Course'=>'普通课程',
     'Short Course'=>'短期课程',
     'Send Enquiry'=>'我要咨询',
+    'message_before_sign'=>'在签字并提交之前, 我已经阅读了本Offer Letter的全文并同意全部条款',
 ];

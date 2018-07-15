@@ -8,7 +8,7 @@
     <p style="text-decoration: underline;">The table below indicates a list of refund items:</p>
 
 
-    <table border="1">
+    <table style="width: 100%;border: solid 1px #000;">
         <tbody>
         <tr style="background-color: #ccc;">
             <td>Description of items</td>
@@ -18,7 +18,7 @@
             <td>Enrolment fee</td>
             <td>Non-refundable</td>
         </tr>
-        <tr>
+        <tr style="background-color: #ccc;">
             <td>Course material fee</td>
             <td>Non-refundable</td>
         </tr>
@@ -26,7 +26,7 @@
             <td>Withdrawal of course 10 weeks or more prior to course commencement</td>
             <td>80% refund less enrolment and course material fees</td>
         </tr>
-        <tr>
+        <tr style="background-color: #ccc;">
             <td>Withdrawal of course between 4 to 10 weeks prior to course commencement</td>
             <td>50% refund less enrolment and course material fees</td>
         </tr>
@@ -34,7 +34,7 @@
             <td>Withdrawal of course less than 4 weeks prior to course commencement</td>
             <td>30% refund less enrolment and course material fees</td>
         </tr>
-        <tr>
+        <tr style="background-color: #ccc;">
             <td>Withdrawal of course after course commencement</td>
             <td>Non-refundable</td>
         </tr>
@@ -42,7 +42,7 @@
             <td>Visa cancellation due to student’s actions</td>
             <td>Non-refundable</td>
         </tr>
-        <tr>
+        <tr style="background-color: #ccc;">
             <td>Enrolment cancelled due to actions of the student and results in serious breaches of SIIT’s policies and procedures</td>
             <td>Non-refundable</td>
         </tr>

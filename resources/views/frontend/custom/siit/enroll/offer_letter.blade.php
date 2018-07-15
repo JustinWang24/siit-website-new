@@ -19,7 +19,7 @@
             @include('frontend.custom.siit.enroll.offer_letter.page_8')
             <div class="page-pad pt-20">
                 <h3 class="has-text-centered">Please sign here&nbsp;<i class="fas fa-arrow-circle-down"></i></h3>
-                <vuejs-signature-pad v-on:sign-confirmed="onSignConfirmed"></vuejs-signature-pad>
+                <vuejs-signature-pad v-on:sign-confirmed="onSignConfirmed" message-before-signing="{{ trans('general.message_before_sign') }}"></vuejs-signature-pad>
             </div>
         </div>
     </div>

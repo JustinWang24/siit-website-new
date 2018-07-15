@@ -66,11 +66,15 @@
     <p style="float: right;">
         Date: <span style="text-decoration: underline;">&nbsp;&nbsp;&nbsp;{{ date('d/m/Y') }}&nbsp;&nbsp;&nbsp;</span>
     </p>
-    <p style="clear: both;">Signature:</p>
-    <p style="clear: both;">
-
-        <img src="{{ asset($order->getStudentSignature()) }}" alt="">
-    </p>
+    <table style="border: none;">
+        <tr>
+            <td>
+                <p>&nbsp;</p>
+                <p>Signature:</p>
+            </td>
+            <td><img src="{{ asset($order->getStudentSignature()) }}" style="width: 160px;margin-top: 0;"></td>
+        </tr>
+    </table>
     <br>
     @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>

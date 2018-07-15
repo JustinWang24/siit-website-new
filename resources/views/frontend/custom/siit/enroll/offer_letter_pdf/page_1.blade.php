@@ -1,42 +1,43 @@
 <div class="word-page-style">
+    <img src="{{ asset($siteConfig->logo) }}" style="width: 160px;margin-left: -56px;margin-top: -60px;">
     <h1 style="text-align: center;">Letter of Offer</h1>
     <p><strong>Dear {{ $student->name }},</strong></p>
     <p>Thank you for your application with Sydney Institute of Interpreting and Translating (hereby referred to as {{ env('APP_NAME') }}).</p>
     <p>I am pleased to advise that you have been offered a place in the course chosen by you and as listed below. The details and terms and conditions of this offer are attached to this letter.</p>
 
     @foreach($order->orderItems as $orderItem)
-    <table border="1">
+    <table style="width: 100%;border: solid 1px #000;">
         <tbody>
             <tr>
-                <td>Student Name:</td>
-                <td>{{ $student->name }}</td>
-                <td>Offer No:</td>
+                <td style="border-right: solid 1px #000;">Student Name:</td>
+                <td style="border-right: solid 1px #000;">{{ $student->name }}</td>
+                <td style="border-right: solid 1px #000;">Offer No:</td>
                 <td>{{ $order->serial_number }}</td>
             </tr>
             <tr style="background-color: #ccc;">
-                <td>Date of Birth:</td>
-                <td>{{ $studentProfile->birthday }}</td>
-                <td>Gender:</td>
+                <td style="border-right: solid 1px #000;">Date of Birth:</td>
+                <td style="border-right: solid 1px #000;">{{ $studentProfile->birthday }}</td>
+                <td style="border-right: solid 1px #000;">Gender:</td>
                 <td>{{ $studentProfile->gender ? 'Male': 'Female' }}</td>
             </tr>
             <tr>
-                <td>Campus</td>
-                <td>{{ $orderItem->operator_name }}</td>
-                <td>Photo ID No:</td>
+                <td style="border-right: solid 1px #000;">Campus</td>
+                <td style="border-right: solid 1px #000;">{{ $orderItem->operator_name }}</td>
+                <td style="border-right: solid 1px #000;">Photo ID No:</td>
                 <td>{{ $studentProfile->passport }}</td>
             </tr>
             <tr style="background-color: #ccc;">
-                <td>Course:</td>
+                <td style="border-right: solid 1px #000;">Course:</td>
                 <td colspan="3">{{ $orderItem->product->name }}</td>
             </tr>
             <tr>
-                <td>Start Date:</td>
-                <td>{{ $orderItem->intake_start_date }}</td>
-                <td>Finish Date:</td>
+                <td style="border-right: solid 1px #000;">Start Date:</td>
+                <td style="border-right: solid 1px #000;">{{ $orderItem->intake_start_date }}</td>
+                <td style="border-right: solid 1px #000;">Finish Date:</td>
                 <td></td>
             </tr>
             <tr style="background-color: #ccc;">
-                <td>Course Fees:</td>
+                <td style="border-right: solid 1px #000;">Course Fees:</td>
                 <td colspan="3"></td>
             </tr>
         </tbody>

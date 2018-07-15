@@ -2,11 +2,11 @@
     <p>Date issued: «Issue_Date»</p>
     <p>Course payment information («Course»):</p>
 
-    <table border="1">
+    <table style="width: 100%;border: solid 1px #000;">
         <tbody>
         <tr style="background-color: #1a6bac; color: white;">
-            <td>Item</td>
-            <td>Fee</td>
+            <td style="color: white;">Item</td>
+            <td style="color: white;">Fee</td>
         </tr>
         @foreach($order->orderItems as $orderItem)
             <tr>
@@ -21,10 +21,10 @@
     <br>
     <p><strong>Payment Method</strong>:</p>
     <p>SIIT’s bank account details for the payment of fees are as follows:</p>
-    <table border="1">
+    <table style="width: 100%;border: solid 1px #000;">
         <tbody>
         <tr style="background-color: #1a6bac; color: white;">
-            <td colspan="2">Account for Sydney Campus</td>
+            <td colspan="2" style="color: white;text-align: center;">Account for Sydney Campus</td>
         </tr>
         <tr>
             <td>Account Name:</td>
@@ -52,10 +52,11 @@
         </tr>
         </tbody>
     </table>
-    <table border="1">
+    <br>
+    <table style="width: 100%;border: solid 1px #000;">
         <tbody>
         <tr style="background-color: #1a6bac; color: white;">
-            <td colspan="2">Account for Brisbane/Melbourne Campus</td>
+            <td colspan="2" style="color: white;text-align: center;">Account for Brisbane/Melbourne Campus</td>
         </tr>
         <tr>
             <td>Account Name:</td>

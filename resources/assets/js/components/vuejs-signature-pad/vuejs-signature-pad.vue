@@ -4,12 +4,15 @@
       <canvas id="vue-signature-pad" class="vue-signature-pad" width=400 height=200></canvas>
     </div>
     <div class="control-panel">
+      <p class="msg-before-sign">{{ messageBeforeSigning }}</p>
+    </div>
+    <div class="control-panel">
       <div class="columns">
         <div class="column">
-          <button v-on:click.stop.prevent="clearCanvas" class="button is-danger">{{ clearButtonText }}</button>
+          <button v-on:click.stop.prevent="clearCanvas" class="button btn-clear">{{ clearButtonText }}</button>
         </div>
         <div class="column">
-          <button v-on:click.stop.prevent="persistent" class="button is-success pull-right">{{ confirmButtonText }}</button>
+          <button v-on:click.stop.prevent="persistent" class="button is-success btn-confirm">{{ confirmButtonText }}</button>
         </div>
       </div>
     </div>
@@ -41,6 +44,15 @@
         type: String,
         required: false,
         default: 'Clear'
+      },
+      download:{
+        type: Boolean,
+        required: false,
+        default: false
+      },
+      messageBeforeSigning:{
+        type: String,
+        required: true
       }
     },
     data (){
@@ -78,7 +90,12 @@
           return alert(this.errorMessage);
         }
         this.dataURL = this.signaturePad.toDataURL(); // 默认将使用png格式
-        this._download('signature.png');
+
+        // 如果需要下载, 则下载该签名图片
+        if(this.download){
+          this._download('signature.png');
+        }
+
         this.$emit('sign-confirmed',this.dataURL);
       },
       _download: function(fileName){
@@ -155,6 +172,14 @@
   }
   .control-panel{
     margin-top:20px;
+    .msg-before-sign{
+      font-size: 11px;
+      color: #989898;
+      text-align: center;
+    }
+    .btn-confirm{
+      float: right;
+    }
   }
 }
 </style>

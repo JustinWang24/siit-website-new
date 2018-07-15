@@ -29,4 +29,5 @@ return [
     'General Course'=>'General Course',
     'Short Course'=>'Short Course',
     'Send Enquiry'=>'Send Enquiry',
+    'message_before_sign'=>'By clicking Confirm, I have read the offer letter and I agree to the Terms.',
 ];

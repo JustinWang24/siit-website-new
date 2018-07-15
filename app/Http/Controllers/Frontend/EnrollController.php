@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Catalog\IntakeItem;
 use App\Models\Catalog\Product;
+use App\Models\Configuration;
 use App\Models\Group;
 use App\Models\Order\Order;
 use App\Models\Utils\JsonBuilder;
@@ -197,6 +198,12 @@ class EnrollController extends Controller
         return view(_get_frontend_theme_path('enroll.offer_letter'),$this->dataForView);
     }
 
+    /**
+     * 下载Offer letter 文件 PDF
+     * @param $uuid
+     * @throws \Mpdf\MpdfException
+     * @throws \Throwable
+     */
     public function get_offer_letter($uuid){
         $order = Order::GetByUuid($uuid);
         if($order){
