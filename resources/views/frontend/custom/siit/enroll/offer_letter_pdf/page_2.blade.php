@@ -94,5 +94,4 @@
         <li>Transfers by EFTPOS using savings or credit cards. These payment facilities are available from SIIT premises. A surcharge fee applies for credit card payments.</li>
     </ul>
     <p>To confirm payment, students are required to send to SIIT via email (<a href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a>), a copy of the transfer receipt, deposit slip or cheque along with your name, offer number and date of birth.</p>
-    @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>

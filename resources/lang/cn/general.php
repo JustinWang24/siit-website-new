@@ -25,4 +25,7 @@ return [
     'Agent'=>'中介公司',
     'Other'=>'其他',
     'Declaration'=>'声明',
+    'General Course'=>'普通课程',
+    'Short Course'=>'短期课程',
+    'Send Enquiry'=>'我要咨询',
 ];

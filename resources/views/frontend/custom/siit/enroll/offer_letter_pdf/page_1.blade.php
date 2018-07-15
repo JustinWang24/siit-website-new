@@ -63,5 +63,4 @@
     <p>Qingyang WEI</p>
     <p>Course Coordinator/Principal Executive Officer</p>
     <p>Sydney Institute of Interpreting and Translating</p>
-    @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>

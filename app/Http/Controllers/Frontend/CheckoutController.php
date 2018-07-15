@@ -68,7 +68,11 @@ class CheckoutController extends Controller
                     if($request->get('payment_method') == PaymentTool::$METHOD_ID_PLACE_ORDER){
                         event(new OrderCreated($order, $customer,$request));
                         session()->flash('msg', ['content'=>'Order #'.$order->serial_number.' has been handled!','status'=>'success']);
-                        return redirect('/frontend/my_orders/'.session('user_data.uuid'));
+
+                        // 将学生导向Offer letter的页面
+                        return redirect()->route('enrol.offer_letter');
+//                        return redirect('/frontend/my_orders/'.session('user_data.uuid'));
+//                        return redirect('/frontend/my_orders/'.session('user_data.uuid'));
                     }elseif($request->get('payment_method') == PaymentTool::$METHOD_ID_WECHAT){
                         // 微信支付
                         $royalPayTool = new RoyalPayTool();
@@ -85,19 +89,8 @@ class CheckoutController extends Controller
 
         $this->dataForView['user'] = $customer;
 
-//        $this->dataForView['shoppingCartTool'] = new ShoppingCartTool(User::find(session('user_data.id')), $cart);
-
-//        $name = 'justin';
-
-//        $nameEncrypt = encrypt($name);
-//        dump($nameEncrypt);
-//        dump(decrypt($nameEncrypt));
-
-//        dump(\GuzzleHttp\json_encode($this->dataForView['shoppingCartTool']->getTransactionsForPayPal(), JSON_PRETTY_PRINT));
-
-
         $this->dataForView['vuejs_libs_required'] = [
-//            'paypal_button',
+            'paypal_button',
             'payment_accordion',
             'guest_checkout'
         ];

@@ -11,51 +11,51 @@
                 <div class="list-group product-fields-switch-btn mt-10 pt-10">
                     <a href="#" class="box" v-on:click="changeTab('basic')" v-bind:class="{ 'active': currentTab=='basic' }">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1"><i class="fa fa-database" aria-hidden="true"></i>&nbsp;基本信息 <small>(必填)</small></h5>
+                            <h5 class="mb-1"><i class="fa fa-database" aria-hidden="true"></i> Basic <small>(Required)</small></h5>
                         </div>
-                        <small>课程的基本信息</small>
+                        <small>Basic Information</small>
                     </a>
                     <a href="#" class="box" v-on:click="changeTab('basic_in_chinese')" v-bind:class="{ 'active': currentTab=='basic_in_chinese' }">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1"><i class="fas fa-language"></i>&nbsp;课程中文信息 <small>(可选)</small></h5>
+                            <h5 class="mb-1"><i class="fas fa-language"></i>&nbsp;课程中文信息 <small>(Optional)</small></h5>
                         </div>
-                        <small>中文信息</small>
+                        <small>Basic Info in CN</small>
                     </a>
                     <a href="#" class="box" v-on:click="changeTab('category')" v-bind:class="{ 'active': currentTab=='category' }">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;课程分类与属性 <small>(必填)</small></h5>
+                            <h5 class="mb-1"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;Category&Attribute <small>(Required)</small></h5>
                         </div>
-                        <small>课程的分类和特殊属性信息</small>
+                        <small>Category and Attribute in details</small>
                     </a>
                     <a href="#" class="box" v-on:click="changeTab('price')" v-bind:class="{ 'active': currentTab=='price' }">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1"><i class="fab fa-monero" aria-hidden="true"></i>&nbsp;价格与库存 <small>(必填)</small></h5>
+                            <h5 class="mb-1"><i class="fab fa-monero" aria-hidden="true"></i>&nbsp;Course Fees <small>(Required)</small></h5>
                         </div>
-                        <small>课程的价格信息.</small>
+                        <small>Course Fees.</small>
                     </a>
                     <a href="#" class="box" v-on:click="changeTab('images')" v-bind:class="{ 'active': currentTab=='images' }">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1"><i class="fas fa-images" aria-hidden="true"></i>&nbsp;多媒体内容 <small>(必填)</small></h5>
+                            <h5 class="mb-1"><i class="fas fa-images" aria-hidden="true"></i>&nbsp;Multimedia <small>(Required)</small></h5>
                         </div>
-                        <small>课程关联的图片或视频</small>
+                        <small>Related course images</small>
                     </a>
                     <a href="#" class="box" v-on:click="changeTab('productOptions')" v-bind:class="{ 'active': currentTab=='productOptions' }">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1"><i class="fa fa-puzzle-piece" aria-hidden="true"></i>&nbsp;课程选项 <small>(可选)</small></h5>
+                            <h5 class="mb-1"><i class="fa fa-puzzle-piece" aria-hidden="true"></i>&nbsp;Options <small>(Optional)</small></h5>
                         </div>
-                        <small>供用户购买前选择的可选项目.</small>
+                        <small>Options.</small>
                     </a>
                     <a href="#" class="box" v-on:click="changeTab('seo')" v-bind:class="{ 'active': currentTab=='seo' }">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;搜索引擎优化 <small>(可选)</small></h5>
+                            <h5 class="mb-1"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;SEO <small>(Optional)</small></h5>
                         </div>
-                        <small>供Google阅读的内容</small>
+                        <small>SEO for Google</small>
                     </a>
                     <a href="#" class="box" v-on:click="changeTab('group_product')" v-bind:class="{ 'active': currentTab=='group_product' }">
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1"><i class="far fa-object-group"></i></i>&nbsp;创建组合课程 <small>(可选)</small></h5>
+                            <h5 class="mb-1"><i class="far fa-object-group"></i></i>&nbsp;Package <small>(Optional)</small></h5>
                         </div>
-                        <small>组合课程选项</small>
+                        <small>Courses as a package</small>
                     </a>
                 </div>
             </div>

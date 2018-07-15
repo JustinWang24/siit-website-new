@@ -71,5 +71,4 @@
         <li>If the student is not happy with SIIT refund policy or its complaint and appeal policy, the student has the right to seek external advice and pursue its action under the Australia’s consumer protection laws.</li>
         <li>SIIT will only refund any monies due to the student in the student’s nominated bank account or to the student in person.</li>
     </ol>
-    @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>

@@ -143,7 +143,7 @@ class RoyalPayTool
      * @return string
      */
     public function getNotifyUrl(){
-        return url('api/payment/weixin/notify');
+        return url('api/payment/paypal/notify');
 //        return "http://115.29.162.214/example/notify.php";
     }
 
@@ -152,8 +152,7 @@ class RoyalPayTool
      * @return string
      */
     public function getReturnUrl(){
-        return url('api/payment/weixin/success');
-//        return 'http://115.29.162.214/example/success.php';
+        return url('api/payment/paypal/success');
     }
 
     /**

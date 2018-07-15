@@ -13,6 +13,7 @@ class ProductType
 {
     public static $GENERAL_ITEM     = 1;
     public static $GROUP_SPECIFIED  = 2;
+    public static $SHORT_COURSE     = 3;
 
     /**
      * 产品默认的属性集ID
@@ -29,9 +30,14 @@ class ProductType
 
     public static function All(){
         return [
-            self::$GENERAL_ITEM     =>'General Item',
-            self::$GROUP_SPECIFIED  => 'Group Specified'
+            self::$GENERAL_ITEM     =>'General Course',
+            self::$SHORT_COURSE  => 'Short Course'
         ];
+    }
+
+    public static function getTypeName($typeId){
+        $types = self::All();
+        return $types[$typeId];
     }
 
     /**

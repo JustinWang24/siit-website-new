@@ -6,12 +6,14 @@ use App\Models\Catalog\IntakeItem;
 use App\Models\Catalog\Product;
 use App\Models\Group;
 use App\Models\Order\Order;
+use App\Models\Utils\JsonBuilder;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User\StudentProfile;
 use App\Models\Utils\Axcelerate\AxcelerateClient;
 use Log;
+use Mpdf\Mpdf;
 
 class EnrollController extends Controller
 {
@@ -181,13 +183,54 @@ class EnrollController extends Controller
         $this->dataForView['pageTitle'] = trans('enrolment.title_offer_letter');
         $this->dataForView['metaKeywords'] = '';
         $this->dataForView['metaDescription'] = '';
-
         $this->dataForView['siteConfig'] = $this->siteConfig;
 
+        // 获取学生最后一个待定的订单
+        $this->dataForView['order'] = Order::where('user_id',session('user_data.id'))->orderBy('id','desc')->first();
+        $student = User::GetById(session('user_data.id'));
+        $this->dataForView['student'] = $student;
+        $this->dataForView['studentProfile'] = $student->studentProfile;
         $this->dataForView['vuejs_libs_required'] = [
             'offer_letter',
         ];
 
         return view(_get_frontend_theme_path('enroll.offer_letter'),$this->dataForView);
+    }
+
+    public function get_offer_letter($uuid){
+        $order = Order::GetByUuid($uuid);
+        if($order){
+            $this->dataForView['order'] = $order;
+            $this->dataForView['student'] = $order->customer;
+            $this->dataForView['studentProfile'] = $order->customer->studentProfile;
+
+            $html = view(_get_frontend_theme_path('enroll.pdf_offer_letter'),$this->dataForView)->render();
+            $mpdf = new Mpdf();
+            $mpdf->WriteHTML($html);
+            $mpdf->Output();
+        }
+    }
+
+    /**
+     * 保存Offer letter的签名. 每个订单的offer letter 签名文件, 就是订单的UUID.png
+     * @param Request $request
+     * @return string
+     */
+    public function confirm_offer_letter(Request $request){
+        $data = $request->get('signature');
+
+        list($type, $data) = explode(';', $data);
+        list(, $data)      = explode(',', $data);
+        $data = base64_decode($data);
+
+        try{
+            file_put_contents(
+                Order::BuildStudentSignaturePath($request->get('order')),
+                $data
+            );
+            return JsonBuilder::Success(['r'=>url('/frontend/my_orders/'.session('user_data.uuid'))]);
+        }catch (\Exception $exception){
+            return JsonBuilder::Error();
+        }
     }
 }

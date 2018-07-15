@@ -22,7 +22,7 @@
                                 @if($product->group_id)
                                     <p class="is-pulled-right"><span class="tag is-danger">{{ $product->group->name }}</span></p>
                                 @else
-                                    <p class="is-pulled-right"><span class="tag is-info">{{ str_replace('_',' ',env('APP_NAME')) }}</span></p>
+                                    <p class="is-pulled-right"><span class="tag is-info">{{ trans('general.'.\App\Models\Utils\ProductType::getTypeName($product->type)) }}</span></p>
                                 @endif
                                 <div class="is-clearfix"></div>
                                     <a href="{{ url('catalog/product/'.$product->uri) }}">
@@ -42,7 +42,7 @@
                                 <div class="control is-pulled-right">
                                     <div class="tags has-addons">
                                         <a class="tag" href="#" v-on:click.prevent="startEnquiry('{{ $product->name }}','{{ $product->uuid }}')">
-                                            <i class="far fa-comment"></i>&nbsp;Send Enquiry
+                                            <i class="far fa-comment"></i>&nbsp;{{ trans('general.Send Enquiry') }}
                                         </a>
                                     </div>
                                 </div>

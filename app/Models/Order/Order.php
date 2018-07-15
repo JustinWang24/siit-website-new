@@ -36,7 +36,7 @@ class Order extends Model
     /**
      * 根据订单的uuid获取数据
      * @param $uuid
-     * @return mixed
+     * @return Order
      */
     public static function GetByUuid($uuid){
         return self::where('uuid',$uuid)->first();
@@ -237,5 +237,25 @@ class Order extends Model
         }
         DB::rollback();
         return false;
+    }
+
+    /**
+     * 获取某个订单所对应的offer letter签名图片文件
+     * @return bool|null
+     */
+    public function getStudentSignature(){
+        if(file_exists(self::BuildStudentSignaturePath($this->uuid))){
+            return asset('storage/uploads/offer_letters/'.$this->uuid.'.png');
+        }
+        return null;
+    }
+
+    /**
+     * 创建某个订单的学生签名文件路径
+     * @param $uuid
+     * @return string
+     */
+    public static function BuildStudentSignaturePath($uuid){
+        return storage_path('app/public/uploads/offer_letters/'.$uuid.'.png');
     }
 }

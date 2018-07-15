@@ -145,8 +145,10 @@ Route::prefix('product-attributes')->group(function(){
 
 // 支付API的回调接口
 Route::prefix('payment')->group(function(){
-//    Route::get('weixin/notify','Api\Payment@weixin_notify');
-//    Route::get('weixin/success','Api\Payment@weixin_success');
+    Route::get('weixin/notify','Api\Payment@weixin_notify');
+    Route::get('weixin/success','Api\Payment@weixin_success');
+    Route::get('paypal/notify','Api\Payment@paypal_notify');
+    Route::get('paypal/success','Api\Payment@paypal_success');
 });
 
 // Brand的功能接口

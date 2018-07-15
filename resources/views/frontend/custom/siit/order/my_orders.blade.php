@@ -19,6 +19,7 @@
                             <th scope="col">Course</th>
                             <th scope="col">Total(GST)</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Offer Letter</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
@@ -36,6 +37,11 @@
                                 </td>
                                 <td>{{ config('system.CURRENCY'). ' '.number_format($value->getTotalFinal(),2) }}</td>
                                 <td>{!! \App\Models\Utils\OrderStatus::GetName($value->status) !!}</td>
+                                <td>
+                                    @if($value->getStudentSignature())
+                                        <a target="_blank" href="{{ url('catalog/course/get-offer-letter/'.$value->uuid) }}">Download</a>
+                                    @endif
+                                </td>
                                 <td>
                                     @if(session('user_data.role') == \App\Models\Utils\UserGroup::$FINANCE_CONTROLLER && $value->status == \App\Models\Utils\OrderStatus::$PENDING)
                                         <div class="btn-group {{ $key>0&&$key==count($orders)-1 ? 'dropup' : null }}">

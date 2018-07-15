@@ -18,6 +18,8 @@ class OrderItem extends Model
         'status','payment_type','notes','discount','discount_reason','intake_start_date'
     ];
 
+    public $dates = ['intake_start_date'];
+
     public function product(){
         return $this->belongsTo(Product::class);
     }

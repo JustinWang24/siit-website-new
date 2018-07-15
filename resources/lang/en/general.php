@@ -26,4 +26,7 @@ return [
     'Agent'=>'Agent',
     'Other'=>'Other',
     'Declaration'=>'Declaration',
+    'General Course'=>'General Course',
+    'Short Course'=>'Short Course',
+    'Send Enquiry'=>'Send Enquiry',
 ];

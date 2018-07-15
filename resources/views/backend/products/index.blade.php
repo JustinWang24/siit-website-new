@@ -47,7 +47,7 @@
                                     }
                                 ?>
                             </td>
-                            <td>{{ $value->type == \App\Models\Utils\ProductType::$GENERAL_ITEM ? 'General' : $value->group->name }}</td>
+                            <td>{{ trans('general.'.\App\Models\Utils\ProductType::getTypeName($value->type)) }}</td>
                             <td>{{ $value->stock === 0 ? 'In stock' : $value->stock }}</td>
                             <td>${{ $value->default_price }}</td>
                             <td>{{ $value->attribute_set_id==\App\Models\Utils\ProductType::$BASIC_PRODUCT_ATTRIBUTE_SET ? 'General' : $value->attributeSet->name }}</td>
