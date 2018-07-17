@@ -20,12 +20,12 @@
                 <br>
                 <div class="box facebook-btn mt-20">
                     <a href="#">
-                        <i class="fab fa-facebook-f"></i>&nbsp;SIIT FACEBOOK
+                        <i class="fab fa-facebook-f"></i>&nbsp;FACEBOOK
                     </a>
                 </div>
                 <div class="box twitter-btn">
                     <a href="#">
-                        <i class="fab fa-twitter"></i>&nbsp;FOLLOW SIIT
+                        <i class="fab fa-twitter"></i>&nbsp;FOLLOW
                     </a>
                 </div>
             </div>

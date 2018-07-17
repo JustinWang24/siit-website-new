@@ -2,17 +2,18 @@
 <div class="header-bg-bar">
 
 </div>
-    <nav id="navbar" class="navbar is-spaced">
+    <nav id="navbar" class="navbar container is-spaced">
         <div class="container bg-transparent" id="home-nav-header">
             <div class="navbar-brand is-marginless">
                 @if(empty($siteConfig->logo))
                     {{ str_replace('_',' ',env('APP_NAME','Home')) }}
                 @else
                     <a id="logo-top" class="" href="{{ url('/') }}">
-                        {!! \App\Models\Utils\AMP\MediaUtil::NormalImage(asset($siteConfig->logo),'SIIT: a bridge across cultures', 254, 117, 'image') !!}
+                        <img alt="SIIT: a bridge across cultures" src="{{ asset($siteConfig->logo) }}" id="" class="image">
                     </a>
                 @endif
             </div>
+
             <div id="navDesktopWrap" class="full-width is-marginless">
                 <div class="navbar-menu">
                     <div class="navbar-end sm-nav">
@@ -45,7 +46,7 @@
                                     echo '<'.$tag.'>';
                                 }
                                 ?>
-                                <a class="navbar-link has-text-white {{ $rootMenu->css_classes }}" href="{{ $rootMenu->link_to=='/' ? '/' : $rootMenu->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($rootMenu->name_cn) ? $rootMenu->name_cn : $rootMenu->name }}">
+                                <a class="navbar-link {{ $rootMenu->css_classes }}" href="{{ $rootMenu->link_to=='/' ? '/' : $rootMenu->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($rootMenu->name_cn) ? $rootMenu->name_cn : $rootMenu->name }}">
                                     {{ app()->getLocale()=='cn' && !empty($rootMenu->name_cn) ? $rootMenu->name_cn : $rootMenu->name }}
                                 </a>
                                 @if(count($children) > 0)
@@ -65,8 +66,8 @@
                             </div>
                         @endforeach
                         <div class="navbar-item">
-                            <a class="has-text-white" href="{{ url('/switch-language/'.(app()->getLocale()=='cn' ? 'en':'cn')) }}" title="{{ trans('general.switch_language') }}">
-                                {{ trans('general.switch_language') }} <i class="fas fa-language"></i>
+                            <a class="has-text-deep-blue" href="{{ url('/switch-language/'.(app()->getLocale()=='cn' ? 'en':'cn')) }}" title="{{ trans('general.switch_language') }}">
+                                {{ trans('general.switch_language') }}
                             </a>
                         </div>
                     </div>
@@ -80,10 +81,13 @@
             </div>
         </div>
     </nav>
+    <div class="container">
+        <img src="/images/frontend/custom/header_bg_ts.jpg" alt="">
+    </div>
     <div class="is-clearfix"></div>
     <div class="container header-widget-wrap">
-        <div class="columns headline-box" style="margin-top: 100px;margin-bottom: 220px;">
-            <h2>A BRIDGE <span class="super-bold">ACROSS</span> CULTURES</h2>
+        <div class="columns headline-box" style="margin-top: 200px;margin-bottom: 220px;">
+            <h2 class="has-text-centered">A BRIDGE <span class="super-bold">ACROSS</span> CULTURES</h2>
         </div>
         <div class="columns header-widget">
             @foreach($latestNews as $key=>$pageNews)

@@ -19,14 +19,14 @@
                             <div class="card">
                                 <div class="card-image">
                                     <figure>
-                                        <img src="{{ $blog->getFeatureImageUrl() }}" alt="{{ $blog->title }}">
+                                        <img src="{{ $blog->getFeatureImageUrl() }}" alt="{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn  }}">
                                     </figure>
                                 </div>
                                 <div class="card-content pl-0">
                                     <div class="media">
                                         <div class="media-content">
-                                            <p class="title is-4">{{ $blog->title }}</p>
-                                            <p class="subtitle is-6"><i>{{ $blog->title_cn }}</i></p>
+                                            <p class="title is-4">{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn }}</p>
+                                            <p class="subtitle is-6"><i></i></p>
                                             <p class="mt-10 has-text-grey-light">{!! $blog->teasing !!}</p>
                                         </div>
                                     </div>
@@ -65,14 +65,14 @@
                                     <div class="card">
                                         <div class="card-image">
                                             <figure>
-                                                <img src="{{ $blog->getFeatureImageUrl() }}" alt="{{ $blog->title }}">
+                                                <img src="{{ $blog->getFeatureImageUrl() }}" alt="{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn  }}">
                                             </figure>
                                         </div>
                                         <div class="card-content pl-0">
                                             <div class="media">
                                                 <div class="media-content">
-                                                    <p class="title is-4">{{ $blog->title }}</p>
-                                                    <p class="subtitle is-6"><i>{{ $blog->title_cn }}</i></p>
+                                                    <p class="title is-4">{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn  }}</p>
+                                                    <p class="subtitle is-6"><i></i></p>
                                                     <p class="mt-10 has-text-grey-light">{!! $blog->teasing !!}</p>
                                                 </div>
                                             </div>

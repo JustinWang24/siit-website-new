@@ -5,10 +5,10 @@
         <div class="container">
             <div class="columns">
                 <div class="column">
-                    {!! \App\Models\Utils\AMP\MediaUtil::NormalImage(asset($siteConfig->logo),'SIIT: a bridge across cultures', 254, 117, 'image') !!}
+                    {!! \App\Models\Utils\AMP\MediaUtil::NormalImage(asset($siteConfig->logo_dark),'SIIT: a bridge across cultures', 254, 117, 'image') !!}
                     <img src="http://apei.edu.au/wp-content/themes/apei/images/f_logo.png" alt="APEI" style="width: 254px; margin-top: 14px;">
                     <div class="p-2 mt-20">
-                        <p>Australian Professional Education Institute</p>
+                        <p style="margin-top: -35px;">Australian Professional Education Institute</p>
                     </div>
                 </div>
                 <nav class="column is-half">

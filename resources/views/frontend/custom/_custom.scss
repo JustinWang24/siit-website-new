@@ -29,21 +29,34 @@ body{
   z-index: -1;
   height: 117px;
   //background-color: $color-deep-blue;
-  background-color: #12243a;
+  //background-color: #12243a;
 }
+.bg-dark-blue{
+  background-color: #12243a !important;
+}
+
+.has-text-deep-blue{
+  color: $color-deep-blue !important;
+}
+
 #navbar{
   background: white;
   margin-top: -117px;
   #home-nav-header{
-    height: 831px;
-    background-image: url("/images/frontend/custom/header-new.jpg");
+    //height: 831px;
+    //background-image: url("/images/frontend/custom/header_bg_ts.jpg");
   }
 }
 .navbar-brand{
   height: 117px;
+  background: #fff;
   #logo-top{
-    margin-left: $container-padding-left-desktop;
+    //margin-left: $container-padding-left-desktop;
+    margin-left: -18px;
     margin-top: 3px;
+    .image{
+      width: 56%;
+    }
   }
 }
 
@@ -51,7 +64,7 @@ body{
   padding-top: 20px;
   padding-bottom: 17px;
   display: block;
-  background: transparent;
+  background: #fff;
   position: relative;
   height: 117px;
   .navbar-menu{
@@ -59,7 +72,7 @@ body{
     .sm-nav{
       .navbar-item{
         font-size: 13px;
-        color: white;
+        color: $color-deep-blue;
         &:hover{
           background: transparent;
           color: red;
@@ -68,14 +81,14 @@ body{
     }
     .big-nav{
       .navbar-item{
-        color: white;
+        color: $color-deep-blue;
         &:hover{
           background: transparent;
           color: red;
         }
         .navbar-link{
           font-size: 16px;
-          color: white;
+          color: $color-deep-blue;
           background: transparent;
           &:hover{
             background: transparent;
@@ -131,6 +144,8 @@ body{
       font-weight: 100;
       font-family: "Roboto";
       line-height: 140px;
+      width: 100%;
+      text-align: center;
       .super-bold{
         font-weight: 900;
         font-size: 70px;
@@ -344,7 +359,7 @@ body{
       background-color: #00477f;
       a{
         color: white;
-        font-size: 30px;
+        font-size: 26px;
         .fa-facebook-f{
           margin-right: 20px;
         }
@@ -373,9 +388,11 @@ body{
   }
   .parent-item{
     margin-top: 33px;
+    font-size: 24px;
   }
   .sibling-item{
     padding-left: 12px;
+    font-size: 18px;
     a{
       &:hover{
         color: red;
