@@ -8,7 +8,7 @@
                 @if(empty($siteConfig->logo))
                     {{ str_replace('_',' ',env('APP_NAME','Home')) }}
                 @else
-                    <a id="logo-top" class="" href="{{ url('/') }}" style="margin-top: 19px;margin-left:27px;">
+                    <a id="logo-top" class="" href="{{ url('/') }}" style="margin-top: 11px;margin-left:27px;">
                         {!! \App\Models\Utils\AMP\MediaUtil::NormalImage(asset($siteConfig->logo_dark),'SIIT: a bridge across cultures', '50%', null, 'image') !!}
                     </a>
                 @endif
@@ -66,7 +66,7 @@
                         @endforeach
                         <div class="navbar-item">
                             <a class="has-text-white" href="{{ url('/switch-language/'.(app()->getLocale()=='cn' ? 'en':'cn')) }}" title="{{ trans('general.switch_language') }}">
-                                {{ trans('general.switch_language') }} <i class="fas fa-language"></i>
+                                {{ trans('general.switch_language') }}
                             </a>
                         </div>
                     </div>
