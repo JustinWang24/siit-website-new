@@ -29,7 +29,7 @@ body{
   z-index: -1;
   height: 117px;
   //background-color: $color-deep-blue;
-  background-color: #12243a;
+  //background-color: #12243a;
 }
 
 .has-text-deep-blue{
@@ -141,6 +141,8 @@ body{
       font-weight: 100;
       font-family: "Roboto";
       line-height: 140px;
+      width: 100%;
+      text-align: center;
       .super-bold{
         font-weight: 900;
         font-size: 70px;

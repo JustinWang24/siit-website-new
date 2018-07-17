@@ -2,7 +2,7 @@
 <div class="header-bg-bar">
 
 </div>
-    <nav id="navbar" class="navbar is-spaced">
+    <nav id="navbar" class="navbar container is-spaced">
         <div class="container bg-transparent" id="home-nav-header">
             <div class="navbar-brand is-marginless">
                 @if(empty($siteConfig->logo))
@@ -86,8 +86,8 @@
     </div>
     <div class="is-clearfix"></div>
     <div class="container header-widget-wrap">
-        <div class="columns headline-box" style="margin-top: 100px;margin-bottom: 220px;">
-            <h2>A BRIDGE <span class="super-bold">ACROSS</span> CULTURES</h2>
+        <div class="columns headline-box" style="margin-top: 200px;margin-bottom: 220px;">
+            <h2 class="has-text-centered">A BRIDGE <span class="super-bold">ACROSS</span> CULTURES</h2>
         </div>
         <div class="columns header-widget">
             @foreach($latestNews as $key=>$pageNews)
