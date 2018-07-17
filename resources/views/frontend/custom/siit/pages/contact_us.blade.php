@@ -8,7 +8,7 @@
     <div class="columns" id="contact-us-app">
         <div class="column">
             <div class="box">
-                <h2 class="is-size-3">Quote Online</h2>
+                <h2 class="is-size-3">{{ trans('general.title_contact_us') }}</h2>
                 <hr>
                 <form action="{{ url('contact-us') }}" method="post" id="contact-us-form">
                     {{ csrf_field() }}
@@ -70,6 +70,10 @@
                 <div class="notification is-danger" style="display: none;margin-top: 10px;" id="txt-on-fail">
                     System is busy, please try again later!
                 </div>
+                @if($config->embed_map_code)
+                    <hr>
+                    {!! $config->embed_map_code !!}
+                @endif
             </div>
         </div>
         <div class="column">
@@ -78,9 +82,9 @@
                     <div class="media-content">
                         <div class="content">
                             <h1>{{ trans('general.menu_contact') }}</h1>
-                            <hr>
                             <?php
-                            $fields = $config->getFillableArray();
+//                            $fields = $config->getFillableArray();
+                            $fields=[];
                             ?>
                             @foreach($fields as $field)
                                 @if(!empty($config->$field) && $config->isContactUsField($field))
@@ -91,11 +95,32 @@
                                     </p>
                                 @endif
                             @endforeach
+                            <hr>
+                            <p><strong>Sydney Campus: George St</strong></p>
+                            <p>George St. campus address: Level 5, 841 George Street, Sydney NSW 2000</p>
+                            <p>Postal Address: PO Box K1, Haymarket NSW 1240</p>
+                            <p>Email:  <a href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a>  Tel: +61 02 8090 3266 or 9283 5759 Fax:+61 02 8958 0655</p>
+                            <p>Website: <a href="http://www.siit.nsw.edu.au">http://www.siit.nsw.edu.au</a> Weibo: <a href="weibo.com/siithome">weibo.com/siithome</a></p>
+                            <p>National 1300 No: 1300 769 588</p>
+                            <hr>
+                            <p><strong>Sydney Campus: Market St</strong></p>
+                            <p>Market St. campus address: Level 4, 22 Market Street, Sydney NSW 2000</p>
+                            <p>Tel: +61 02 8090 3266 or 02 8319 2940</p>
 
-                            @if($config->embed_map_code)
-                                <hr>
-                                {!! $config->embed_map_code !!}
-                            @endif
+                            <hr>
+                            <p><strong>Brisbane Campus:</strong></p>
+                            <p>Address: Level 1, 344 Queen St, Brisbane QLD, 4000</p>
+                            <p>Postal Address: PO Box 667, Brisbane QLD 4001</p>
+                            <p>Email:  <a href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a>  </p><p>Tel: +61 07 3088 2850 Fax:+61 02 8958 0655 </p><p>TMobile: 0452 618 118 </p><p>TWebsite:
+                                <a href="http://www.siit.nsw.edu.au">http://www.siit.nsw.edu.au</a> </p><p>TWeibo: <a href="weibo.com/siithome">weibo.com/siithome</a></p>
+
+                            <hr>
+                            <p><strong>Melbourne Campus:</strong></p>
+                            <p>Address: Level 4, 341 Queen St, Melbourne VIC, 3000</p>
+                            <p>Email: <a href="mailto:melbourne@siit.nsw.edu.au">melbourne@siit.nsw.edu.au</a></p><p> Tel: +61 03 9005 5511 </p><p>Mobile: 0429 292 811 </p><p>Website:
+                                <a href="http://www.siit.nsw.edu.au">http://www.siit.nsw.edu.au</a> </p><p>Weibo: <a href="weibo.com/siithome">weibo.com/siithome</a></p>
+
+
                             @if(isset($leads) && count($leads)>0)
                                 <h2>Testimonials</h2>
                                 <hr>
