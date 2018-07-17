@@ -47,7 +47,7 @@
 
                 </div>
                 <div class="page-title-wrap">
-                    <h1 class="is-size-1-desktop is-size-1-mobile">{{ $page->title }}</h1>
+                    <h1 class="is-size-1-desktop is-size-1-mobile">{{ app()->getLocale()=='cn'?$page->title_cn:$page->title }}</h1>
                 </div>
                 <div class="content page-content-wrap">
                     {!! $page->rebuildContent() !!}
