@@ -1,5 +1,5 @@
 <div id="navigation-app">
-    <div class="header-bg-bar">
+    <div class="header-bg-bar-dark-blue">
 
     </div>
     <nav id="navbar" class="navbar is-spaced">
