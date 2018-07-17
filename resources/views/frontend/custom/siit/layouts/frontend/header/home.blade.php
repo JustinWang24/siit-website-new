@@ -109,7 +109,6 @@
             @endforeach
         </div>
     </div>
-
     <div class="container header-events-wrap">
         <div class="content">
             <div class="columns is-marginless">
