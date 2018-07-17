@@ -77,8 +77,7 @@
                 <article class="media">
                     <div class="media-content">
                         <div class="content">
-                            <h1>{{ trans('general.menu_contact') }} On {{ $siteConfig->contact_phone }}</h1>
-                            <p class="is-size-5"><a style="color: black;" href="mailto:{{ $siteConfig->contact_phone }}">{{ $siteConfig->contact_phone }}</a></p>
+                            <h1>{{ trans('general.menu_contact') }}</h1>
                             <hr>
                             <?php
                             $fields = $config->getFillableArray();

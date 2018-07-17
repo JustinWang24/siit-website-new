@@ -8,8 +8,8 @@
                 @if(empty($siteConfig->logo))
                     {{ str_replace('_',' ',env('APP_NAME','Home')) }}
                 @else
-                    <a id="logo-top" class="" href="{{ url('/') }}">
-                        {!! \App\Models\Utils\AMP\MediaUtil::NormalImage(asset($siteConfig->logo),'SIIT: a bridge across cultures', 254, 117, 'image') !!}
+                    <a id="logo-top" class="" href="{{ url('/') }}" style="margin-top: 20px;margin-left:20px;">
+                        {!! \App\Models\Utils\AMP\MediaUtil::NormalImage(asset($siteConfig->logo_dark),'SIIT: a bridge across cultures', '50%', null, 'image') !!}
                     </a>
                 @endif
             </div>
