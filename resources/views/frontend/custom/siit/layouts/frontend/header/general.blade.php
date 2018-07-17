@@ -2,9 +2,9 @@
     <div class="header-bg-bar bg-dark-blue">
 
     </div>
-    <nav id="navbar" class="navbar is-spaced">
+    <nav id="navbar" class="navbar is-spaced bg-dark-blue">
         <div class="container bg-transparent" id="home-nav-header-general">
-            <div class="navbar-brand is-marginless">
+            <div class="navbar-brand is-marginless bg-dark-blue">
                 @if(empty($siteConfig->logo))
                     {{ str_replace('_',' ',env('APP_NAME','Home')) }}
                 @else
@@ -13,21 +13,21 @@
                     </a>
                 @endif
             </div>
-            <div id="navDesktopWrap" class="full-width is-marginless">
+            <div id="navDesktopWrap" class="full-width is-marginless bg-dark-blue">
                 <div class="navbar-menu">
                     <div class="navbar-end sm-nav">
-                        <a class="navbar-item" href="{{ url('/') }}" title="{{ trans('general.menu_home') }}">
+                        <a class="navbar-item has-text-white" href="{{ url('/') }}" title="{{ trans('general.menu_home') }}">
                             <i class="fas fa-home"></i>&nbsp;{{ trans('general.menu_home') }}
                         </a>
                         @if(empty(session('user_data')))
-                            <a class="navbar-item" href="{{ url('/frontend/customers/login') }}" title="{{ trans('general.student_login') }}">
+                            <a class="navbar-item has-text-white" href="{{ url('/frontend/customers/login') }}" title="{{ trans('general.student_login') }}">
                                 <i class="fas fa-sign-in-alt"></i>&nbsp;{{ trans('general.student_login') }}
                             </a>
                         @elseif(!empty(session('user_data.uuid')))
-                            <a class="navbar-item" href="{{ url('/frontend/my_profile/'.session('user_data.uuid')) }}" title="{{ trans('general.my_dashboard') }}">
+                            <a class="navbar-item has-text-white" href="{{ url('/frontend/my_profile/'.session('user_data.uuid')) }}" title="{{ trans('general.my_dashboard') }}">
                                 <i class="fas fa-tachometer-alt"></i>&nbsp;{{ trans('general.my_dashboard') }}
                             </a>
-                            <a class="navbar-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();" title="{{ trans('general.menu_logout') }}">
+                            <a class="navbar-item has-text-white" onclick="event.preventDefault();document.getElementById('logout-form').submit();" title="{{ trans('general.menu_logout') }}">
                                 <i class="fas fa-sign-out-alt"></i>&nbsp;{{ trans('general.menu_logout') }}
                             </a>
                         @endif
