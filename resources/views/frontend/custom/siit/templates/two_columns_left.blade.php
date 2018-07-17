@@ -12,14 +12,14 @@
     @endif
     <div class="content">
         <div class="columns is-marginless">
-            <div class="column is-one-quarter left-side-bar-wrap">
+            <div class="column is-one-fifth left-side-bar-wrap">
                 <?php
                     // 检查一下当前的页面, 如果是2栏的布局，那么试着根据页面的URI, 结合菜单的结构, 自动生成左边可以使用的INDEX
                     $menuItem = $page->getMenuObject();
                     $siblings = $menuItem ? $menuItem->siblings() : [];
                 ?>
                 @if($menuItem && $menuItem->parent)
-                    <h2 class="parent-item"><a href="{{ url($menuItem->parent->link_to) }}" title="{{ $menuItem->parent->name }}">{{ $menuItem->parent->name }}</a></h2>
+                    <h2 class="parent-item"><a href="{{ url($menuItem->parent->link_to) }}" title="{{ app()->getLocale()=='cn'?$menuItem->parent->name_cn:$menuItem->parent->name  }}">{{ app()->getLocale()=='cn'?$menuItem->parent->name_cn:$menuItem->parent->name }}</a></h2>
                     @foreach($siblings as $menuSibling)
                         <?php
                             $urlLink = '/page'.$menuSibling->link_to;
@@ -28,7 +28,7 @@
                             }
                         ?>
                     <h3 class="sibling-item {{ $menuItem->id == $menuSibling->id ? 'current-item' : null }}">
-                        <a href="{{ url($urlLink) }}" title="{{ $menuSibling->name }}">{{ $menuSibling->name }}</a>
+                        <a href="{{ url($urlLink) }}" title="{{ app()->getLocale()=='cn'? $menuSibling->name_cn : $menuSibling->name }}">{{ app()->getLocale()=='cn'? $menuSibling->name_cn : $menuSibling->name }}</a>
                     </h3>
                     @endforeach
                 @endif
@@ -42,7 +42,7 @@
                     </div>
                 @endforeach
             </div>
-            <div class="column is-three-quarter">
+            <div class="column is-four-fifths">
                 <div class="thumbnail-wrap">
 
                 </div>
