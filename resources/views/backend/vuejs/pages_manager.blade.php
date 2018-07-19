@@ -31,6 +31,7 @@
                 seo_description:'{{ $page->seo_description }}',
                 feature_image:'{{ $page->feature_image }}',
                 content: '{!! $page->content !!}',
+                content_cn: '{!! $page->content_cn !!}',
                 teasing: '{!! $page->teasing !!}'
             },
             rules: {
@@ -69,6 +70,7 @@
                 var that = this;
                 // 由于使用了 vuejs-editor, 需要单独通过下面的方式获取
                 this.currentPage.content = this.$refs.pageContentEditor.getContent();
+                this.currentPage.content_cn = this.$refs.pageContentEditorCN.getContent();
 
                 axios.post(
                         '/api/page/save',

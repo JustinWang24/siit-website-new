@@ -44,6 +44,9 @@
                         <img v-if="currentPage.feature_image" :src="currentPage.feature_image" class="avatar">
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
+                    <el-button v-show="currentPage.feature_image.length > 0" type="danger" v-on:click="currentPage.feature_image = ''">
+                        <i class="el-icon-minus"></i>&nbsp;Remove feature image
+                    </el-button>
                 </el-form-item>
 
                 <el-form-item label="SEO Keywords">
@@ -68,6 +71,18 @@
                             image-upload-url="/api/images/upload"
                             existed-images="/api/images/load-all"
                             :original-content="currentPage.content"
+                            short-codes-load-url="/api/widgets/load-short-codes"
+                    ></vuejs-editor>
+                </el-form-item>
+                <el-form-item label="Content">
+                    <vuejs-editor
+                            ref="pageContentEditorCN"
+                            class="rich-text-editor"
+                            placeholder="Put content here"
+                            text-area-id="page-content-editor-cn"
+                            image-upload-url="/api/images/upload"
+                            existed-images="/api/images/load-all"
+                            :original-content="currentPage.content_cn"
                             short-codes-load-url="/api/widgets/load-short-codes"
                     ></vuejs-editor>
                 </el-form-item>

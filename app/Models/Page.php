@@ -26,6 +26,7 @@ class Page extends Model implements ISupportWidget
         'title_cn',
         'uri',
         'content',
+        'content_cn',
         'seo_keyword',
         'seo_description',
         'feature_image',
