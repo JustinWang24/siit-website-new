@@ -143,9 +143,10 @@ class Page extends Model implements ISupportWidget
     public function rebuildContent()
     {
         // TODO: Implement rebuildContent() method.
+        $content = app()->getLocale()=='cn' ? $this->content_cn : $this->content;
         if(!empty($this->widgets)){
             // 确定本页有widgets, 那就要找出所在的index
-            $parts = explode(self::$WIDGET_TAG,$this->content);
+            $parts = explode(self::$WIDGET_TAG,$content);
             $result = '';
             foreach ($parts as $key=>$part) {
                 if($key == count($parts)-1){
@@ -156,7 +157,7 @@ class Page extends Model implements ISupportWidget
             }
             return $result;
         }
-        return $this->content;
+        return $content;
     }
 
     /**
