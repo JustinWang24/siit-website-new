@@ -78,8 +78,9 @@
                 ).then(function(res){
                     if(res.data.error_no == 100){
                         // 成功
-                        that._notify('success','DONE!','Page Saved!');
-                        that.currentPage.id = res.data.data.msg;
+                        // that._notify('success','DONE!','Page Saved!');
+                        // that.currentPage.id = res.data.data.msg;
+                        window.location.href = '/backend/pages/index';
                     }else{
                         // 失败
                         that._notify('error','Error','Can not save page, please try later!');
