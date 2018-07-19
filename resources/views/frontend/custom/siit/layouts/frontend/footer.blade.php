@@ -8,7 +8,7 @@
                     {!! \App\Models\Utils\AMP\MediaUtil::NormalImage(asset($siteConfig->logo_dark),'SIIT: a bridge across cultures', 254, 117, 'image') !!}
                     <img src="{{ asset('images/frontend/custom/apeilogowhite.png') }}" alt="APEI" style="width: 254px; margin-top: 14px;">
                     <div class="p-2 mt-20">
-                        <p style="margin-top: -35px;">Australian Professional Education Institute</p>
+                        <p style="margin-top: -15px;">Australian Professional Education Institute</p>
                     </div>
                 </div>
                 <nav class="column is-half">
