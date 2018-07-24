@@ -18,6 +18,16 @@
                     </a>
                 </div>
             </div>
+            @if($siteConfig->instagram)
+                <div class="column ">
+                    <br>
+                    <div class="box facebook-btn mt-20">
+                        <a href="{{ $siteConfig->instagram }}">
+                            <i class="fab fa-instagram"></i>&nbsp;FOLLOW
+                        </a>
+                    </div>
+                </div>
+            @endif
             <div class="column "></div>
         </div>
     </div>
