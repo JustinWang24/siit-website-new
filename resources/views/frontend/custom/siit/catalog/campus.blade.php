@@ -20,7 +20,7 @@
                         <li>
                             <p>
                                 <a href="{{ url('catalog/product/'.$product->uri) }}">
-                                    <p class="is-size-6 has-text-grey mb-10 mh48">{{ $product->name }}</p>
+                                    <p class="is-size-6 has-text-grey">{{ $product->name }}</p>
                                 </a>
                             </p>
                         </li>
