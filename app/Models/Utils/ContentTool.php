@@ -29,7 +29,7 @@ class ContentTool
         'content','description','description_cn','teasing',
         // 和中文相关
         'description_cn','short_description_cn',
-        'keywords_cn','seo_description_cn',
+        'keywords_cn','seo_description_cn','content_cn'
     ];
 
     /**
