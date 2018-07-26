@@ -32,4 +32,5 @@ return [
     'title_contact_us'=>'请您留言',
     'Courses'=>'课程',
     'Campus'=>'校区',
+    'Description'=>'课程详情',
 ];

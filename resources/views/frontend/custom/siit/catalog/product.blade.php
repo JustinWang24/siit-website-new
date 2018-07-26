@@ -14,7 +14,7 @@
                     </div>
                     <div class="content pl-20 pr-20">
                         <h1 class="mt-20">
-                            Course name: {{ $product->name }}&nbsp;
+                            Course name: {{ app()->getLocale() == 'cn' ? $product->name_cn : $product->name }}&nbsp;
                             @if($product->manage_stock && $product->stock<$product->min_quantity)
                                 <span class="badge badge-pill badge-danger">Out of Stock</span>
                             @endif

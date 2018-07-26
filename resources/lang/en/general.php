@@ -33,4 +33,5 @@ return [
     'title_contact_us'=>'Leave us a Message',
     'Courses'=>'Courses',
     'Campus'=>'Campus',
+    'Description'=>'Description',
 ];
