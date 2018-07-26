@@ -30,11 +30,4 @@
     </ul>
     <hr><br>
     @endif
-
-    <h1>Courses</h1>
-    @foreach($categoryProducts as $categoryProduct)
-        <h2>
-            <a href="{{ $categoryProduct->product->getProductUrl() }}">{{ $categoryProduct->product->name }}</a>
-        </h2>
-    @endforeach
 </div>
