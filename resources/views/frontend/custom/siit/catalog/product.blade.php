@@ -21,8 +21,6 @@
                         </h1>
                         <hr>
                         <h2 class="is-size-5 has-text-danger">{{ trans('general.Campus') }}: {{ $product->brand }}</h2>
-                        <p class="sku-txt">{{ trans('general.CODE') }}: {{ $product->sku }}</p>
-
                         @include(_get_frontend_theme_path('catalog.elements.sections.short_description'))
 
                         <div class="main-attributes content">
