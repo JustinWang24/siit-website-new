@@ -34,7 +34,10 @@
                     @foreach($products as $key=>$value)
                         <tr class="align-middle">
                             <td><img class="img-thumbnail" width="80" src="{{ $value->getProductDefaultImageUrl() }}" alt=""></td>
-                            <td>{{ $value->name }}</td>
+                            <td>
+                                <p>{{ $value->name }}</p>
+                                <p>{{ $value->name_cn }}</p>
+                            </td>
                             <td>
                                 <?php
                                     $cats = $value->categories();

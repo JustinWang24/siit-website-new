@@ -30,4 +30,7 @@ return [
     'Send Enquiry'=>'我要咨询',
     'message_before_sign'=>'在签字并提交之前, 我已经阅读了本Offer Letter的全文并同意全部条款',
     'title_contact_us'=>'请您留言',
+    'Courses'=>'课程',
+    'Campus'=>'校区',
+    'Description'=>'课程详情',
 ];

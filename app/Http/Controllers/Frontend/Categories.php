@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Catalog\Brand;
 use App\Models\Catalog\Category;
 use App\Models\Catalog\CategoryProduct;
 use App\Models\Catalog\Product;
@@ -22,6 +23,40 @@ class Categories extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function view($uri, Request $request){
+        $category = Category::where('uri',$uri)->first();
+
+        if(!$category){
+            return response()->view('frontend.default.pages.404',$this->dataForView, 404);
+        }
+
+        $this->dataForView['pageTitle'] = $category->name . ' - ' . str_replace('_',' ',env('APP_NAME'));
+        $this->dataForView['metaKeywords'] = $category->keywords;
+        $this->dataForView['metaDescription'] = $category->seo_description;
+
+        // 总是加载Features product and promotion
+        $this->dataForView['featureProducts'] = Category::LoadFeatureProducts();
+        $this->dataForView['promotionProducts'] = Category::LoadPromotionProducts();
+
+        // 获取校园
+        $brands = Brand::orderBy('name')->get();
+        $campuses = [];
+        foreach ($brands as $brand) {
+            $ps = Product::where('brand',$brand->name)->orderBy('position')->get();
+            $campuses[$brand->name] = $ps;
+        }
+
+        $this->dataForView['campuses'] = $campuses;
+        return view(_get_frontend_theme_path('catalog.campus'),$this->dataForView);
+    }
+
+
+    /**
+     * 按指定目录加载产品列表
+     * @param $uri
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function view_old($uri, Request $request){
         $category = Category::where('uri',$uri)->first();
 
         if(!$category){
