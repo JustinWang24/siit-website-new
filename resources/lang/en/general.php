@@ -20,6 +20,8 @@ return [
     'Next'=>'Next',
     'Prev'=>'Prev',
     'Apply_Now'=>'Apply Now',
+    'Email'=>'Email',
+    'Phone'=>'Phone',
     'Government_Website'=>'Government Website',
     'Advertisements'=>'Advertisements',
     'Friends_Relatives'=>'Friends/Relatives',
@@ -51,5 +53,8 @@ return [
     'Enroll_Now'=>'Enroll Now',
     'or_call'=>' or call',
     'Email_to'=>'Email to',
+    'Follow_us'=>'Follow us',
+    'Subscribe'=>'Subscribe',
+    'Sign_up_newsletter'=>'Sign up for our newsletter',
     'help_notes'=>'Students are encouraged to contact '.env('APP_NAME').' Marketing team for exact timetable and training arrangement.',
 ];

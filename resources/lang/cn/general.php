@@ -19,6 +19,8 @@ return [
     'Next'=>'下一步',
     'Prev'=>'上一步',
     'Apply_Now'=>'立刻申请',
+    'Email'=>'邮件',
+    'Phone'=>'电话',
     'Government_Website'=>'政府网站',
     'Advertisements'=>'广告',
     'Friends_Relatives'=>'亲戚朋友',
@@ -50,6 +52,9 @@ return [
     'Enroll_Now'=>'现在报名',
     'or_call'=>'或致电',
     'Email_to'=>'请发送邮件到',
+    'Follow_us'=>'关注我们',
+    'Subscribe'=>'订阅',
+    'Sign_up_newsletter'=>'订阅我们的新闻邮件',
     'help_notes'=>'欢迎学生们随时联系'.env('APP_NAME').'市场部门以便获取最新的上课时间表与课程安排.',
 
 ];
