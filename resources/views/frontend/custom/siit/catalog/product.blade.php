@@ -14,14 +14,14 @@
                     </div>
                     <div class="content pl-20 pr-20">
                         <h1 class="mt-20">
-                            Course name: {{ app()->getLocale() == 'cn' ? $product->name_cn : $product->name }}&nbsp;
+                            {{ trans('general.Course') }} {{ trans('general.name') }}: {{ app()->getLocale() == 'cn' ? $product->name_cn : $product->name }}&nbsp;
                             @if($product->manage_stock && $product->stock<$product->min_quantity)
                                 <span class="badge badge-pill badge-danger">Out of Stock</span>
                             @endif
                         </h1>
                         <hr>
-                        <h2 class="is-size-5 has-text-danger">Campus: {{ $product->brand }}</h2>
-                        <p class="sku-txt">CODE: {{ $product->sku }}</p>
+                        <h2 class="is-size-5 has-text-danger">{{ trans('general.Campus') }}: {{ $product->brand }}</h2>
+                        <p class="sku-txt">{{ trans('general.CODE') }}: {{ $product->sku }}</p>
 
                         @include(_get_frontend_theme_path('catalog.elements.sections.short_description'))
 
@@ -56,10 +56,12 @@
                                     <hr>
                                     <table>
                                         <thead>
-                                        <tr><h2 class="is-size-4-desktop is-size-4-mobile has-text-grey">Proposed Language <span class="has-text-link">(Please choose language)</span></h2></tr>
+                                        <tr>
+                                            <h2 class="is-size-4-desktop is-size-4-mobile has-text-grey">
+                                                {{ trans('general.Proposed_Language') }} <span class="has-text-link">({{ trans('general.Please_choose_language') }})</span></h2></tr>
                                         <tr>
                                         @foreach($languages as $languageIndex=>$language)
-                                            <th>{{ $language }}</th>
+                                            <th>{{ trans('general.'.$language) }}</th>
                                         @endforeach
                                         </tr>
                                         </thead>
@@ -87,8 +89,8 @@
                                     </table>
                             </div>
                             <div class="row">
-                                <h2 class="is-size-4-desktop is-size-4-mobile has-text-grey mt-10">Scheduled Intake</h2>
-                                <el-select v-model="selectedAxcelerateInstanceId" placeholder="Please choose intake ..." class="full-width">
+                                <h2 class="is-size-4-desktop is-size-4-mobile has-text-grey mt-10">{{ trans('general.Scheduled_Intake') }}</h2>
+                                <el-select v-model="selectedAxcelerateInstanceId" placeholder="{{ trans('general.Please_choose_intake') }}" class="full-width">
                                     <el-option
                                             v-for="(item,idx) in axcelerateInstances"
                                             :key="idx"
@@ -100,15 +102,15 @@
                             <div class="add-to-cart-form-wrap">
                                 <input type="hidden" name="quantity" value="1"><!-- 一次报名1人 -->
                                 <button v-on:click="enrollNow($event)" type="submit" class="button is-danger" :disabled="selectedAxcelerateInstanceId.length==0 || intakeItemId==0">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Enroll Now
+                                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;{{ trans('general.Enroll_Now') }}
                                 </button>
                             </div>
                         </form>
                         <blockquote class="mt-20">
                             <p>
-                                Students are encouraged to contact {{ env('APP_NAME') }} Marketing team for exact timetable and training arrangement.
+                                {{ trans('general.help_notes') }}
                             </p>
-                            <p>Email to <a href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a>or Call <span class="has-text-link">{{ $siteConfig->contact_phone }}</span></p>
+                            <p>{{ trans('general.Email_to') }} <a href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a> {{ trans('general.or_call') }} <span class="has-text-link">{{ $siteConfig->contact_phone }}</span></p>
                         </blockquote>
                     </div>
 
