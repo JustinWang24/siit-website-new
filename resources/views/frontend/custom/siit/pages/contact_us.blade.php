@@ -14,18 +14,18 @@
                     {{ csrf_field() }}
                     <input type="hidden" name="user" value="{{ session('user_data.uuid') }}">
                     <div class="field">
-                        <label class="label">Name</label>
+                        <label class="label">{{ trans('general.name') }}</label>
                         <div class="control has-icons-left">
-                            <input class="input" name="name" type="text" placeholder="Your Name" id="input-name" required>
+                            <input class="input" name="name" type="text" placeholder="{{ trans('general.name') }}" id="input-name" required>
                             <span class="icon is-small is-left">
                               <i class="fas fa-user"></i>
                             </span>
                         </div>
                     </div>
                     <div class="field">
-                        <label class="label">Phone</label>
+                        <label class="label">{{ trans('general.Phone') }}</label>
                         <div class="control has-icons-left">
-                            <input class="input" name="mobile" type="text" placeholder="Your Phone #" id="input-phone" required>
+                            <input class="input" name="mobile" type="text" placeholder="{{ trans('general.Phone') }} #" id="input-phone" required>
                             <span class="icon is-small is-left">
                               <i class="fas fa-phone"></i>
                             </span>
@@ -33,9 +33,9 @@
                     </div>
 
                     <div class="field">
-                        <label class="label">Email</label>
+                        <label class="label">{{ trans('general.Email') }}</label>
                         <div class="control has-icons-left has-icons-right">
-                            <input class="input" type="email" placeholder="Your Email" name="email" id="input-email" required>
+                            <input class="input" type="email" placeholder="{{ trans('general.Email') }}" name="email" id="input-email" required>
                             <span class="icon is-small is-left">
                               <i class="fas fa-envelope"></i>
                             </span>
@@ -43,9 +43,9 @@
                     </div>
 
                     <div class="field">
-                        <label class="label">Message</label>
+                        <label class="label">{{ trans('general.Message') }}</label>
                         <div class="control">
-                            <textarea rows="6" class="textarea" placeholder="Say Something ..." id="input-message" name="message"></textarea>
+                            <textarea rows="6" class="textarea" placeholder="{{ trans('general.Say_Something') }} ..." id="input-message" name="message"></textarea>
                         </div>
                     </div>
 
@@ -53,14 +53,14 @@
                         <div class="control">
                             <label class="checkbox">
                                 <input type="checkbox" checked>
-                                I agree to the <a href="{{ url('/terms') }}">terms and conditions</a>
+                                {{ trans('general.I_agree') }} <a href="{{ url('/terms') }}">{{ trans('general.terms') }}</a>
                             </label>
                         </div>
                     </div>
 
                     <div class="field is-grouped">
                         <div class="control">
-                            <button class="button is-link" id="submit-contact-us-btn">Submit</button>
+                            <button class="button is-link" id="submit-contact-us-btn">{{ trans('general.Submit') }}</button>
                         </div>
                     </div>
                 </form>
