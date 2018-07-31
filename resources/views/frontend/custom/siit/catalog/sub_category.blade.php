@@ -10,11 +10,11 @@
         <div class="columns">
             <div class="column">
             @foreach($courses as $p)
-                <div class="card">
+                <div class="card mb-20">
                     <div class="card-title">
-                        <h2 class="is-size-5">
+                        <h2 class="is-size-5 m-5">
                             <a href="{{ url('catalog/product/'.$p->uri) }}">
-                                {{ $p->getName() }} - {{ $p->brand_name }} {{ trans('general.Campus') }}
+                                {{ $p->getName() }} - {{ $p->brand }} {{ trans('general.Campus') }}
                             </a>
                         </h2>
                     </div>
