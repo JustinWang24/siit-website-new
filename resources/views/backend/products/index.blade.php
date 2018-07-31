@@ -23,8 +23,7 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>Categories</th>
-                        <th>Type</th>
-                        <th>Stock</th>
+                        <th>Campus</th>
                         <th>Price</th>
                         <th>Attribute Set</th>
                         <th>Actions</th>
@@ -50,9 +49,11 @@
                                     }
                                 ?>
                             </td>
-                            <td>{{ trans('general.'.\App\Models\Utils\ProductType::getTypeName($value->type)) }}</td>
-                            <td>{{ $value->stock === 0 ? 'In stock' : $value->stock }}</td>
-                            <td>${{ $value->default_price }}</td>
+                            <td>{{ $value->brand }}</td>
+                            <td>
+                                <p>${{ $value->default_price }}</p>
+                                <p class="has-text-danger">${{ $value->special_price }}</p>
+                            </td>
                             <td>{{ $value->attribute_set_id==\App\Models\Utils\ProductType::$BASIC_PRODUCT_ATTRIBUTE_SET ? 'General' : $value->attributeSet->name }}</td>
                             <td>
                                 <div class="btn-group">
