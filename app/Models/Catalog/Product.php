@@ -54,8 +54,28 @@ class Product extends Model
         'is_configurable_product' => 'boolean'
     ];
 
+    /**
+     * 自动获取课程中英文名称的方法
+     * @return mixed
+     */
     public function getName(){
         return app()->getLocale()=='cn' ? $this->name_cn : $this->name;
+    }
+
+    /**
+     * 自动获取课程中英文简介的方法
+     * @return mixed
+     */
+    public function getShortDescription(){
+        return app()->getLocale()=='cn' ? $this->short_description_cn : $this->short_description;
+    }
+
+    /**
+     * 自动获取课程中英文详情的方法
+     * @return mixed
+     */
+    public function getDescription(){
+        return app()->getLocale()=='cn' ? $this->description_cn : $this->description;
     }
 
     /**
