@@ -11,10 +11,10 @@
             <div class="column">
                 <div class="content pl-20">
                     <ul>
-                        @foreach($category->productCategories as $cp)
+                        @foreach($courses as $p)
                         <li>
-                            <a href="{{ url('catalog/product/'.$cp->product->uri) }}">
-                                <p class="is-size-6 has-text-grey">{{ $cp->product->name }}</p>
+                            <a href="{{ url('catalog/product/'.$p->uri) }}">
+                                <p class="is-size-6 has-text-grey">{{ $p->name }}</p>
                             </a>
                         </li>
                         @endforeach

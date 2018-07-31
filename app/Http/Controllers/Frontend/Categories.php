@@ -55,6 +55,7 @@ class Categories extends Controller
         }else{
             // 不是一级目录
             $this->dataForView['category'] = $category;
+            $this->dataForView['courses'] = $category->productCategories();
             return view(_get_frontend_theme_path('catalog.sub_category'),$this->dataForView);
         }
     }
