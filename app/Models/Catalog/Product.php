@@ -54,7 +54,7 @@ class Product extends Model
         'is_configurable_product' => 'boolean'
     ];
 
-    public function getNameAttribute(){
+    public function getName(){
         return app()->getLocale()=='cn' ? $this->name_cn : $this->name;
     }
 

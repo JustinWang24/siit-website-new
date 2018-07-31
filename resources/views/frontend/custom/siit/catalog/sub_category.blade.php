@@ -3,7 +3,7 @@
     <div class="container mt-20 mb-20 pl-10 pr-10 categories-wrapper" id="category-view-manager">
         <div class="columns">
             <div class="column">
-                <h1 class="is-size-2 pl-10">{{ $category->name }}</h1>
+                <h1 class="is-size-2 pl-10">{{ $category->getName() }}</h1>
             </div>
         </div>
 
@@ -13,9 +13,11 @@
                     <ul>
                         @foreach($courses as $p)
                         <li>
-                            <a href="{{ url('catalog/product/'.$p->uri) }}">
-                                <p class="is-size-6 has-text-grey">{{ $p->name }}</p>
-                            </a>
+                            <p class="">
+                                <a href="{{ url('catalog/product/'.$p->uri) }}">
+                                    {{ $p->getName() }}
+                                </a>
+                            </p>
                         </li>
                         @endforeach
                     </ul>

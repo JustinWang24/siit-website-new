@@ -37,7 +37,7 @@ class Category extends Model
         return self::where('uuid',$uuid)->orderBy('id','asc')->first();
     }
 
-    public function getNameAttribute(){
+    public function getName(){
         return app()->getLocale()=='cn' ? $this->name_cn : $this->name;
     }
 
