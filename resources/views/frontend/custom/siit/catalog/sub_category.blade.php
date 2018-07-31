@@ -20,7 +20,7 @@
                     </div>
                     <div class="card-content">
                         <div class="content pl-20">
-                        {{ $p->getShortDescription() }}
+                        {!! $p->getShortDescription() !!}
                         </div>
                     </div>
                 </div>
