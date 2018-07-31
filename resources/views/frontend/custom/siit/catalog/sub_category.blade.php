@@ -9,26 +9,22 @@
 
         <div class="columns">
             <div class="column">
-                <div class="content pl-20">
-                    <ul>
-                        @foreach($courses as $p)
-                        <li>
-                            <div class="card">
-                                <div class="card-title">
-                                    <h2 class="is-size-5">
-                                        <a href="{{ url('catalog/product/'.$p->uri) }}">
-                                            {{ $p->getName() }}
-                                        </a>
-                                    </h2>
-                                </div>
-                                <div class="card-content">
-                                    {{ $p->getShortDescription() }}
-                                </div>
-                            </div>
-                        </li>
-                        @endforeach
-                    </ul>
+            @foreach($courses as $p)
+                <div class="card">
+                    <div class="card-title">
+                        <h2 class="is-size-5">
+                            <a href="{{ url('catalog/product/'.$p->uri) }}">
+                                {{ $p->getName() }}
+                            </a>
+                        </h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="content pl-20">
+                        {{ $p->getShortDescription() }}
+                        </div>
+                    </div>
                 </div>
+            @endforeach
             </div>
             <div class="clearfix"></div>
         </div>
