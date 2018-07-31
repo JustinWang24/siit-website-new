@@ -14,7 +14,7 @@
                     <div class="card-title">
                         <h2 class="is-size-5">
                             <a href="{{ url('catalog/product/'.$p->uri) }}">
-                                {{ $p->getName() }}
+                                {{ $p->getName() }} - {{ $p->brand_name }}
                             </a>
                         </h2>
                     </div>
