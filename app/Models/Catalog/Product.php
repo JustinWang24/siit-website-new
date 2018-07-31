@@ -54,6 +54,10 @@ class Product extends Model
         'is_configurable_product' => 'boolean'
     ];
 
+    public function getNameAttribute(){
+        return app()->getLocale()=='cn' ? $this->name_cn : $this->name;
+    }
+
     /**
      * 获取本课程关联的 Axcelerate 的 instances
      * @param null $enrollmentOpenOnly

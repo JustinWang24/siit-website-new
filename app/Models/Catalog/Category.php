@@ -37,6 +37,10 @@ class Category extends Model
         return self::where('uuid',$uuid)->orderBy('id','asc')->first();
     }
 
+    public function getNameAttribute(){
+        return app()->getLocale()=='cn' ? $this->name_cn : $this->name;
+    }
+
     /**
      * 加载推荐产品
      * @return mixed
@@ -67,8 +71,9 @@ class Category extends Model
 
     /**
      * 保存目录的方法
-     * @param array $data
-     * @return Integer
+     * @param $data
+     * @return int
+     * @throws \Exception
      */
     public static function Persistent($data){
 //        $data['keywords'] = ContentTool::RemoveNewLineFromString($data['keywords']);

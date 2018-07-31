@@ -23,6 +23,9 @@ class Categories extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function view($uri, Request $request){
+        /**
+         * @var Category $category
+         */
         $category = Category::where('uri',$uri)->first();
 
         if(!$category){
@@ -38,15 +41,22 @@ class Categories extends Controller
         $this->dataForView['promotionProducts'] = Category::LoadPromotionProducts();
 
         // 获取校园
-        $brands = Brand::orderBy('name')->get();
-        $campuses = [];
-        foreach ($brands as $brand) {
-            $ps = Product::where('brand',$brand->name)->orderBy('position')->get();
-            $campuses[$brand->name] = $ps;
-        }
+        if ($category && $category->parent_id == 1){
+            // 是一级目录
+            $brands = Brand::orderBy('name')->get();
+            $campuses = [];
+            foreach ($brands as $brand) {
+                $ps = Product::where('brand',$brand->name)->orderBy('position')->get();
+                $campuses[$brand->name] = $ps;
+            }
 
-        $this->dataForView['campuses'] = $campuses;
-        return view(_get_frontend_theme_path('catalog.campus'),$this->dataForView);
+            $this->dataForView['campuses'] = $campuses;
+            return view(_get_frontend_theme_path('catalog.campus'),$this->dataForView);
+        }else{
+            // 不是一级目录
+            $this->dataForView['campuses'] = $category;
+            return view(_get_frontend_theme_path('catalog.sub_category'),$this->dataForView);
+        }
     }
 
 
