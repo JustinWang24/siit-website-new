@@ -16,10 +16,12 @@
             currentCategory: {
                 id: null,
                 name:'',
+                name_cn:'',
                 uri:'',
                 position:0,
                 parent_id: 1,
                 short_description: '',
+                short_description_cn: '',
                 keywords:'',
                 seo_description: '',
                 include_in_menu: false,
@@ -92,16 +94,17 @@
                 return window.categoryNoteRender(h, { node, data, store });
             },
             handleEdit: function(cate, node, tree){
-                console.log(cate);
                 // 加载选定的目录树种的目录,放到待编辑表单中
                 this.currentParentCategoryId = cate.id;
                 this.currentSelectedCategoryName = cate.name;
                 this.currentCategory.id = cate.id;
                 this.currentCategory.name = cate.name;
+                this.currentCategory.name_cn = cate.name_cn;
                 this.currentCategory.uri = cate.uri;
                 this.currentCategory.position = cate.position;
                 this.currentCategory.parent_id = cate.parent_id;
                 this.currentCategory.short_description = cate.short_description;
+                this.currentCategory.short_description_cn = cate.short_description_cn;
                 this.currentCategory.keywords = cate.keywords;
                 this.currentCategory.seo_description = cate.seo_description;
                 this.currentCategory.include_in_menu = cate.include_in_menu;
@@ -112,10 +115,12 @@
                 // 点击 New Category之后, 将表格设置为新添状态. 以当前选定的目录作为父目录
                 this.currentCategory.id = null;
                 this.currentCategory.name = '';
+                this.currentCategory.name_cn = '';
                 this.currentCategory.uri = '';
                 this.currentCategory.position = 0;
                 this.currentCategory.parent_id = this.currentParentCategoryId;
                 this.currentCategory.short_description = '';
+                this.currentCategory.short_description_cn = '';
                 this.currentCategory.keywords = '';
                 this.currentCategory.seo_description = '';
                 this.currentCategory.include_in_menu = false;
@@ -169,6 +174,7 @@
                 var that = this;
                 // 由于使用了 vuejs-editor, 需要单独通过下面的方式获取产品的description最新值
                 this.currentCategory.short_description = this.$refs.categoryShortDescriptionEditor.getContent();
+                this.currentCategory.short_description_cn = this.$refs.categoryShortDescriptionCnEditor.getContent();
                 axios.post(
                     '/api/category/save',
                     {category: this.currentCategory}
