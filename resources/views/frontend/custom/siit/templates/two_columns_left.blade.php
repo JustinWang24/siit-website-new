@@ -74,7 +74,7 @@
                                     <article class="media">
                                         <div class="media-left">
                                             <a href="{{ url( '/staff-profile?name='.$staffItem->name ) }}" title="{{ $staffItem->name }}">
-                                            <figure class="image">
+                                            <figure>
                                                 <img src="{{ $staffItem->getAvatarUrl() }}" alt="Avatar: {{ $staffItem->name }}" style="height: 130px;">
                                             </figure>
                                             </a>
@@ -117,7 +117,7 @@
                         <article class="media">
                             <div class="media-left">
                                 <a href="{{ url( '/staff-profile?name='.$staffItem->name ) }}" title="{{ $staffItem->name }}">
-                                    <figure class="image">
+                                    <figure>
                                         <img src="{{ $staffItem->getAvatarUrl() }}" alt="Avatar: {{ $staffItem->name }}" style="height: 130px;">
                                     </figure>
                                 </a>
