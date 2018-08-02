@@ -58,9 +58,10 @@
                 ?>
                 <div class="content pl-20">
                     <hr>
+
                     @foreach($trainingStaffItems as $campusName=>$staffItems)
                         <h2 class="has-text-centered">{{ $campusName }}</h2>
-                        <div class="columns is-multiline">
+                        <div class="content">
                             @foreach($staffItems as $staffItem)
                                 @if($currentJobGroup != $staffItem->job_group)
                                     <?php
@@ -68,33 +69,31 @@
                                     ?>
                                     <div class="column is-12"><h3>{{ \App\Models\Staff::GetJobGroupName($currentJobGroup) }}</h3></div>
                                 @endif
-                            <div class="column is-one-third">
-                                <div class="card">
-                                    <div class="card-image pt-10">
-                                        <figure class="image">
+
+                                <div class="box">
+                                    <article class="media">
+                                        <div class="media-left">
                                             <a href="{{ url( '/staff-profile?name='.$staffItem->name ) }}" title="{{ $staffItem->name }}">
-                                            <img src="{{ $staffItem->getAvatarUrl() }}" alt="Avatar: {{ $staffItem->name }}">
+                                            <figure class="image">
+                                                <img src="{{ $staffItem->getAvatarUrl() }}" alt="Avatar: {{ $staffItem->name }}" style="height: 130px;">
+                                            </figure>
                                             </a>
-                                        </figure>
-                                    </div>
-                                    <div class="card-content">
-                                        <div class="media">
-                                            <div class="media-content">
-                                                <p class="title is-4">
-                                                    <a href="{{ url( '/staff-profile?name='.$staffItem->name ) }}" title="{{ $staffItem->name }}">{{ $staffItem->name }}</a>
+                                        </div>
+                                        <div class="media-content">
+                                            <div class="content">
+                                                <p>
+                                                    <strong>
+                                                        <a href="{{ url( '/staff-profile?name='.$staffItem->name ) }}" title="{{ $staffItem->name }}">{{ $staffItem->name }}</a>
+                                                    </strong>
+                                                    <a href="mailto:{{ $staffItem->email }}">&nbsp;<i class="fas fa-envelope-square"></i>&nbsp;{{ $staffItem->email }}</a>
+                                                    <a href="tel:{{ $staffItem->phone }}">&nbsp;<i class="fas fa-phone-square"></i>&nbsp;{{ $staffItem->phone }}</a>
                                                 </p>
-                                                <p class="subtitle is-5 mt-10">{{ $staffItem->job_title }}</p>
+                                                <p>{{ $staffItem->job_title }}</p>
                                             </div>
                                         </div>
-
-                                        <div class="content">
-                                            <a href="mailto:{{ $staffItem->email }}"><i class="fas fa-envelope-square"></i>&nbsp;{{ $staffItem->email }}</a>
-                                            <br>
-                                            <a href="tel:{{ $staffItem->phone }}"><i class="fas fa-phone-square"></i>&nbsp;{{ $staffItem->phone }}</a>
-                                        </div>
-                                    </div>
+                                    </article>
                                 </div>
-                            </div>
+
                             @endforeach
                         </div>
                     @endforeach
@@ -107,43 +106,37 @@
                 ?>
                 <div class="content pl-20">
                     <hr>
-                    <div class="columns is-multiline">
-                    @foreach($StaffMembers as $StaffMember)
-                        @if($currentDivision != $StaffMember->division)
+                    @foreach($StaffMembers as $staffItem)
+                        @if($currentDivision != $staffItem->division)
                             <?php
-                            $currentDivision = $StaffMember->division;
+                            $currentDivision = $staffItem->division;
                             ?>
-                            <div class="column is-12"><h2>{{ \App\Models\Staff::GetDivisionName($currentDivision) }}</h2></div>
+                    <div class="column is-12"><h2>{{ \App\Models\Staff::GetDivisionName($currentDivision) }}</h2></div>
                         @endif
-                        <div class="column is-one-third">
-                            <div class="card">
-                                <div class="card-image pt-10">
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <a href="{{ url( '/staff-profile?name='.$staffItem->name ) }}" title="{{ $staffItem->name }}">
                                     <figure class="image">
-                                        <a href="{{ url( '/staff-profile?name='.$StaffMember->name ) }}" title="{{ $StaffMember->name }}">
-                                        <img src="{{ $StaffMember->getAvatarUrl() }}" alt="Avatar: {{ $StaffMember->name }}">
-                                        </a>
+                                        <img src="{{ $staffItem->getAvatarUrl() }}" alt="Avatar: {{ $staffItem->name }}" style="height: 130px;">
                                     </figure>
-                                </div>
-                                <div class="card-content">
-                                    <div class="media">
-                                        <div class="media-content">
-                                            <p class="title is-4">
-                                                <a href="{{ url( '/staff-profile?name='.$StaffMember->name ) }}" title="{{ $StaffMember->name }}">{{ $StaffMember->name }}</a>
-                                            </p>
-                                            <p class="subtitle is-5 mt-10">{{ $StaffMember->job_title }}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="content">
-                                        <a href="mailto:{{ $StaffMember->email }}"><i class="fas fa-envelope-square"></i>&nbsp;{{ $StaffMember->email }}</a>
-                                        <br>
-                                        <a href="tel:{{ $StaffMember->phone }}"><i class="fas fa-phone-square"></i>&nbsp;{{ $StaffMember->phone }}</a>
-                                    </div>
+                                </a>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong>
+                                            <a href="{{ url( '/staff-profile?name='.$staffItem->name ) }}" title="{{ $staffItem->name }}">{{ $staffItem->name }}</a>
+                                        </strong>
+                                        <a href="mailto:{{ $staffItem->email }}">&nbsp;<i class="fas fa-envelope-square"></i>&nbsp;{{ $staffItem->email }}</a>
+                                        <a href="tel:{{ $staffItem->phone }}">&nbsp;<i class="fas fa-phone-square"></i>&nbsp;{{ $staffItem->phone }}</a>
+                                    </p>
+                                    <p>{{ $staffItem->job_title }}</p>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        </article>
                     </div>
+                    @endforeach
                 </div>
             @endif
             </div>
