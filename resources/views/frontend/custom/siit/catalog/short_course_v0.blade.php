@@ -54,21 +54,39 @@
                                 $today = \Carbon\Carbon::today();
                                 ?>
                                 <hr>
-                                <h2 class="is-size-4-desktop is-size-4-mobile has-text-grey">
-                                    {{ trans('general.Proposed_Language') }}
-                                </h2>
-                                <el-select v-model="intakeItemId" placeholder="{{ trans('general.Please_choose_language') }}" class="full-width">
-                                    @foreach($product->intakes as $intake)
-                                        @foreach($intake->intakeItems as $item)
-                                            @if( $item->scheduled && $item->scheduled > $today && $item->seats && $item->seats>$item->enrolment_count )
-                                                <el-option label="{{ trans('general.'.$languages[$item->language_id]).' - '.$item->scheduled->format('d M Y') }}" value="{{ $item->id }}"></el-option>
-                                            @endif
+                                <table>
+                                    <thead>
+                                    <tr><h2 class="is-size-4-desktop is-size-4-mobile has-text-grey">Proposed Language <span class="has-text-link">(Please choose language)</span></h2></tr>
+                                    <tr>
+                                        @foreach($languages as $languageIndex=>$language)
+                                            <th>{{ $language }}</th>
                                         @endforeach
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($product->intakes as $intake)
+                                        <tr>
+                                            @foreach($intake->intakeItems as $item)
+                                                @if($item->scheduled > $today)
+                                                    <td class="intake-item-box">
+                                                        @if($item->seats && $item->seats>$item->enrolment_count && $item->scheduled)
+                                                            <a class="intake-book-link-btn" href="{{ url('/catalog/course/book/'.$item->id) }}" title="Click me to enroll now!">
+                                                            </a>
+                                                            <p>
+                                                                <span class="tag is-success seats-select-tag" :class="{'item-selected':intakeItemId==<?php echo $item->id ?>}" v-on:click="chooseIntakeItem({{ $item->id }})">
+                                                                    {{ $item->seats }} Seats&nbsp;<span v-html="(intakeItemId=={{$item->id}}?'&#10004;':'')"></span>
+                                                                </span>
+                                                            </p>
+                                                        @endif
+                                                    </td>
+                                                @endif
+                                            @endforeach
+                                        </tr>
                                     @endforeach
-                                </el-select>
+                                    </tbody>
+                                </table>
                             </div>
-
-                            <div class="row mt-20">
+                            <div class="row">
                                 <h2 class="is-size-4-desktop is-size-4-mobile has-text-grey mt-10">Scheduled Intake</h2>
                                 <el-select v-model="selectedAxcelerateInstanceId" placeholder="Please choose intake ..." class="full-width">
                                     <el-option

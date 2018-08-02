@@ -26,8 +26,9 @@ $theSpecialPrice = $product->getSpecialPriceGST();
             // 和课程相关的有效的Instances
             axcelerateInstances:[],
             selectedAxcelerateInstanceId:'',
-            intakeItemId:0,
+            intakeItemId: '',
             agentCode:'{{ $agentCode }}',
+            language: '',
             rules:{
                 not_null: '{{ trans('validation_rules.not_null') }}'
             }

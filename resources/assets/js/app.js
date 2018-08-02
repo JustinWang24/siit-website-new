@@ -45,6 +45,7 @@ Vue.use(ElementUI);
 Vue.component('CatalogViewer', require('./components/catalog-viewer/catalogviewer.vue'));
 Vue.component('VuejsSlider', require('./components/vuejs-slider/VuejsSlider.vue'));
 Vue.component('VuejsSignaturePad', require('./components/vuejs-signature-pad/vuejs-signature-pad.vue'));
+Vue.component('StripePayment', require('./components/payments/stripe/StripePayment.vue'));
 
 fastclick.attach(document.body);
 

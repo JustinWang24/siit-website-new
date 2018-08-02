@@ -9,6 +9,9 @@
     <div class="card payment-method-item bg-primary" id="pm-place-order">
         @include(_get_frontend_theme_path('checkout.elements.payment.place_order'))
     </div>
+    <div class="card payment-method-item" id="pm-paypal">
+        @include(_get_frontend_theme_path('checkout.elements.payment.paypal_express_off_site'))
+    </div>
     <div class="card payment-method-item" id="pm-wechat">
         @include(_get_frontend_theme_path('checkout.elements.payment.wechat_off_site'))
     </div>

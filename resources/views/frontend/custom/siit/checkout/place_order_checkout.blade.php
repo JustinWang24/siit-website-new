@@ -53,7 +53,7 @@
                         </p>
                         <p class="columns is-marginless">
                             <span class="column">Intake:</span>
-                            <span class="column"><b>{{ $orderItemObject->intake_start_date ? $orderItemObject->intake_start_date : 'Anytime' }}</b></span>
+                            <span class="column"><b>{{ $orderItemObject->intake_start_date ? $orderItemObject->intake_start_date->format('d/M/Y') : 'Anytime' }}</b></span>
                         </p>
                         <div class="is-clearfix"></div>
                     </div>

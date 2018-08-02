@@ -3,6 +3,7 @@
 namespace App\Models\Order;
 
 use App\Models\Utils\OrderStatus;
+use Carbon\Carbon;
 use FlipNinja\Axcelerate\Courses\Instance;
 use Gloudemans\Shoppingcart\CartItem;
 use Illuminate\Database\Eloquent\Model;
@@ -89,7 +90,7 @@ class OrderItem extends Model
                 'status'=>OrderStatus::$PENDING,
                 'payment_type'=>$order->payment_type,
                 'notes'=>$notes,
-                'intake_start_date'=>$instance->get('startdate')
+                'intake_start_date'=>$instance->get('startdate')=='n.a' ? Carbon::tomorrow('Australia/Melbourne') : $instance->get('startdate')
             ];
             $orderItem = self::create($dataOrderItem);
             if($orderItem){

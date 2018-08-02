@@ -90,7 +90,7 @@ class CheckoutController extends Controller
         $this->dataForView['user'] = $customer;
 
         $this->dataForView['vuejs_libs_required'] = [
-            'paypal_button',
+//            'paypal_button',
             'payment_accordion',
             'guest_checkout'
         ];
