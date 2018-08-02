@@ -42,18 +42,20 @@
                 <div class="content">
                     <el-form ref="currentCategory" :rules="rules" :model="currentCategory" label-width="160px">
                         <el-form-item label="Category Name" prop="name">
-                            <el-input placeholder="名称: 必填" v-model="currentCategory.name"></el-input>
+                            <el-input placeholder="Category name: Required" v-model="currentCategory.name"></el-input>
                         </el-form-item>
-
+                        <el-form-item label="Category Name">
+                            <el-input placeholder="中文名称: 选填" v-model="currentCategory.name_cn"></el-input>
+                        </el-form-item>
                         <el-form-item label="Category URI" prop="uri">
                             <el-input placeholder="目录链接URI: 必填" v-model="currentCategory.uri"></el-input>
                         </el-form-item>
 
-                        <el-form-item label="包含在导航栏中">
+                        <el-form-item label="In Menu bar">
                             <el-switch v-model="currentCategory.include_in_menu"></el-switch>
                         </el-form-item>
 
-                        <el-form-item label="作为静态页面链接">
+                        <el-form-item label="As static link">
                             <el-switch v-model="currentCategory.as_link"></el-switch>
                         </el-form-item>
 
@@ -65,18 +67,27 @@
                             <vuejs-editor
                                     ref="categoryShortDescriptionEditor"
                                     class="rich-text-editor"
-                                    placeholder="(必填) 填入目录的简要描述"
+                                    placeholder="Category short description: Required"
                                     text-area-id="category-short-description-editor"
                                     :original-content="currentCategory.short_description"
+                            ></vuejs-editor>
+                        </el-form-item>
+                        <el-form-item label="目录中文简述">
+                            <vuejs-editor
+                                    ref="categoryShortDescriptionCnEditor"
+                                    class="rich-text-editor"
+                                    placeholder="(选填) 目录的中文简要描述"
+                                    text-area-id="category-short-description-cn-editor"
+                                    :original-content="currentCategory.short_description_cn"
                             ></vuejs-editor>
                         </el-form-item>
                         <hr>
                         <h5 class="desc-text">Optional: For SEO <span class="has-text-danger">({{ trans('general.seo_description_note') }})</span></h5>
                         <el-form-item label="Keywords(SEO)">
-                            <el-input placeholder="选填: 和本目录相关的关键字集合, 逗号分隔" type="textarea" v-model="currentCategory.keywords"></el-input>
+                            <el-input placeholder="Optional: use comma to seperate multiple keywords for SEO" type="textarea" v-model="currentCategory.keywords"></el-input>
                         </el-form-item>
                         <el-form-item label="Description(SEO)">
-                            <el-input placeholder="选填: 和本目录相关的描述" type="textarea" v-model="currentCategory.seo_description"></el-input>
+                            <el-input placeholder="Optional: SEO decription" type="textarea" v-model="currentCategory.seo_description"></el-input>
                         </el-form-item>
                         <el-form-item>
                             <el-button :loading="savingCategory" type="primary" v-on:click="saveCurrentCategory('currentCategory')">Save<i class="el-icon-upload el-icon--right"></i></el-button>

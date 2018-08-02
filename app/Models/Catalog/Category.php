@@ -13,7 +13,7 @@ class Category extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name','parent_id','position','short_description',
+        'name','parent_id','position','short_description','short_description_cn',
         'uri','active','include_in_menu','image_path',
         'keywords','seo_description','uuid','as_link','name_cn','brands'
     ];
@@ -35,6 +35,10 @@ class Category extends Model
 
     public static function GetByUuid($uuid){
         return self::where('uuid',$uuid)->orderBy('id','asc')->first();
+    }
+
+    public function getName(){
+        return app()->getLocale()=='cn' ? $this->name_cn : $this->name;
     }
 
     /**
@@ -67,8 +71,9 @@ class Category extends Model
 
     /**
      * 保存目录的方法
-     * @param array $data
-     * @return Integer
+     * @param $data
+     * @return int
+     * @throws \Exception
      */
     public static function Persistent($data){
 //        $data['keywords'] = ContentTool::RemoveNewLineFromString($data['keywords']);
