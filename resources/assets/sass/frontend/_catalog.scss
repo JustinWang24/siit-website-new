@@ -1,4 +1,5 @@
 /* Product View */
+$product-content-text-color: #111111;
 .origin-price-txt{
   font-size: 18px;
   color: $color-default-light;
@@ -140,6 +141,23 @@
   }
 }
 
+// 产品显示单页
+.product-view-manager-app{
+  .content{
+    .short-desc{
+      p{
+        line-height: 24px;
+        color: $product-content-text-color;
+        margin-bottom: 8px;
+        strong{
+          display: block;
+          margin-top: 25px;
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+}
 .product-additional-wrap{
   .nav-tabs{
     .nav-item{
@@ -152,12 +170,35 @@
       }
     }
   }
-  .tab-content{
+  #tab-contents{
     border-left: solid 1px $color-default-light-super;
     border-right: solid 1px $color-default-light-super;
     border-bottom: solid 1px $color-default-light-super;
     .tab-pane{
       padding: 20px;
+      p{
+        line-height: 24px;
+        color: $product-content-text-color;
+        margin-bottom: 8px;
+        strong{
+          display: block;
+          margin-top: 25px;
+          margin-bottom: 5px;
+        }
+      }
+      ul{
+        li{
+          line-height: 24px;
+          color: $product-content-text-color;
+        }
+      }
+      table{
+        tr{
+          td{
+            color: $product-content-text-color;
+          }
+        }
+      }
     }
   }
 }
