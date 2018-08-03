@@ -61,5 +61,10 @@ return [
     'Subscribe'=>'订阅',
     'Sign_up_newsletter'=>'订阅我们的新闻邮件',
     'help_notes'=>'欢迎学生们随时联系'.env('APP_NAME').'市场部门以便获取最新的上课时间表与课程安排.',
-
+    'RTO'=>'认证培训机构代码',
+    'CRICOS Code'=>'CRICOS代码',
+    'Training Package'=>'培训套餐',
+    'AQF Level'=>'AQF资质级别',
+    'Code and Title of Qualification'=>'资质名称',
+    'Course Duration'=>'课程时长',
 ];

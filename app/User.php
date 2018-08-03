@@ -11,6 +11,7 @@ use App\Models\UserGroup;
 use App\Models\User\StudentProfile;
 use FlipNinja\Axcelerate\Contacts\Contact;
 use Illuminate\Support\Facades\Crypt;
+use Stripe\Customer;
 
 class User extends Authenticatable
 {
@@ -190,5 +191,34 @@ class User extends Authenticatable
             return $this->axc_login_details = Crypt::encryptString($username.self::AXE_USERNAME_PASSWORD_SEPARATOR.$password);
         }
         return null;
+    }
+
+    /**
+     * 获取客户关联的 stripe customer 信息
+     * @return null|\Stripe\StripeObject
+     */
+    public function getStripeCustomer(){
+        if(is_null($this->stripe_id)){
+            return null;
+        }else{
+            return Customer::retrieve($this->stripe_id);
+        }
+    }
+
+    /**
+     * 创建一个和当前 user 相关联的 stripe customer 对象
+     * @param $source
+     * @return \Stripe\ApiResource
+     */
+    public function createStripeCustomer($source){
+        $customer = Customer::create([
+            'source'=>$source,
+            'description'=>$this->name,
+            'email'=>$this->email
+        ]);
+        if($customer){
+            $this->stripe_id = $customer->id;
+        }
+        return $customer;
     }
 }

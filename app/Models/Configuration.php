@@ -28,6 +28,15 @@ class Configuration extends Model
         'theme_main_color',
     ];
 
+    /**
+     * 获取财务人员的邮件. 如果没有单独指定, 则使用默认联系人的
+     * @return string
+     */
+    public static function GetFinanceEmail(){
+        $config = self::find(1);
+        return $config->finance_email ? $config->finance_email : $config->contact_email;
+    }
+
     public function isContactUsField($key){
         return in_array($key, self::GetContactUsFields());
     }

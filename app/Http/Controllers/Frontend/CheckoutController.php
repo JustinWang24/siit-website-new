@@ -77,6 +77,17 @@ class CheckoutController extends Controller
                         // 微信支付
                         $royalPayTool = new RoyalPayTool();
                         return redirect($royalPayTool->purchase($order)->getQrRedirectUrl());
+                    }elseif($request->get('payment_method') == PaymentTool::$METHOD_ID_STRIPE){
+                        // Stripe 信用卡支付
+                        $job = new StripePayment($order, $request, $customer,$paymentMethod);
+                        if($job->handle()){
+                            // 一切顺利
+                            $cart->destroy();
+                            session()->flash('msg', ['content'=>'Order #'.$order->serial_number.' is in progress!','status'=>'success']);
+                            return redirect('/frontend/my_orders/'.session('user_data.uuid'));
+                        }else{
+                            session()->flash('msg', ['content'=>'System is Busy, Please try again!','status'=>'danger']);
+                        }
                     }else{
                         // 不是 place order 订单, 那么进行支付处理
                         event(new OrderPlaced(null,$customer,$request,$order));

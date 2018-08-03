@@ -62,4 +62,10 @@ return [
     'Subscribe'=>'Subscribe',
     'Sign_up_newsletter'=>'Sign up for our newsletter',
     'help_notes'=>'Students are encouraged to contact '.env('APP_NAME').' Marketing team for exact timetable and training arrangement.',
+    'RTO'=>'RTO',
+    'CRICOS Code'=>'CRICOS Code',
+    'Training Package'=>'Training Package',
+    'AQF Level'=>'AQF Level',
+    'Code and Title of Qualification'=>'Code and Title of Qualification',
+    'Course Duration'=>'Course Duration',
 ];

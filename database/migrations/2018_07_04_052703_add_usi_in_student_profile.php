@@ -14,7 +14,7 @@ class AddUsiInStudentProfile extends Migration
     public function up()
     {
         Schema::table('student_profiles', function (Blueprint $table) {
-            $table->unsignedSmallInteger('USI')->nullable();             // Group Product
+            $table->string('USI',100)->nullable();             // Group Product
         });
     }
 

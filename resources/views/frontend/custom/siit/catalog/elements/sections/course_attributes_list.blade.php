@@ -7,7 +7,7 @@
             @if($product_attribute->location == \App\Models\Utils\OptionTool::$LOCATION_ADDITIONAL)
                 <li>
                     <h2>
-                        <span class="attr-name">{{ $product_attribute->name }}:</span>
+                        <span class="attr-name">{{ trans('general.'.$product_attribute->name) }}:</span>
                         <?php
                         $productAttributeValue = $product_attribute->valuesOf($product);
                         ?>
