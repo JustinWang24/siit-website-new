@@ -9,7 +9,7 @@
     </el-form-item>
 
     <div v-for="(pAttribute, idx) in productAttributes" :key="idx">
-        <el-form-item :label="pAttribute.name" v-if="pAttribute.type=={{ \App\Models\Utils\OptionTool::$TYPE_TEXT }}">
+        <el-form-item :label="pAttribute.name + (pAttribute.lang=='cn' ? '(中文)' : '')" v-if="pAttribute.type=={{ \App\Models\Utils\OptionTool::$TYPE_TEXT }}">
             <el-input :placeholder="pAttribute.default_value" v-model="productAttributesValues[idx]"></el-input>
         </el-form-item>
 

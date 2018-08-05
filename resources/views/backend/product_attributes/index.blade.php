@@ -14,9 +14,11 @@
                        v-bind:class="{ 'active': currentTab=='{{ $parentAttribute->id }}' }">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">{{ $parentAttribute->name }} (<small>{{ $parentAttribute->attributeSet->name }}</small>)</h5>
-
                         </div>
-                        <small>{{ \App\Models\Utils\OptionTool::TypeName($parentAttribute->type) }}: {{ $parentAttribute->default_value }}</small>
+                        <small>
+                            {{ \App\Models\Utils\OptionTool::TypeName($parentAttribute->type) }}: {{ $parentAttribute->default_value }}
+                            Language: {{ strtoupper($parentAttribute->lang) }}
+                        </small>
                     </a>
                     @endforeach
 
@@ -27,7 +29,10 @@
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">{{ $attribute->name }} (<small>{{ $attribute->attributeSet->name }}</small>)</h5>
                             </div>
-                            <small>类型: {{ \App\Models\Utils\OptionTool::TypeName($attribute->type) }}</small>
+                            <small>
+                                类型: {{ \App\Models\Utils\OptionTool::TypeName($attribute->type) }}&nbsp;
+                                {{ $attribute->lang=='cn' ? '语言: 中文' : 'Language: '.strtoupper($attribute->lang) }}
+                            </small>
                         </a>
                     @endforeach
                 </div>
@@ -57,6 +62,14 @@
                         <el-form-item label="属性名称" prop="name" required>
                             <el-input placeholder="必填: 属性名称" v-model="productAttribute.name"></el-input>
                         </el-form-item>
+
+                        <el-form-item label="Language">
+                            <el-select v-model="productAttribute.lang" placeholder="English">
+                                <el-option label="English" value="en"></el-option>
+                                <el-option label="中文" value="cn"></el-option>
+                            </el-select>
+                        </el-form-item>
+
                         <el-form-item label="类型">
                             <el-select v-model="productAttribute.type" placeholder="必填: 属性类型">
                                 @foreach(\App\Models\Utils\OptionTool::ProductAttributeTypes() as $key=>$typeName)

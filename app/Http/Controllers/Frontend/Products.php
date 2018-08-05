@@ -23,6 +23,9 @@ class Products extends Controller
     public function view($uri, Request $request){
         $this->dataForView['agentCode'] = $request->has('agent') ? $request->get('agent') : 0;
 
+        /**
+         * @var Product $product
+         */
         $product = Product::GetByUri($uri);
 
         if(!$product){

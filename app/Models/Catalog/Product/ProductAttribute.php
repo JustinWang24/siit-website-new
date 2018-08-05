@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ProductAttribute extends Model
 {
     protected $fillable = [
-        'name','product_attribute_set_id','type','default_value','location','position'
+        'name','product_attribute_set_id','type',
+        'default_value','location','position','lang'
     ];
 
     public $timestamps = false;
@@ -19,6 +20,7 @@ class ProductAttribute extends Model
 
     /**
      * @param Product $product
+     * @return mixed
      */
     public function valuesOf(Product $product){
         return AttributeValue::where('product_id',$product->id)

@@ -17,7 +17,7 @@ class AttributeSet extends Controller
      * @return string
      */
     public function load_attributes_by_set_ajax(Request $request){
-        $pas = ProductAttribute::select('id','name','type','default_value')
+        $pas = ProductAttribute::select('id','name','type','default_value','lang')
             ->where('product_attribute_set_id',$request->get('set_id'))
             ->orderBy('position','asc')
             ->orderBy('name','asc')

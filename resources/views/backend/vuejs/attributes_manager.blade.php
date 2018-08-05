@@ -12,6 +12,7 @@
                 default_value: '{!! $productAttribute->default_value ? $productAttribute->default_value : null !!}',
                 type: '{{ $productAttribute->type ? $productAttribute->type : 1 }}',
                 location: '{{ $productAttribute->location ? $productAttribute->location : 1 }}',
+                lang: '{{ $productAttribute->lang ? $productAttribute->lang : 'en' }}',
                 position: {{ $productAttribute->position ? $productAttribute->position : 0 }}
             },
             rules: {
@@ -36,6 +37,7 @@
                         that.productAttribute = res.data.msg;
                         that.productAttribute.type = that.productAttribute.type + '';
                         that.productAttribute.location = that.productAttribute.location + '';
+                        that.productAttribute.lang = that.productAttribute.lang + '';
                         that._notify('success','DONE!',that.productAttribute.name + ' is loaded!');
                     }else{
                         // 失败
@@ -51,6 +53,7 @@
                 this.productAttribute.type = '1';
                 this.productAttribute.location = '1';
                 this.productAttribute.position = 0;
+                this.productAttribute.lang = 'en';
                 this.currentTab = '';
             },
             saveAttribute: function(formName){

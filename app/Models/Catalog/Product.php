@@ -271,6 +271,7 @@ class Product extends Model
      */
     public function productAttributes(){
         return ProductAttribute::where('product_attribute_set_id', $this->attribute_set_id)
+            ->where('lang',app()->getLocale())
             ->orderBy('position','asc')
             ->orderBy('name','asc')
             ->get();

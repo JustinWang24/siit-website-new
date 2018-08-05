@@ -4,13 +4,13 @@
     <hr>
     <ul class="course-special-attributes">
         @foreach($product_attributes as $key=>$product_attribute)
-            @if($product_attribute->location == \App\Models\Utils\OptionTool::$LOCATION_ADDITIONAL)
+            @if($product_attribute->location == \App\Models\Utils\OptionTool::$LOCATION_ADDITIONAL )
+                <?php
+                $productAttributeValue = $product_attribute->valuesOf($product);
+                ?>
                 <li>
                     <h2>
-                        <span class="attr-name">{{ trans('general.'.$product_attribute->name) }}:</span>
-                        <?php
-                        $productAttributeValue = $product_attribute->valuesOf($product);
-                        ?>
+                        <span class="attr-name">{{ $product_attribute->name}}:</span>
                         @if(count($productAttributeValue)>0)
                             @if(strlen($productAttributeValue[0]->value) > 20)
                                 <br>
