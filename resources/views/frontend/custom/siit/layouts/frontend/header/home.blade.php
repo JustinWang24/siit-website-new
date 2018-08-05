@@ -52,9 +52,36 @@
                                 @if(count($children) > 0)
                                     <div class="navbar-dropdown is-boxed">
                                         @foreach($children as $sub)
-                                            <a class="navbar-item" href="{{ $sub->link_to=='/' ? '/' : $sub->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}">
-                                                {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
-                                            </a>
+                                            @php
+                                            $menuUrl = $sub->getMenuUrl();
+                                            $pathwaySubmenu = strpos($menuUrl,'University-Pathway-Collection') !== false;
+                                            @endphp
+                                            @if($pathwaySubmenu)
+                                                {{-- 对pathway的特殊处理 --}}
+                                                <div class="aside">
+                                                    <ul class="menu-list">
+                                                        <li>
+                                                            <a class="navbar-item has-low-level-menus" data-content="#pathway-list-subs" href="#" title="{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}">
+                                                                <i class="fas fa-plus has-text-link" style="margin-left: 0;"></i>
+                                                                &nbsp;&nbsp;{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
+                                                            </a>
+                                                            <ul id="pathway-list-subs" class="hidden" style="margin-top: 0;">
+                                                                @foreach($pathways as $product)
+                                                                    <li>
+                                                                        <a href="{{ url('catalog/product/'.$product->uri) }}">
+                                                                            {{ $product->getName() }} - {{ trans('general.'.$product->brand).(app()->getLocale()=='cn'?null:trans('general.Campus')) }}
+                                                                        </a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            @else
+                                                <a class="navbar-item" href="{{ $sub->link_to=='/' ? '/' : $sub->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}">
+                                                    {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
+                                                </a>
+                                            @endif
                                         @endforeach
                                     </div>
                                 @endif

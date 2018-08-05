@@ -68,4 +68,7 @@ return [
     'AQF Level'=>'AQF Level',
     'Code and Title of Qualification'=>'Code and Title of Qualification',
     'Course Duration'=>'Course Duration',
+    'Sydney'=>' Sydney',
+    'Melbourne'=>' Melbourne',
+    'Brisbane'=>' Brisbane',
 ];

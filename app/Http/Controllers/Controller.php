@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Session;
 use App\User;
 use App\Models\Catalog\Category;
 use Gloudemans\Shoppingcart\Cart;
+use App\Models\Catalog\Brand;
+use App\Models\Catalog\Product;
 
 class Controller extends BaseController
 {
@@ -50,6 +52,14 @@ class Controller extends BaseController
         $this->dataForView['rootMenus'] = Menu::getRootMenus();
         $this->siteConfig = Configuration::find(1);
         $this->dataForView['siteConfig'] = $this->siteConfig;
+
+        // 总是获取 Pathway 目录的数据放到菜单中
+        $this->dataForView['pathways'] = [];
+        $pathwayCategory = Category::where('uri','University-Pathway-Collection')->first();
+        if($pathwayCategory){
+            $this->dataForView['pathways'] = $pathwayCategory->productCategories();
+        }
+        // 总是获取 Pathway 目录的数据放到菜单中
 
         // 和电商相关
         if(env('activate_ecommerce',false)){

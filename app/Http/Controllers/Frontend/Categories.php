@@ -37,8 +37,8 @@ class Categories extends Controller
         $this->dataForView['metaDescription'] = $category->seo_description;
 
         // 总是加载Features product and promotion
-        $this->dataForView['featureProducts'] = Category::LoadFeatureProducts();
-        $this->dataForView['promotionProducts'] = Category::LoadPromotionProducts();
+        $this->dataForView['featureProducts'] = [];
+        $this->dataForView['promotionProducts'] = [];
 
         // 获取校园
         if ($category && $category->parent_id == 1){

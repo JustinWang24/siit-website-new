@@ -445,4 +445,13 @@ $(document).ready(function(){
             }
         );
     }
+
+    if($('.has-low-level-menus').length >0){
+        $('.has-low-level-menus').on('click',function(val){
+          let target = $(this).data('content');
+          if($(target).length > 0){
+            $(target).toggle();
+          }
+        });
+    }
 });

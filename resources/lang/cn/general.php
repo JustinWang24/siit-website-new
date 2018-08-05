@@ -67,4 +67,7 @@ return [
     'AQF Level'=>'AQF资质级别',
     'Code and Title of Qualification'=>'资质名称',
     'Course Duration'=>'课程时长',
+    'Sydney'=>'悉尼',
+    'Melbourne'=>'墨尔本',
+    'Brisbane'=>'布里斯班',
 ];

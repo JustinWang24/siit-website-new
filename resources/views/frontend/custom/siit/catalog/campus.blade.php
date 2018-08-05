@@ -14,7 +14,6 @@
                 foreach ($campuses as $campusName=>$products) {
                 ?>
                 <h2 class="is-size-4">{{ trans('general.Campus').': '. $campusName }}</h2>
-
                 <ul>
                     @foreach($products as $key=>$product)
                         <li>
