@@ -1,9 +1,9 @@
 @extends('layouts.backend')
 
 @section('content')
-    <div>
+    <div class="container">
         <br>
-        <div class="container">
+        <div class="content">
             <div class="column">
                 <div class="columns">
                     <div class="column">

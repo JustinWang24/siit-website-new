@@ -240,4 +240,13 @@ Route::prefix('backend')->middleware('auth')->group(function(){
     Route::post('brands/save','Backend\Brands@save');
 });
 
+Route::prefix('group')->group(function (){
+    Route::get('login', 'Group\Index@login')->name('group.login');
+    Route::post('login', 'Group\Index@login_action')->name('group.login.action');
+    Route::post('logout', 'Group\Index@logout')->name('group.logout');
+
+    // 经销商主页
+    Route::get('portal', 'Group\Index@portal')->name('group.portal');
+});
+
 Route::get('/home', 'Backend\Home@index');

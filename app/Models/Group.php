@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Dealer\DealerOrder;
+use App\Models\Dealer\DealerStudent;
 use App\Models\Shipment\DeliveryFee;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
@@ -16,8 +18,55 @@ class Group extends Model
     protected $fillable = [
         'name','phone','address','city','state','postcode',
         'country','has_min_order_amount','shipping_fee',
-        'fax','status','extra','email','commission','group_code'
+        'fax','status','extra','email','commission',
+        'group_code','password'
     ];
+
+    /**
+     * 经销商所关联的学生
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function groupStudents(){
+        return $this->hasMany(DealerStudent::class);
+    }
+
+    /**
+     * 经销商关联的学生总数
+     * @return int
+     */
+    public function studentsCount(){
+        return DealerStudent::where('group_id',$this->id)
+            ->count();
+    }
+
+    /**
+     * 经销商所关联的订单
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function groupOrders(){
+        return $this->hasMany(DealerOrder::class);
+    }
+
+    /**
+     * 经销商所关联的订单总数
+     * @return int
+     */
+    public function ordersCount(){
+        return DealerOrder::where('group_id',$this->id)
+            ->count();
+    }
+
+    /**
+     * 经销商登录
+     * @param $username
+     * @param $password
+     * @return Group
+     */
+    public static function Login($username, $password){
+        return self::where('email',$username)
+            ->where('password',$password)
+            ->first();
+    }
 
     /**
      * Persistent Group Data

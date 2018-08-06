@@ -4,6 +4,9 @@ import './bulma/accordion';
 import './bulma/tagsinput';
 import Slideout from 'slideout';
 
+// 导入
+import ClipboardJS from 'clipboard';
+
 window.Vue = require('vue');
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -43,6 +46,24 @@ $(document).ready(function(){
                 window.location.href = $(this).attr('href');
             }
         });
+    }
+
+    if(jQuery('.btn-show-modal').length > 0){
+        jQuery('.btn-show-modal').on('click',function(e){
+            e.preventDefault();
+            let targetId = $(this).data('content');
+            $(targetId).addClass('is-active');
+        });
+        jQuery('.btn-hide-modal').on('click',function(e){
+            e.preventDefault();
+            let targetId = $(this).data('content');
+            $(targetId).removeClass('is-active');
+        });
+    }
+
+    if($('.copy-txt-btn').length > 0){
+        // 激活JS拷贝文本到clipboard
+        new ClipboardJS('.copy-txt-btn');
     }
 });
 

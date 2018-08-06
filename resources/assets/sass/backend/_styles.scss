@@ -9,9 +9,18 @@ h1,h2,h3,h4,h5,p,a,span,li,td,div{
 
 .admin-login-wrapper{
   height: 100%;
-  background-image: url("../../images/backend/back_login-bg.jpg");
+  background-image: url("../../images/backend/login-bg.jpg");
   background-position: center 0;
   background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 30%;
+}
+.partner-login-wrapper{
+  height: 100%;
+  background-image: url("../../images/backend/partner-bg.jpg");
+  background-position: center 0;
+  background-repeat: no-repeat;
+  background-size: cover;
   padding-top: 30%;
 }
 .is-vertical-centered{

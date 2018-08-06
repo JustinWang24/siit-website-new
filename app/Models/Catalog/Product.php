@@ -338,8 +338,9 @@ class Product extends Model
      * @param $categories
      * @param $productOptionsData
      * @param $productAttributeData
-     * @param $productColours           // 产品的颜色
-     * @return mixed
+     * @param $productColours
+     * @return bool
+     * @throws \Exception
      */
     public static function DoClone($productData, $images, $categories, $productOptionsData, $productAttributeData,$productColours){
         $result = false;
@@ -418,13 +419,15 @@ class Product extends Model
     }
 
     /**
+     * 课程保存
      * @param $productData
      * @param $images
      * @param $categories
-     * @param $productOptionsData   // 产品的附加选项
-     * @param $productAttributeData   // 产品的属性数据集合
-     * @param $productColours   // 产品的颜色数据集合
+     * @param $productOptionsData
+     * @param $productAttributeData
+     * @param array $productColours
      * @return bool
+     * @throws \Exception
      */
     public static function Persistent($productData, $images, $categories, $productOptionsData, $productAttributeData, $productColours=[]){
         $result = false;
