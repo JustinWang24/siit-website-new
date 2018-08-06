@@ -1,15 +1,7 @@
 @extends(_get_frontend_layout_path('frontend'))
 @section('content')
 <div class="container mt-10 mb-10">
-    @if(!empty($page->feature_image))
-    <div class="columns mt-0 pt-0 mb-0 pb-0">
-        <div class="column pt-0 pb-0">
-            <img src="{{ $page->getFeatureImageUrl() }}" alt="{{ $page->title }}" style="width: 100%;">
-        </div>
-    </div>
-    @else
-        <div style="height: 6px;"></div>
-    @endif
+
     <div class="content">
         <div class="columns is-marginless">
             <div class="column is-one-fifth left-side-bar-wrap">
@@ -43,11 +35,16 @@
                 @endforeach
             </div>
             <div class="column is-four-fifths">
+                @if(!empty($page->feature_image))
+                    <img src="{{ $page->getFeatureImageUrl() }}" alt="{{ $page->title }}" style="width: 100%;">
+                @else
+                    <div style="height: 6px;"></div>
+                @endif
                 <div class="thumbnail-wrap">
 
                 </div>
                 <div class="page-title-wrap">
-                    <h1 style="font-size: 20px;font-weight: bold;">{{ app()->getLocale()=='cn'?$page->title_cn:$page->title }}</h1>
+                    <h1 style="font-size: 36px;font-weight: bold;font-family: Roboto Condensed, SimHei;">{{ app()->getLocale()=='cn'?$page->title_cn:$page->title }}</h1>
                 </div>
                 <div class="content page-content-wrap">
                     {!! $page->rebuildContent() !!}

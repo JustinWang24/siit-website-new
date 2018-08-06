@@ -1,6 +1,7 @@
 /* CSS rules for front and back */
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Oswald");
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
 
 html, body{
   width: 100%;
@@ -8,7 +9,7 @@ html, body{
 }
 
 h1,h2,h3,h4,h5,p,a,span,li,td,div{
-  font-family:  "Oswald";
+  font-family:  'Roboto Condensed',"Heiti SC";
 }
 .full-width{
   width: 100%;
