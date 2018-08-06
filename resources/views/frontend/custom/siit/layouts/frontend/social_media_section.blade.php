@@ -1,4 +1,4 @@
-<section class="section is-paddingless we-social-wrap" style="min-height: 220px;">
+<section class="section is-paddingless we-social-wrap" style="min-height: 220px;background-repeat: no-repeat;background-size:cover;background-image: url({{ asset('images/frontend/custom/social-bg.jpg') }})">
     <div class="container">
         <div class="columns is-marginless">
             <div class="column "></div>
