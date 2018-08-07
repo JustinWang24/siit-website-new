@@ -25,7 +25,7 @@ class DealerStudent extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function student(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 
     /**
@@ -36,4 +36,5 @@ class DealerStudent extends Model
     public static function Persistent($data){
         return self::create($data);
     }
+
 }

@@ -247,6 +247,9 @@ Route::prefix('group')->group(function (){
 
     // 经销商主页
     Route::get('portal', 'Group\Index@portal')->name('group.portal');
+    Route::get('students', 'Group\Index@students')->name('group.students');
+    Route::get('orders', 'Group\Index@orders')->name('group.orders');
+    Route::get('payments', 'Group\Index@payments')->name('group.payments');
 });
 
 Route::get('/home', 'Backend\Home@index');
