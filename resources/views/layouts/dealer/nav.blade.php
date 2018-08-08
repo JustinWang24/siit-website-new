@@ -1,6 +1,10 @@
 <nav id="menu" class="menu slideout-menu slideout-menu-left">
     <section class="menu-section">
-        <h3 class="menu-section-title">Users</h3>
+        <h3 class="menu-section-title has-text-white">
+            {{ session('group_data.name') }}<br>
+            (Code: {{ session('group_data.group_code') }})
+        </h3>
+        <hr>
         <ul class="menu-section-list">
             <li>
                 <a class="{{ $menuName=='update-password' ? 'is-active' : null }}" href="{{ url('/backend/update-password') }}">

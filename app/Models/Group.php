@@ -14,6 +14,9 @@ use App\User;
  */
 class Group extends Model
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_DISABLE = 0;
+
     public $timestamps = false;
     protected $fillable = [
         'name','phone','address','city','state','postcode',
@@ -65,6 +68,7 @@ class Group extends Model
     public static function Login($username, $password){
         return self::where('email',$username)
             ->where('password',$password)
+            ->where('status',self::STATUS_ACTIVE)
             ->first();
     }
 

@@ -20,7 +20,7 @@
                     <th>名称</th>
                     <th>联系电话</th>
                     <th>联系地址</th>
-                    <th>传真</th>
+                    <th>识别码</th>
                     <th>电子邮件</th>
                     <th>状态</th>
                     <th>Actions</th>
@@ -39,7 +39,7 @@
                             {{ $value->getAddressText() }}
                         </td>
                         <td>
-                            {!! $value->fax !!}
+                            {!! $value->group_code !!}
                         </td>
                         <td>
                             <a href="mailto:{{ $value->email }}">{!! $value->email !!}</a>
