@@ -70,4 +70,5 @@ return [
     'Sydney'=>'悉尼',
     'Melbourne'=>'墨尔本',
     'Brisbane'=>'布里斯班',
+    'GST_include'=>'含GST',
 ];

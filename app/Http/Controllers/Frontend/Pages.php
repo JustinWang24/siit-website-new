@@ -168,12 +168,6 @@ class Pages extends Controller
         $this->dataForView['pageTitle'] = trans('general.menu_contact');
         $this->dataForView['metaKeywords'] = trans('general.menu_contact');
         $this->dataForView['metaDescription'] = trans('general.menu_contact');
-        $this->dataForView['config'] = Configuration::find(1);
-
-        if(env('output_leads_to_contact_us', false)){
-            $this->dataForView['leads'] = Lead::orderBy('id','desc')->limit(20)->get();
-        }
-
         return view(_get_frontend_theme_path('pages.contact_us'), $this->dataForView);
     }
 

@@ -8,7 +8,7 @@
         <span class="special-price-txt has-text-danger">
             {{ config('system.CURRENCY') }}
             @{{ formatPriceText(specialPriceDisplay) }}
-            (GST Incl.)
+            ({{ trans('general.GST_include') }})
         </span>
         <span class="origin-price-txt">
             {{ config('system.CURRENCY') }}
@@ -18,7 +18,7 @@
     @else
         <p class="price-default-txt has-text-danger">
             {{ config('system.CURRENCY') }}
-            @{{ formatPriceText(originPriceDisplay) }} (GST Incl.)
+            @{{ formatPriceText(originPriceDisplay) }} ({{ trans('general.GST_include') }})
         </p>
     @endif
 </div>

@@ -20,7 +20,7 @@
                             @endif
                         </h1>
                         <hr>
-                        <h2 class="is-size-5 has-text-danger">{{ trans('general.Campus') }}: {{ $product->brand }}</h2>
+                        <h2 class="is-size-5 has-text-danger">{{ trans('general.Campus') }}: {{ trans('general.'.$product->brand) }}</h2>
                         @include(_get_frontend_theme_path('catalog.elements.sections.short_description'))
 
                         <div class="main-attributes content">
