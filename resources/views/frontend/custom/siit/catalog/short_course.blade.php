@@ -14,14 +14,15 @@
                     </div>
                     <div class="content pl-20 pr-20">
                         <h1 class="mt-20">
-                            Course name: {{ $product->name }}&nbsp;
+                            {{ trans('general.Course') }}{{ trans('general.name') }}: {{ app()->getLocale() == 'cn' ? $product->name_cn : $product->name }}&nbsp;
                             @if($product->manage_stock && $product->stock<$product->min_quantity)
                                 <span class="badge badge-pill badge-danger">Out of Stock</span>
                             @endif
                         </h1>
                         <hr>
-                        <h2 class="is-size-5 has-text-danger">Campus: {{ $product->brand }}</h2>
-                        <p class="sku-txt">CODE: {{ $product->sku }}</p>
+                        <h2 class="is-size-5 has-text-danger">
+                            {{ trans('general.Campus') }}: {{ trans('general.'.$product->brand) }}
+                        </h2>
 
                         @include(_get_frontend_theme_path('catalog.elements.sections.short_description'))
 

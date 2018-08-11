@@ -64,12 +64,13 @@ class Products extends Controller
         $this->dataForView['productShortDescriptionTop'] = Block::where('short_code','like','product_short_description_block_top%')->get();
         $this->dataForView['productShortDescriptionBottom'] = Block::where('short_code','like','product_short_description_block_bottom%')->get();
 
+        $this->dataForView['vuejs_libs_required'] = ['product_view'];
+
         if($product->type == ProductType::$SHORT_COURSE){
             // Todo 短期课程
             return view(_get_frontend_theme_path('catalog.short_course'),$this->dataForView);
         }else{
             // todo 一般课程
-            $this->dataForView['vuejs_libs_required'] = ['product_view'];
             return view(_get_frontend_theme_path('catalog.product'),$this->dataForView);
         }
     }
