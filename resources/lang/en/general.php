@@ -74,4 +74,6 @@ return [
     'GST_include'=>'GST Incl.',
     'WeChat'=>'WECHAT',
     'Weibo'=>'Weibo',
+    'Facebook'=>'FACEBOOK',
+    'Twitter'=>'TWITTER',
 ];

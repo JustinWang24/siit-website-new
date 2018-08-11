@@ -73,4 +73,6 @@ return [
     'GST_include'=>'含GST',
     'WeChat'=>'微信',
     'Weibo'=>'微博',
+    'Facebook'=>'脸书',
+    'Twitter'=>'推特',
 ];

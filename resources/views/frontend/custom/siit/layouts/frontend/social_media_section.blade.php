@@ -5,7 +5,7 @@
                 <br>
                 <div class="box facebook-btn mt-20">
                     <a href="{{ $siteConfig->facebook }}">
-                        <i class="fab fa-facebook-f"></i>&nbsp;FACEBOOK
+                        <i class="fab fa-facebook-f"></i>&nbsp;{{ trans('general.Facebook') }}
                     </a>
                 </div>
             </div>
@@ -13,7 +13,7 @@
                 <br>
                 <div class="box twitter-btn mt-20">
                     <a href="{{ $siteConfig->facebook }}">
-                        <i class="fab fa-twitter"></i>&nbsp;TWITTER
+                        <i class="fab fa-twitter"></i>&nbsp;{{ trans('general.Twitter') }}
                     </a>
                 </div>
             </div>
