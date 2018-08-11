@@ -71,4 +71,6 @@ return [
     'Melbourne'=>'墨尔本',
     'Brisbane'=>'布里斯班',
     'GST_include'=>'含GST',
+    'WeChat'=>'微信',
+    'Weibo'=>'微博',
 ];
