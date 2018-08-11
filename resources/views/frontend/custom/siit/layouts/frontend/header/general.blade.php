@@ -2,13 +2,13 @@
     <div class="header-bg-bar bg-dark-blue">
 
     </div>
-    <nav id="navbar" class="navbar is-spaced bg-dark-blue">
+    <nav id="navbar" class="container navbar is-spaced bg-dark-blue">
         <div class="container bg-transparent" id="home-nav-header-general">
             <div class="navbar-brand is-marginless bg-dark-blue">
                 @if(empty($siteConfig->logo))
                     {{ str_replace('_',' ',env('APP_NAME','Home')) }}
                 @else
-                    <a id="logo-top" class="" href="{{ url('/') }}" style="margin-top: 11px;margin-left:27px;">
+                    <a id="logo-top" class="" href="{{ url('/') }}" style="margin-top: 11px;">
                         {!! \App\Models\Utils\AMP\MediaUtil::NormalImage(asset($siteConfig->logo_dark),'SIIT: a bridge across cultures', '50%', null, 'image') !!}
                     </a>
                 @endif
