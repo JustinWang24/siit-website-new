@@ -11,7 +11,11 @@
                     $siblings = $menuItem ? $menuItem->siblings() : [];
                 ?>
                 @if($menuItem && $menuItem->parent)
-                    <h2 class="parent-item"><a href="{{ url($menuItem->parent->link_to) }}" title="{{ app()->getLocale()=='cn'?$menuItem->parent->name_cn:$menuItem->parent->name  }}">{{ app()->getLocale()=='cn'?$menuItem->parent->name_cn:$menuItem->parent->name }}</a></h2>
+                    <h2 class="parent-item">
+                        <a href="{{ url($menuItem->parent->link_to) }}" title="{{ app()->getLocale()=='cn'?$menuItem->parent->name_cn:$menuItem->parent->name  }}" style="font-weight: bold;">
+                            {{ app()->getLocale()=='cn'?$menuItem->parent->name_cn:$menuItem->parent->name }}
+                        </a>
+                    </h2>
                     @foreach($siblings as $menuSibling)
                         <?php
                             $urlLink = '/page'.$menuSibling->link_to;
@@ -20,7 +24,9 @@
                             }
                         ?>
                     <h3 class="sibling-item {{ $menuItem->id == $menuSibling->id ? 'current-item' : null }}">
-                        <a href="{{ url($urlLink) }}" title="{{ app()->getLocale()=='cn'? $menuSibling->name_cn : $menuSibling->name }}">{{ app()->getLocale()=='cn'? $menuSibling->name_cn : $menuSibling->name }}</a>
+                        <a href="{{ url($urlLink) }}" title="{{ app()->getLocale()=='cn'? $menuSibling->name_cn : $menuSibling->name }}" style="font-weight: bold;">
+                            {{ app()->getLocale()=='cn'? $menuSibling->name_cn : $menuSibling->name }}
+                        </a>
                     </h3>
                     @endforeach
                 @endif
