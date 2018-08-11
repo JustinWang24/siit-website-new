@@ -13,6 +13,8 @@ use App\Models\Dealer\DealerStudent;
 use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Models\Dealer\DealerOrder;
+use App\Models\Dealer\DealerBill;
 
 class Index extends Controller
 {
@@ -89,7 +91,8 @@ class Index extends Controller
      */
     public function orders(Request $request){
         $this->dataForView['menuName'] = 'orders';
-        $this->dataForView['groupStudents'] = DealerStudent::where('group_id',$request->session()->get('group_data.id'))
+        $this->dataForView['groupOrders'] = DealerOrder::where('group_id',$request->session()
+            ->get('group_data.id'))
             ->orderBy('id','desc')
             ->paginate(config('system.PAGE_SIZE'));
         return view('dealer.portal.orders',$this->dataForView);
