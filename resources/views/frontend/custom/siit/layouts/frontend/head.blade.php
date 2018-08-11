@@ -14,6 +14,7 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
+
         .container {
         <?php
             if($agentObject->isPhone()){
@@ -27,5 +28,15 @@
             }
         ?>
         }
+
+        <?php
+        if(app()->getLocale()=='cn'){
+            ?>
+            h1,h2,h3,h4,h5,p,span,a,li,td{
+                font-family: 'Microsoft YaHei', '宋体' !important;
+            }
+            <?php
+        }
+        ?>
     </style>
 </head>
