@@ -19,6 +19,7 @@
         "mpdf/mpdf": "^7.1",
         "overtrue/laravel-wechat": "~4.0",
         "paquettg/php-html-parser": "^1.7",
+        "phpoffice/phpspreadsheet": "^1.4",
         "predis/predis": "^1.1",
         "ramsey/uuid": "^3.7",
         "spatie/schema-org": "^1.4",

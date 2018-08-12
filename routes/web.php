@@ -226,6 +226,7 @@ Route::prefix('backend')->middleware('auth')->group(function(){
      */
     Route::get('groups', 'Backend\Groups@index')->name('groups');
     Route::get('groups/add', 'Backend\Groups@add');
+    Route::get('groups/import', 'Backend\Groups@import');
     Route::get('groups/edit/{id}', 'Backend\Groups@edit');
     Route::get('groups/delete/{id}', 'Backend\Groups@delete');
     Route::post('groups/save','Backend\Groups@save');

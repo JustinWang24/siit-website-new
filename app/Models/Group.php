@@ -22,7 +22,7 @@ class Group extends Model
         'name','phone','address','city','state','postcode',
         'country','has_min_order_amount','shipping_fee',
         'fax','status','extra','email','commission',
-        'group_code','password'
+        'group_code','password','phone_alt','begin_at','finish_at','contact_person'
     ];
 
     /**
