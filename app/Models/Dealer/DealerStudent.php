@@ -30,11 +30,32 @@ class DealerStudent extends Model
 
     /**
      * 保存
-     * @param $data
-     * @return mixed
+     * @param Group $dealer
+     * @param User $student
+     * @return DealerStudent
      */
-    public static function Persistent($data){
-        return self::create($data);
+    public static function Persistent(Group $dealer, User $student){
+        $ds = self::Locate($dealer, $student);
+        if(empty($ds)){
+            return self::create([
+                'group_id'=>$dealer->id,
+                'user_id'=>$student->id,
+                'group_name'=>$dealer->name,
+                'student_name'=>$student->name
+            ]);
+        }
+        return $ds;
     }
 
+    /**
+     * @param Group $dealer
+     * @param User $student
+     * @return DealerStudent|null
+     */
+    public static function Locate(Group $dealer, User $student){
+        return self::where('group_id',$dealer->id)
+            ->where('group_id',$student->id)
+            ->orderBy('id','desc')
+            ->first();
+    }
 }

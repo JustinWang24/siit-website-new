@@ -463,6 +463,8 @@ $(document).ready(function(){
     if($('.has-low-level-menus').length >0){
         $('.has-low-level-menus').on('click',function(val){
           let target = $(this).data('content');
+          $('.has-low-level-menus .fa-plus').toggle();
+          $('.has-low-level-menus .fa-minus').toggle();
           if($(target).length > 0){
             $(target).toggle();
           }

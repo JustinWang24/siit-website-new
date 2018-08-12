@@ -97,4 +97,7 @@ return [
     'Notes'=>'Notes',
     'Language'=>'Language',
     'Join_the_conversations'=>'Join the conversations',
+    'fill_9_below'=>'please fill in the question No.9 below',
+    'yes'=>'YES',
+    'no'=>'NO',
 ];

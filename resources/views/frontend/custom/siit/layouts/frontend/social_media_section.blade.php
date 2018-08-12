@@ -4,10 +4,10 @@
             <div class="column mt-20">
                 <h2 class="is-size-3 has-text-white has-text-centered">{{ trans('general.Join_the_conversations') }}</h2>
                 <p class="has-text-centered mt-20">
-                    <a href="{{ $siteConfig->facebook }}" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
+                    <a href="{{ strpos($siteConfig->facebook,'http') !== false ? $siteConfig->facebook : 'https://'.$siteConfig->facebook }}" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
                         <i class="fab fa-facebook"></i>
                     </a>
-                    <a href="{{ $siteConfig->twitter }}" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
+                    <a href="{{ strpos($siteConfig->twitter,'http') !== false ? $siteConfig->twitter : 'https://'.$siteConfig->twitter }}" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
                         <i class="fab fa-twitter"></i>
                     </a>
                     <a href="#" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
@@ -16,13 +16,13 @@
                     <a href="https://www.weibo.com/siithome?s=6cm7D0" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
                         <i class="fab fa-weibo"></i>
                     </a>
-                    <a href="#" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
+                    <a href="{{ strpos($siteConfig->instagram,'http') !== false ? $siteConfig->instagram : 'https://'.$siteConfig->instagram }}" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="#" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
+                    <a href="{{ strpos($siteConfig->google_plus,'http') !== false ? $siteConfig->google_plus : 'https://'.$siteConfig->google_plus }}" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
                         <i class="fab fa-google-plus"></i>
                     </a>
-                    <a href="#" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
+                    <a href="{{  strpos($siteConfig->linked_in,'http') !== false ? $siteConfig->linked_in : 'https://'.$siteConfig->linked_in }}" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
                         <i class="fab fa-linkedin"></i>
                     </a>
                     <a href="#" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\Catalog\IntakeItem;
 use App\Models\Catalog\Product;
 use App\Models\Configuration;
+use App\Models\Dealer\DealerOrder;
+use App\Models\Dealer\DealerStudent;
 use App\Models\Group;
 use App\Models\Order\Order;
 use App\Models\Utils\JsonBuilder;
@@ -62,8 +64,6 @@ class EnrollController extends Controller
                 $this->dataForView['studentProfile'] = $user->studentProfile;
             }
         }
-
-//        dd($request->all());
 
         // todo: 检查intake, 如果是 inax- 开头的，表示非 Axcelerate 的课程
         if( strpos($intakeItemId,'unax-') !== false ){
@@ -147,6 +147,12 @@ class EnrollController extends Controller
         $studentProfileData = $request->get('student');
         $enrollData = $request->get('enroll');
 
+        // 获取中介的信息
+        $dealer = null;
+        if(!empty($enrollData['voucher'])){
+            $dealer = Group::GetByCode($enrollData['voucher']);
+        }
+
         $storagePath = _buildUploadFolderPath();
         // 可能上传的文件
         if($request->hasFile('disability_required_file')){
@@ -201,8 +207,9 @@ class EnrollController extends Controller
 
                     if($orderPlaced){
                         $cart->destroy();
+                        // 如果有中介的信息, 建立连接
+                        $this->connectOrderToAgent($orderPlaced, $dealer,$user);
                         // todo 3: 订单保存成功, 开始向 Axcelerate 提交数据
-
                         try{
                             $result = $contact->enrolmentForInstance($axcelerateInstance)
                                 ->enrol($orderPlaced,$enrollData);
@@ -263,6 +270,8 @@ class EnrollController extends Controller
                 $cart->destroy();
 
                 if($orderPlaced){
+                    $this->connectOrderToAgent($orderPlaced, $dealer, $user);
+
                     // todo 3: 订单保存成功, 开始向 Axcelerate 提交数据
                     session()->flash('msg', [
                         'content' => trans('general.enrol_success'), 'status' => 'success']
@@ -278,6 +287,20 @@ class EnrollController extends Controller
 
         }
         return redirect()->route('customer_login');
+    }
+
+    /**
+     * @param Order|null $order
+     * @param Group|null $dealer
+     * @param User|null $student
+     */
+    protected function connectOrderToAgent(Order $order=null, Group $dealer=null, User $student=null){
+        if($order && $dealer && $student){
+            // 把该学生分配给中介
+            DealerStudent::Persistent($dealer, $student);
+            // 把订单分配给中介
+            DealerOrder::Persistent($order, $dealer);
+        }
     }
 
     /**

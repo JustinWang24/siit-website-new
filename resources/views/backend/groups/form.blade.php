@@ -76,6 +76,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="column">
+                    <label class="label">Commission</label>
+                    <div class="field has-addons">
+                        <div class="control">
+                            <input type="text" class="input{{ $errors->has('commission') ? ' is-invalid' : '' }}" name="commission" value="{{ $group->commission ? $group->commission : \App\Models\Group::DEFAULT_COMMISSION_RATE }}" required placeholder="Commission">
+                            @if ($errors->has('commission'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('commission') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        <div class="control">
+                            <a class="button is-static">%</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <hr>

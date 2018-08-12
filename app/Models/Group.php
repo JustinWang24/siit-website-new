@@ -17,6 +17,9 @@ class Group extends Model
     const STATUS_ACTIVE  = 0;
     const STATUS_DISABLE = 1;
 
+    const DEFAULT_COMMISSION_RATE   = 0;
+    const DEFAULT_DISCOUNT_RATE     = 0.8; // 经销商的学生打八折
+
     public $timestamps = false;
     protected $fillable = [
         'name','phone','address','city','state','postcode',

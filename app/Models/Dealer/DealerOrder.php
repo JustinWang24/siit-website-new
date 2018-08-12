@@ -31,10 +31,18 @@ class DealerOrder extends Model
 
     /**
      * 保存
-     * @param $data
+     * @param Order $order
+     * @param Group $dealer
      * @return mixed
      */
-    public static function Persistent($data){
-        return self::create($data);
+    public static function Persistent(Order $order, Group $dealer){
+        return self::create([
+            'group_id'=>$dealer->id,
+            'order_id'=>$order->id,
+            'user_id'=>$order->user_id,
+            'order_serial_number'=>$order->serial_number,
+            'order_total'=>$order->getTotalFinal(),
+            'order_status'=>$order->status
+        ]);
     }
 }

@@ -1,3 +1,8 @@
+<style>
+    .navbar-link::after{
+        border-color: grey !important;
+    }
+</style>
 <div id="navigation-app">
 <div class="header-bg-bar">
 
@@ -39,6 +44,7 @@
                     <div class="navbar-end big-nav">
                         @foreach($rootMenus as $key=>$rootMenu)
                             <div class="navbar-item has-dropdown is-hoverable">
+
                                 <?php
                                 $tag = $rootMenu->html_tag;
                                 $children = $rootMenu->getSubMenus();
@@ -62,16 +68,17 @@
                                                     <ul class="menu-list">
                                                         <li>
                                                             <a class="navbar-item has-low-level-menus" data-content="#pathway-list-subs" href="#" title="{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}">
-                                                                <i class="fas fa-plus has-text-link" style="margin-left: 0;"></i>
-                                                                &nbsp;&nbsp;{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
+                                                                <i class="fas fa-plus has-text-grey" style="margin-left: 0;"></i>
+                                                                <i class="fas fa-minus has-text-grey" style="margin-left: 0;display: none;"></i>
+                                                                {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
                                                             </a>
                                                             <ul id="pathway-list-subs" class="hidden" style="margin-top: 0;">
                                                                 @foreach($pathways as $product)
-                                                                    <li>
-                                                                        <a href="{{ url('catalog/product/'.$product->uri) }}">
-                                                                            {{ $product->getName() }} - {{ trans('general.'.$product->brand).(app()->getLocale()=='cn'?null:trans('general.Campus')) }}
-                                                                        </a>
-                                                                    </li>
+                                                                <li>
+                                                                    <a href="{{ url('catalog/product/'.$product->uri) }}">
+                                                                        {{ $product->getName() }} - {{ trans('general.'.$product->brand).(app()->getLocale()=='cn'?null:trans('general.Campus')) }}
+                                                                    </a>
+                                                                </li>
                                                                 @endforeach
                                                             </ul>
                                                         </li>
@@ -109,7 +116,7 @@
         </div>
     </nav>
     <div class="container">
-        <img src="/images/frontend/custom/header_bg_ts.jpg" alt="">
+        <img src="{{ asset('/images/frontend/custom/header_bg_ts.jpg') }}" alt="header bg">
     </div>
     <div class="is-clearfix"></div>
     <div class="container header-widget-wrap">

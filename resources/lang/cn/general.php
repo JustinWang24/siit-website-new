@@ -96,4 +96,7 @@ return [
     'Notes'=>'说明',
     'Language'=>'语言',
     'Join_the_conversations'=>'加入我们的社交网络',
+    'fill_9_below'=>'是, 请在下面的第9栏中填入优惠代码',
+    'yes'=>'是',
+    'no'=>'否',
 ];

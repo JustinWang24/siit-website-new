@@ -33,6 +33,7 @@
                             {{ csrf_field() }}
                             <input type="hidden" name="product_id" value="{{ $product->uuid }}">
                             <input type="hidden" name="user_id" value="{{ session('user_data.uuid') }}">
+                            <input type="hidden" name="agent" value="{{ $agentCode }}">
 
                             @if(count($product_colours)>0)
                                 <div class="options-wrap">
