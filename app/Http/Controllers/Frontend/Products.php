@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Catalog\Brand;
 use App\Models\Catalog\CategoryProduct;
+use App\Models\Catalog\InTake;
 use App\Models\Catalog\Product;
 use App\Models\Utils\ProductType;
 use App\Models\Widget\Block;
@@ -22,7 +23,6 @@ class Products extends Controller
      */
     public function view($uri, Request $request){
         $this->dataForView['agentCode'] = $request->has('agent') ? $request->get('agent') : 0;
-
         /**
          * @var Product $product
          */
@@ -54,7 +54,7 @@ class Products extends Controller
         $this->dataForView['product_attributes'] = $product->productAttributes();
         $this->dataForView['product_options'] = $product->options();
         $this->dataForView['product_colours'] = Colour::LoadByProduct($product->id, true)->toArray();
-
+        
 
         /**
          * 加载通用的产品相关的Blocks
@@ -69,6 +69,9 @@ class Products extends Controller
         if($product->type == ProductType::$SHORT_COURSE){
             // Todo 短期课程
             return view(_get_frontend_theme_path('catalog.short_course'),$this->dataForView);
+        }elseif($product->type === ProductType::$CCL_COURSE){
+            $this->dataForView['intakes'] = $product->getCCLcourseIntakes();
+            return view(_get_frontend_theme_path('catalog.ccl_course'),$this->dataForView);
         }else{
             // todo 一般课程
             return view(_get_frontend_theme_path('catalog.product'),$this->dataForView);

@@ -31,10 +31,11 @@ class OrderItem extends Model
      * @param CartItem $cartItem
      * @param string $operatorName
      * @param int $cartItemIndex
-     * @param Instance $instance
+     * @param Instance|null $instance
      * @return bool
+     * @throws \Exception
      */
-    public static function Persistent(Order $order, CartItem $cartItem, $operatorName='n.a', $cartItemIndex=0, Instance $instance){
+    public static function Persistent(Order $order, CartItem $cartItem, $operatorName='n.a', $cartItemIndex=0, Instance $instance=null){
         $product = Product::GetByUuid($cartItem->id);
 
         if($product){
@@ -72,6 +73,13 @@ class OrderItem extends Model
             }
             $priceFinal = $theProductPrice + $priceExtra;
 
+            $intake_start_date = null;
+            if($instance){
+                $intake_start_date = $instance->get('startdate')=='n.a'
+                    ? Carbon::tomorrow('Australia/Melbourne')
+                    : $instance->get('startdate');
+            }
+
             $dataOrderItem = [
                 'order_id'=>$order->id,
                 'uuid'=>Uuid::uuid4()->toString(),
@@ -90,7 +98,7 @@ class OrderItem extends Model
                 'status'=>OrderStatus::$PENDING,
                 'payment_type'=>$order->payment_type,
                 'notes'=>$notes,
-                'intake_start_date'=>$instance->get('startdate')=='n.a' ? Carbon::tomorrow('Australia/Melbourne') : $instance->get('startdate')
+                'intake_start_date'=>$intake_start_date
             ];
             $orderItem = self::create($dataOrderItem);
             if($orderItem){

@@ -19,8 +19,8 @@
                 <tr>
                     <th>识别码</th>
                     <th>名称</th>
-                    <th>联系地址</th>
                     <th>联系人</th>
+                    <th>其他</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -31,16 +31,18 @@
                             {!! $value->group_code !!}
                         </td>
                         <td>
-                            {!! $value->name !!}
-                        </td>
-                        <td>
-                            {{ $value->address }}
+                            <p>{{ $value->name }}</p>
+                            <p>{{ $value->address }}</p>
                         </td>
                         <td>
                             <p>{{ $value->contact_person }}</p>
                             <p><a href="mailto:{{ $value->email }}">{!! $value->email !!}</a></p>
                             <p>{{ $value->phone }}</p>
                         </td>
+                        <td>
+                            {{ $value->extra }}
+                        </td>
+
                         <td>
                             <a class="button is-small" href="{{ url('backend/groups/edit/'.$value->id) }}">
                                 <i class="fa fa-edit"></i>&nbsp;Edit

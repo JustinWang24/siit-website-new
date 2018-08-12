@@ -13,6 +13,13 @@ class OptionItem extends Model
     public $timestamps = false;
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function productOption(){
+        return $this->belongsTo(ProductOption::class);
+    }
+
+    /**
      * 持久化选项记录
      * @param ProductOption |  $productOption
      * @param $data

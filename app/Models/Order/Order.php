@@ -140,6 +140,7 @@ class Order extends Model
      * @param null $paymentMethod
      * @param Instance|null $instance
      * @return null
+     * @throws \Exception
      */
     public static function PlaceOrder($customer,Cart $cart,$placeOrderNumber,$notes, $paymentMethod=null,Instance $instance = null){
         $now = Carbon::now();
@@ -151,7 +152,6 @@ class Order extends Model
             'total'=>self::_calculateTotal($cart),
             // 计算可能产生的额外邮寄费用
             'delivery_charge'=>0,
-//            'delivery_charge'=>Group::CalculateDeliveryCharge($customer, $cart->total()),
             'status'=>OrderStatus::$PENDING,
             'payment_type'=>$paymentMethod ? $paymentMethod : PaymentTool::$TYPE_PLACE_ORDER,
             'day'=>$now->day,
@@ -166,15 +166,28 @@ class Order extends Model
         $order = self::create($orderData);
 
         if($order){
-            $dataOrderItems = $cart->content();
-            $orderTotal = 0;
-            foreach ($dataOrderItems as $key=>$dataOrderItem) {
-                // 这里的 Order Item 是订单的每个子项, 不是具体的options, 别忘了
-                $subTotal = OrderItem::Persistent($order,$dataOrderItem,config('app.name'),$key,$instance);
-                if($subTotal){
-                    $orderTotal += $subTotal;
+            if($instance){
+                $dataOrderItems = $cart->content();
+                $orderTotal = 0;
+                foreach ($dataOrderItems as $key=>$dataOrderItem) {
+                    // 这里的 Order Item 是订单的每个子项, 不是具体的options, 别忘了
+                    $subTotal = OrderItem::Persistent($order,$dataOrderItem,config('app.name'),$key,$instance);
+                    if($subTotal){
+                        $orderTotal += $subTotal;
+                    }
+                }
+            }else{
+                $orderTotal = $order->total;
+                $dataOrderItems = $cart->content();
+                foreach ($dataOrderItems as $key=>$dataOrderItem) {
+                    // 这里的 Order Item 是订单的每个子项, 不是具体的options, 别忘了
+                    $subTotal = OrderItem::Persistent($order,$dataOrderItem,config('app.name'),$key,$instance);
+                    if($subTotal){
+                        $orderTotal += $subTotal;
+                    }
                 }
             }
+
 
             if($orderTotal){
                 if($orderTotal != $order->total){

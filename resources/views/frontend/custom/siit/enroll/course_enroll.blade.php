@@ -7,20 +7,22 @@
                 <div class="column">
                     <div class="content pt-40">
                         <div class="page-title-wrap  mt-20 is-paddingless">
-                            <h1 class="is-size-1-desktop is-size-1-mobile mt-0">
-                                {{ trans('enrolment.Apply_Online') }}: {{ $course->name }}
+                            <h1 class="is-size-3 mt-0">
+                                {{ trans('enrolment.Apply_Online') }}: {{ $course->getName() }}
                             </h1>
+                            @if($axcelerateInstance)
                             <h2>
                                 <span class="has-text-danger">({{ $course->brand }})</span> -
-                                {{ trans('enrolment.Intake_Date') }}: {{ $axcelerateInstance->get('startdate') }}
+                                {{ trans('enrolment.Intake_Date') }}: {{ $axcelerateInstance ? $axcelerateInstance->get('startdate') : null }}
                             </h2>
+                            @endif
                         </div>
                         @if(!session('user_data.uuid'))
                             <hr>
                         <el-form ref="user" :model="user" label-width="100px" class="is-invisible" id="course-enroll-app-form">
                             <div class="columns" v-show="hasAccount">
                                 <div class="column">
-                                    <el-form-item label="Please Choose" class="full-width">
+                                    <el-form-item label="{{ trans('general.Please_Choose') }}" class="full-width">
                                         <el-select v-model="hasAccount" placeholder="{{ trans('enrolment.Please_choose_your_status') }}" class="full-width">
                                             <el-option label="{{ trans('enrolment.I_already_have_an_account') }}" :value="true"></el-option>
                                             <el-option label="{{ trans('enrolment.I_dont_have_account') }}" :value="false"></el-option>
@@ -97,8 +99,10 @@
                             <input id="current-intake-item" type="hidden" name="enroll[intake_item]" value="{{ $intakeItem->id }}">
                             <input id="current-course-id" type="hidden" name="enroll[course_id]" value="{{ $course->uuid }}">
                             <input id="current-instance-id" type="hidden" name="enroll[instance]" value="{{ $instanceIdAndType }}">
+                            <input type="hidden" name="enroll[productOptions]" value="{{ $productOptions }}">
                             <input type="hidden" name="student[user_id]" value="{{ session('user_data.uuid') }}">
-                            <input id="current-group-id" type="hidden" name="student[agent_id]" value="{{ isset($dealer)&&$dealer ? $dealer->id : 0  }}">
+                            <input id="current-group-id" type="hidden" name="student[agent_id]" value="{{ isset($dealer)&&$dealer ? $dealer->group_code : 0  }}">
+                            <input id="current-lang" type="hidden" value="{{ app()->getLocale()  }}">
                             <hr>
                             <?php $transClass = 'slideRight';  $enterClass='slideRight'; $leaveClass='slideLeft'; ?>
                             <transition name="{{ $transClass }}" enter-active-class="{{ $enterClass }}" leave-active-class="{{ $leaveClass }}">

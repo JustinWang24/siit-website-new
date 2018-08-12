@@ -14,11 +14,11 @@ class AddMoreInGroups extends Migration
     public function up()
     {
         Schema::table('groups', function (Blueprint $table) {
-            $table->string('contact_person');
-            $table->string('phone_alt',20)->nullable();
-            $table->date('begin_at')->nullable();
-            $table->date('finish_at')->nullable();
-            $table->string('category')->nullable();
+//            $table->string('contact_person');
+//            $table->string('phone_alt',20)->nullable();
+//            $table->date('begin_at')->nullable();
+//            $table->date('finish_at')->nullable();
+//            $table->string('category')->nullable();
         });
     }
 

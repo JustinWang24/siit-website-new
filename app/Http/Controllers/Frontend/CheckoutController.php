@@ -5,6 +5,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Events\Order\Created as OrderCreated;
+use App\Models\Settings\PaymentMethod;
 use App\Models\Utils\Payment\RoyalPayTool;
 use App\Models\Utils\PaymentTool;
 use App\User;
@@ -15,6 +16,7 @@ use App\Models\Order\Order;
 use App\Models\Group;
 //use Omnipay;
 use App\Events\OrderPlaced;
+use App\Jobs\Payment\StripePayment;
 
 class CheckoutController extends Controller
 {
@@ -79,10 +81,9 @@ class CheckoutController extends Controller
                         return redirect($royalPayTool->purchase($order)->getQrRedirectUrl());
                     }elseif($request->get('payment_method') == PaymentTool::$METHOD_ID_STRIPE){
                         // Stripe 信用卡支付
-                        $job = new StripePayment($order, $request, $customer,$paymentMethod);
+                        $job = new StripePayment($order, $request, $customer,new PaymentMethod());
                         if($job->handle()){
                             // 一切顺利
-                            $cart->destroy();
                             session()->flash('msg', ['content'=>'Order #'.$order->serial_number.' is in progress!','status'=>'success']);
                             return redirect('/frontend/my_orders/'.session('user_data.uuid'));
                         }else{

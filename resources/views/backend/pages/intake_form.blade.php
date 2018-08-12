@@ -17,7 +17,7 @@
         <div class="container">
             <el-form ref="currentPage" status-icon :rules="rules" :model="currentPage" label-width="160px">
                 <div class="columns">
-                    <div class="column">
+                    <div class="column is-one-third">
                         <?php $types = \App\Models\Catalog\InTake::GetAllTypes(); ?>
                         <el-form-item label="Type" required>
                             <el-select v-model="currentPage.type" placeholder="Please choose">
@@ -27,12 +27,12 @@
                             </el-select>
                         </el-form-item>
                     </div>
-                    <div class="column">
+                    <div class="column is-two-third">
                         <el-form-item label="Course" required>
-                            <el-select v-model="currentPage.course_id" placeholder="Please choose">
+                            <el-select v-model="currentPage.course_id" placeholder="Please choose" class="full-width">
                                 <el-option label="NOT AVAILABLE" value="0"></el-option>
                                 @foreach($courses as $course)
-                                    <el-option label="{{ $course->name }}" value="{{ $course->id }}"></el-option>
+                                    <el-option label="{{ $course->name }} - {{ $course->name_cn }}" value="{{ $course->id }}"></el-option>
                                 @endforeach
                             </el-select>
                         </el-form-item>

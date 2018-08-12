@@ -22,6 +22,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
+                        <th>Type</th>
                         <th>Categories</th>
                         <th>Campus</th>
                         <th>Price</th>
@@ -36,6 +37,9 @@
                             <td>
                                 <p>{{ $value->name }}</p>
                                 <p>{{ $value->name_cn }}</p>
+                            </td>
+                            <td>
+                                {{ \App\Models\Utils\ProductType::getTypeName($value->type) }}
                             </td>
                             <td>
                                 <?php

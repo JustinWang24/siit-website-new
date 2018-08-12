@@ -61,6 +61,7 @@ class Group extends Model
 
     /**
      * 经销商登录
+     * http://siit.test/catalog/product/Advanced-Diploma-of-Financial-Planning?agent=S600036
      * @param $username
      * @param $password
      * @return Group
@@ -68,6 +69,12 @@ class Group extends Model
     public static function Login($username, $password){
         return self::where('email',$username)
             ->where('password',$password)
+            ->where('status',self::STATUS_ACTIVE)
+            ->first();
+    }
+
+    public static function GetByCode($code){
+        return self::where('group_code',$code)
             ->where('status',self::STATUS_ACTIVE)
             ->first();
     }
