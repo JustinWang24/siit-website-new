@@ -41,7 +41,7 @@
                             <div class="select full-width">
                                 <select class="full-width" name="status">
                                     <option value="{{ \App\Models\Group::STATUS_ACTIVE }}" {{ $group->status===\App\Models\Group::STATUS_ACTIVE ? 'selected' : null }}>上线</option>
-                                    <option value="{{ \App\Models\Group::STATUS_DISABLE }}" {{ $group->status===\App\Models\Group::STATUS_DISABLE ? null : 'selected' }}>暂停</option>
+                                    <option value="{{ \App\Models\Group::STATUS_DISABLE }}" {{ $group->status===\App\Models\Group::STATUS_DISABLE ? 'selected' : null }}>暂停</option>
                                 </select>
                             </div>
                         </div>
