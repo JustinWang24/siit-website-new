@@ -92,6 +92,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="column">
+                    <label class="label">Discount</label>
+                    <div class="field has-addons">
+                        <div class="control">
+                            <input type="text" class="input{{ $errors->has('discount_rate') ? ' is-invalid' : '' }}" name="discount_rate" value="{{ $group->discount_rate ? $group->discount_rate : \App\Models\Group::DEFAULT_DISCOUNT_RATE }}" required placeholder="Discount">
+                            @if ($errors->has('discount_rate'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('discount_rate') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        <div class="control">
+                            <a class="button is-static">%</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <hr>

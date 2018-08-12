@@ -139,17 +139,37 @@ class Order extends Model
      * @param $notes
      * @param null $paymentMethod
      * @param Instance|null $instance
+     * @param Group|null $dealer    // 可能是来自某个代理商的
      * @return null
      * @throws \Exception
      */
-    public static function PlaceOrder($customer,Cart $cart,$placeOrderNumber,$notes, $paymentMethod=null,Instance $instance = null){
+    public static function PlaceOrder(
+        $customer,
+        Cart $cart,
+        $placeOrderNumber,
+        $notes,
+        $paymentMethod=null,
+        Instance $instance = null,
+        Group $dealer = null
+    ){
         $now = Carbon::now();
 
         DB::beginTransaction();
+
+        /**
+         * 计算订单的总金额和折扣
+         */
+        $orderTotal = self::_calculateTotal($cart, $dealer);
+        $discount = 0;
+        if($dealer){
+            $discount = $cart->total() - $orderTotal;
+        }
+
         $orderData = [
             'serial_number'=>self::_generalOutTradeNo($customer->id),
             'user_id'=>$customer->id,
-            'total'=>self::_calculateTotal($cart),
+            'total'=>$orderTotal,
+            'discount'=>$discount,
             // 计算可能产生的额外邮寄费用
             'delivery_charge'=>0,
             'status'=>OrderStatus::$PENDING,
@@ -188,7 +208,6 @@ class Order extends Model
                 }
             }
 
-
             if($orderTotal){
                 if($orderTotal != $order->total){
                     $order->total = $orderTotal;
@@ -209,10 +228,15 @@ class Order extends Model
     /**
      * 计算购物车中所有的物品的总金额
      * @param Cart $cart
+     * @param Group|null $dealer
      * @return string
      */
-    private static function _calculateTotal(Cart $cart){
-        $total = str_replace(',','',$cart->total());
+    private static function _calculateTotal(Cart $cart, Group $dealer = null){
+        $cartTotal = $cart->total();
+        if($dealer){
+            $cartTotal = $cartTotal * ( 1 - $dealer->getDiscountRate() );
+        }
+        $total = str_replace(',','',$cartTotal);
         return $total;
     }
 
@@ -221,6 +245,7 @@ class Order extends Model
      * 商户系统内部订单号，要求32个字符内，只能是数字、大小写字母_-|*@ ，且在同一个商户号下唯一
      * @param $userId
      * @return string
+     * @throws \Exception
      */
     private static function _generalOutTradeNo($userId){
         return random_int(100000,999999).'-'.$userId; // 由于 $userId 的存在, 肯定这个值是唯一的
