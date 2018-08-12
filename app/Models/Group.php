@@ -14,8 +14,8 @@ use App\User;
  */
 class Group extends Model
 {
-    const STATUS_ACTIVE = 1;
-    const STATUS_DISABLE = 0;
+    const STATUS_ACTIVE  = 0;
+    const STATUS_DISABLE = 1;
 
     public $timestamps = false;
     protected $fillable = [
