@@ -96,4 +96,5 @@ return [
     'Intake'=>'Intake',
     'Notes'=>'Notes',
     'Language'=>'Language',
+    'Join_the_conversations'=>'Join the conversations',
 ];

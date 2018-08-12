@@ -95,4 +95,5 @@ return [
     'Intake'=>'开学日期',
     'Notes'=>'说明',
     'Language'=>'语言',
+    'Join_the_conversations'=>'加入我们的社交网络',
 ];

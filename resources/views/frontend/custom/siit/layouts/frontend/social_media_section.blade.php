@@ -1,48 +1,35 @@
 <section class="section is-paddingless we-social-wrap" style="min-height: 220px;background-repeat: no-repeat;background-size:cover;background-image: url({{ asset('images/frontend/custom/social-bg.jpg') }})">
     <div class="container">
-        <div class="columns is-marginless">
-            <div class="column ">
-                <br>
-                <div class="box facebook-btn mt-20">
-                    <a href="{{ $siteConfig->facebook }}">
-                        <i class="fab fa-facebook-f"></i>&nbsp;{{ trans('general.Facebook') }}
+        <div class="columns mt-20">
+            <div class="column mt-20">
+                <h2 class="is-size-3 has-text-white has-text-centered">{{ trans('general.Join_the_conversations') }}</h2>
+                <p class="has-text-centered mt-20">
+                    <a href="{{ $siteConfig->facebook }}" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
+                        <i class="fab fa-facebook"></i>
                     </a>
-                </div>
-            </div>
-            <div class="column ">
-                <br>
-                <div class="box twitter-btn mt-20">
-                    <a href="{{ $siteConfig->facebook }}">
-                        <i class="fab fa-twitter"></i>&nbsp;{{ trans('general.Twitter') }}
+                    <a href="{{ $siteConfig->twitter }}" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
+                        <i class="fab fa-twitter"></i>
                     </a>
-                </div>
-            </div>
-            <div class="column ">
-                <br>
-                <div class="box twitter-btn mt-20" style="background-color: #44b549;">
-                    <a href="#">
-                        <i class="fab fa-weixin"></i>&nbsp;{{ trans('general.WeChat') }}
+                    <a href="#" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
+                        <i class="fab fa-weixin"></i>
                     </a>
-                </div>
-            </div>
-            <div class="column ">
-                <br>
-                <div class="box twitter-btn mt-20" style="background-color: #ff9933;">
-                    <a href="https://www.weibo.com/siithome?s=6cm7D0">
-                        <i style="color: #e6162d;" class="fab fa-weibo"></i>&nbsp;<span style="color: black;">{{ trans('general.Weibo') }}</span>
+                    <a href="https://www.weibo.com/siithome?s=6cm7D0" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
+                        <i class="fab fa-weibo"></i>
                     </a>
-                </div>
+                    <a href="#" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
+                        <i class="fab fa-google-plus"></i>
+                    </a>
+                    <a href="#" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </p>
             </div>
-            @if($siteConfig->instagram)
-                <div class="column ">
-                    <br>
-                    <div class="box facebook-btn mt-20">
-                        <a href="{{ $siteConfig->instagram }}">
-                            <i class="fab fa-instagram"></i>&nbsp;FOLLOW
-                        </a>
-                    </div>
-                </div>
-            @endif
         </div>
     </div>
 </section>
