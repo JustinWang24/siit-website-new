@@ -59,6 +59,14 @@ class Order extends Model
     }
 
     /**
+     * 判断是否为经销商订单的方法
+     * @return bool|string
+     */
+    public function isBelongsToDealer(){
+        return empty($this->secret_code) ? false : $this->secret_code;
+    }
+
+    /**
      * 将订单切换为发票已开状态
      * @param $id
      * @return mixed
@@ -120,9 +128,15 @@ class Order extends Model
      * @param $transactionReference
      * @param $identify
      * @param string $fieldName
+     * @param int $paymentMethodId
      * @return null/Order
      */
-    public static function OrderPaymentConfirmedBy($transactionReference, $identify, $fieldName='serial_number'){
+    public static function OrderPaymentConfirmedBy(
+        $transactionReference,
+        $identify,
+        $fieldName='serial_number',
+        $paymentMethodId = 1
+    ){
         $order = self::where($fieldName,$identify)->orderBy('id','desc')->first();
         if($order){
             $order->approve($transactionReference);
@@ -180,7 +194,8 @@ class Order extends Model
             'hour'=>$now->hour,
             'place_order_number'=>$placeOrderNumber,
             'uuid'=>Uuid::uuid4()->toString(),
-            'notes'=>$notes
+            'notes'=>$notes,
+            'secret_code'=>$dealer ? $dealer->group_code : null
         ];
 
         $order = self::create($orderData);

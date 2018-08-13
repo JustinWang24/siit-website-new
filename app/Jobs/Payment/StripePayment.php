@@ -16,11 +16,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
 // 导入 Stripe 相关
+use Stripe\ApiResource;
 use Stripe\Stripe;
 use Stripe\Customer as StripeCustomer;
 use Stripe\Charge as StripeCharge;
-use Log;
-use DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class StripePayment implements ShouldQueue
 {
@@ -90,7 +91,7 @@ class StripePayment implements ShouldQueue
         if($this->stripeCustomer){
             $charge = $this->_charge();
             if($charge){
-                $chargeResult = $this->_finalizeOrderAndCustomer();
+                $chargeResult = $this->_finalizeOrderAndCustomer($charge);
                 if($chargeResult){
                     // 成功了
                     $chargeResult = true;
@@ -112,13 +113,14 @@ class StripePayment implements ShouldQueue
     }
 
     /**
-     * 针对数据库进行更新的操作
+     * @param ApiResource $charge
      * @return bool
      */
-    private function _finalizeOrderAndCustomer(){
+    private function _finalizeOrderAndCustomer(ApiResource $charge){
         DB::beginTransaction();
         // 更新订单状态为已经支付
         $this->order->status = OrderStatus::$APPROVED;
+        $this->order->payment_type = PaymentTool::$TYPE_STRIPE;
         $saved = $this->order->save();
 
         // 如果需要, 保存客户的 stripe id
@@ -127,6 +129,7 @@ class StripePayment implements ShouldQueue
             $saved = $this->user->save();
         }
         if($saved){
+            // Todo 如果是代理商的订单, 在收款完成之后, 需要对代理商进行一些后续的操作
             DB::commit();
         }else{
             DB::rollback();
@@ -136,7 +139,7 @@ class StripePayment implements ShouldQueue
 
     /**
      * 收取费用
-     * @return \Stripe\ApiResource
+     * @return ApiResource
      */
     private function _charge(){
         return StripeCharge::create([
