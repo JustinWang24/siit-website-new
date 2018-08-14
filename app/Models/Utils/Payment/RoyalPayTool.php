@@ -14,6 +14,7 @@ use App\Models\Utils\Payment\RoyalPay\Lib\Data\RoyalPayUnifiedOrder;
 use App\Models\Utils\Payment\RoyalPay\Lib\RoyalPayConfig;
 use App\Models\Utils\Payment\RoyalPay\Lib\Data\RoyalPayRedirect;
 use App\Models\Utils\Payment\RoyalPay\Lib\Data\RoyalPayExchangeRate;
+use App\Models\Utils\Payment\RoyalPay\Lib\RoyalPayException;
 use Illuminate\Http\Request;
 use App\Models\Utils\Payment\RoyalPay\Lib\Data\RoyalPayDataBase;
 
@@ -35,6 +36,7 @@ class RoyalPayTool
      * 购买订单的方法
      * @param Order $order
      * @return $this
+     * @throws RoyalPay\Lib\RoyalPayException
      */
     public function purchase(Order $order){
         if($this->_init($order)){
@@ -70,6 +72,7 @@ class RoyalPayTool
     /**
      * 获取跳转到RoyalPay进行支付的url网址
      * @return null|string
+     * @throws RoyalPay\Lib\RoyalPayException
      */
     public function getQrRedirectUrl(){
         return $this->qrCode ? RoyalPayApi::getQRRedirectUrl($this->getQrCodePayUrl(),$this->redirect) : null;
@@ -79,7 +82,7 @@ class RoyalPayTool
      * 处理成功回调的方法
      * @param Request $request
      * @param Boolean $async
-     * @return Order/null
+     * @return Order|bool
      */
     public function complete(Request $request, $async = false)
     {
@@ -102,6 +105,11 @@ class RoyalPayTool
         return false;
     }
 
+    /**
+     * 初始化订单
+     * @param Order $order
+     * @return bool
+     */
     private function _init(Order $order){
         $this->order = $order;
         $this->input->setOrderId($this->getPartnerOrderId($order));
@@ -116,9 +124,14 @@ class RoyalPayTool
         if (!empty($currency) && $currency == 'CNY') {
             //建议缓存汇率,每天更新一次,遇节假日或其他无汇率更新情况,可取最近一个工作日的汇率
             $inputRate = new RoyalPayExchangeRate();
-            $rate = RoyalPayApi::exchangeRate($inputRate);
 
-            if ($rate['return_code'] == 'SUCCESS') {
+            try{
+                $rate = RoyalPayApi::exchangeRate($inputRate);
+            }catch (RoyalPayException $exception){
+                $rate = null;
+            }
+
+            if ($rate && $rate['return_code'] == 'SUCCESS') {
                 $real_pay_amt = $this->input->getPrice() / $rate['rate'] / 100;
                 if ($real_pay_amt < 0.01) {
                     echo '人民币转换澳元后必须大于0.01澳元';

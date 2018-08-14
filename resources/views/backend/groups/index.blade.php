@@ -23,10 +23,10 @@
             <table class="table full-width is-hoverable">
                 <thead>
                 <tr>
-                    <th>识别码</th>
-                    <th>名称</th>
-                    <th>联系人</th>
-                    <th>其他</th>
+                    <th>ID Code</th>
+                    <th>Business name</th>
+                    <th>Contact</th>
+                    <th>Other</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -46,9 +46,10 @@
                             <p>{{ $value->phone }}</p>
                         </td>
                         <td>
-                            {{ $value->extra }}
+                            <p>{{ $value->extra }}</p>
+                            <p>Discount: {{ $value->discount_rate }}%</p>
+                            <p>Commission: {{ $value->comission }}%</p>
                         </td>
-
                         <td>
                             <a class="button is-small" href="{{ url('backend/groups/edit/'.$value->id) }}">
                                 <i class="fa fa-edit"></i>&nbsp;Edit

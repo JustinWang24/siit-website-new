@@ -18,14 +18,15 @@ class Group extends Model
     const STATUS_DISABLE = 1;
 
     const DEFAULT_COMMISSION_RATE   = 0;
-    const DEFAULT_DISCOUNT_RATE     = 0.8; // 经销商的学生打八折
+    const DEFAULT_DISCOUNT_RATE     = 20; // 经销商的学生打八折
 
     public $timestamps = false;
     protected $fillable = [
         'name','phone','address','city','state','postcode',
         'country','has_min_order_amount','shipping_fee',
         'fax','status','extra','email','commission',
-        'group_code','password','phone_alt','begin_at','finish_at','contact_person'
+        'group_code','password','phone_alt','begin_at',
+        'finish_at','contact_person','discount_rate'
     ];
 
     /**
@@ -80,6 +81,14 @@ class Group extends Model
         return self::where('group_code',$code)
             ->where('status',self::STATUS_ACTIVE)
             ->first();
+    }
+
+    /**
+     * 返回代理商的折扣率
+     * @return float
+     */
+    public function getDiscountRate(){
+        return self::DEFAULT_DISCOUNT_RATE/100;
     }
 
     /**

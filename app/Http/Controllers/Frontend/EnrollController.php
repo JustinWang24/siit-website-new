@@ -202,7 +202,12 @@ class EnrollController extends Controller
                     $orderPlaced = Order::PlaceOrder(
                         $user,
                         $cart,
-                        $enrollData['instance'],null,null,$axcelerateInstance);
+                        $enrollData['instance'],
+                        null,
+                        null,
+                        $axcelerateInstance,
+                        $dealer
+                    );
                     // todo 保存订单操作完成
 
                     if($orderPlaced){
@@ -262,7 +267,12 @@ class EnrollController extends Controller
                 $orderPlaced = Order::PlaceOrder(
                     $user,
                     $cart,
-                    str_random(8),$notes,null,null);
+                    str_random(8),
+                    $notes,
+                    null,
+                    null,
+                    $dealer
+                );
 
                 /**
                  * 只要创建过订单了，就清空购物车
