@@ -31,9 +31,45 @@ if(document.getElementById('menu')){
             slideout.close();
         }else{
             let clickedEl = $(e.target);
-            if(clickedEl.attr('id') == 'toggle-drawer-btn' || clickedEl.parent().attr('id') == 'toggle-drawer-btn'){
+            if(clickedEl.attr('id') === 'toggle-drawer-btn' || clickedEl.parent().attr('id') === 'toggle-drawer-btn'){
                 slideout.toggle();
             }
+        }
+    });
+}
+
+if(document.getElementById('dealer-manager-app')){
+    let dealerManagerApp = new Vue({
+        el:'#dealer-manager-app',
+        data(){
+            return {
+              keyword:''
+            }
+        },
+        created: function(){
+
+        },
+        methods:{
+          querySearchAsync: function(queryString,cb){
+                if(queryString.length < 2){
+                  return;
+                }
+                axios.get(
+                    '/api/dealers/search?q=' + queryString
+                ).then(function(res){
+                    console.log(res);
+                  if(res.status === 200 && res.data.error_no === 100){
+                    // 表示找到了结果
+                    cb(res.data.data)
+                  }else{
+                    cb([]);
+                    this.$message('No user is found');
+                  }
+                });
+          },
+          handleSelect: function(item){
+              window.open('/backend/groups/edit/' + item.id, '_blank') ;
+          }
         }
     });
 }

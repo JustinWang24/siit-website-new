@@ -168,3 +168,7 @@ Route::prefix('group-products')->group(function(){
 Route::prefix('myob')->group(function(){
     Route::any('test','Api\MyobController@test');
 });
+
+Route::prefix('dealers')->group(function(){
+    Route::any('search','Api\Dealers@search');
+});

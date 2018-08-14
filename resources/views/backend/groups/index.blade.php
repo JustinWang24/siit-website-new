@@ -10,11 +10,19 @@
             </div>
             <div class="column">
                 <el-autocomplete
-                        v-model="state4"
-                        :fetch-suggestions="querySearchAsync"
-                        placeholder="请输入内容"
-                        @select="handleSelect"
-                ></el-autocomplete>
+                    v-model="keyword"
+                    style="width: 400px;"
+                    :fetch-suggestions="querySearchAsync"
+                    placeholder="Find a dealer: Name / Code"
+                    @select="handleSelect"
+                    :hide-loading="true"
+                    :trigger-on-focus="false"
+                >
+                    <template slot-scope="{ item }">
+                        <p class="name">@{{ item.value }} (@{{ item.address }})</p>
+                    </template>
+
+                </el-autocomplete>
                 <a class="button is-primary pull-right" href="{{ url('/backend/groups/add') }}"><i class="fa fa-plus"></i>&nbsp;{{ trans('admin.new.groups') }}</a>
             </div>
         </div>
