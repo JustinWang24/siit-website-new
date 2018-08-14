@@ -225,6 +225,8 @@ Route::prefix('backend')->middleware('auth')->group(function(){
      * 合作经销商管理
      */
     Route::get('groups', 'Backend\Groups@index')->name('groups');
+    Route::get('groups/view-students', 'Backend\Groups@view_students')->name('admin.view.group.students');
+    Route::get('groups/view-orders', 'Backend\Groups@view_orders')->name('admin.view.group.orders');
     Route::get('groups/add', 'Backend\Groups@add');
     Route::get('groups/import', 'Backend\Groups@import');
     Route::get('groups/edit/{id}', 'Backend\Groups@edit');

@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 
 class Dealers extends Controller
 {
+    /**
+     * 搜索经销商
+     * @param Request $request
+     * @return string
+     */
     public function search(Request $request){
         $dealers = Group::select('id','name','group_code','address')
             ->where('name','like','%'.$request->get('q').'%')
@@ -26,6 +31,6 @@ class Dealers extends Controller
             ];
         }
 
-        return JsonBuilder::Success($result);
+        return count($result)>0 ? JsonBuilder::Success($result) : JsonBuilder::Error();
     }
 }

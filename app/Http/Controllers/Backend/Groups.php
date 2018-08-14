@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Dealer\DealerOrder;
+use App\Models\Dealer\DealerStudent;
 use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -123,6 +125,11 @@ class Groups extends Controller
         return redirect()->route('groups');
     }
 
+    /**
+     * 保存经销商信息
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function save(Request $request){
         $groupData = $request->all();
         unset($groupData['_token']);
@@ -139,5 +146,31 @@ class Groups extends Controller
         }
 
         return redirect()->route('groups');
+    }
+
+    /**
+     * 查看某个经销商的学生
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function view_students(Request $request){
+        $this->dataForView['dealer'] = Group::find($request->get('group'));
+        $this->dataForView['ds'] = DealerStudent::where('group_id',$request->get('group'))
+            ->orderBy('user_id','desc')
+            ->paginate(config('system.PAGE_SIZE'));
+        return view('backend.groups.students',$this->dataForView);
+    }
+
+    /**
+     * 查看某个经销商的订单
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function view_orders(Request $request){
+        $this->dataForView['dealer'] = Group::find($request->get('group'));
+        $this->dataForView['dos'] = DealerOrder::where('group_id',$request->get('group'))
+            ->orderBy('id','desc')
+            ->paginate(config('system.PAGE_SIZE'));
+        return view('backend.groups.orders',$this->dataForView);
     }
 }
