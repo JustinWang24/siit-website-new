@@ -6,12 +6,12 @@
             <div class="columns">
                 <div class="column">
                     {!! \App\Models\Utils\AMP\MediaUtil::NormalImage(asset($siteConfig->logo_dark),'SIIT: a bridge across cultures', 254, 117, 'image') !!}
-                    <img src="{{ asset('images/frontend/custom/apeilogowhite.png') }}" alt="APEI" style="width: 254px; margin-top: 14px;">
+                    <img src="{{ asset('images/frontend/custom/new-ape.png') }}" alt="APEI" style="width: 254px; margin-top: 14px;">
                     <div class="p-2 mt-20">
                         <p style="margin-top: -15px;">Australian Professional Education Institute</p>
                     </div>
                 </div>
-                <nav class="column is-half">
+                <nav class="column is-three-quarters">
                     <div class="columns">
 
                         @foreach($rootMenus as $key=>$rootMenu)
@@ -40,27 +40,6 @@
                         @endforeach
                     </div>
                 </nav>
-                <div class="column">
-                    <label class="label">{{ trans('general.Sign_up_newsletter') }}</label>
-                    <div class="field has-addons">
-
-                        <div class="control">
-                            <input class="input" type="text" placeholder="{{ trans('general.Email') }}">
-                        </div>
-                        <div class="control">
-                            <a class="button is-info">
-                                {{ trans('general.Subscribe') }}
-                            </a>
-                        </div>
-                    </div>
-                    <br>
-                    <label class="label">{{ trans('general.Follow_us') }}</label>
-                    <p class="social-icons">
-                        <a target="_blank" href="{{ $siteConfig->twitter }}" title="新浪微博"><i class="fab fa-weibo"></i></a>
-                        <a target="_blank" href="{{ $siteConfig->facebook }}" title="Facebook"><i class="fab fa-facebook-square"></i></a>
-                        <a target="_blank" href="{{ $siteConfig->google_plus }}" title="微信公众号"><i class="fab fa-weixin"></i></a>
-                    </p>
-                </div>
             </div>
             <div class="columns">
                 <div class="column" style="border-top: solid 1px #13213b;">

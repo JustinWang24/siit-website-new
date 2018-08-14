@@ -5,6 +5,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Events\Order\Created as OrderCreated;
+use App\Models\Settings\PaymentMethod;
 use App\Models\Utils\Payment\RoyalPayTool;
 use App\Models\Utils\PaymentTool;
 use App\User;
@@ -15,6 +16,7 @@ use App\Models\Order\Order;
 use App\Models\Group;
 //use Omnipay;
 use App\Events\OrderPlaced;
+use App\Jobs\Payment\StripePayment;
 
 class CheckoutController extends Controller
 {
@@ -58,8 +60,13 @@ class CheckoutController extends Controller
                 $order = Order::GetByUuid($request->get('order'));
                 if($order){
                     // 保留提交的订单留言
-                    $order->notes = $request->get('notes');
-                    $order->save();
+                    if(!empty($request->get('notes'))){
+                        $order->notes .= PHP_EOL . $request->get('notes');
+                        $order->save();
+                    }
+                    // 保存支付方式
+//                    PaymentTool::GetMethodTypeById($request->get('payment_method'));
+
 
                     /**
                      * 订单生成成功, 发布订单创建事件
@@ -68,21 +75,18 @@ class CheckoutController extends Controller
                     if($request->get('payment_method') == PaymentTool::$METHOD_ID_PLACE_ORDER){
                         event(new OrderCreated($order, $customer,$request));
                         session()->flash('msg', ['content'=>'Order #'.$order->serial_number.' has been handled!','status'=>'success']);
-
+                        // 默认的收款方式, 因此不需要更新订单的收费渠道了
                         // 将学生导向Offer letter的页面
                         return redirect()->route('enrol.offer_letter');
-//                        return redirect('/frontend/my_orders/'.session('user_data.uuid'));
-//                        return redirect('/frontend/my_orders/'.session('user_data.uuid'));
                     }elseif($request->get('payment_method') == PaymentTool::$METHOD_ID_WECHAT){
                         // 微信支付
                         $royalPayTool = new RoyalPayTool();
                         return redirect($royalPayTool->purchase($order)->getQrRedirectUrl());
                     }elseif($request->get('payment_method') == PaymentTool::$METHOD_ID_STRIPE){
                         // Stripe 信用卡支付
-                        $job = new StripePayment($order, $request, $customer,$paymentMethod);
+                        $job = new StripePayment($order, $request, $customer,new PaymentMethod());
                         if($job->handle()){
                             // 一切顺利
-                            $cart->destroy();
                             session()->flash('msg', ['content'=>'Order #'.$order->serial_number.' is in progress!','status'=>'success']);
                             return redirect('/frontend/my_orders/'.session('user_data.uuid'));
                         }else{

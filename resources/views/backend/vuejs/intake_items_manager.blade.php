@@ -18,7 +18,7 @@
                 description_cn: '{!! $intake->description_cn !!}'
             },
             scheduled: [
-                @forEach($intakeItems as $intakeItem){!! "'".$intakeItem->scheduled."'," !!}@endforeach
+                @forEach($intakeItems as $intakeItem){!! "'".($intakeItem->scheduled ? $intakeItem->scheduled : $intake->online_date)."'," !!}@endforeach
             ]
         },
         created: function(){

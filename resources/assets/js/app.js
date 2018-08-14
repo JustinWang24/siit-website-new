@@ -283,7 +283,8 @@ $(document).ready(function(){
                     step:{
                         current: 1,
                         total: 4
-                    }
+                    },
+                    isChinese: false
                 },
                 computed: {
                     prevBtnEnable: function(){
@@ -315,6 +316,7 @@ $(document).ready(function(){
                     this.enrollData.intake_item = $('#current-intake-item').val();
                     this.enrollData.course_id   = $('#current-course-id').val();
                     this.enrollData.instance   = $('#current-instance-id').val();
+                    this.isChinese   = $('#current-lang').val() === 'cn';
                     this.loginAttemptCount = 0;
                 },
                 mounted: function(){
@@ -337,7 +339,11 @@ $(document).ready(function(){
                         if(this.loginAttemptCount < 5){
                             this.loginAttemptCount++;
                         }else{
-                            window._notify(this,'error','You have tried too many times!');
+                            window._notify(
+                                this,
+                                this.isChinese ? '错误' : 'error',
+                                this.isChinese ? '尝试次数超过系统限制' : 'You have tried too many times!'
+                            );
                             return;
                         }
                         this.isDoingLogin = true;
@@ -349,7 +355,7 @@ $(document).ready(function(){
                                 {email:this.user.email, password: this.user.password}
                             ).then((res)=>{
                                 if(res.data.error_no == 100){
-                                    that.emailField.infoMsg2 = 'Login succeed, we are redirecting ...';
+                                    that.emailField.infoMsg2 = that.isChinese ? '操作成功, 正在跳转...' : 'Login succeed, we are redirecting ...';
                                     // 登录成功, 那么就要从新加载一下当前页
                                     window.location.href = that._generateReloadUrl(res.data.data.uuid);
                                 }else {
@@ -365,7 +371,7 @@ $(document).ready(function(){
                     // 从服务器端获取验证码
                     getVerificationCode: function(){
                         if(this.user.email.trim().length == 0){
-                            this.emailField.errorMsg = 'Please enter a valid email address';
+                            this.emailField.errorMsg = this.isChinese ? '请输入一个有效的电子邮件' : 'Please enter a valid email address';
                             return;
                         }
                         this.emailField.errorMsg = '';
@@ -378,11 +384,11 @@ $(document).ready(function(){
                                 if(res.data.error_no == 100){
                                     if(res.data.data.result == 'not_valid'){
                                         // 给定的邮件已经不存在
-                                        that.emailField.errorMsg = 'Please enter a valid email address';
+                                        that.emailField.errorMsg = that.isChinese ? '请输入一个有效的电子邮件' : 'Please enter a valid email address';
                                     }else if(res.data.data.result == 'valid'){
                                         if(!res.data.data.emailExisted){
                                             that.vCode = that._decodeVcode(res.data.data.vCode, res.data.data.id);
-                                            that.emailField.infoMsg = 'The verification code is sent to ' + that.user.email;
+                                            that.emailField.infoMsg = (that.isChinese ? '验证码已发送到' : 'The verification code is sent to ') + that.user.email;
                                             that.emailField.infoMsg2 = '';
                                             that.showVerificationField = true;
                                             that.captcha = Math.floor((Math.random() * 1000000) + 1) + '';
@@ -390,7 +396,7 @@ $(document).ready(function(){
                                             // 用户的邮件已经是学生了, 显示让用户输入登录密码的表格, 6位数字
                                             // 给定的邮件已经存在, 需要用户去登录
                                             that.emailField.infoMsg = '';
-                                            that.emailField.infoMsg2 = 'This email has been registered, please login';
+                                            that.emailField.infoMsg2 = that.isChinese ? '您输入的邮件已经被注册' : 'This email has been registered, please login';
                                             that.hasAccount = true;
                                         }
                                     }
@@ -413,7 +419,10 @@ $(document).ready(function(){
                                     window.location.href = that._generateReloadUrl(res.data.data.uuid);
                                 }else{
                                     // 表示注册失败, 从新加载注册页面
-                                    window._notify(that,'error','System is busy, please try again!');
+                                    window._notify(
+                                        that,
+                                        that.isChinese ? '错误' : 'error',
+                                        that.isChinese ? '系统繁忙, 请稍后再试' : 'System is busy, please try again!');
                                     that.verificationField.isVerifyingCode = false;
                                 }
                             });
@@ -429,13 +438,18 @@ $(document).ready(function(){
                     },
                     // 获取从新加载当前页面的url
                     _generateReloadUrl: function(userUuid){
+                        let intakeItem = 'unax-';
+                        if(this.enrollData.intake_item.length > 0){
+                          intakeItem = this.enrollData.intake_item;
+                        }
                         return '/catalog/course/book/'
-                            + this.enrollData.intake_item
+                            + intakeItem
                             + '?agent='
                             + this.user.group_id
                             + '&sd='
                             + userUuid
-                            + '&instance=' + this.enrollData.instance;
+                            + '&instance=' + this.enrollData.instance
+                            + '&product_id=' + this.enrollData.course_id;
                     },
                     confirmToEnroll: function(e){
                         e.preventDefault();
@@ -449,6 +463,8 @@ $(document).ready(function(){
     if($('.has-low-level-menus').length >0){
         $('.has-low-level-menus').on('click',function(val){
           let target = $(this).data('content');
+          $('.has-low-level-menus .fa-plus').toggle();
+          $('.has-low-level-menus .fa-minus').toggle();
           if($(target).length > 0){
             $(target).toggle();
           }

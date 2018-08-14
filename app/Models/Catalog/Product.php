@@ -197,6 +197,14 @@ class Product extends Model
         ];
     }
 
+    public function getCCLcourseIntakes(){
+        $today = Carbon::now()->format('Y-m-d');
+        return InTake::where('online_date','>=',$today)
+            ->where('course_id',$this->id)
+            ->orderBy('online_date','asc')
+            ->get();
+    }
+
     /**
      * @param bool $asArray
      * @return array

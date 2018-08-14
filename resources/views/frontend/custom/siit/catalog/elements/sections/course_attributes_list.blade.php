@@ -1,6 +1,6 @@
 <div class="content product-additional-wrap pt-40">
     @if(count($product_attributes)>0)
-    <h1>{{ app()->getLocale()=='cn' ? $product->name_cn : $product->name }}&nbsp;</h1>
+    <h1 style="font-weight: bold;">{{ app()->getLocale()=='cn' ? $product->name_cn : $product->name }}&nbsp;</h1>
     <hr>
     <ul class="course-special-attributes">
         @foreach($product_attributes as $key=>$product_attribute)
@@ -9,7 +9,7 @@
                 $productAttributeValue = $product_attribute->valuesOf($product);
                 ?>
                 <li>
-                    <h2>
+                    <h2 style="font-weight: bold;">
                         <span class="attr-name">{{ $product_attribute->name}}:</span>
                         @if(count($productAttributeValue)>0)
                             @if(strlen($productAttributeValue[0]->value) > 20)

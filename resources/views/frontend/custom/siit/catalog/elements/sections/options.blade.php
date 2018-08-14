@@ -1,4 +1,3 @@
-<h5 class="options-title">Options:</h5>
 <hr>
 <?php
     foreach ($product_options as $key=>$product_option){

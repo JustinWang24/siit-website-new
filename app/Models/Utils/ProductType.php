@@ -14,6 +14,7 @@ class ProductType
     public static $GENERAL_ITEM     = 1;
     public static $GROUP_SPECIFIED  = 2;
     public static $SHORT_COURSE     = 3;
+    public static $CCL_COURSE       = 4;
 
     /**
      * 产品默认的属性集ID
@@ -31,7 +32,8 @@ class ProductType
     public static function All(){
         return [
             self::$GENERAL_ITEM     =>'General Course',
-            self::$SHORT_COURSE  => 'Short Course'
+            self::$SHORT_COURSE  => 'Short Course',
+            self::$CCL_COURSE  => 'CCL Course',
         ];
     }
 

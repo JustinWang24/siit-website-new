@@ -27,5 +27,14 @@
             }
         ?>
         }
+        <?php
+        if(app()->getLocale()=='cn'){
+            ?>
+            h1,h2,h3,h4,h5,p,span,a,li,td{
+                font-family: "Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu  !important;
+            }
+            <?php
+        }
+        ?>
     </style>
 </head>

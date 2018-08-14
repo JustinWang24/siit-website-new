@@ -6,7 +6,7 @@
         <div class="columns">
             <div class="column">
                 <h2 class="is-size-4">
-                    Step 2: manage intake items - {{ $intake->title }}
+                    Step 2: manage intake items - {{ $intake->title }} ({{ $intake->online_date->format('d-M-Y') }})
                 </h2>
             </div>
             <div class="column">
@@ -26,8 +26,8 @@
                         foreach ($intakeItems as $intakeItem) {
                             if($key == $intakeItem->language_id){
                                 $currentItemId = $intakeItem->id;
-                                $currentItemScheduled = $intakeItem->scheduled ? $intakeItem->scheduled->format('d-m-Y') : null;
-                                $currentSeats = $intakeItem->seats;
+                                $currentItemScheduled = $intakeItem->scheduled ? $intakeItem->scheduled->format('d-m-Y') : $intake->online_date->format('d-m-Y');
+                                $currentSeats = $intakeItem->seats ? $intakeItem->seats : 100;
                                 break;
                             }
                         }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class Groups extends Controller
 {
@@ -22,6 +23,87 @@ class Groups extends Controller
         $this->dataForView['groups'] = Group::where('id','>',1)->orderBy('name','asc')->paginate(config('system.PAGE_SIZE'));
         $this->dataForView['menuName'] = 'groups';
         return view('backend.groups.index', $this->dataForView);
+    }
+
+    public function import(){
+        $files = scandir(__DIR__.'/tmp');
+
+        $done = [
+            'Agentlist -CHINESE+VIETNAMESE + KOREAN.XLSX',
+            'BNE Agent List.xlsx',
+            'Chinese Agents List - 23052018-1.xls',
+            '.DS_Store',
+            'Hindi Punjabi  Agent Email.xlsx',
+            'Minor language Agent List&MELAgent List-1.xlsx'
+        ];
+
+        $groupCodeStart = 600000;
+
+        foreach ($files as $file) {
+            if(in_array($file,$done)){
+                continue;
+            }
+
+            if($file != '.' && $file != '..'){
+                $fileName = __DIR__.'/tmp/'.$file;
+
+                try{
+                    $type = strpos(strtolower($file),'.xlsx') !== false ? 'Xlsx' : 'Xls';
+                    $reader = IOFactory::createReader($type);
+                    $spreadsheet = $reader->load($fileName);
+
+                    foreach ($spreadsheet->getWorksheetIterator() as $worksheet) {
+                        $worksheetTitle = $worksheet->getTitle();
+                        dump($worksheetTitle);
+                        foreach ($worksheet->getRowIterator() as $row) {
+                            $cellIterator = $row->getCellIterator();
+                            $cellIterator->setIterateOnlyExistingCells(false);
+                            if($row->getRowIndex() > 1){
+                                $group = new Group();
+                                foreach ($cellIterator as $key=>$cell) {
+                                    switch ($key){
+                                        case 'A':
+                                            $group->name = $cell;
+                                            break;
+                                        case 'B':
+                                            $group->email = $cell;
+                                            break;
+                                        case 'C':
+                                            $group->address = $cell;
+                                            break;
+                                        case 'D':
+                                            $group->phone = $cell;
+                                            break;
+                                        case 'E':
+                                            $group->contact_person = $cell;
+                                            break;
+                                        case 'F':
+                                            $group->extra = $cell;
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
+
+                                if(!empty(trim($group->name))){
+                                    $group->category = $worksheetTitle;
+                                    $group->group_code = substr($worksheetTitle,0,1).($groupCodeStart++);
+                                    $group->password = '123456';
+                                    $group->save();
+                                }
+                            }
+                        }
+                        dump('done');
+                        die(0);
+                    }
+
+                }catch (\Exception $exception){
+                    dump($exception->getMessage());
+                }
+            }
+
+        }
+
     }
 
     public function add(){

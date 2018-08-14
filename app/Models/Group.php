@@ -14,15 +14,19 @@ use App\User;
  */
 class Group extends Model
 {
-    const STATUS_ACTIVE = 1;
-    const STATUS_DISABLE = 0;
+    const STATUS_ACTIVE  = 0;
+    const STATUS_DISABLE = 1;
+
+    const DEFAULT_COMMISSION_RATE   = 0;
+    const DEFAULT_DISCOUNT_RATE     = 20; // 经销商的学生打八折
 
     public $timestamps = false;
     protected $fillable = [
         'name','phone','address','city','state','postcode',
         'country','has_min_order_amount','shipping_fee',
         'fax','status','extra','email','commission',
-        'group_code','password'
+        'group_code','password','phone_alt','begin_at',
+        'finish_at','contact_person','discount_rate'
     ];
 
     /**
@@ -61,6 +65,7 @@ class Group extends Model
 
     /**
      * 经销商登录
+     * http://siit.test/catalog/product/Advanced-Diploma-of-Financial-Planning?agent=S600036
      * @param $username
      * @param $password
      * @return Group
@@ -70,6 +75,20 @@ class Group extends Model
             ->where('password',$password)
             ->where('status',self::STATUS_ACTIVE)
             ->first();
+    }
+
+    public static function GetByCode($code){
+        return self::where('group_code',$code)
+            ->where('status',self::STATUS_ACTIVE)
+            ->first();
+    }
+
+    /**
+     * 返回代理商的折扣率
+     * @return float
+     */
+    public function getDiscountRate(){
+        return self::DEFAULT_DISCOUNT_RATE/100;
     }
 
     /**

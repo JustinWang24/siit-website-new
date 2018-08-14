@@ -23,7 +23,7 @@
             <div class="columns">
                 <div class="column">
                     <div class="field">
-                        <label class="label">Name</label>
+                        <label class="label">Dealer Name</label>
                         <div class="control">
                             <input type="text" class="input{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $group->name }}" required autofocus placeholder="经销商名称: Required">
                             @if($errors->has('name'))
@@ -40,8 +40,8 @@
                         <div class="control">
                             <div class="select full-width">
                                 <select class="full-width" name="status">
-                                    <option value="1" {{ $group->status ? 'selected' : null }}>上线</option>
-                                    <option value="0" {{ $group->status ? null : 'selected' }}>暂停</option>
+                                    <option value="{{ \App\Models\Group::STATUS_ACTIVE }}" {{ $group->status===\App\Models\Group::STATUS_ACTIVE ? 'selected' : null }}>上线</option>
+                                    <option value="{{ \App\Models\Group::STATUS_DISABLE }}" {{ $group->status===\App\Models\Group::STATUS_DISABLE ? 'selected' : null }}>暂停</option>
                                 </select>
                             </div>
                         </div>
@@ -52,22 +52,6 @@
             <div class="columns">
                 <div class="column">
                     <div class="field">
-                        <label class="label">分成比例</label>
-                        <div class="control has-icons-right">
-                            <input type="text" class="input{{ $errors->has('commission') ? ' is-invalid' : '' }}" name="commission" value="{{ $group->commission }}" required placeholder="Required: 分成比例">
-                            @if ($errors->has('commission'))
-                                <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('commission') }}</strong>
-                                </span>
-                            @endif
-                            <span class="icon is-right">
-                                %
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="field">
                         <label class="label">经销商识别码</label>
                         <div class="control">
                             <input type="text" class="input{{ $errors->has('group_code') ? ' is-invalid' : '' }}" name="group_code" value="{{ $group->group_code }}" required placeholder="Required: 经销商唯一识别码">
@@ -76,6 +60,51 @@
                                     <strong>{{ $errors->first('group_code') }}</strong>
                                 </span>
                             @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field">
+                        <label class="label">Password</label>
+                        <div class="control">
+                            <input type="text" class="input{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" value="{{ $group->password }}" required placeholder="Required: 登录密码">
+                            @if ($errors->has('password'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <label class="label">Commission</label>
+                    <div class="field has-addons">
+                        <div class="control">
+                            <input type="text" class="input{{ $errors->has('commission') ? ' is-invalid' : '' }}" name="commission" value="{{ $group->commission ? $group->commission : \App\Models\Group::DEFAULT_COMMISSION_RATE }}" required placeholder="Commission">
+                            @if ($errors->has('commission'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('commission') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        <div class="control">
+                            <a class="button is-static">%</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <label class="label">Discount</label>
+                    <div class="field has-addons">
+                        <div class="control">
+                            <input type="text" class="input{{ $errors->has('discount_rate') ? ' is-invalid' : '' }}" name="discount_rate" value="{{ $group->discount_rate ? $group->discount_rate : \App\Models\Group::DEFAULT_DISCOUNT_RATE }}" required placeholder="Discount">
+                            @if ($errors->has('discount_rate'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('discount_rate') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        <div class="control">
+                            <a class="button is-static">%</a>
                         </div>
                     </div>
                 </div>
@@ -99,12 +128,12 @@
                 </div>
                 <div class="column">
                     <div class="field">
-                        <label class="label">Password</label>
+                        <label class="label">Contact Person</label>
                         <div class="control">
-                            <input type="text" class="input{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" value="{{ $group->password }}" required placeholder="Required: 登录密码">
-                            @if ($errors->has('password'))
+                            <input type="text" class="input{{ $errors->has('contact_person') ? ' is-invalid' : '' }}" name="contact_person" value="{{ $group->contact_person }}" placeholder="Contact Person">
+                            @if ($errors->has('contact_person'))
                                 <span class="invalid-feedback">
-                                    <strong>{{ $errors->first('password') }}</strong>
+                                    <strong>{{ $errors->first('contact_person') }}</strong>
                                 </span>
                             @endif
                         </div>
@@ -114,7 +143,7 @@
                     <div class="field">
                         <label class="label">Phone</label>
                         <div class="control">
-                            <input type="text" class="input{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ $group->phone }}" required placeholder="Required: 联系电话">
+                            <input type="text" class="input{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ $group->phone }}" placeholder="联系电话">
                             @if ($errors->has('phone'))
                                 <span class="invalid-feedback">
                                     <strong>{{ $errors->first('phone') }}</strong>
@@ -132,59 +161,6 @@
                         <div class="control">
                             <div class=" full-width">
                                 <input type="text" class="input{{ $errors->has('address') ? ' is-invalid' : '' }}" name="address" value="{{ $group->address }}" placeholder="Required: 公司地址">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="field">
-                        <label class="label">City</label>
-                        <div class="control">
-                            <div class=" full-width">
-                                <input type="text" class="input{{ $errors->has('city') ? ' is-invalid' : '' }}" name="city" value="{{ $group->city }}" placeholder="Required: City/Suburb">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="field">
-                        <label class="label">State</label>
-                        <div class="control">
-                            <div class=" full-width">
-                                <input type="text" class="input{{ $errors->has('state') ? ' is-invalid' : '' }}" name="state" value="{{ $group->state }}" placeholder="Required: State">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="columns">
-                <div class="column">
-                    <div class="field">
-                        <label class="label">Postcode</label>
-                        <div class="control">
-                            <div class=" full-width">
-                                <input type="text" class="input{{ $errors->has('postcode') ? ' is-invalid' : '' }}" name="postcode" value="{{ $group->postcode }}" placeholder="Required: Postcode">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="field">
-                        <label class="label">Country</label>
-                        <div class="control">
-                            <div class=" full-width">
-                                <input type="text" class="input{{ $errors->has('country') ? ' is-invalid' : '' }}" name="country" value="{{ $group->country ? $group->country : 'Australia' }}" placeholder="Required: 国家">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="field">
-                        <label class="label">Fax</label>
-                        <div class="control">
-                            <div class=" full-width">
-                                <input type="text" class="input{{ $errors->has('fax') ? ' is-invalid' : '' }}" name="fax" value="{{ $group->fax }}" placeholder="Required: 传真号码">
                             </div>
                         </div>
                     </div>

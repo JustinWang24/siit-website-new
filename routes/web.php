@@ -40,7 +40,7 @@ Route::post('/checkout','Frontend\ShoppingCartController@prepare_checkout');
 Route::prefix('catalog')->group(function(){
     Route::get('product/{uri}', 'Frontend\Products@view');
     Route::get('brand/load', 'Frontend\Products@view_by_brand');
-    Route::get('course/book/{id}', 'Frontend\EnrollController@course_enroll');
+    Route::any('course/book/{id?}', 'Frontend\EnrollController@course_enroll')->name('course.book');
     Route::post('course/confirm-book', 'Frontend\EnrollController@course_enroll_confirm');
 
     // 显示Offer Letter
@@ -226,6 +226,7 @@ Route::prefix('backend')->middleware('auth')->group(function(){
      */
     Route::get('groups', 'Backend\Groups@index')->name('groups');
     Route::get('groups/add', 'Backend\Groups@add');
+    Route::get('groups/import', 'Backend\Groups@import');
     Route::get('groups/edit/{id}', 'Backend\Groups@edit');
     Route::get('groups/delete/{id}', 'Backend\Groups@delete');
     Route::post('groups/save','Backend\Groups@save');

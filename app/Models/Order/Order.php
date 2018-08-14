@@ -59,6 +59,14 @@ class Order extends Model
     }
 
     /**
+     * 判断是否为经销商订单的方法
+     * @return bool|string
+     */
+    public function isBelongsToDealer(){
+        return empty($this->secret_code) ? false : $this->secret_code;
+    }
+
+    /**
      * 将订单切换为发票已开状态
      * @param $id
      * @return mixed
@@ -120,9 +128,15 @@ class Order extends Model
      * @param $transactionReference
      * @param $identify
      * @param string $fieldName
+     * @param int $paymentMethodId
      * @return null/Order
      */
-    public static function OrderPaymentConfirmedBy($transactionReference, $identify, $fieldName='serial_number'){
+    public static function OrderPaymentConfirmedBy(
+        $transactionReference,
+        $identify,
+        $fieldName='serial_number',
+        $paymentMethodId = 1
+    ){
         $order = self::where($fieldName,$identify)->orderBy('id','desc')->first();
         if($order){
             $order->approve($transactionReference);
@@ -139,19 +153,39 @@ class Order extends Model
      * @param $notes
      * @param null $paymentMethod
      * @param Instance|null $instance
+     * @param Group|null $dealer    // 可能是来自某个代理商的
      * @return null
+     * @throws \Exception
      */
-    public static function PlaceOrder($customer,Cart $cart,$placeOrderNumber,$notes, $paymentMethod=null,Instance $instance = null){
+    public static function PlaceOrder(
+        $customer,
+        Cart $cart,
+        $placeOrderNumber,
+        $notes,
+        $paymentMethod=null,
+        Instance $instance = null,
+        Group $dealer = null
+    ){
         $now = Carbon::now();
 
         DB::beginTransaction();
+
+        /**
+         * 计算订单的总金额和折扣
+         */
+        $orderTotal = self::_calculateTotal($cart, $dealer);
+        $discount = 0;
+        if($dealer){
+            $discount = $cart->total() - $orderTotal;
+        }
+
         $orderData = [
             'serial_number'=>self::_generalOutTradeNo($customer->id),
             'user_id'=>$customer->id,
-            'total'=>self::_calculateTotal($cart),
+            'total'=>$orderTotal,
+            'discount'=>$discount,
             // 计算可能产生的额外邮寄费用
             'delivery_charge'=>0,
-//            'delivery_charge'=>Group::CalculateDeliveryCharge($customer, $cart->total()),
             'status'=>OrderStatus::$PENDING,
             'payment_type'=>$paymentMethod ? $paymentMethod : PaymentTool::$TYPE_PLACE_ORDER,
             'day'=>$now->day,
@@ -160,19 +194,32 @@ class Order extends Model
             'hour'=>$now->hour,
             'place_order_number'=>$placeOrderNumber,
             'uuid'=>Uuid::uuid4()->toString(),
-            'notes'=>$notes
+            'notes'=>$notes,
+            'secret_code'=>$dealer ? $dealer->group_code : null
         ];
 
         $order = self::create($orderData);
 
         if($order){
-            $dataOrderItems = $cart->content();
-            $orderTotal = 0;
-            foreach ($dataOrderItems as $key=>$dataOrderItem) {
-                // 这里的 Order Item 是订单的每个子项, 不是具体的options, 别忘了
-                $subTotal = OrderItem::Persistent($order,$dataOrderItem,config('app.name'),$key,$instance);
-                if($subTotal){
-                    $orderTotal += $subTotal;
+            if($instance){
+                $dataOrderItems = $cart->content();
+                $orderTotal = 0;
+                foreach ($dataOrderItems as $key=>$dataOrderItem) {
+                    // 这里的 Order Item 是订单的每个子项, 不是具体的options, 别忘了
+                    $subTotal = OrderItem::Persistent($order,$dataOrderItem,config('app.name'),$key,$instance);
+                    if($subTotal){
+                        $orderTotal += $subTotal;
+                    }
+                }
+            }else{
+                $orderTotal = $order->total;
+                $dataOrderItems = $cart->content();
+                foreach ($dataOrderItems as $key=>$dataOrderItem) {
+                    // 这里的 Order Item 是订单的每个子项, 不是具体的options, 别忘了
+                    $subTotal = OrderItem::Persistent($order,$dataOrderItem,config('app.name'),$key,$instance);
+                    if($subTotal){
+                        $orderTotal += $subTotal;
+                    }
                 }
             }
 
@@ -196,10 +243,15 @@ class Order extends Model
     /**
      * 计算购物车中所有的物品的总金额
      * @param Cart $cart
+     * @param Group|null $dealer
      * @return string
      */
-    private static function _calculateTotal(Cart $cart){
-        $total = str_replace(',','',$cart->total());
+    private static function _calculateTotal(Cart $cart, Group $dealer = null){
+        $cartTotal = $cart->total();
+        if($dealer){
+            $cartTotal = $cartTotal * ( 1 - $dealer->getDiscountRate() );
+        }
+        $total = str_replace(',','',$cartTotal);
         return $total;
     }
 
@@ -208,6 +260,7 @@ class Order extends Model
      * 商户系统内部订单号，要求32个字符内，只能是数字、大小写字母_-|*@ ，且在同一个商户号下唯一
      * @param $userId
      * @return string
+     * @throws \Exception
      */
     private static function _generalOutTradeNo($userId){
         return random_int(100000,999999).'-'.$userId; // 由于 $userId 的存在, 肯定这个值是唯一的

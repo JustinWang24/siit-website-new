@@ -13,7 +13,7 @@
 
 <div class="columns">
     <div class="column">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('enroll','authorize_to_agent',['NO','YES, please fill in the question No.9 below'],null,true) }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('enroll','authorize_to_agent',[trans('general.no'),trans('general.fill_9_below')],(isset($dealer)&&$dealer->id?1:0),true) }}
     </div>
 </div>
 
@@ -45,7 +45,7 @@
 </div>
 <div class="columns">
     <div class="column is-8">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','voucher',false) }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','voucher',false,(isset($dealer)&&$dealer ? $dealer->group_code : null)) }}
     </div>
     <div class="column">
 

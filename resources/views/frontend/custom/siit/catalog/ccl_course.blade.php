@@ -13,17 +13,14 @@
                         @endforeach
                     </div>
                     <div class="content pl-20 pr-20">
-                        <h1 class="mt-20">
+                        <h1 class="mt-20" style="font-size: 21px;">
                             {{ trans('general.Course') }}{{ trans('general.name') }}: {{ app()->getLocale() == 'cn' ? $product->name_cn : $product->name }}&nbsp;
                             @if($product->manage_stock && $product->stock<$product->min_quantity)
                                 <span class="badge badge-pill badge-danger">Out of Stock</span>
                             @endif
                         </h1>
                         <hr>
-                        <h2 class="is-size-5 has-text-danger">
-                            {{ trans('general.Campus') }}: {{ trans('general.'.$product->brand) }}
-                        </h2>
-
+                        <h2 class="is-size-5 has-text-danger">{{ trans('general.Campus') }}: {{ trans('general.'.$product->brand) }}</h2>
                         @include(_get_frontend_theme_path('catalog.elements.sections.short_description'))
 
                         <div class="main-attributes content">
@@ -32,10 +29,11 @@
 
                         @include(_get_frontend_theme_path('catalog.elements.sections.price'))
 
-                        <form id="add-to-cart-form">
+                        <form id="add-to-cart-form" method="post" action="{{ route('course.book') }}/unax-">
                             {{ csrf_field() }}
                             <input type="hidden" name="product_id" value="{{ $product->uuid }}">
                             <input type="hidden" name="user_id" value="{{ session('user_data.uuid') }}">
+                            <input type="hidden" name="agent" value="{{ $agentCode }}">
 
                             @if(count($product_colours)>0)
                                 <div class="options-wrap">
@@ -48,50 +46,18 @@
                                     @include(_get_frontend_theme_path('catalog.elements.sections.options'))
                                 </div>
                             @endif
-
-                            <div class="row">
-                                <?php
-                                $languages = \App\Models\Catalog\IntakeItem::GetSupportedLanguages();
-                                $today = \Carbon\Carbon::today();
-                                ?>
-                                <hr>
-                                <h2 class="is-size-4-desktop is-size-4-mobile has-text-grey">
-                                    {{ trans('general.Proposed_Language') }}
-                                </h2>
-                                <el-select v-model="intakeItemId" placeholder="{{ trans('general.Please_choose_language') }}" class="full-width">
-                                    @foreach($product->intakes as $intake)
-                                        @foreach($intake->intakeItems as $item)
-                                            @if( $item->scheduled && $item->scheduled > $today && $item->seats && $item->seats>$item->enrolment_count )
-                                                <el-option label="{{ trans('general.'.$languages[$item->language_id]).' - '.$item->scheduled->format('d M Y') }}" value="{{ $item->id }}"></el-option>
-                                            @endif
-                                        @endforeach
-                                    @endforeach
-                                </el-select>
-                            </div>
-
-                            <div class="row mt-20">
-                                <h2 class="is-size-4-desktop is-size-4-mobile has-text-grey mt-10">Scheduled Intake</h2>
-                                <el-select v-model="selectedAxcelerateInstanceId" placeholder="Please choose intake ..." class="full-width">
-                                    <el-option
-                                            v-for="(item,idx) in axcelerateInstances"
-                                            :key="idx"
-                                            :label="item.label"
-                                            :value="item.value">
-                                    </el-option>
-                                </el-select>
-                            </div>
                             <div class="add-to-cart-form-wrap">
                                 <input type="hidden" name="quantity" value="1"><!-- 一次报名1人 -->
-                                <button v-on:click="enrollNow($event)" type="submit" class="button is-danger" :disabled="selectedAxcelerateInstanceId.length==0 || intakeItemId==0">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Enroll Now
+                                <button type="submit" class="button is-danger">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;{{ trans('general.Enroll_Now') }}
                                 </button>
                             </div>
                         </form>
                         <blockquote class="mt-20">
                             <p>
-                                Students are encouraged to contact {{ env('APP_NAME') }} Marketing team for exact timetable and training arrangement.
+                                {{ trans('general.help_notes') }}
                             </p>
-                            <p>Email to <a href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a>or Call <span class="has-text-link">{{ $siteConfig->contact_phone }}</span></p>
+                            <p>{{ trans('general.Email_to') }} <a href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a> {{ trans('general.or_call') }} <span class="has-text-link">{{ $siteConfig->contact_phone }}</span></p>
                         </blockquote>
                     </div>
 

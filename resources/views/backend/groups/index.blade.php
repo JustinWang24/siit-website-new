@@ -17,12 +17,10 @@
             <table class="table full-width is-hoverable">
                 <thead>
                 <tr>
-                    <th>名称</th>
-                    <th>联系电话</th>
-                    <th>联系地址</th>
-                    <th>识别码</th>
-                    <th>电子邮件</th>
-                    <th>状态</th>
+                    <th>ID Code</th>
+                    <th>Business name</th>
+                    <th>Contact</th>
+                    <th>Other</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -30,21 +28,22 @@
                 @foreach($groups as $key=>$value)
                     <tr>
                         <td>
-                            {!! $value->name !!}
-                        </td>
-                        <td>
-                            {!! $value->phone !!}
-                        </td>
-                        <td>
-                            {{ $value->getAddressText() }}
-                        </td>
-                        <td>
                             {!! $value->group_code !!}
                         </td>
                         <td>
-                            <a href="mailto:{{ $value->email }}">{!! $value->email !!}</a>
+                            <p>{{ $value->name }}</p>
+                            <p>{{ $value->address }}</p>
                         </td>
-                        <td>{!! $value->status ? '上线' : '暂停' !!}</td>
+                        <td>
+                            <p>{{ $value->contact_person }}</p>
+                            <p><a href="mailto:{{ $value->email }}">{!! $value->email !!}</a></p>
+                            <p>{{ $value->phone }}</p>
+                        </td>
+                        <td>
+                            <p>{{ $value->extra }}</p>
+                            <p>Discount: {{ $value->discount_rate }}%</p>
+                            <p>Commission: {{ $value->comission }}%</p>
+                        </td>
                         <td>
                             <a class="button is-small" href="{{ url('backend/groups/edit/'.$value->id) }}">
                                 <i class="fa fa-edit"></i>&nbsp;Edit
@@ -57,6 +56,7 @@
                 @endforeach
                 </tbody>
             </table>
+            {{ $groups->links() }}
         </div>
     </div>
 @endsection

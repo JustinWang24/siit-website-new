@@ -70,10 +70,6 @@
                 <div class="notification is-danger" style="display: none;margin-top: 10px;" id="txt-on-fail">
                     System is busy, please try again later!
                 </div>
-                @if($config->embed_map_code)
-                    <hr>
-                    {!! $config->embed_map_code !!}
-                @endif
             </div>
         </div>
         <div class="column">
@@ -81,7 +77,6 @@
                 <article class="media">
                     <div class="media-content">
                         <div class="content">
-                            <h1>{{ trans('general.menu_contact') }}</h1>
                             <?php
 //                            $fields = $config->getFillableArray();
                             $fields=[];
@@ -95,43 +90,31 @@
                                     </p>
                                 @endif
                             @endforeach
-                            <hr>
                             <p><strong>Sydney Campus: George St</strong></p>
                             <p>George St. campus address: Level 5, 841 George Street, Sydney NSW 2000</p>
                             <p>Postal Address: PO Box K1, Haymarket NSW 1240</p>
                             <p>Email:  <a href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a>  Tel: +61 02 8090 3266 or 9283 5759 Fax:+61 02 8958 0655</p>
                             <p>Website: <a href="http://www.siit.nsw.edu.au">http://www.siit.nsw.edu.au</a> Weibo: <a href="weibo.com/siithome">weibo.com/siithome</a></p>
                             <p>National 1300 No: 1300 769 588</p>
+                            <iframe style="width: 100%;height: 450px;border:0;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.2425281774604!2d151.20062825174617!3d-33.88340718055727!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12ae269619d221%3A0x6bf481f7bfd2762d!2sLevel+5%2F841+George+St%2C+Haymarket+NSW+2000!5e0!3m2!1sen!2sau!4v1534000117019" frameborder="0" allowfullscreen></iframe>
                             <hr>
                             <p><strong>Sydney Campus: Market St</strong></p>
                             <p>Market St. campus address: Level 4, 22 Market Street, Sydney NSW 2000</p>
                             <p>Tel: +61 02 8090 3266 or 02 8319 2940</p>
-
+                                <iframe style="width: 100%;height: 450px;border:0;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.738006205027!2d151.2028089517462!3d-33.87064228056081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12ae3ece2c8bc1%3A0x756901a4192c9b87!2sLevel+4%2F22+Market+St%2C+Sydney+NSW+2000!5e0!3m2!1sen!2sau!4v1534000252879" frameborder="0" allowfullscreen></iframe>
                             <hr>
                             <p><strong>Brisbane Campus:</strong></p>
                             <p>Address: Level 1, 344 Queen St, Brisbane QLD, 4000</p>
                             <p>Postal Address: PO Box 667, Brisbane QLD 4001</p>
                             <p>Email:  <a href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a>  </p><p>Tel: +61 07 3088 2850 Fax:+61 02 8958 0655 </p><p>TMobile: 0452 618 118 </p><p>TWebsite:
                                 <a href="http://www.siit.nsw.edu.au">http://www.siit.nsw.edu.au</a> </p><p>TWeibo: <a href="weibo.com/siithome">weibo.com/siithome</a></p>
-
+                                <iframe style="width: 100%;height: 450px;border:0;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3540.094115541139!2d153.02679985165807!3d-27.46632918280826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b915a1d0ee5a841%3A0x6d4690302f483185!2sUnit+1%2F344+Queen+St%2C+Brisbane+City+QLD+4000!5e0!3m2!1sen!2sau!4v1534000309232" frameborder="0" allowfullscreen></iframe>
                             <hr>
                             <p><strong>Melbourne Campus:</strong></p>
                             <p>Address: Level 4, 341 Queen St, Melbourne VIC, 3000</p>
                             <p>Email: <a href="mailto:melbourne@siit.nsw.edu.au">melbourne@siit.nsw.edu.au</a></p><p> Tel: +61 03 9005 5511 </p><p>Mobile: 0429 292 811 </p><p>Website:
                                 <a href="http://www.siit.nsw.edu.au">http://www.siit.nsw.edu.au</a> </p><p>Weibo: <a href="weibo.com/siithome">weibo.com/siithome</a></p>
-
-
-                            @if(isset($leads) && count($leads)>0)
-                                <h2>Testimonials</h2>
-                                <hr>
-                                <div class="testimonials-list">
-                                    @foreach($leads as $lead)
-                                        <p>
-                                            <span class="has-text-link">{{ $lead->name }}:</span> {{ $lead->message }}
-                                        </p>
-                                    @endforeach
-                                </div>
-                            @endif
+                                <iframe style="width: 100%;height: 450px;border:0;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3152.132245716262!2d144.95594195180817!3d-37.81037127965352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d3582c30917%3A0x6df6ee4e25e0ff0!2sLevel+4%2F341+Queen+St%2C+Melbourne+VIC+3000!5e0!3m2!1sen!2sau!4v1534000432153" frameborder="0" allowfullscreen></iframe>
                         </div>
                     </div>
                 </article>
