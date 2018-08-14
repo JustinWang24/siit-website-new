@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 @section('content')
-    <div id="">
+    <div id="dealer-manager-app">
         <br>
         <div class="columns">
             <div class="column">
@@ -9,6 +9,12 @@
                 </h2>
             </div>
             <div class="column">
+                <el-autocomplete
+                        v-model="state4"
+                        :fetch-suggestions="querySearchAsync"
+                        placeholder="请输入内容"
+                        @select="handleSelect"
+                ></el-autocomplete>
                 <a class="button is-primary pull-right" href="{{ url('/backend/groups/add') }}"><i class="fa fa-plus"></i>&nbsp;{{ trans('admin.new.groups') }}</a>
             </div>
         </div>
