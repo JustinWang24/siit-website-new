@@ -4,14 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Mail\UserConfirmEmail;
 use App\Mail\UserVerificationCode;
+use App\Models\Dealer\DealerStudent;
 use App\Models\Utils\JsonBuilder;
 use App\Models\Utils\UserGroup;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use Ramsey\Uuid\Uuid;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 
 class StudentsController extends Controller
 {
@@ -54,6 +55,7 @@ class StudentsController extends Controller
      * 学生在Intake之前，如果还没在系统有账户，那么会先通过这个方式常见自己的账户
      * @param Request $request
      * @return string
+     * @throws \Exception
      */
     public function verify_register(Request $request){
         // 相当于学生注册
@@ -93,5 +95,43 @@ class StudentsController extends Controller
         $firstThree = substr($vCode,0,$index);
         $lastThree = substr($vCode,$index);
         return $lastThree.$firstThree;
+    }
+
+    /**
+     * 管理后台搜索学生的功能
+     * @param Request $request
+     * @return string
+     */
+    public function search_ajax(Request $request){
+        $result = [];
+
+        if($request->get('d')){
+            $where = [
+                ['student_name','like','%'.$request->get('s').'%'],
+                ['group_id','=',$request->get('d')]
+            ];
+            $ds = DealerStudent::where($where)
+                ->orderBy('id','desc')
+                ->take(config('system.PAGE_SIZE'))
+                ->get();
+            foreach ($ds as $d) {
+                $result[] = [
+                    'value'=>$d->student_name,
+                    'id'=>$d->user_id
+                ];
+            }
+        }else{
+            $users = User::where(['name','like','%'.$request->get('s').'%'])
+                ->orderBy('id','desc')
+                ->take(config('system.PAGE_SIZE'))
+                ->get();
+            foreach ($users as $user) {
+                $result[] = [
+                    'value'=>$user->name,
+                    'id'=>$user->id
+                ];
+            }
+        }
+        return count($result)>0 ? JsonBuilder::Success($result) : JsonBuilder::Error();
     }
 }

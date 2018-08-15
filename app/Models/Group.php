@@ -5,8 +5,10 @@ namespace App\Models;
 use App\Models\Dealer\DealerOrder;
 use App\Models\Dealer\DealerStudent;
 use App\Models\Shipment\DeliveryFee;
+use App\Models\Utils\OrderStatus;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class Group 用户组
@@ -61,6 +63,18 @@ class Group extends Model
     public function ordersCount(){
         return DealerOrder::where('group_id',$this->id)
             ->count();
+    }
+
+    /**
+     * 该经销商的订单总额
+     * @return int
+     */
+    public function ordersTotal(){
+        $result = DealerOrder::select(DB::raw('SUM(order_total) as total'))
+            ->where('group_id',$this->id)
+            ->where('order_status',OrderStatus::$APPROVED)
+            ->first();
+        return $result->total ? $result->total : 0;
     }
 
     /**

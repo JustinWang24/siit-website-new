@@ -137,6 +137,9 @@ class Order extends Model
         $fieldName='serial_number',
         $paymentMethodId = 1
     ){
+        /**
+         * @var Order $order
+         */
         $order = self::where($fieldName,$identify)->orderBy('id','desc')->first();
         if($order){
             $order->approve($transactionReference);

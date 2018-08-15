@@ -31,11 +31,127 @@ if(document.getElementById('menu')){
             slideout.close();
         }else{
             let clickedEl = $(e.target);
-            if(clickedEl.attr('id') == 'toggle-drawer-btn' || clickedEl.parent().attr('id') == 'toggle-drawer-btn'){
+            if(clickedEl.attr('id') === 'toggle-drawer-btn' || clickedEl.parent().attr('id') === 'toggle-drawer-btn'){
                 slideout.toggle();
             }
         }
     });
+}
+
+if(document.getElementById('dealer-manager-app')){
+    let dealerManagerApp = new Vue({
+        el:'#dealer-manager-app',
+        data(){
+            return {
+              keyword:''
+            }
+        },
+        created: function(){
+
+        },
+        methods:{
+          querySearchAsync: function(queryString,cb){
+                if(queryString.length < 2){
+                  return;
+                }
+                let that = this;
+                axios.get(
+                    '/api/dealers/search?q=' + queryString
+                ).then(function(res){
+                  if(res.status === 200 && res.data.error_no === 100){
+                    // 表示找到了结果
+                    cb(res.data.data)
+                  }else{
+                    cb([]);
+                    that.$message('No dealer is found');
+                  }
+                });
+          },
+          handleSelect: function(item){
+              window.open('/backend/groups/edit/' + item.id, '_blank') ;
+          }
+        }
+    });
+}
+
+if(document.getElementById('student-manager-app')){
+  let studentManagerApp = new Vue({
+    el:'#student-manager-app',
+    data(){
+      return {
+        keyword:'',
+        dealer: null
+      }
+    },
+    created: function(){
+      let tmp = document.getElementById('dealer-id');
+      if(tmp){
+        this.dealer = tmp.getAttribute('data-content');
+      }
+    },
+    methods:{
+      querySearchAsync: function(queryString,cb){
+        if(queryString.length < 2){
+          return;
+        }
+        let that = this;
+        axios.post(
+            '/api/students/search-ajax',{q:queryString,d:this.dealer}
+        ).then(function(res){
+          if(res.status === 200 && res.data.error_no === 100){
+            // 表示找到了结果
+            cb(res.data.data)
+          }else{
+            cb([]);
+            that.$message('No student is found');
+          }
+        });
+      },
+      handleSelect: function(item){
+        window.open('/backend/customers/edit/' + item.id) ;
+      }
+    }
+  });
+}
+
+if(document.getElementById('my-orders-manager-app')){
+  let ordersManagerApp = new Vue({
+    el:'#my-orders-manager-app',
+    data(){
+      return {
+        keyword:'',
+        dealer: null
+      }
+    },
+    created: function(){
+      let tmp = document.getElementById('dealer-id');
+      if(tmp){
+        this.dealer = tmp.getAttribute('data-content');
+      }
+    },
+    methods:{
+      querySearchAsync: function(queryString,cb){
+        if(queryString.length < 2){
+          return;
+        }
+        let that = this;
+        axios.post(
+            '/api/orders/search-ajax',{q:queryString,d:this.dealer}
+        ).then(function(res){
+          if(res.status === 200 && res.data.error_no === 100){
+            // 表示找到了结果
+            cb(res.data.data)
+          }else{
+            cb([]);
+            that.$message('No student is found');
+          }
+        });
+      },
+      handleSelect: function(item){
+        window.open('/backend/customers/edit/' + item.id) ;
+      }
+    }
+  });
 }
 
 $(document).ready(function(){

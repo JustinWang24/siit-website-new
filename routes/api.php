@@ -39,6 +39,7 @@ Route::prefix('students')->group(function(){
     // 验证学生的邮件是否存在
     Route::post('verify-email','Api\StudentsController@verify_email');
     Route::post('verify-register','Api\StudentsController@verify_register');
+    Route::post('search-ajax','Api\StudentsController@search_ajax');
 });
 
 // 和 Axcelerate 相关的API接口
@@ -167,4 +168,12 @@ Route::prefix('group-products')->group(function(){
 
 Route::prefix('myob')->group(function(){
     Route::any('test','Api\MyobController@test');
+});
+
+Route::prefix('dealers')->group(function(){
+    Route::any('search','Api\Dealers@search');
+});
+
+Route::prefix('orders')->group(function(){
+    Route::any('search-ajax','Api\Orders@search_ajax');
 });

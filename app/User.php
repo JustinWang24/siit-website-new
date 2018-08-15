@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Dealer\DealerStudent;
 use App\Models\Group;
 use App\Models\Utils\Axcelerate\AxcelerateClient;
 use Illuminate\Notifications\Notifiable;
@@ -134,6 +135,14 @@ class User extends Authenticatable
 
     public function group(){
         return $this->belongsTo(Group::class);
+    }
+
+    /**
+     * 用户所属的经销商关系
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function dealers(){
+        return $this->hasMany(DealerStudent::class);
     }
 
     public function addressText(){

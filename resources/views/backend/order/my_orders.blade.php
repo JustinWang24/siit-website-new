@@ -9,15 +9,16 @@
                 <div class="column">
                     <el-form ref="form" label-width="80px">
                         <el-autocomplete
-                                style="width: 500px;margin-right: 20px;"
-                                v-model="orderKeyword"
-                                :fetch-suggestions="orderSearchAsync"
-                                placeholder="Search Orders"
-                                icon="el-icon-search"
-                                popper-class="order-search-auto-complete"
-                                :trigger-on-focus="false"
-                                :select-when-unmatched="true"
-                                @select="handleResultSelect"
+                            v-model="keyword"
+                            icon="el-icon-search"
+                            popper-class="order-search-auto-complete"
+                            :select-when-unmatched="true"
+                            :fetch-suggestions="querySearchAsync"
+                            placeholder="Find an Orders: Order #"
+                            @select="handleSelect"
+                            :hide-loading="true"
+                            :trigger-on-focus="false"
+                            class="full-width"
                         ></el-autocomplete>
                     </el-form>
                 </div>
