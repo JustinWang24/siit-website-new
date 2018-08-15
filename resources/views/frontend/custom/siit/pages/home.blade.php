@@ -8,19 +8,12 @@
                     <h2>TIME <span class="super-bold">Visiting</span></h2>
                     <br>
                     <div class="columns mt-20">
-                        <div class="column">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed nulla mollis, ornare mi ac, consequat velit. Pellentesque nec fringilla nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dignissim rutrum lorem, bibendum vehicula orci commodo non. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam nec pulvinar ligula. Sed odio felis, pulvinar nec pretium in
-                            </p>
-                        </div>
                         @foreach($topStories as $key=>$blog)
-                            @if($key < 2)
+                            @if($key < 3)
                         <div class="column">
                             <div class="card">
                                 <div class="card-image">
-                                    <figure>
-                                        <img src="{{ $blog->getFeatureImageUrl() }}" alt="{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn  }}">
-                                    </figure>
+                                    <img style="min-height: 180px;" src="{{ $blog->getFeatureImageUrl() }}" alt="{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn  }}">
                                 </div>
                                 <div class="card-content pl-0">
                                     <div class="media">

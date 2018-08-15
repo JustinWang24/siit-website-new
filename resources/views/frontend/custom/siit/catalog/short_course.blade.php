@@ -70,7 +70,7 @@
                             </div>
 
                             <div class="row mt-20">
-                                <h2 class="is-size-4-desktop is-size-4-mobile has-text-grey mt-10">Scheduled Intake</h2>
+                                <h2 class="is-size-4-desktop is-size-4-mobile has-text-grey mt-10">{{ trans('general.Scheduled_Intake') }}</h2>
                                 <el-select v-model="selectedAxcelerateInstanceId" placeholder="Please choose intake ..." class="full-width">
                                     <el-option
                                             v-for="(item,idx) in axcelerateInstances"
@@ -89,9 +89,9 @@
                         </form>
                         <blockquote class="mt-20">
                             <p>
-                                Students are encouraged to contact {{ env('APP_NAME') }} Marketing team for exact timetable and training arrangement.
+                                {{ trans('general.help_notes') }}
                             </p>
-                            <p>Email to <a href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a>or Call <span class="has-text-link">{{ $siteConfig->contact_phone }}</span></p>
+                            <p>{{ trans('general.Email_to') }} <a href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a> {{ trans('general.or_call') }} <span class="has-text-link">{{ $siteConfig->contact_phone }}</span></p>
                         </blockquote>
                     </div>
 

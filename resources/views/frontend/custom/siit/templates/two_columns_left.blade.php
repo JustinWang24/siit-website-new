@@ -12,7 +12,7 @@
                 ?>
                 @if($menuItem && $menuItem->parent)
                     <h2 class="parent-item">
-                        <a href="{{ url($menuItem->parent->link_to) }}" title="{{ app()->getLocale()=='cn'?$menuItem->parent->name_cn:$menuItem->parent->name  }}" style="font-weight: bold;">
+                        <a href="{{ url($menuItem->parent->link_to) }}" title="{{ app()->getLocale()=='cn'?$menuItem->parent->name_cn:$menuItem->parent->name  }}" style="font-weight: normal;">
                             {{ app()->getLocale()=='cn'?$menuItem->parent->name_cn:$menuItem->parent->name }}
                         </a>
                     </h2>
@@ -24,7 +24,7 @@
                             }
                         ?>
                     <h3 class="sibling-item {{ $menuItem->id == $menuSibling->id ? 'current-item' : null }}">
-                        <a href="{{ url($urlLink) }}" title="{{ app()->getLocale()=='cn'? $menuSibling->name_cn : $menuSibling->name }}" style="font-weight: bold;">
+                        <a href="{{ url($urlLink) }}" title="{{ app()->getLocale()=='cn'? $menuSibling->name_cn : $menuSibling->name }}" style="font-weight: normal;">
                             {{ app()->getLocale()=='cn'? $menuSibling->name_cn : $menuSibling->name }}
                         </a>
                     </h3>

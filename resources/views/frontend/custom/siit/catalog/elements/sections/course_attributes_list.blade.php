@@ -9,13 +9,13 @@
                 $productAttributeValue = $product_attribute->valuesOf($product);
                 ?>
                 <li>
-                    <h2 style="font-weight: bold;">
+                    <h2 style="font-weight: normal;">
                         <span class="attr-name">{{ $product_attribute->name}}:</span>
                         @if(count($productAttributeValue)>0)
                             @if(strlen($productAttributeValue[0]->value) > 20)
                                 <br>
                                 <div class="attr-value mt-10">
-                                    {!! $productAttributeValue[0]->value !!}
+                                    <span>{!! $productAttributeValue[0]->value !!}</span>
                                 </div>
                             @else
                                 <span class="attr-name">
