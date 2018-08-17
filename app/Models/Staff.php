@@ -25,6 +25,7 @@ class Staff extends Model
     const DIVISION_ADMIN_STUDENT_SERVICE    = 1;
     const DIVISION_MARKETING                = 2;
     const DIVISION_FINANCE                  = 3;
+    const DIVISION_ACADEMIC                 = 4;
 
     // 特殊页面
     const PAGE_TRAINING_STAFF = 'training-staff';
@@ -161,6 +162,7 @@ class Staff extends Model
             self::DIVISION_ADMIN_STUDENT_SERVICE => 'Admission & Student Services Division',
             self::DIVISION_MARKETING => 'Marketing Division',
             self::DIVISION_FINANCE => 'Finance Division',
+            self::DIVISION_ACADEMIC => 'Academic Division',
         ];
     }
 
