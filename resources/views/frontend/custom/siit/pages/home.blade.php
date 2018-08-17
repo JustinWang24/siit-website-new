@@ -1,7 +1,7 @@
 @extends(_get_frontend_layout_path('frontend'))
 @section('content')
-    <section class="section is-paddingless company-brief-wrap">
-        <div class="container">
+    <section class="section is-paddingless company-brief-wrap" style="background-color: #06162f;">
+        <div class="container" style="background-color: transparent;">
             <div class="columns is-marginless">
                 <div class="column is-three-quarters first-visiting">
                     <h2>FIRST</h2>

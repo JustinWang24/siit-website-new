@@ -1,0 +1,24 @@
+@media screen and (min-width: 1024px){
+.navbar-dropdown.is-boxed {
+  border-radius: 0;
+  top: calc(100%);
+}
+}
+
+.d-flex{
+  display:flex;
+}
+.bg-img{
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.align-self-center{
+  align-self: center;
+}
+.home-text{
+  color:#fff;
+  margin:auto;
+  h2{
+    font-size:3rem;
+  }
+}

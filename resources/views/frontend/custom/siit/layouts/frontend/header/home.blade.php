@@ -40,72 +40,7 @@
                     </div>
                 </div>
 
-                <div class="navbar-menu">
-                    <div class="navbar-end big-nav">
-                        @foreach($rootMenus as $key=>$rootMenu)
-                            <div class="navbar-item has-dropdown is-hoverable">
 
-                                <?php
-                                $tag = $rootMenu->html_tag;
-                                $children = $rootMenu->getSubMenus();
-                                if($tag && $tag !== 'a'){
-                                    echo '<'.$tag.'>';
-                                }
-                                ?>
-                                <a class="navbar-link {{ $rootMenu->css_classes }}" href="{{ $rootMenu->link_to=='/' ? '/' : $rootMenu->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($rootMenu->name_cn) ? $rootMenu->name_cn : $rootMenu->name }}">
-                                    {{ app()->getLocale()=='cn' && !empty($rootMenu->name_cn) ? $rootMenu->name_cn : $rootMenu->name }}
-                                </a>
-                                @if(count($children) > 0)
-                                    <div class="navbar-dropdown is-boxed">
-                                        @foreach($children as $sub)
-                                            @php
-                                            $menuUrl = $sub->getMenuUrl();
-                                            $pathwaySubmenu = strpos($menuUrl,'University-Pathway-Collection') !== false;
-                                            @endphp
-                                            @if($pathwaySubmenu)
-                                                {{-- 对pathway的特殊处理 --}}
-                                                <div class="aside">
-                                                    <ul class="menu-list">
-                                                        <li>
-                                                            <a class="navbar-item has-low-level-menus" data-content="#pathway-list-subs" href="#" title="{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}">
-                                                                <i class="fas fa-plus has-text-grey" style="margin-left: 0;"></i>
-                                                                <i class="fas fa-minus has-text-grey" style="margin-left: 0;display: none;"></i>
-                                                                {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
-                                                            </a>
-                                                            <ul id="pathway-list-subs" class="hidden" style="margin-top: 0;">
-                                                                @foreach($pathways as $product)
-                                                                <li>
-                                                                    <a href="{{ url('catalog/product/'.$product->uri) }}">
-                                                                        {{ $product->getName() }} - {{ trans('general.'.$product->brand).(app()->getLocale()=='cn'?null:trans('general.Campus')) }}
-                                                                    </a>
-                                                                </li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            @else
-                                                <a class="navbar-item" href="{{ $sub->link_to=='/' ? '/' : $sub->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}">
-                                                    {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
-                                                </a>
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                @endif
-                                <?php
-                                if($tag && $tag !== 'a'){
-                                    echo '</'.$tag.'>';
-                                }
-                                ?>
-                            </div>
-                        @endforeach
-                        <div class="navbar-item">
-                            <a class="has-text-deep-blue" href="{{ url('/switch-language/'.(app()->getLocale()=='cn' ? 'en':'cn')) }}" title="{{ trans('general.switch_language') }}">
-                                {{ trans('general.switch_language') }}
-                            </a>
-                        </div>
-                    </div>
-                </div>
 
                 <div id="search-form-wrap">
                     <div id="search-btn">
@@ -115,14 +50,92 @@
             </div>
         </div>
     </nav>
-    <div class="container">
-        <img src="{{ asset('/images/frontend/custom/header_bg_ts.jpg') }}" alt="header bg">
-    </div>
-    <div class="is-clearfix"></div>
-    <div class="container header-widget-wrap">
-        <div class="columns headline-box" style="margin-top: 200px;margin-bottom: 220px;">
+    <section style="height: 40px; background-color: rgba(227, 227, 227, 0.36);width: 100%;">
+        <div class="container">
+            <div class="navbar-menu">
+                <div class="navbar-end big-nav">
+                    @foreach($rootMenus as $key=>$rootMenu)
+                        <div class="navbar-item has-dropdown is-hoverable">
+
+                            <?php
+                            $tag = $rootMenu->html_tag;
+                            $children = $rootMenu->getSubMenus();
+                            if($tag && $tag !== 'a'){
+                                echo '<'.$tag.'>';
+                            }
+                            ?>
+                            <a class="navbar-link {{ $rootMenu->css_classes }}" href="{{ $rootMenu->link_to=='/' ? '/' : $rootMenu->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($rootMenu->name_cn) ? $rootMenu->name_cn : $rootMenu->name }}">
+                                {{ app()->getLocale()=='cn' && !empty($rootMenu->name_cn) ? $rootMenu->name_cn : $rootMenu->name }}
+                            </a>
+                            @if(count($children) > 0)
+                                <div class="navbar-dropdown is-boxed">
+                                    @foreach($children as $sub)
+                                        @php
+                                            $menuUrl = $sub->getMenuUrl();
+                                            $pathwaySubmenu = strpos($menuUrl,'University-Pathway-Collection') !== false;
+                                        @endphp
+                                        @if($pathwaySubmenu)
+                                            {{-- 对pathway的特殊处理 --}}
+                                            <div class="aside">
+                                                <ul class="menu-list">
+                                                    <li>
+                                                        <a class="navbar-item has-low-level-menus" data-content="#pathway-list-subs" href="#" title="{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}">
+                                                            <i class="fas fa-plus has-text-grey" style="margin-left: 0;"></i>
+                                                            <i class="fas fa-minus has-text-grey" style="margin-left: 0;display: none;"></i>
+                                                            {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
+                                                        </a>
+                                                        <ul id="pathway-list-subs" class="hidden" style="margin-top: 0;">
+                                                            @foreach($pathways as $product)
+                                                                <li>
+                                                                    <a href="{{ url('catalog/product/'.$product->uri) }}">
+                                                                        {{ $product->getName() }} - {{ trans('general.'.$product->brand).(app()->getLocale()=='cn'?null:trans('general.Campus')) }}
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        @else
+                                            <a class="navbar-item" href="{{ $sub->link_to=='/' ? '/' : $sub->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}">
+                                                {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
+                                            </a>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            @endif
+                            <?php
+                            if($tag && $tag !== 'a'){
+                                echo '</'.$tag.'>';
+                            }
+                            ?>
+                        </div>
+                    @endforeach
+                    <div class="navbar-item">
+                        <a class="has-text-deep-blue" href="{{ url('/switch-language/'.(app()->getLocale()=='cn' ? 'en':'cn')) }}" title="{{ trans('general.switch_language') }}">
+                            {{ trans('general.switch_language') }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section class="bg-img d-flex" style="background-image: url({{ asset('/images/frontend/custom/header_bg_ts.jpg') }});min-height:800px;">
+    <div class="container align-self-center" >
+        <div class="home-text">
             <h2 class="has-text-centered">A BRIDGE <span class="super-bold">ACROSS</span> CULTURES</h2>
         </div>
+    </div>
+    </section>
+    <div class="is-clearfix"></div>
+
+    @if(false)
+    <div class="container header-widget-wrap">
+        <div class="columns headline-box" style="margin-top: 200px;margin-bottom: 220px;">
+
+        </div>
+        @if(false)
         <div class="columns header-widget">
             @foreach($latestNews as $key=>$pageNews)
                 @if(false)
@@ -146,7 +159,10 @@
                 @endif
             @endforeach
         </div>
+        @endif
     </div>
+    @endif
+    @if(false)
     <div class="container header-events-wrap">
         <div class="content">
             <div class="columns is-marginless">
@@ -176,4 +192,5 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
