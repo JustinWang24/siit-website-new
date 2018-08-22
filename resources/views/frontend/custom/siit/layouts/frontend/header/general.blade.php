@@ -2,7 +2,7 @@
     <div class="header-bg-bar bg-dark-blue">
 
     </div>
-    <nav id="navbar" class="container navbar is-spaced bg-dark-blue">
+    <nav id="navbar" class="navbar  is-fixed-top bg-dark-blue">
         <div class="container bg-transparent" id="home-nav-header-general">
             <div class="navbar-brand is-marginless bg-dark-blue">
                 @if(empty($siteConfig->logo))

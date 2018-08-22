@@ -5,6 +5,12 @@ $color-super-light: #f8f8f7;
 $color-page-blue-bg: #06162f;
 $color-page-blue-bg-light: #0d345f;
 
+@import "update";
+
+.container{
+  background-color: transparent;
+}
+
 body{
   //background-color: $color-super-light;
 }
@@ -40,16 +46,16 @@ body{
 }
 
 #navbar{
-  background: white;
-  margin-top: -117px;
+  background-color: #fff;
+  //margin-top: -117px;
   #home-nav-header{
     //height: 831px;
     //background-image: url("/images/frontend/custom/header_bg_ts.jpg");
   }
 }
+
 .navbar-brand{
   height: 117px;
-  background: #fff;
   #logo-top{
     //margin-left: $container-padding-left-desktop;
     margin-left: -18px;
@@ -59,12 +65,15 @@ body{
     }
   }
 }
-
+@media screen and (max-width: 376px){
+  .navbar-brand{
+    height: unset;
+  }
+}
 #navDesktopWrap{
   padding-top: 20px;
   padding-bottom: 17px;
   display: block;
-  background: #fff;
   position: relative;
   height: 117px;
   .navbar-menu{
@@ -231,10 +240,8 @@ body{
 
 // Page
 .company-brief-wrap, .campus-life-wrap, .story-success-wrap, .we-social-wrap{
-  background-color: white;
   margin-top: 0;
   overflow: hidden;
-  min-height: 594px;
   .container{
     background-color: $color-page-blue-bg;
     padding-left: $container-padding-left-desktop;
@@ -244,7 +251,6 @@ body{
       h2{
         font-size: 64px;
         font-weight: lighter;
-        font-family: "Roboto";
         margin: 2px;
         line-height: 66px;
         color: white;
@@ -296,7 +302,7 @@ body{
       .brochure-box{
         position: absolute;
         right: -$container-padding-left-desktop;
-        bottom:-45px;
+        bottom:0;
         border-radius: 0;
         background-color: #e32316;
         width: 63%;
@@ -326,11 +332,11 @@ body{
   .container {
     background: transparent;
     .box{
-      background: white;
+      background: #585858b5;
       padding: 30px;
       border-radius: 0;
       h3, p{
-        color: #333;
+        color: #fff;
       }
       h3{
         font-size: 30px;

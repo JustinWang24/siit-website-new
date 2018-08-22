@@ -68,6 +68,7 @@ class Products extends Controller
 
         if($product->type == ProductType::$SHORT_COURSE){
             // Todo 短期课程
+            $this->dataForView['vuejs_libs_required'] = ['product_view'];
             return view(_get_frontend_theme_path('catalog.short_course'),$this->dataForView);
         }elseif($product->type === ProductType::$CCL_COURSE){
             $this->dataForView['intakes'] = $product->getCCLcourseIntakes();

@@ -7,7 +7,7 @@
 <div class="header-bg-bar">
 
 </div>
-    <nav id="navbar" class="navbar container is-spaced">
+    <nav id="navbar" class="navbar is-fixed-top">
         <div class="container bg-transparent" id="home-nav-header">
             <div class="navbar-brand is-marginless">
                 @if(empty($siteConfig->logo))
@@ -39,7 +39,6 @@
                         @endif
                     </div>
                 </div>
-
                 <div class="navbar-menu">
                     <div class="navbar-end big-nav">
                         @foreach($rootMenus as $key=>$rootMenu)
@@ -59,8 +58,8 @@
                                     <div class="navbar-dropdown is-boxed">
                                         @foreach($children as $sub)
                                             @php
-                                            $menuUrl = $sub->getMenuUrl();
-                                            $pathwaySubmenu = strpos($menuUrl,'University-Pathway-Collection') !== false;
+                                                $menuUrl = $sub->getMenuUrl();
+                                                $pathwaySubmenu = strpos($menuUrl,'University-Pathway-Collection') !== false;
                                             @endphp
                                             @if($pathwaySubmenu)
                                                 {{-- 对pathway的特殊处理 --}}
@@ -74,11 +73,11 @@
                                                             </a>
                                                             <ul id="pathway-list-subs" class="hidden" style="margin-top: 0;">
                                                                 @foreach($pathways as $product)
-                                                                <li>
-                                                                    <a href="{{ url('catalog/product/'.$product->uri) }}">
-                                                                        {{ $product->getName() }} - {{ trans('general.'.$product->brand).(app()->getLocale()=='cn'?null:trans('general.Campus')) }}
-                                                                    </a>
-                                                                </li>
+                                                                    <li>
+                                                                        <a href="{{ url('catalog/product/'.$product->uri) }}">
+                                                                            {{ $product->getName() }} - {{ trans('general.'.$product->brand).(app()->getLocale()=='cn'?null:trans('general.Campus')) }}
+                                                                        </a>
+                                                                    </li>
                                                                 @endforeach
                                                             </ul>
                                                         </li>
@@ -107,6 +106,7 @@
                     </div>
                 </div>
 
+
                 <div id="search-form-wrap">
                     <div id="search-btn">
                         <p><i class="fas fa-search"></i></p>
@@ -115,14 +115,21 @@
             </div>
         </div>
     </nav>
-    <div class="container">
-        <img src="{{ asset('/images/frontend/custom/header_bg_ts.jpg') }}" alt="header bg">
-    </div>
-    <div class="is-clearfix"></div>
-    <div class="container header-widget-wrap">
-        <div class="columns headline-box" style="margin-top: 200px;margin-bottom: 220px;">
+    <section class="bg-img d-flex" style="background-image: url({{ asset('/images/frontend/h1.png') }});min-height:800px;">
+    <div class="container align-self-center" >
+        <div class="home-text">
             <h2 class="has-text-centered">A BRIDGE <span class="super-bold">ACROSS</span> CULTURES</h2>
         </div>
+    </div>
+    </section>
+    <div class="is-clearfix"></div>
+
+    @if(false)
+    <div class="container header-widget-wrap">
+        <div class="columns headline-box" style="margin-top: 200px;margin-bottom: 220px;">
+
+        </div>
+        @if(false)
         <div class="columns header-widget">
             @foreach($latestNews as $key=>$pageNews)
                 @if(false)
@@ -146,7 +153,10 @@
                 @endif
             @endforeach
         </div>
+        @endif
     </div>
+    @endif
+    @if(false)
     <div class="container header-events-wrap">
         <div class="content">
             <div class="columns is-marginless">
@@ -176,4 +186,5 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
