@@ -46,7 +46,8 @@ body{
 }
 
 #navbar{
-  margin-top: -117px;
+  background-color: #fff;
+  //margin-top: -117px;
   #home-nav-header{
     //height: 831px;
     //background-image: url("/images/frontend/custom/header_bg_ts.jpg");
@@ -250,7 +251,6 @@ body{
       h2{
         font-size: 64px;
         font-weight: lighter;
-        font-family: "Roboto";
         margin: 2px;
         line-height: 66px;
         color: white;

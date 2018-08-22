@@ -5,7 +5,7 @@
             <div class="columns is-marginless">
                 <div class="column is-three-quarters first-visiting">
                     <h2>FIRST</h2>
-                    <h2>TIME <span class="super-bold">Visiting</span></h2>
+                    <h2>TIME VISITING</h2>
                     <br>
                     <div class="columns mt-20">
                         @foreach($topStories as $key=>$blog)
