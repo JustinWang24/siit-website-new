@@ -1,5 +1,10 @@
 @extends(_get_frontend_layout_path('frontend'))
 @section('content')
+    <style>
+        .content table td{
+            vertical-align: middle;
+        }
+    </style>
     <div class="container mt-10 mb-10">
 
         <div class="content">
@@ -26,6 +31,7 @@
                         </a>
                     </h3>
                 </div>
+
                 <div class="column is-four-fifths">
                     @if(!empty($page->feature_image))
                         <img src="{{ $page->getFeatureImageUrl() }}" alt="{{ $page->title }}" style="width: 100%;">
