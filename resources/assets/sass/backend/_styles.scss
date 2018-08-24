@@ -1,5 +1,6 @@
 //@import "redactor/redactor";
-@import "redactor3/redactor";
+@import "redactor3_1_1/redactor";
+//@import "redactor3/redactor";
 @import "redactor3/variable_plugin";
 @import "redactor3/filemanager";
 @import url("https://fonts.googleapis.com/css?family=Oswald");
@@ -9,7 +10,7 @@ h1,h2,h3,h4,h5,p,a,span,li,td,div{
 
 .admin-login-wrapper{
   height: 100%;
-  background-image: url("../../images/backend/login-bg.jpg");
+  //background-image: url("login_bg.jpg");
   background-position: center 0;
   background-repeat: no-repeat;
   background-size: cover;
@@ -17,7 +18,7 @@ h1,h2,h3,h4,h5,p,a,span,li,td,div{
 }
 .partner-login-wrapper{
   height: 100%;
-  background-image: url("../../images/backend/partner-bg.jpg");
+  //background-image: url("partner_bg.jpg");
   background-position: center 0;
   background-repeat: no-repeat;
   background-size: cover;

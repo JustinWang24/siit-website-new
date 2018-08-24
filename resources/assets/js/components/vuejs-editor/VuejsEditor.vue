@@ -7,7 +7,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-    require('./lib3/redactor3')
+    require('./lib3_1_1/redactor3')
     require('./lib3/plugins/variable')
     require('./lib3/plugins/fontcolor')
     require('./lib3/plugins/video')

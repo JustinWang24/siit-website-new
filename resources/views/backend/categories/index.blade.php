@@ -4,7 +4,7 @@
     <div id="categories-manager-app" class="content">
         <br>
         <div class="columns">
-            <div class="column is-one-fifth">
+            <div class="column is-one-third">
                 <h2 class="is-size-4">
                     {{ trans('admin.menu.categories') }} {{ trans('admin.mgr') }}
                 </h2>
@@ -19,7 +19,7 @@
                 >
                 </el-tree>
             </div>
-            <div class="column is-four-fifth">
+            <div class="column is-two-third">
                 <div class="columns">
                     <div class="column">
                         <div class="high-light-box">
