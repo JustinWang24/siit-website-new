@@ -6,7 +6,7 @@ return [
     'system_busy'=>'System is busy, please try later!',
     // header
     'student_login'=>'Student Login',
-    'my_dashboard'=>'My Dashboard',
+    'my_dashboard'=>'Student Portal',
     'menu_logout'=>'Logout',
     'switch_language'=>'中文',
     'Choose_a_file'=>'Choose a file ..',

@@ -74,7 +74,7 @@
                             short-codes-load-url="/api/widgets/load-short-codes"
                     ></vuejs-editor>
                 </el-form-item>
-                <el-form-item label="Content">
+                <el-form-item label="中文内容">
                     <vuejs-editor
                             ref="pageContentEditorCN"
                             class="rich-text-editor"
