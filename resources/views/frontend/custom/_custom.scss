@@ -33,7 +33,7 @@ body{
 // Navigation bar
 .header-bg-bar{
   z-index: -1;
-  height: 117px;
+  height: 55px;
   //background-color: $color-deep-blue;
   //background-color: #12243a;
 }
@@ -55,15 +55,22 @@ body{
 }
 
 .navbar-brand{
-  height: 117px;
+  max-width: 180px;
+  align-self: center;
   #logo-top{
-    //margin-left: $container-padding-left-desktop;
-    margin-left: -18px;
-    margin-top: 3px;
-    .image{
-      width: 56%;
-    }
+  width:100%;
   }
+}
+#logo-top{
+  img{
+    margin-top: 0.6em;
+    margin-bottom: 0.3em;
+  }
+}
+
+#search-form-wrap{
+  display: flex;
+  align-self: center;
 }
 @media screen and (max-width: 376px){
   .navbar-brand{
@@ -71,11 +78,9 @@ body{
   }
 }
 #navDesktopWrap{
-  padding-top: 20px;
-  padding-bottom: 17px;
+  padding-top: 10px;
   display: block;
   position: relative;
-  height: 117px;
   .navbar-menu{
     width: 95%;
     .sm-nav{
@@ -528,3 +533,4 @@ body{
   -moz-box-shadow: 10px 10px 34px -4px rgba(0,0,0,0.13);
   box-shadow: 10px 10px 34px -4px rgba(0,0,0,0.13);
 }
+
