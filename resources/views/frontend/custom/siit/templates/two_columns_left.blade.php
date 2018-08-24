@@ -61,7 +61,6 @@
                 ?>
                 <div class="content pl-20">
                     <hr>
-
                     @foreach($trainingStaffItems as $campusName=>$staffItems)
                         <h2 class="has-text-centered">{{ $campusName }}</h2>
                         <div class="content">

@@ -99,4 +99,5 @@ return [
     'fill_9_below'=>'是, 请在下面的第9栏中填入优惠代码',
     'yes'=>'是',
     'no'=>'否',
+    'intake_dates_page_title'=>'开学日期',
 ];

@@ -15,6 +15,7 @@ class ContentTool
     public static $LAYOUT_TWO_COLUMNS_LEFT  = 3;
     public static $LAYOUT_TWO_COLUMNS_RIGHT = 2;
     public static $LAYOUT_ONE_COLUMN        = 1;
+    public static $LAYOUT_INTAKE_DATES      = 5;
 
     /**
      * 根目录的ID
@@ -85,6 +86,7 @@ class ContentTool
             self::$LAYOUT_TWO_COLUMNS_LEFT      => 'Two Columns',
             self::$LAYOUT_TWO_COLUMNS_RIGHT     => 'Two Columns with Right Sidebar',
             self::$LAYOUT_THREE_COLUMNS         => 'Three Columns',
+            self::$LAYOUT_INTAKE_DATES          => 'Intake Dates Page',
         ];
     }
 

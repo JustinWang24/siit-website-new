@@ -277,6 +277,9 @@ class Pages extends Controller
                 case ContentTool::$LAYOUT_THREE_COLUMNS:
                     $template = 'templates.three_columns';
                     break;
+                case ContentTool::$LAYOUT_INTAKE_DATES:
+                    $template = 'templates.intake_dates';
+                    break;
                 default:
                     $template = 'pages.404';
                     break;

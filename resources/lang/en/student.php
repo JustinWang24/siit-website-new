@@ -76,7 +76,4 @@ return [
     'applying_exemptions_placeholder'=>'',
     'heard_from'=>'Where did you heard about us?',
     'heard_from_placeholder'=>'',
-    ''=>'',
-    '_placeholder'=>'',''=>'',
-    '_placeholder'=>'',
 ];

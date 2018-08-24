@@ -100,4 +100,5 @@ return [
     'fill_9_below'=>'please fill in the question No.9 below',
     'yes'=>'YES',
     'no'=>'NO',
+    'intake_dates_page_title'=>'Proposed Intake Dates',
 ];
