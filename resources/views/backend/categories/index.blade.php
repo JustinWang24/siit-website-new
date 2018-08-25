@@ -28,13 +28,13 @@
                     </div>
                     <div class="column">
                         <el-button class="is-pulled-right" type="primary" v-on:click="createNewCategoryForm">
-                            <i class="el-icon-plus"></i>&nbsp; New Category
+                            <i class="el-icon-plus"></i>&nbsp;New
                         </el-button>
                         <el-button class="is-pulled-right mr-20" type="default" v-on:click="createNewRootCategoryForm">
-                            <i class="el-icon-plus"></i>&nbsp; New Root Category
+                            <i class="el-icon-plus"></i>&nbsp;New Root
                         </el-button>
                         <el-button class="is-pulled-right mr-20" type="danger" v-on:click="dialogVisible = true">
-                            <i class="el-icon-delete"></i>&nbsp; Delete
+                            <i class="el-icon-delete"></i>
                         </el-button>
                     </div>
                 </div>
