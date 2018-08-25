@@ -47,7 +47,7 @@
                                     if($cats){
                                         foreach ($cats as $cat) {
                                             ?>
-                                <span class="badge badge-light">{{ $cat->name }}</span>
+                                <p class="is-marginless">{{ $cat->name }}</p>
                                             <?php
                                         }
                                     }
