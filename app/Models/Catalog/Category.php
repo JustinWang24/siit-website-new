@@ -153,6 +153,9 @@ class Category extends Model
      * @return int
      */
     public static function Tree($root = 1){
+        /**
+         * @var Category $root
+         */
         $root = self::find($root);
         $root->loadTree();
         return $root;
@@ -288,7 +291,8 @@ class Category extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function children(){
-        return $this->hasMany(Category::class,'parent_id');
+        return $this->hasMany(Category::class,'parent_id')
+            ->orderBy('position','asc');
     }
 
     /**

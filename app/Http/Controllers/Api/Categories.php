@@ -28,6 +28,7 @@ class Categories extends Controller
      * 删除目录的方法
      * @param Request $request
      * @return string
+     * @throws \Exception
      */
     public function delete(Request $request){
         if($request->get('category') && Category::Terminate($request->get('category'))){
@@ -41,6 +42,7 @@ class Categories extends Controller
      * 为后台提供的保存分类目录信息的方法
      * @param Request $request
      * @return string
+     * @throws \Exception
      */
     public function save(Request $request){
         $categoryData = $request->get('category');

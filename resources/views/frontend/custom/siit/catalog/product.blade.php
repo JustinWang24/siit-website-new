@@ -51,6 +51,7 @@
                                     $languages = \App\Models\Catalog\IntakeItem::GetSupportedLanguages();
                                     $today = \Carbon\Carbon::today();
                                 ?>
+                                @if(count($languages) > 0)
                                     <hr>
                                     <h2 class="is-size-4-desktop is-size-4-mobile has-text-grey">
                                         {{ trans('general.Proposed_Language') }}
@@ -64,6 +65,9 @@
                                             @endforeach
                                         @endforeach
                                     </el-select>
+                                @else
+
+                                @endif
                             </div>
                             <div class="row mt-20">
                                 <h2 class="is-size-4-desktop is-size-4-mobile has-text-grey mt-10">{{ trans('general.Scheduled_Intake') }}</h2>
