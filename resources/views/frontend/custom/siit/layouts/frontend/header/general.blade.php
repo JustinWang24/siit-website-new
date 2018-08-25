@@ -122,16 +122,16 @@
                                         <div class="aside">
                                             <ul class="menu-list">
                                                 <li>
-                                                    <a class="navbar-item has-low-level-menus" data-content="#pathway-list-subs" href="#" title="{{ app()->getLocale()=='cn' && !empty($subCategory->name_cn) ? $subCategory->name_cn : $subCategory->name }}">
+                                                    <a class="navbar-item has-low-level-menus" data-content="#pathway-list-subs{{ $subCategory->uri }}" href="#" title="{{ app()->getLocale()=='cn' && !empty($subCategory->name_cn) ? $subCategory->name_cn : $subCategory->name }}">
                                                         <i class="fas fa-plus has-text-grey" style="margin-left: 0;"></i>
                                                         <i class="fas fa-minus has-text-grey" style="margin-left: 0;display: none;"></i>
                                                         {{ app()->getLocale()=='cn' && !empty($subCategory->name_cn) ? $subCategory->name_cn : $subCategory->name }}
                                                     </a>
-                                                    <ul id="pathway-list-subs" class="mt-0 hidden">
+                                                    <ul id="pathway-list-subs{{ $subCategory->uri }}" class="mt-0 hidden">
                                                         @foreach($courses as $course)
                                                             <li>
                                                                 <a href="{{ url('catalog/product/'.$course->uri) }}">
-                                                                    {{ $course->getName() }} - {{ trans('general.'.$course->brand).(app()->getLocale()=='cn'?null:trans('general.Campus')) }}
+                                                                    {{ trans('general.'.$course->brand).(app()->getLocale()=='cn'?null:trans('general.Campus')) }}
                                                                 </a>
                                                             </li>
                                                         @endforeach
