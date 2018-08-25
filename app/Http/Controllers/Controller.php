@@ -50,6 +50,12 @@ class Controller extends BaseController
     {
         $this->dataForView['agentObject'] = new Agent();
         $this->dataForView['rootMenus'] = Menu::getRootMenus();
+
+        // 前端页面的菜单, 第一个为About us, 接admission, 然后插入3个Tags命名的
+        $categoryTags = Category::Tree(6);
+        $this->dataForView['categoryTags'] = $categoryTags->children;
+        // 加载 Category Tags 结束
+
         $this->siteConfig = Configuration::find(1);
         $this->dataForView['siteConfig'] = $this->siteConfig;
 

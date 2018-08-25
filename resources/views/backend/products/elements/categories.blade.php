@@ -58,19 +58,38 @@
 <hr>
 <h5 class="desc-text">Categories</h5>
 <div class="content">
-    <?php
-    $chunks = $categories->chunk(6);
-    ?>
-    @foreach($chunks as $row)
-        <div class="columns is-multiline">
-            @foreach($row as $key=>$category)
-                <div class="column is-2 form-check form-check-inline">
-                    <label class="checkbox form-check-label">
-                        <input v-model="categories" class="checkbox form-check-input"
-                               type="checkbox" value="{{ $category->id }}"> {{ $category->name }}
-                    </label>
+    @foreach($categoriesTree['children'] as $key=>$levelOne)
+        <article class="message is-info">
+            <div class="message-header">
+                <label class="checkbox form-check-label">
+                    <input v-model="categories" class="checkbox form-check-input"
+                           type="checkbox" value="{{ $levelOne['id'] }}"> {{ $levelOne['name'] }}
+                </label>
+            </div>
+            @if(count($levelOne['children'])>0)
+                <div class="message-body">
+                    @foreach($levelOne['children'] as $key=>$levelTwo)
+                        <p>
+                            <label class="checkbox form-check-label">
+                                <input v-model="categories" class="checkbox form-check-input"
+                                       type="checkbox" value="{{ $levelTwo['id'] }}"> - {{ $levelTwo['name'] }}
+                            </label>
+                        </p>
+                        @if(isset($levelTwo['children']) && count($levelTwo['children']))
+                            <div class="panel" style="padding-left: 40px;">
+                                @foreach($levelTwo['children'] as $levelThree)
+                                    <p>
+                                        <label class="form-check-label" style="margin-right: 20px;">
+                                            <input v-model="categories" class="checkbox form-check-input"
+                                                   type="checkbox" value="{{ $levelThree['id'] }}"> -- {{ $levelThree['name'] }}
+                                        </label>
+                                    </p>
+                                @endforeach
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
-            @endforeach
-        </div>
+            @endif
+        </article>
     @endforeach
 </div>
