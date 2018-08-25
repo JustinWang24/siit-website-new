@@ -10,32 +10,93 @@
                 </div>
                 <nav class="column is-three-quarters">
                     <div class="columns">
-
-                        {{--@foreach($rootMenus as $key=>$rootMenu)
-                            <div class="column">
-                                <?php
-                                $tag = $rootMenu->html_tag;
-                                $children = $rootMenu->getSubMenus();
-                                ?>
-                                <p style="border-bottom: solid 1px white;line-height: 36px;">
-                                <a class="is-size-4" href="{{ $rootMenu->link_to=='/' ? '/' : $rootMenu->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($rootMenu->name_cn) ? $rootMenu->name_cn : $rootMenu->name }}">
-                                    {{ app()->getLocale()=='cn' && !empty($rootMenu->name_cn) ? $rootMenu->name_cn : $rootMenu->name }}
+                        <div class="column">
+                            <p style="border-bottom: solid 1px white;line-height: 36px;">
+                                <a class="is-size-4" href="#" title="{{ trans('general.Quick_links') }}">
+                                    {{ trans('general.Quick_links') }}
                                 </a>
-                                </p>
-                                @if(count($children) > 0)
+                            </p>
+                            <p>
+                                <a href="{{ url('/page/intake-dates-2018') }}" title="{{ trans('general.Important_Dates') }}">
+                                    {{ trans('general.Important_Dates') }}
+                                </a>
+                            </p>
+                            <p>
+                                <a href="{{ url('/page/blog') }}" title="{{ trans('general.News_Events') }}">
+                                    {{ trans('general.News_Events') }}
+                                </a>
+                            </p>
+                            <p>
+                                <a href="https://apei.moodle.com.au/" title="{{ trans('general.Study_online') }}">
+                                    {{ trans('general.Study_online') }}
+                                </a>
+                            </p>
+                            <p>
+                                <a href="{{ url('/page/jobs') }}" title="{{ trans('general.Jobs') }}">
+                                    {{ trans('general.Jobs') }}
+                                </a>
+                            </p>
+                            <p>
+                                <a href="{{ url('/page/internship') }}" title="{{ trans('general.Jobs') }}">
+                                    {{ trans('general.Recruit_a_Student') }}
+                                </a>
+                            </p>
+                            <p>
+                                <a href="https://www.livingin-australia.com/" title="{{ trans('general.Jobs') }}" target="_blank">
+                                    {{ trans('general.Live_in_Australia') }}
+                                </a>
+                            </p>
+                            <p>
+                                <a href="{{ route('contact_us') }}" title="{{ trans('general.Jobs') }}">
+                                    {{ trans('general.Enquiries') }}
+                                </a>
+                            </p>
+                            <p>
+                                <a href="{{ url('/page/campus-map') }}" title="{{ trans('general.Jobs') }}" target="_blank">
+                                    {{ trans('general.Campus_map') }}
+                                </a>
+                            </p>
+                        </div>
+                        <div class="column">
+                            <p style="border-bottom: solid 1px white;line-height: 36px;">
+                                <a class="is-size-4" href="#" title="{{ trans('general.Partnerships') }}">
+                                    {{ trans('general.Partnerships') }}
+                                </a>
+                            </p>
+                            <p>
+                                <a href="http://chcservices.edu.au/" title="CHC Services">
+                                    <img src="http://chcservices.edu.au/wp-content/uploads/2017/10/chc_logo.jpg" alt="CHC Services">
+                                </a>
+                            </p>
+                            <p>
+                                <a href="http://http://tiis.edu.au//" title="TIIS">
+                                    <img src="{{ asset('images/frontend/custom/tiis_logo.jpg') }}" alt="Pollard English">
+                                </a>
+                            </p>
 
-                                        @foreach($children as $sub)
-                                            <p>
-                                            <a class="" href="{{ $sub->link_to=='/' ? '/' : $sub->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}">
-                                                {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
-                                            </a>
-                                            </p>
-                                        @endforeach
-
-                                @endif
-                            </div>
-                        @endforeach--}}
-
+                            <p>
+                                <a href="https://www.naati.com.au/" title="NATTI" target="_blank">
+                                    NATTI
+                                </a>
+                            </p>
+                        </div>
+                        <div class="column">
+                            <p style="border-bottom: solid 1px white;line-height: 36px;">
+                                <a class="is-size-4" href="#" title="">
+                                    &nbsp;
+                                </a>
+                            </p>
+                            <p>
+                                <a href="http://oncallinterpreters.com.au/" title="Pollard English">
+                                    <img src="{{ asset('images/frontend/custom/pe_logo.jpg') }}" alt="Pollard English">
+                                </a>
+                            </p>
+                            <p>
+                                <a href="http://oncallinterpreters.com.au/" title="Oncall Interpreters & Translators">
+                                    <img src="{{ asset('images/frontend/custom/oncall_logo.jpg') }}" alt="Oncall Interpreters & Translators">
+                                </a>
+                            </p>
+                        </div>
                     </div>
                 </nav>
             </div>
