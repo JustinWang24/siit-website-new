@@ -131,7 +131,7 @@
                                                         <i class="fas fa-minus has-text-grey" style="margin-left: 0;display: none;"></i>
                                                         {{ app()->getLocale()=='cn' && !empty($subCategory->name_cn) ? $subCategory->name_cn : $subCategory->name }}
                                                     </a>
-                                                    <ul id="pathway-list-subs{{ $randomString}}" class="mt-0 hidden">
+                                                    <ul id="pathway-list-subs{{ $randomString}}" class="has-low-level-menus-children mt-0 hidden">
                                                         @foreach($courses as $course)
                                                             <li>
                                                                 <a href="{{ url('catalog/product/'.$course->uri) }}">
