@@ -5,10 +5,10 @@
         <div class="container">
             <div class="columns">
                 <div class="column">
-                    {!! \App\Models\Utils\AMP\MediaUtil::NormalImage(asset($siteConfig->logo_dark),'SIIT: a bridge across cultures', 254, 117, 'image') !!}
-                    <img src="{{ asset('images/frontend/custom/new-ape.png') }}" alt="APEI" style="width: 254px; margin-top: 14px;">
+                    <img src="{{ asset('images/frontend/custom/new-ape.png') }}" alt="APEI" style="width: 200px; margin-top: 14px;">
+                    {!! \App\Models\Utils\AMP\MediaUtil::NormalImage(asset($siteConfig->logo_dark),'SIIT: a bridge across cultures', 200, 117, 'image') !!}
                 </div>
-                <nav class="column is-three-quarters">
+                <nav class="column is-four-fifths">
                     <div class="columns">
                         <div class="column">
                             <p style="border-bottom: solid 1px white;line-height: 36px;">
@@ -31,6 +31,13 @@
                                     {{ trans('general.Study_online') }}
                                 </a>
                             </p>
+                        </div>
+                        <div class="column">
+                            <p style="border-bottom: solid 1px white;line-height: 36px;">
+                                <a class="is-size-4" href="#" title="">
+                                    &nbsp;
+                                </a>
+                            </p>
                             <p>
                                 <a href="{{ url('/page/jobs') }}" title="{{ trans('general.Jobs') }}">
                                     {{ trans('general.Jobs') }}
@@ -46,6 +53,13 @@
                                     {{ trans('general.Live_in_Australia') }}
                                 </a>
                             </p>
+                        </div>
+                        <div class="column">
+                            <p style="border-bottom: solid 1px white;line-height: 36px;">
+                                <a class="is-size-4" href="#" title="">
+                                    &nbsp;
+                                </a>
+                            </p>
                             <p>
                                 <a href="{{ route('contact_us') }}" title="{{ trans('general.Jobs') }}">
                                     {{ trans('general.Enquiries') }}
@@ -57,7 +71,7 @@
                                 </a>
                             </p>
                         </div>
-                        <div class="column">
+                        <div class="column footer-logo">
                             <p style="border-bottom: solid 1px white;line-height: 36px;">
                                 <a class="is-size-4" href="#" title="{{ trans('general.Partnerships') }}">
                                     {{ trans('general.Partnerships') }}
@@ -69,21 +83,8 @@
                                 </a>
                             </p>
                             <p>
-                                <a href="http://http://tiis.edu.au//" title="TIIS">
+                                <a href="http://http://tiis.edu.au/" title="TIIS">
                                     <img src="{{ asset('images/frontend/custom/tiis_logo.jpg') }}" alt="Pollard English">
-                                </a>
-                            </p>
-
-                            <p>
-                                <a href="https://www.naati.com.au/" title="NATTI" target="_blank">
-                                    NATTI
-                                </a>
-                            </p>
-                        </div>
-                        <div class="column">
-                            <p style="border-bottom: solid 1px white;line-height: 36px;">
-                                <a class="is-size-4" href="#" title="">
-                                    &nbsp;
                                 </a>
                             </p>
                             <p>
@@ -91,11 +92,7 @@
                                     <img src="{{ asset('images/frontend/custom/pe_logo.jpg') }}" alt="Pollard English">
                                 </a>
                             </p>
-                            <p>
-                                <a href="http://oncallinterpreters.com.au/" title="Oncall Interpreters & Translators">
-                                    <img src="{{ asset('images/frontend/custom/oncall_logo.jpg') }}" alt="Oncall Interpreters & Translators">
-                                </a>
-                            </p>
+
                         </div>
                     </div>
                 </nav>

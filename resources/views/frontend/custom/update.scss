@@ -23,3 +23,18 @@
     text-shadow:4px 3px 14px #000000c7;
   }
 }
+
+.footer-logo{
+  img{
+    max-width: 120px;
+  }
+}
+
+.footer{
+  padding: 3rem 1.5rem 2rem;
+}
+@media screen and (min-width: 1024px){
+  .navbar > .container .navbar-menu, .container > .navbar .navbar-menu {
+    margin-right: 0;
+  }
+}
