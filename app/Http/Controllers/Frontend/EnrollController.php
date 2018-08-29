@@ -124,7 +124,7 @@ class EnrollController extends Controller
         }
 
         // 根据给定的值, 查询经销商 ID 或者 Code
-        $this->dataForView['dealer'] = $dealer?$dealer:new Group();
+        $this->dataForView['dealer'] = $dealer;
 
         // 如果该课程已经过期了
         $this->dataForView['instanceIdAndType'] = $instanceIdAndType;
