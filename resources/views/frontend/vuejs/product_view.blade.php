@@ -26,7 +26,7 @@ $theSpecialPrice = $product->getSpecialPriceGST();
             // 和课程相关的有效的Instances
             axcelerateInstances:[],
             selectedAxcelerateInstanceId:'',
-            intakeItemId: '{{ $product->type==\App\Models\Utils\ProductType::$GENERAL_ITEM ? null : 'unax-'.$product->uuid }}',
+            intakeItemId: '{{ $product->type==\App\Models\Utils\ProductType::$GENERAL_ITEM ? 'ax-'.$product->uuid : 'unax-'.$product->uuid }}',
             agentCode:'{{ $agentCode }}',
             language: '',
             rules:{
@@ -59,13 +59,13 @@ $theSpecialPrice = $product->getSpecialPriceGST();
                 var that = this;
                 axios.post(
                     '/api/axe/courses/instances/load',{
-                        name:"{{ $product->name }}",location:"{{ $product->brand }}"
+                        name:"{{ $product->name }}",location:"{{ $product->brand }}",uuid:"{{ $product->uuid }}"
                     }
                 ).then(function(res){
                     if(res.data.error_no == 100){
                         that.axcelerateInstances = res.data.data.instances;
                     }else {
-                        console.log(res.data);
+                        // console.log(res.data);
                     }
                 });
             },

@@ -104,13 +104,15 @@ class EnrollController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
-    private function _handleAxcelerateCourse($intakeItemId, $instanceIdAndType, Group $dealer, Request $request){
-        $intakeItem = IntakeItem::GetById($intakeItemId);
-        if(!$intakeItem){
-            return view(_get_frontend_theme_path('pages.404'),$this->dataForView);
-        }
+    private function _handleAxcelerateCourse($intakeItemId, $instanceIdAndType, Group $dealer=null, Request $request){
 
-        $course = $intakeItem->inTake->course;
+        $intakeItem = IntakeItem::GetById($intakeItemId);
+        if($intakeItem){
+            $course = $intakeItem->inTake->course;
+        }else{
+            $courseUuid = str_replace('ax-','',$intakeItemId);
+            $course = Product::GetByUuid($courseUuid);
+        }
 
         // 必须要有 Axcelerate 的 instance 数据
         $axcelerateInstance = AxcelerateClient::GetAxcelerateInstanceDetailByIdAndType($instanceIdAndType);
@@ -122,7 +124,7 @@ class EnrollController extends Controller
         }
 
         // 根据给定的值, 查询经销商 ID 或者 Code
-        $this->dataForView['dealer'] = $dealer;
+        $this->dataForView['dealer'] = $dealer?$dealer:new Group();
 
         // 如果该课程已经过期了
         $this->dataForView['instanceIdAndType'] = $instanceIdAndType;
@@ -195,6 +197,9 @@ class EnrollController extends Controller
                 // Todo 1: 根据给定的Email, 去Axcelerate取查找，看是否可以取得对应的 contact ID
                 $contact = $user->getAxcelerateContact();
                 $axcelerateInstance = AxcelerateClient::GetAxcelerateInstanceDetailByIdAndType($enrollData['instance']);
+
+                dd($contact);
+
                 if($contact && $axcelerateInstance){
                     // 获取 Axcelerate Contact 对象成功
                     // todo 保存订单

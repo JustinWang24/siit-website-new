@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\FourSeasonsWear;
 
 use App\Models\Configuration;
+use App\Models\Utils\Axcelerate\AxcelerateClient;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;

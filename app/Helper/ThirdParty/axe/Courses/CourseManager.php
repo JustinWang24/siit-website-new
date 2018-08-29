@@ -29,6 +29,32 @@ class CourseManager extends Manager implements ManagerContract
     }
 
     /**
+     * 根据课程的 ID 获取包含的 instances
+     * @param $courseId
+     * @param $location
+     * @return array
+     */
+    public function getClassesByCourseId($courseId,$location=null){
+        $defaults = [
+            'ID'=>$courseId,
+            'type'=>'p',
+        ];
+        $instances = [];
+        if ($response = $this->getConnection()->get('course/instances', $defaults)) {
+            foreach ($response as $instance) {
+                if($location){
+                    $location = strtoupper($location);
+                    if($location == $instance['LOCATION'])
+                        $instances[] = new Instance($instance, $this);
+                }else{
+                    $instances[] = new Instance($instance, $this);
+                }
+            }
+        }
+        return $instances;
+    }
+
+    /**
      * Search for instances that match the attributes
      *
      * @param array $attributes Attributes to match with
@@ -38,10 +64,6 @@ class CourseManager extends Manager implements ManagerContract
     {
         // Default search parameters
         $defaults = [
-//            'startDate_min' => date('Y-m-d', time() - 3153600000), // 100 years ago
-//            'startDate_max' => date('Y-m-d', time() + 3153600000), // 100 years from now
-//            'finishDate_min' => date('Y-m-d', time() - 3153600000), // 100 years ago
-//            'finishDate_max' => date('Y-m-d', time() + 3153600000), // 100 years from now
             'everything' => true, // A lovely parameter that overwrites the defaults
             'displayLength'=>config('system.PAGE_SIZE'),
             'enrolmentOpen'=>true,
@@ -49,6 +71,27 @@ class CourseManager extends Manager implements ManagerContract
         ];
         $instances = [];
         if ($response = $this->getConnection()->post('course/instance/search', array_merge($defaults, $attributes))) {
+            foreach ($response as $instance) {
+                $instances[] = new Instance($instance, $this);
+            }
+        }
+        return $instances;
+    }
+
+    /**
+     * Get all courses from AxCelerate
+     * @param $attributes
+     * @return array
+     */
+    public function getAll($attributes)
+    {
+        // Default search parameters
+        $defaults = [
+            'isactive'=>true,
+            'type'=>'p'
+        ];
+        $instances = [];
+        if ($response = $this->getConnection()->get('courses', array_merge($defaults,$attributes))) {
             foreach ($response as $instance) {
                 $instances[] = new Instance($instance, $this);
             }

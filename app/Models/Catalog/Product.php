@@ -119,6 +119,24 @@ class Product extends Model
     }
 
     /**
+     * 根据传入的产品的 UUID , 从 axcelerate 获取产品的 classes
+     * @param $productUuid
+     * @param $location
+     * @param null $enrollmentOpenOnly
+     * @param null $publicOnly
+     * @return array|null
+     */
+    public static function GetClassesByCourseId($productUuid,$location,$enrollmentOpenOnly = null,$publicOnly = null){
+        // 获取课程所在的校区
+        $course = self::GetByUuid($productUuid);
+        if($course){
+            $courseManager = AxcelerateClient::GetCourseManager();
+            return $courseManager->getClassesByCourseId($course->axcelerate_course_id, $course->brand);
+        }
+        return null;
+    }
+
+    /**
      * 获取某个课程的开学时间记录
      * @return mixed
      */

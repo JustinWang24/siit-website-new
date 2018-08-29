@@ -20,6 +20,7 @@ use App\Models\Widget\Block;
 use App\Models\Catalog\Category;
 use App\Models\Blog\Event;
 use Illuminate\Support\Facades\URL;
+use App\Models\Utils\Axcelerate\AxcelerateClient;
 
 class Pages extends Controller
 {

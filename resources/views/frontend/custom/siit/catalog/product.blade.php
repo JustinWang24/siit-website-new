@@ -51,7 +51,7 @@
                                     $languages = \App\Models\Catalog\IntakeItem::GetSupportedLanguages();
                                     $today = \Carbon\Carbon::today();
                                 ?>
-                                @if(count($languages) > 0)
+                                @if(false)
                                     <hr>
                                     <h2 class="is-size-4-desktop is-size-4-mobile has-text-grey">
                                         {{ trans('general.Proposed_Language') }}
@@ -82,8 +82,8 @@
                             </div>
                             <div class="add-to-cart-form-wrap">
                                 <input type="hidden" name="quantity" value="1"><!-- 一次报名1人 -->
-                                <button v-on:click="enrollNow($event)" type="submit" class="button is-danger" :disabled="selectedAxcelerateInstanceId.length==0 || intakeItemId==0">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;{{ trans('general.Enroll_Now') }}
+                                <button v-on:click="enrollNow($event)" type="submit" class="button is-danger" :disabled="selectedAxcelerateInstanceId.length==0">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;{{ trans('general.Apply_Now') }}
                                 </button>
                             </div>
                         </form>

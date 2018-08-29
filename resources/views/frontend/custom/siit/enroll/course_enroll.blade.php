@@ -96,10 +96,10 @@
 
                         <form id="catalog-course-enroll-form" action="{{ url('/catalog/course/confirm-book') }}" method="post" enctype="multipart/form-data" class="{{ session('user_data.uuid')?null:'is-invisible' }}">
                             @csrf
-                            <input id="current-intake-item" type="hidden" name="enroll[intake_item]" value="{{ $intakeItem->id }}">
+                            <input id="current-intake-item" type="hidden" name="enroll[intake_item]" value="{{ $intakeItem ? $intakeItem->id : null }}">
                             <input id="current-course-id" type="hidden" name="enroll[course_id]" value="{{ $course->uuid }}">
                             <input id="current-instance-id" type="hidden" name="enroll[instance]" value="{{ $instanceIdAndType }}">
-                            <input type="hidden" name="enroll[productOptions]" value="{{ $productOptions }}">
+                            <input type="hidden" name="enroll[productOptions]" value="{{ isset($productOptions) ? $productOptions : null }}">
                             <input type="hidden" name="student[user_id]" value="{{ session('user_data.uuid') }}">
                             <input id="current-group-id" type="hidden" name="student[agent_id]" value="{{ isset($dealer)&&$dealer ? $dealer->group_code : 0  }}">
                             <input id="current-lang" type="hidden" value="{{ app()->getLocale()  }}">

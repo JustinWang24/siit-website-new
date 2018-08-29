@@ -49,7 +49,6 @@ class Axcelerate
 
     /**
      * Get the manager for courses
-     *
      * @return CourseManager
      */
     public function courses()

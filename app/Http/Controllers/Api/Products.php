@@ -23,37 +23,45 @@ class Products extends Controller
     public function load_instances_by_course_name(Request $request){
         $courseName     = $request->get('name');
         $location       = $request->get('location');
+        $productUuid       = $request->get('uuid');
         $enrollmentOnly = $request->has('enrollmentOnly') ? $request->get('enrollmentOnly') : true;
         $publicOnly     = $request->has('publicOnly') ? $request->get('publicOnly') : true;
         if($courseName){
-            $instances = Product::GetAxcelerateInstanceByName(
-                $courseName,$location,$enrollmentOnly,$publicOnly
+            $instances = Product::GetClassesByCourseId(
+                $productUuid,$location,$enrollmentOnly,$publicOnly
             );
             $data = [];
 
             if($instances){
                 $today = date('Y-m-d');
                 foreach ($instances as $instance) {
+//                    $instanceData = $instance->toArray();
+//                    $startDate = isset($instanceData['startdate']) ? substr($instanceData['startdate'],0,10) : null;
+//                    if(is_null($startDate) || $startDate > $today ){
+//                        // 如果有起始日期, 并且起始日期晚于今天
+//                        $finishDate = isset($instanceData['finishdate']) ? substr($instanceData['finishdate'],0,10) : null;
+//                        $label = (isset($instanceData['code']) ? $instanceData['code'].': ' : '')
+//                            .(isset($instanceData['name']) ? $instanceData['name'].' ' : '')
+//                            .(isset($instanceData['duration']) ? '('.$instanceData['duration'].')' : '');
+//                        if($startDate){
+//                            $label .= ' from '.$startDate;
+//                        }
+//                        if($finishDate){
+//                            $label .= ' to '.$finishDate;
+//                        }
+//                        if(!empty($label)){
+//                            $data[] = [
+//                                'value'=>$instanceData['instanceid'].'_p', // 值为 id 与 type 的组合
+//                                'label'=>$label
+//                            ];
+//                        }
+//                    }
                     $instanceData = $instance->toArray();
-                    $startDate = isset($instanceData['startdate']) ? substr($instanceData['startdate'],0,10) : null;
-                    if(is_null($startDate) || $startDate > $today ){
-                        // 如果有起始日期, 并且起始日期晚于今天
-                        $finishDate = isset($instanceData['finishdate']) ? substr($instanceData['finishdate'],0,10) : null;
-                        $label = (isset($instanceData['code']) ? $instanceData['code'].': ' : '')
-                            .(isset($instanceData['name']) ? $instanceData['name'].' ' : '')
-                            .(isset($instanceData['duration']) ? '('.$instanceData['duration'].')' : '');
-                        if($startDate){
-                            $label .= ' from '.$startDate;
-                        }
-                        if($finishDate){
-                            $label .= ' to '.$finishDate;
-                        }
-                        if(!empty($label)){
-                            $data[] = [
-                                'value'=>$instanceData['instanceid'].'_'.$instanceData['type'], // 值为 id 与 type 的组合
-                                'label'=>$label
-                            ];
-                        }
+                    if($today < $instanceData['startdate']){
+                        $data[] = [
+                            'value'=>$instanceData['instanceid'].'_p', // 值为 id 与 type 的组合
+                            'label'=>$instanceData['name']
+                        ];
                     }
                 }
             }
