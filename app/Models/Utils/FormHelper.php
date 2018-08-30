@@ -47,7 +47,7 @@ class FormHelper
      * @param null $placeholder
      * @param null $label
      */
-    public function simpleTextField($modelName,$fieldName, $isRequired = true, $fieldValue=null, $placeholder=null, $label=null){
+    public function simpleTextField($modelName,$fieldName, $isRequired = true, $fieldValue=null, $placeholder=null, $label=null, $isReadOnly=false){
         if(is_null($placeholder)){
             $placeholder = $this->_i18n($modelName,$fieldName.'_placeholder');
         }
@@ -69,7 +69,9 @@ class FormHelper
         ?>
         <div class="field">
             <label class="label"><?php echo $label; ?></label>
-            <div class="control"><input name="<?php echo $modelName.'['.$fieldName.']'; ?>" class="input" type="<?php echo $type; ?>" placeholder="<?php echo $placeholder; ?>" value="<?php echo $fieldValue; ?>"<?php echo $isRequired?' required':null ?>></div>
+            <div class="control">
+                <input name="<?php echo $modelName.'['.$fieldName.']'; ?>" class="input" type="<?php echo $type; ?>" placeholder="<?php echo $placeholder; ?>" value="<?php echo $fieldValue; ?>"<?php echo $isRequired?' required':null ?><?php echo $isReadOnly?' readonly':null ?>>
+            </div>
         </div>
         <?php
     }
