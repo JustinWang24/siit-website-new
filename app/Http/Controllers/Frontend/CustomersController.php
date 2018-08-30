@@ -115,6 +115,7 @@ class CustomersController extends Controller
      * Save wholesaler account action
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
     public function save_wholesale(Request $request){
         $userData = $request->all();
@@ -359,8 +360,9 @@ class CustomersController extends Controller
     /**
      * 保存用户提交的request数据的私有方法
      * @param $data
-     * @param bool $passwordIsRequired  // 是否需要用户提交密码
+     * @param bool $passwordIsRequired
      * @return array
+     * @throws \Exception
      */
     private function _saveNewCustomer($data,$passwordIsRequired = true){
         // 这个是注册用户的位置

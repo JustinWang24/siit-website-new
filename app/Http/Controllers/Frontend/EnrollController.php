@@ -66,7 +66,11 @@ class EnrollController extends Controller
         }
 
         // todo: 检查intake, 如果是 inax- 开头的，表示非 Axcelerate 的课程
-        if( strpos($intakeItemId,'unax-') !== false ){
+        $course = Product::GetByUuid($request->get('product_id'));
+        if( $course && empty($course->axcelerate_course_id) ){
+            /**
+             * 课程没有 axcelerate_course_id 表示非 Axcelerate的课程
+             */
             $all = $request->all();
             $course = Product::GetByUuid($request->get('product_id'));
             $this->_handleInaxcelerateCourse($course, $agent);
@@ -110,14 +114,33 @@ class EnrollController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
     private function _handleAxcelerateCourse($intakeItemId, $instanceIdAndType, Group $dealer=null, Request $request){
+        $course = null;
 
         $intakeItem = $intakeItemId ? IntakeItem::GetById($intakeItemId) : null;
         if($intakeItem){
             $course = $intakeItem->inTake->course;
         }else{
-            $courseUuid = str_replace('ax-','',$intakeItemId);
-            $course = Product::GetByUuid($courseUuid);
+            // 一定要找出product uuid
+            if(str_start($intakeItemId,'ax-')){
+                $courseUuid = str_replace('ax-','',$intakeItemId);
+            }elseif (str_start($intakeItemId,'unax-')){
+                $courseUuid = str_replace('unax-','',$intakeItemId);
+            }
+
+            if($request->get('product_id')){
+                $course = Product::GetByUuid($request->get('product_id'));
+            }else{
+                if(strpos($intakeItemId,'unax-') === 0){
+                    $courseUuid = str_replace('unax-','',$intakeItemId);
+                }elseif (strpos($intakeItemId,'ax-') === 0){
+                    $courseUuid = str_replace('ax-','',$intakeItemId);
+                }
+                $course = Product::GetByUuid($courseUuid);
+            }
         }
+
+//        dump($course);
+//        dd($instanceIdAndType);
 
         // 必须要有 Axcelerate 的 instance 数据
         $axcelerateInstance = AxcelerateClient::GetAxcelerateInstanceDetailByIdAndType($instanceIdAndType);
@@ -203,6 +226,8 @@ class EnrollController extends Controller
                 $contact = $user->getAxcelerateContact();
                 $axcelerateInstance = AxcelerateClient::GetAxcelerateInstanceDetailByIdAndType($enrollData['instance']);
 
+                $errorMsg = 'Sorry, system is busy now, Please try again!';
+
                 if($contact && $axcelerateInstance){
                     // 获取 Axcelerate Contact 对象成功
                     // todo 保存订单
@@ -227,6 +252,7 @@ class EnrollController extends Controller
                             $result = $contact->enrolmentForInstance($axcelerateInstance)
                                 ->enrol($orderPlaced,$enrollData);
                         }catch (\Exception $e){
+                            $errorMsg = $e->getMessage();
                             $result = false;
                         }
 
@@ -247,8 +273,8 @@ class EnrollController extends Controller
 
                 Log::info('AxcelerateEnrolFailed',$enrollData);
                 // 操作失败
-                session()->flash('msg', ['content' => 'Sorry, system is busy now, Please try again!', 'status' => 'danger']);
-                return redirect('/catalog/course/book/'.$enrollData['intake_item'].'?agent='.$studentProfileData['agent_id'].'&instance='.$enrollData['instance']);
+                session()->flash('msg', ['content' => $errorMsg, 'status' => 'danger']);
+                return redirect('/catalog/course/book/'.$enrollData['intake_item'].'?agent='.$studentProfileData['agent_id'].'&instance='.$enrollData['instance'].'&product_id='.$course->uuid);
             }else{
                 // Todo 获取非Axcelerate课程的 options
                 $productOptionsId = explode(',',$enrollData['productOptions']);

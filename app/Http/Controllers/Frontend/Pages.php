@@ -37,7 +37,8 @@ class Pages extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(){
-        //        $ins = AxcelerateClient::GetCourseManager()->getAll([]);
+//                $ins = AxcelerateClient::GetCourseManager()->getAll([]);
+//                dd($ins);
         //        $ins = AxcelerateClient::GetCourseManager()
         //          ->getDetailByCourseId(21163);
 
