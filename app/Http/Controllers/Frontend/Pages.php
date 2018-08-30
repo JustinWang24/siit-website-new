@@ -37,6 +37,10 @@ class Pages extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(){
+//        dump(AxcelerateClient::GetEnv());
+//        $ins = AxcelerateClient::GetInstance()->courses()->getAll([]);
+//        dd($ins);
+
         $page = Page::where('uri','/')->first();
         $this->dataForView['page'] = $page;
 
