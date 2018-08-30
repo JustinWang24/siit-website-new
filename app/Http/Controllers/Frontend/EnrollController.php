@@ -28,7 +28,7 @@ class EnrollController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
-    public function course_enroll($intakeItemId, Request $request){
+    public function course_enroll($intakeItemId=null, Request $request){
         $this->dataForView['pageTitle'] = 'Intake Latest';
         $this->dataForView['metaKeywords'] = 'Intake Latest';
         $this->dataForView['metaDescription'] = 'Intake Latest';
@@ -111,7 +111,7 @@ class EnrollController extends Controller
      */
     private function _handleAxcelerateCourse($intakeItemId, $instanceIdAndType, Group $dealer=null, Request $request){
 
-        $intakeItem = IntakeItem::GetById($intakeItemId);
+        $intakeItem = $intakeItemId ? IntakeItem::GetById($intakeItemId) : null;
         if($intakeItem){
             $course = $intakeItem->inTake->course;
         }else{
