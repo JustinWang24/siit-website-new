@@ -92,7 +92,11 @@
                                     <img src="{{ asset('images/frontend/custom/pe_logo.jpg') }}" alt="Pollard English">
                                 </a>
                             </p>
-
+                            <p>
+                                <a href="http://chcservices.edu.au/" title="Partner Portal">
+                                    <img src="{{ asset('images/frontend/custom/agent_portal.jpeg') }}" alt="Partner Portal">
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </nav>
