@@ -93,7 +93,7 @@
                                 </a>
                             </p>
                             <p>
-                                <a href="http://chcservices.edu.au/" title="Partner Portal">
+                                <a href="{{ url('group/login') }}" title="Partner Portal">
                                     <img src="{{ asset('images/frontend/custom/agent_portal.jpeg') }}" alt="Partner Portal">
                                 </a>
                             </p>
