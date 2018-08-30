@@ -28,7 +28,7 @@ class EnrollController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
-    public function course_enroll($intakeItemId, Request $request){
+    public function course_enroll($intakeItemId=null, Request $request){
         $this->dataForView['pageTitle'] = 'Intake Latest';
         $this->dataForView['metaKeywords'] = 'Intake Latest';
         $this->dataForView['metaDescription'] = 'Intake Latest';
@@ -86,6 +86,11 @@ class EnrollController extends Controller
         return view(_get_frontend_theme_path('enroll.course_enroll'),$this->dataForView);
     }
 
+    /**
+     * 处理非 Axcelerate 的课程流程
+     * @param Product $course
+     * @param Group|null $dealer
+     */
     private function _handleInaxcelerateCourse(Product $course, Group $dealer=null){
         // 根据给定的值, 查询经销商 ID 或者 Code
         $this->dataForView['dealer'] = $dealer;
@@ -106,7 +111,7 @@ class EnrollController extends Controller
      */
     private function _handleAxcelerateCourse($intakeItemId, $instanceIdAndType, Group $dealer=null, Request $request){
 
-        $intakeItem = IntakeItem::GetById($intakeItemId);
+        $intakeItem = $intakeItemId ? IntakeItem::GetById($intakeItemId) : null;
         if($intakeItem){
             $course = $intakeItem->inTake->course;
         }else{
@@ -197,8 +202,6 @@ class EnrollController extends Controller
                 // Todo 1: 根据给定的Email, 去Axcelerate取查找，看是否可以取得对应的 contact ID
                 $contact = $user->getAxcelerateContact();
                 $axcelerateInstance = AxcelerateClient::GetAxcelerateInstanceDetailByIdAndType($enrollData['instance']);
-
-                dd($contact);
 
                 if($contact && $axcelerateInstance){
                     // 获取 Axcelerate Contact 对象成功

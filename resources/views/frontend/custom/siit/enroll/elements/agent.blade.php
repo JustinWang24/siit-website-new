@@ -45,7 +45,7 @@
 </div>
 <div class="columns">
     <div class="column is-8">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','voucher',false,(isset($dealer)&&$dealer ? $dealer->group_code : null)) }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','voucher',false,(isset($dealer)&&$dealer ? $dealer->group_code : null), null, null, (isset($dealer)&&$dealer)) }}
     </div>
     <div class="column">
 
