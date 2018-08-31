@@ -52,14 +52,16 @@ class Enrolment extends Resource
             'instanceID' => $this->instance->id,
             'type' => $this->instance->get('type'),
             // If a new invoice is generated as a result of this booking, use this as the Purchase Order Number.
-            'PONumber'=>$order->serail_number,
+            'PONumber'=>$order->serial_number,
             // The ID of the Contact that should be set as the marketing agent for the enrolment.
-            'marketingAgentContactID'=>$agentId,
+//            'marketingAgentContactID'=>$agentId,
             // The (invoice item) Service date.
-            'serviceDate'=>$this->instance->get('startdate'),
+//            'serviceDate'=>$this->instance->get('startdate'),
             // The Discounted Cost.
             // 'cost'=>$order->getTotalFinal()
         ];
+
+//        dd($params);
 
         return $this->manager->getConnection()->post(
             'course/enrol',
