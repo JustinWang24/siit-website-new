@@ -106,9 +106,10 @@ return [
     'Important_Dates'=>'Important Dates',
     'News_Events'=>'News & Events',
     'Study_online'=>'Study Online',
-    'Jobs'=>'Jobs at SIIT/APEI',
-    'Recruit_a_Student'=>'Recruit a Student',
+    'Jobs'=>'Careers at SIIT',
+    'Recruit_a_Student'=>'Internship Program',
     'Live_in_Australia'=>'Live in Australia',
     'Enquiries'=>'Enquiries',
     'Campus_map'=>'Campus Map',
+    'agent_portal'=>'Agent Portal',
 ];

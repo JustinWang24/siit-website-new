@@ -69,6 +69,11 @@
                                     {{ trans('general.Campus_map') }}
                                 </a>
                             </p>
+                            <p>
+                                <a href="{{ url('group/login') }}" title="{{ trans('general.agent_portal') }}" target="_blank">
+                                    {{ trans('general.agent_portal') }}
+                                </a>
+                            </p>
                         </div>
                         <div class="column footer-logo">
                             <p style="border-bottom: solid 1px white;line-height: 36px;">
@@ -76,27 +81,24 @@
                                     {{ trans('general.Partnerships') }}
                                 </a>
                             </p>
-                            <p>
-                                <a href="{{ url('group/login') }}" title="Partner Portal">
-                                    <img src="{{ asset('images/frontend/custom/agent_portal.jpeg') }}" alt="Partner Portal">
-                                </a>
-                            </p>
-                            <p>
-                                <a href="http://chcservices.edu.au/" title="CHC Services">
-                                    <img src="http://chcservices.edu.au/wp-content/uploads/2017/10/chc_logo.jpg" alt="CHC Services">
-                                </a>
-                            </p>
-                            <p>
-                                <a href="http://http://tiis.edu.au/" title="TIIS">
-                                    <img src="{{ asset('images/frontend/custom/tiis_logo.jpg') }}" alt="Pollard English">
-                                </a>
-                            </p>
-                            <p>
-                                <a href="http://oncallinterpreters.com.au/" title="Pollard English">
-                                    <img src="{{ asset('images/frontend/custom/pe_logo.jpg') }}" alt="Pollard English">
-                                </a>
-                            </p>
+                            <div style="justify-content: space-around;">
+                                <div class="flex-item">
+                                    <a href="http://oncallinterpreters.com.au/" title="Pollard English">
+                                        <img src="{{ asset('images/frontend/custom/poll.png') }}" alt="Pollard English">
+                                    </a>
+                                </div>
+                                <div class="flex-item">
+                                    <a href="http://chcservices.edu.au/" title="CHC Services">
+                                        <img src="{{ asset('images/frontend/custom/chc.png') }}" alt="CHC Services">
+                                    </a>
+                                </div>
+                                <div class="flex-item">
+                                    <a href="http://http://tiis.edu.au/" title="TIIS">
+                                        <img src="{{ asset('images/frontend/custom/tiis.png') }}" alt="Pollard English">
+                                    </a>
+                                </div>
 
+                            </div>
                         </div>
                     </div>
                 </nav>
@@ -105,7 +107,7 @@
                 <div class="column" style="border-top: solid 1px #13213b;">
                     <br>
                     <p class="has-text-centered">
-                        Copyright © 2014 Australian Professional Education Institute Pty Ltd trading as Sydney Institute of Interpreting and Translating
+                        Copyright © 2018 Australian Professional Education Institute Pty Ltd trading as Sydney Institute of Interpreting and Translating
                     </p>
                     <p class="has-text-centered">
                         {{ trans('general.Email') }}: <a class="has-text-danger" href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a>,&nbsp;&nbsp;
