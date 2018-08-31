@@ -5,7 +5,6 @@
         <div class="container">
             <div class="columns">
                 <div class="column">
-                    <img src="{{ asset('images/frontend/custom/new-ape.png') }}" alt="APEI" style="width: 200px; margin-top: 14px;">
                     {!! \App\Models\Utils\AMP\MediaUtil::NormalImage(asset($siteConfig->logo_dark),'SIIT: a bridge across cultures', 200, 117, 'image') !!}
                 </div>
                 <nav class="column is-four-fifths">
@@ -78,6 +77,11 @@
                                 </a>
                             </p>
                             <p>
+                                <a href="{{ url('group/login') }}" title="Partner Portal">
+                                    <img src="{{ asset('images/frontend/custom/agent_portal.jpeg') }}" alt="Partner Portal">
+                                </a>
+                            </p>
+                            <p>
                                 <a href="http://chcservices.edu.au/" title="CHC Services">
                                     <img src="http://chcservices.edu.au/wp-content/uploads/2017/10/chc_logo.jpg" alt="CHC Services">
                                 </a>
@@ -92,11 +96,7 @@
                                     <img src="{{ asset('images/frontend/custom/pe_logo.jpg') }}" alt="Pollard English">
                                 </a>
                             </p>
-                            <p>
-                                <a href="{{ url('group/login') }}" title="Partner Portal">
-                                    <img src="{{ asset('images/frontend/custom/agent_portal.jpeg') }}" alt="Partner Portal">
-                                </a>
-                            </p>
+
                         </div>
                     </div>
                 </nav>
