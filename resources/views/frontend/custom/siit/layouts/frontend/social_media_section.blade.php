@@ -25,7 +25,7 @@
                     <a href="{{  strpos($siteConfig->linked_in,'http') !== false ? $siteConfig->linked_in : 'https://'.$siteConfig->linked_in }}" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
                         <i class="fab fa-linkedin"></i>
                     </a>
-                    <a href="#" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
+                    <a href="https://www.youtube.com/channel/UCCNOZblQBg4Ef2To16v5TZg" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
                         <i class="fab fa-youtube"></i>
                     </a>
                 </p>

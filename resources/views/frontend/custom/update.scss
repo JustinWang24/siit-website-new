@@ -26,7 +26,11 @@
 
 .footer-logo{
   img{
-    max-width: 120px;
+    max-width: 90px;
+  }
+  .flex-item{
+    max-width: 90px;
+    align-self: center;
   }
 }
 
@@ -38,3 +42,4 @@
     margin-right: 0;
   }
 }
+
