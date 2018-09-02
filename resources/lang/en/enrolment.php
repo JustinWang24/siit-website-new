@@ -28,7 +28,8 @@ return [
     'Details_of_the_Agent'=>'Details of the Agent',
     'If_you_have_our_voucher'=>'If you have our voucher?',
     'notes'=>'Note: students are encouraged to contact '.env('APP_NAME').' Marketing team for exact timetable and training arrangement.',
-    'passport_first_page_image'=>'My password file',
+    'passport_first_page_image'=>'My passport file',
+    'my_passport_first_page_image'=>'My uploaded passport file',
     'english_test_certificate_image'=>'English Testing Certification',
     'my_english_test_certificate_image'=>'My English Testing Certification',
 ];
