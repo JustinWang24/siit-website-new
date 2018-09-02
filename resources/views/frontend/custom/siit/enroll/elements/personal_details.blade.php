@@ -24,7 +24,6 @@
     </div>
 </div>
 <div class="columns">
-
     <div class="column">
         {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','passport',true,($studentProfile ? $studentProfile->passport : null)) }}
     </div>
@@ -36,6 +35,12 @@
     </div>
 </div>
 <div class="columns">
+    <div class="column">
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleFileField('passport_first_page_image',false,trans('enrolment.passport_first_page_image')) }}
+        @if($studentProfile->passport_first_page_image)
+        <p><a target="_blank" href="{{ asset($studentProfile->passport_first_page_image) }}">{{ trans('enrolment.my_passport_first_page_image') }}</a></p>
+        @endif
+    </div>
     <div class="column">
         {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','disability_required',['NO','YES'],($studentProfile ? $studentProfile->disability_required : 0),true,trans('enrolment.disability_input')) }}
     </div>

@@ -12,8 +12,8 @@
                             </h1>
                             @if($axcelerateInstance)
                             <h2>
-                                <span class="has-text-danger">({{ $course->brand }})</span> -
-                                {{ trans('enrolment.Intake_Date') }}: {{ $axcelerateInstance ? $axcelerateInstance->get('startdate') : null }}
+                                <span class="has-text-danger">({{ trans('general.'.$course->brand) }})</span> -
+                                {{ trans('enrolment.Intake_Date') }}: {{ $axcelerateInstance ? str_replace('00:00:00','',$axcelerateInstance->get('startdate')) : null }}
                             </h2>
                             @endif
                         </div>

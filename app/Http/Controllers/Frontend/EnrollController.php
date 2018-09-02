@@ -36,44 +36,60 @@ class EnrollController extends Controller
         // 检查是否为agent来的信息
         $agent = null;
         if(!empty($request->get('agent'))){
+            // 提交的agent参数如果为零， 也是empty的，所以$agent依然会是null
             $agent = Group::GetByCode($request->get('agent'));
         }
+
+        // 获取提交的intance参数， 它是Axcelerate的instantId_Type
         $instanceIdAndType = $request->get('instance');
 
         // 检查是否能够提取出用户的信息
-        $this->dataForView['studentProfile'] = null;
-        if($request->has('sd') && empty($request->session()->get('user_data'))){
+        $studentProfile = null;
+        $studentUserId = null;
+        if($request->session()->get('user_data')){
+            $studentUserId = $request->session()->get('user_data.id');
+            $user = User::GetById($studentUserId);
+            if($user){
+                $studentProfile = $user->studentProfile;
+            }
+        }elseif($request->has('sd')){
             // 表示用户没有登录
             $uuid = $request->get('sd');
             $user = User::GetByUuid($uuid);
             if($user){
                 $this->_saveUserInSession($user);
                 // 将学生的档案数据传给 View
-                $this->dataForView['studentProfile'] = $user->studentProfile;
+                $studentProfile = $user->studentProfile;
             }
         }
 
-        // 检查是否能够提取出用户的信息
-        if(!empty($request->get('user_id')) && empty($request->session()->get('user_data'))){
-            // 表示用户没有登录
-            $uuid = $request->get('user_id');
-            $user = User::GetByUuid($uuid);
-            if($user){
-                $this->_saveUserInSession($user);
-                // 将学生的档案数据传给 View
-                $this->dataForView['studentProfile'] = $user->studentProfile;
+        if(is_null($studentProfile)){
+            // 如果此时还是没有找到学生的档案， 那么再尝试一个办法
+            // 检查是否能够提取出用户的信息
+            if(!empty($request->get('user_id'))){
+                // 表示用户没有登录
+                $uuid = $request->get('user_id');
+                $user = User::GetByUuid($uuid);
+                if($user){
+                    $this->_saveUserInSession($user);
+                    // 将学生的档案数据传给 View
+                    $studentProfile = $user->studentProfile;
+                }
             }
         }
+        // 向View 传送 $studentProfile
+        $this->dataForView['studentProfile'] = $studentProfile;
 
         // todo: 检查intake, 如果是 inax- 开头的，表示非 Axcelerate 的课程
         $course = Product::GetByUuid($request->get('product_id'));
+
         if( $course && empty($course->axcelerate_course_id) ){
             /**
              * 课程没有 axcelerate_course_id 表示非 Axcelerate的课程
              */
             $all = $request->all();
-            $course = Product::GetByUuid($request->get('product_id'));
-            $this->_handleInaxcelerateCourse($course, $agent);
+//            $course = Product::GetByUuid($request->get('product_id'));
+            $this->_handleNotAxcelerateCourse($course, $agent);
 
             $productOptions = [];
             foreach ($all as $key=>$value) {
@@ -84,7 +100,7 @@ class EnrollController extends Controller
             $this->dataForView['productOptions'] = implode(',',$productOptions);
         }else{
             // Axcelerate 课程
-            $this->_handleAxcelerateCourse($intakeItemId,$instanceIdAndType, $agent, $request);
+            $this->_handleAxcelerateCourse($intakeItemId,$instanceIdAndType, $agent, $request, $course);
         }
 
         return view(_get_frontend_theme_path('enroll.course_enroll'),$this->dataForView);
@@ -95,7 +111,7 @@ class EnrollController extends Controller
      * @param Product $course
      * @param Group|null $dealer
      */
-    private function _handleInaxcelerateCourse(Product $course, Group $dealer=null){
+    private function _handleNotAxcelerateCourse(Product $course, Group $dealer=null){
         // 根据给定的值, 查询经销商 ID 或者 Code
         $this->dataForView['dealer'] = $dealer;
         // 如果该课程已经过期了
@@ -111,34 +127,36 @@ class EnrollController extends Controller
      * @param $instanceIdAndType
      * @param Group $dealer
      * @param Request $request
+     * @param Product $course
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
-    private function _handleAxcelerateCourse($intakeItemId, $instanceIdAndType, Group $dealer=null, Request $request){
-        $course = null;
-
-        $intakeItem = $intakeItemId ? IntakeItem::GetById($intakeItemId) : null;
-        if($intakeItem){
-            $course = $intakeItem->inTake->course;
-        }else{
-            // 一定要找出product uuid
-            if(str_start($intakeItemId,'ax-')){
-                $courseUuid = str_replace('ax-','',$intakeItemId);
-            }elseif (str_start($intakeItemId,'unax-')){
-                $courseUuid = str_replace('unax-','',$intakeItemId);
-            }
-
-            if($request->get('product_id')){
-                $course = Product::GetByUuid($request->get('product_id'));
+    private function _handleAxcelerateCourse($intakeItemId, $instanceIdAndType, Group $dealer=null, Request $request, Product $course=null){
+        // 如果没有传入课程对象， 要想办法取得课程数据
+        if(is_null($course)){
+            $intakeItem = $intakeItemId ? IntakeItem::GetById($intakeItemId) : null;
+            if($intakeItem){
+                $course = $intakeItem->inTake->course;
             }else{
-                if(strpos($intakeItemId,'unax-') === 0){
-                    $courseUuid = str_replace('unax-','',$intakeItemId);
-                }elseif (strpos($intakeItemId,'ax-') === 0){
+                // 一定要找出product uuid
+                $courseUuid = 0;
+                if(str_start($intakeItemId,'ax-')){
                     $courseUuid = str_replace('ax-','',$intakeItemId);
+                }elseif (str_start($intakeItemId,'unax-')){
+                    $courseUuid = str_replace('unax-','',$intakeItemId);
                 }
-                $course = Product::GetByUuid($courseUuid);
+
+                if($request->get('product_id')){
+                    $course = Product::GetByUuid($request->get('product_id'));
+                }else{
+                    if(strpos($intakeItemId,'unax-') === 0){
+                        $courseUuid = str_replace('unax-','',$intakeItemId);
+                    }elseif (strpos($intakeItemId,'ax-') === 0){
+                        $courseUuid = str_replace('ax-','',$intakeItemId);
+                    }
+                    $course = $courseUuid ? Product::GetByUuid($courseUuid) : null;
+                }
             }
         }
-
 //        dump($course);
 //        dd($instanceIdAndType);
 
@@ -148,7 +166,7 @@ class EnrollController extends Controller
         if(is_null($axcelerateInstance)){
             // 没有从Axcelerate 找到 instance, 那么返回
             session()->flash('msg', ['content' => 'The intake date is not available, please choose another date!', 'status' => 'danger']);
-            return redirect('/catalog/product/'.$course->uri.'?agent='.($dealer ? $dealer->group_code : null));
+            return redirect('/catalog/product/'.$course->uri.'?agent='.($dealer ? $dealer->group_code : 0));
         }
 
         // 根据给定的值, 查询经销商 ID 或者 Code
@@ -157,7 +175,7 @@ class EnrollController extends Controller
         // 如果该课程已经过期了
         $this->dataForView['instanceIdAndType'] = $instanceIdAndType;
         $this->dataForView['axcelerateInstance'] = $axcelerateInstance;
-        $this->dataForView['intakeItem'] = $intakeItem;
+        $this->dataForView['intakeItem'] = isset($intakeItem) ? $intakeItem : null;
         $this->dataForView['course'] = $course;
     }
 
@@ -185,6 +203,18 @@ class EnrollController extends Controller
 
         $storagePath = _buildUploadFolderPath();
         // 可能上传的文件
+        if($request->hasFile('passport_first_page_image')){
+            // 个人护照
+            $studentProfileData['passport_first_page_image'] = $request->file('passport_first_page_image')
+                ->store($storagePath, 'public');
+        }
+
+        if($request->hasFile('english_test_certificate_image')){
+            // 英语考试成绩
+            $studentProfileData['english_test_certificate_image'] = $request->file('english_test_certificate_image')
+                ->store($storagePath, 'public');
+        }
+
         if($request->hasFile('disability_required_file')){
             $studentProfileData['disability_required_file'] = $request->file('disability_required_file')
                 ->store($storagePath, 'public');

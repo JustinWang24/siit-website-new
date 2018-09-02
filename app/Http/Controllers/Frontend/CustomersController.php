@@ -68,7 +68,7 @@ class CustomersController extends Controller
             $this->_saveUserInSession($user);
             return JsonBuilder::Success(['uuid'=>$user->uuid]);
         }else{
-            return JsonBuilder::Error(['msg'=>'You entered an incorrect username or password.']);
+            return JsonBuilder::Error(['msg'=>trans('auth.username_password_wrong')]);
         }
     }
 

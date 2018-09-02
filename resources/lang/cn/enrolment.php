@@ -28,4 +28,8 @@ return [
     'Details_of_the_Agent'=>'教育中介信息',
     'If_you_have_our_voucher'=>'您有我们的优惠码吗?',
     'notes'=>'注意: 任何学生都可以联系'.env('APP_NAME').'官方以获取详细的开学时间表和入学协助服务.',
+    'passport_first_page_image'=>'你护照首页扫描件',
+    'my_passport_first_page_image'=>'我已经上传的护照扫描件',
+    'english_test_certificate_image'=>'你的英语考试成绩扫描件',
+    'my_english_test_certificate_image'=>'我的英语考试成绩扫描件',
 ];
