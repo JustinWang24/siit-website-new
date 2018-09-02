@@ -37,7 +37,7 @@
 <div class="columns">
     <div class="column">
         {{ \App\Models\Utils\FormHelper::getInstance()->simpleFileField('passport_first_page_image',false,trans('enrolment.passport_first_page_image')) }}
-        @if($studentProfile->passport_first_page_image)
+        @if($studentProfile && $studentProfile->passport_first_page_image)
         <p id="existed-passport-file-link"><a target="_blank" href="{{ asset('/storage/'.$studentProfile->passport_first_page_image) }}">{{ trans('enrolment.my_passport_first_page_image') }}</a></p>
         @endif
     </div>
