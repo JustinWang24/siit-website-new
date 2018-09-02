@@ -32,14 +32,11 @@ class StudentProfile extends Model
             $row = new StudentProfile();
         }
 
+
         $data['user_id'] = $user->id;
         foreach ($data as $fieldName => $fieldValue) {
             $row->$fieldName = $fieldValue;
         }
         return $row->save();
-    }
-
-    public function t(){
-
     }
 }

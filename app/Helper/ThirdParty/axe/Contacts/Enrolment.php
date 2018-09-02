@@ -61,8 +61,6 @@ class Enrolment extends Resource
             // 'cost'=>$order->getTotalFinal()
         ];
 
-//        dd($params);
-
         return $this->manager->getConnection()->post(
             'course/enrol',
             $params

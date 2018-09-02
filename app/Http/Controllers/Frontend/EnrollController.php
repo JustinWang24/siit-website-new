@@ -250,7 +250,7 @@ class EnrollController extends Controller
             $course = Product::GetByUuid($enrollData['course_id']);
             $cart = $this->getCart();   // 1: 创建一个购物车
 
-            if($course->type === ProductType::$GENERAL_ITEM){
+            if($course->axcelerate_course_id){
                 // Todo 处理课程的登记
                 // Todo 1: 根据给定的Email, 去Axcelerate取查找，看是否可以取得对应的 contact ID
                 $contact = $user->getAxcelerateContact();
@@ -282,7 +282,7 @@ class EnrollController extends Controller
                             $result = $contact->enrolmentForInstance($axcelerateInstance)
                                 ->enrol($orderPlaced,$enrollData);
                         }catch (\Exception $e){
-                            $errorMsg = $e->getMessage();
+                            $errorMsg = $e->getCode().': '.$e->getMessage();
                             $result = false;
                         }
 

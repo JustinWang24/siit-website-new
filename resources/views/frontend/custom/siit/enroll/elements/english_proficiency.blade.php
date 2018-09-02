@@ -17,12 +17,12 @@
 </div>
 <div class="columns">
     <div class="column">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','test_score') }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','test_score',true,($studentProfile ? $studentProfile->test_score:null)) }}
     </div>
     <div class="column">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','test_taken_date',true) }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','test_taken_date',true,($studentProfile ? $studentProfile->test_taken_date:null)) }}
     </div>
     <div class="column">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','english_proficiency_certificate') }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','english_proficiency_certificate',true,($studentProfile ? $studentProfile->english_proficiency_certificate:null)) }}
     </div>
 </div>
