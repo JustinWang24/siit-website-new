@@ -111,4 +111,12 @@ return [
     'Enquiries'=>'联系我们',
     'Campus_map'=>'校区地图',
     'agent_portal'=>'中介登录',
+    'Forget_password'=>'忘记密码',
+    'Reset_password'=>'重置我的密码',
+    'Confirm_password'=>'确认新密码',
+    'Send_Password_Reset_Link'=>'发送重置密码链接',
+    'Password'=>'密码',
+    'New_Password'=>'新密码',
+    'Log_Me_In'=>'登录',
+    'I_Already_Have_an_Account'=>'登录我的账户',
 ];

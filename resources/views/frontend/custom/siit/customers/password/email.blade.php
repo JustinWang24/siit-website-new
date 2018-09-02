@@ -11,7 +11,7 @@
             <div class="column">
                 <div class="box content">
                     <div class="content-title-line">
-                        <h3>Reset Password</h3>
+                        <h3>{{ trans('general.Reset_password') }}</h3>
                     </div>
                     <div class="content-detail-wrap">
                         @if (session('status'))
@@ -22,7 +22,7 @@
                         <form method="post" action="{{ route('password.email') }}">
                             {{ csrf_field() }}
                             <div class="field">
-                                <label for="staticEmail" class="label">Email</label>
+                                <label for="staticEmail" class="label">{{ trans('general.Email') }}</label>
                                 <div class="control">
                                     <input type="text" class="input" id="staticEmail" name="email" value="{{ old('email') }}" placeholder="email@example.com">
                                 </div>
@@ -33,10 +33,10 @@
 
                             <div class="columns">
                                 <div class="column">
-                                    <p><a class="is-danger" href="{{ url('frontend/customers/login') }}">Student Login</a></p>
+                                    <p><a class="is-danger" href="{{ url('frontend/customers/login') }}">{{ trans('general.student_login') }}</a></p>
                                 </div>
                                 <div class="column">
-                                    <button type="submit" class="button is-link is-pulled-right">Send Password Reset Link</button>
+                                    <button type="submit" class="button is-link is-pulled-right">{{ trans('general.Send_Password_Reset_Link') }}</button>
                                 </div>
                             </div>
                             <div class="clearfix"></div>

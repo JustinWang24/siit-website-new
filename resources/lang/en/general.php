@@ -112,4 +112,12 @@ return [
     'Enquiries'=>'Enquiries',
     'Campus_map'=>'Campus Map',
     'agent_portal'=>'Agent Portal',
+    'Forget_password'=>'Forget Password',
+    'Reset_password'=>'Reset Password',
+    'Confirm_password'=>'Confirm New Password',
+    'Send_Password_Reset_Link'=>'Send Password Reset Link',
+    'Password'=>'Password',
+    'New_Password'=>'New Password',
+    'Log_Me_In'=>'Log Me In',
+    'I_Already_Have_an_Account'=>'I Already Have an Account',
 ];
