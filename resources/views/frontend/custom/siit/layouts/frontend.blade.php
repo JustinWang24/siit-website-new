@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 @include('layouts.frontend.head')
-<body class="has-navbar-fixed-top" style="{{ \Illuminate\Support\Facades\URL::current() == url('/') ? null : 'background-color: #f9f8f8;' }}">
+<body class="has-navbar-fixed-top"{{-- style="{{ \Illuminate\Support\Facades\URL::current() == url('/') ? null : 'background-color: #f9f8f8;' }}"--}}>
 @if($agentObject->isPhone())
     <!-- Mobile Version -->
     @include('layouts.frontend.mobile.nav')
