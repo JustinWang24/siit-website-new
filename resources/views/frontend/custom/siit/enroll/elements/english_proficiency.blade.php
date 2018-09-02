@@ -11,7 +11,7 @@
     <div class="column">
         {{ \App\Models\Utils\FormHelper::getInstance()->simpleFileField('english_test_certificate_image',false,trans('enrolment.english_test_certificate_image')) }}
         @if($studentProfile->english_test_certificate_image)
-            <p><a target="_blank" href="{{ asset($studentProfile->english_test_certificate_image) }}">{{ trans('enrolment.my_english_test_certificate_image') }}</a></p>
+            <p id="existed-english-test-file-link"><a target="_blank" href="{{ asset('/storage/'.$studentProfile->english_test_certificate_image) }}">{{ trans('enrolment.my_english_test_certificate_image') }}</a></p>
         @endif
     </div>
 </div>

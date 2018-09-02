@@ -135,8 +135,8 @@
                                     <button :disabled="!prevBtnEnable" class="button is-primary is-large" v-on:click="goPrev($event)"><&nbsp;{{ trans('general.Prev') }}</button>
                                 </div>
                                 <div class="column">
-                                    <button v-show="nextBtnEnable" class="button is-link is-large pull-right" v-on:click="goNext($event)">{{ trans('general.Next') }}&nbsp;></button>
-                                    <button v-show="showSubmitButton" class="button is-large is-link pull-right" v-on:click="confirmToEnroll($event)">{{ trans('general.Apply_Now') }}</button>
+                                    <button v-show="nextBtnEnable" class="button is-link is-large is-pulled-right" v-on:click="goNext($event)">{{ trans('general.Next') }}&nbsp;></button>
+                                    <button v-show="showSubmitButton" class="button is-large is-link is-pulled-right" v-on:click="confirmToEnroll($event)">{{ trans('general.Apply_Now') }}</button>
                                 </div>
                             </div>
                         </form>

@@ -83,18 +83,18 @@
                             </p>
                             <div style="justify-content: space-around;">
                                 <div class="flex-item">
-                                    <a href="http://oncallinterpreters.com.au/" title="Pollard English">
+                                    <a href="http://pollardenglish.com/" title="Pollard English" target="_blank">
                                         <img src="{{ asset('images/frontend/custom/poll.png') }}" alt="Pollard English">
                                     </a>
                                 </div>
                                 <div class="flex-item">
-                                    <a href="http://chcservices.edu.au/" title="CHC Services">
+                                    <a href="http://chcservices.edu.au/" title="CHC Services" target="_blank">
                                         <img src="{{ asset('images/frontend/custom/chc.png') }}" alt="CHC Services">
                                     </a>
                                 </div>
                                 <div class="flex-item">
-                                    <a href="http://http://tiis.edu.au/" title="TIIS">
-                                        <img src="{{ asset('images/frontend/custom/tiis.png') }}" alt="Pollard English">
+                                    <a href="http://http://tiis.edu.au/" title="TIIS" target="_blank">
+                                        <img src="{{ asset('images/frontend/custom/tiis.png') }}" alt="TIIS">
                                     </a>
                                 </div>
 

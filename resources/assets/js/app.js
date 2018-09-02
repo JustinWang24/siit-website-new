@@ -284,7 +284,9 @@ $(document).ready(function(){
                         current: 1,
                         total: 4
                     },
-                    isChinese: false
+                    isChinese: false,
+                    passportFileExist: false,
+                    englishTestCertificationFileExist: false
                 },
                 computed: {
                     prevBtnEnable: function(){
@@ -318,6 +320,15 @@ $(document).ready(function(){
                     this.enrollData.instance   = $('#current-instance-id').val();
                     this.isChinese   = $('#current-lang').val() === 'cn';
                     this.loginAttemptCount = 0;
+
+                    // 是否已经存在提交过的护照
+                    if(document.getElementById('existed-passport-file-link')){
+                        this.passportFileExist = true;
+                    }
+                    // 是否已经存在提交过的英语考试成绩
+                    if(document.getElementById('existed-english-test-file-link')){
+                        this.englishTestCertificationFileExist = true;
+                    }
                 },
                 mounted: function(){
                     $('#course-enroll-app-form').removeClass('is-invisible');
@@ -326,6 +337,30 @@ $(document).ready(function(){
                     // 控制表单一页页显示的几个方法
                     goNext: function(e){
                         e.preventDefault();
+                        if(this.step.current === 1){
+                            // 第一步， 检查是否护照提交
+                            if(!this.passportFileExist && document.getElementById('input_passport_first_page_image_name').innerHTML===''){
+                                // 如果没有提交过护照, 本次也没有上传, 那么提示客户上传
+                              window._notify(
+                                  this,
+                                  'error',
+                                  this.isChinese ? '请上传您的护照首页扫描件' : 'Please provide your passport!'
+                              );
+                              return;
+                            }
+                        }
+                          if(this.step.current === 3){
+                            // 第一步， 检查是否英语成绩
+                            if(!this.englishTestCertificationFileExist && document.getElementById('input_english_test_certificate_image_name').innerHTML===''){
+                              // 如果没有提交过英语成绩, 本次也没有上传, 那么提示客户上传
+                              window._notify(
+                                  this,
+                                  'error',
+                                  this.isChinese ? '请上传您的英语考试成绩扫描件' : 'Please provide your passport!'
+                              );
+                              return;
+                            }
+                          }
                         this.step.current++;
                     },
                     goPrev: function(e){
@@ -453,6 +488,7 @@ $(document).ready(function(){
                     },
                     confirmToEnroll: function(e){
                         e.preventDefault();
+                        // 检查护照和英语成绩是否已经提交了
                         $('#catalog-course-enroll-form').submit();
                     }
                 }
