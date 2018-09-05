@@ -85,7 +85,7 @@ return [
     '8 Weeks'=>'8 Weeks',
     '16 Weeks'=>'16 Weeks',
     'Please_Choose'=>'Please Choose',
-    'enrol_success'=>'Hi , thank you very much for your enrollment, one of our staff will contact you very soon!',
+    'enrol_success'=>'Hi , thank you very much for your enrollment, please read our offer letter then sign!',
     'Order_Summary'=>'Order Summary',
     'Order_No'=>'Order No.',
     'Student_Name'=>'Student Name',
@@ -120,4 +120,6 @@ return [
     'New_Password'=>'New Password',
     'Log_Me_In'=>'Log Me In',
     'I_Already_Have_an_Account'=>'I Already Have an Account',
+    'Pay_Now'=>'Pay Now',
+    'Detail'=>'Detail',
 ];

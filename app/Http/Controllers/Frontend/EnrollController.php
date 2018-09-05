@@ -236,6 +236,8 @@ class EnrollController extends Controller
 
         // 先看看这个学生在系统中有没有profile
         $user = User::GetByUuid(session('user_data.uuid'));
+
+
         if($user){
             if(!$user->studentProfile){
                 // Todo 如果学生没有profile, 那么先创建一个
@@ -257,6 +259,8 @@ class EnrollController extends Controller
                 $axcelerateInstance = AxcelerateClient::GetAxcelerateInstanceDetailByIdAndType($enrollData['instance']);
 
                 $errorMsg = 'Sorry, system is busy now, Please try again!';
+
+
 
                 if($contact && $axcelerateInstance){
                     // 获取 Axcelerate Contact 对象成功
@@ -292,8 +296,11 @@ class EnrollController extends Controller
                             $orderPlaced->save();
 
                             // todo 4: 订单已经提交到了 Axcelerate, 显示界面, 让用户去查收邮件
-                            session()->flash('msg', ['content' => 'Hi , thank you very much for your enrollment, one of our staff will contact you very soon!', 'status' => 'success']);
-                            return redirect()->route('customer.checkout');
+                            session()->flash(
+                                'msg',
+                                ['content' => trans('general.enrol_success'), 'status' => 'success']
+                            );
+                            return redirect()->route('enrol.offer_letter');
                         }else{
                             // 向 Axcelerate 进行 enrol 失败了
                             $orderPlaced->removeAll();
@@ -350,7 +357,7 @@ class EnrollController extends Controller
                     session()->flash('msg', [
                         'content' => trans('general.enrol_success'), 'status' => 'success']
                     );
-                    return redirect()->route('customer.checkout');
+                    return redirect()->route('enrol.offer_letter');
                 }else{
                     session()->flash('msg', [
                         'content' => trans('general.system_busy'), 'status' => 'danger']

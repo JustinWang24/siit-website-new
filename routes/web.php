@@ -66,6 +66,10 @@ Route::prefix('frontend')->group(function () {
     Route::get('wholesalers/register', 'Frontend\CustomersController@register_wholesale');
     Route::post('wholesalers/register', 'Frontend\CustomersController@save_wholesale');
 
+    // 支付订单, 从我的订单历史中而来
+    Route::get('pay_order','Frontend\CheckoutController@pay_order')
+        ->name('frontend.order.pay');
+
     Route::get('place_order_checkout','Frontend\CheckoutController@place_order_checkout')
         ->name('customer.checkout');
     Route::post('place_order_checkout','Frontend\CheckoutController@place_order_checkout');

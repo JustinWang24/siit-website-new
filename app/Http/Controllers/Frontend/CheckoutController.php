@@ -6,14 +6,13 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Events\Order\Created as OrderCreated;
 use App\Models\Settings\PaymentMethod;
+use App\Models\Utils\OrderStatus;
 use App\Models\Utils\Payment\RoyalPayTool;
 use App\Models\Utils\PaymentTool;
 use App\User;
-use Gloudemans\Shoppingcart\CartItem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Order\Order;
-use App\Models\Group;
 //use Omnipay;
 use App\Events\OrderPlaced;
 use App\Jobs\Payment\StripePayment;
@@ -26,9 +25,32 @@ class CheckoutController extends Controller
     }
 
     /**
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function pay_order(Request $request){
+        $customer = User::GetByUuid($request->get('user'));
+        $order = Order::GetByUuid($request->get('order'));
+        $this->dataForView['order'] = $order;
+        $this->dataForView['user'] = $customer;
+
+        $this->dataForView['vuejs_libs_required'] = [
+            'payment_accordion',
+            'guest_checkout'
+        ];
+
+        return view(
+            _get_frontend_theme_path('checkout.place_order_checkout'),
+            $this->dataForView
+        );
+    }
+
+    /**
      * 完成Place Order方式订单的方法
      * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \App\Models\Utils\Payment\RoyalPay\Lib\RoyalPayException
      */
     public function place_order_checkout(Request $request){
         // 检查用户是否登录了, 如果没有登录,那么去登录页
@@ -38,8 +60,7 @@ class CheckoutController extends Controller
             $customer = User::find(session('user_data.id'));
         }
 
-        $order = Order::where('user_id',session('user_data.id'))
-            ->orderBy('id','desc')->first();
+        $order = Order::GetByUuid($request->get('order'));
         $this->dataForView['order'] = $order;
 
         // 首先确认是post方式并且检查用户选择的支付方式
@@ -62,8 +83,10 @@ class CheckoutController extends Controller
                     // 保留提交的订单留言
                     if(!empty($request->get('notes'))){
                         $order->notes .= PHP_EOL . $request->get('notes');
-                        $order->save();
+
                     }
+                    $order->status = OrderStatus::$COMPLETE;
+                    $order->save();
                     // 保存支付方式
 //                    PaymentTool::GetMethodTypeById($request->get('payment_method'));
 
@@ -77,7 +100,7 @@ class CheckoutController extends Controller
                         session()->flash('msg', ['content'=>'Order #'.$order->serial_number.' has been handled!','status'=>'success']);
                         // 默认的收款方式, 因此不需要更新订单的收费渠道了
                         // 将学生导向Offer letter的页面
-                        return redirect()->route('enrol.offer_letter');
+                        return redirect('/frontend/my_orders/'.session('user_data.uuid'));
                     }elseif($request->get('payment_method') == PaymentTool::$METHOD_ID_WECHAT){
                         // 微信支付
                         $royalPayTool = new RoyalPayTool();

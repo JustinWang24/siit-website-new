@@ -84,7 +84,7 @@ return [
     '8 Weeks'=>'8周',
     '16 Weeks'=>'16周',
     'Please_Choose'=>'请选择',
-    'enrol_success'=>'非常感谢, 您已经成功注册了课程!',
+    'enrol_success'=>'非常感谢, 您已经成功注册了课程, 请仔细阅读以下的Offer Letter后签字并提交!',
     'Order_Summary'=>'订单信息',
     'Order_No'=>'订单号',
     'Student_Name'=>'学生名字',
@@ -119,4 +119,6 @@ return [
     'New_Password'=>'新密码',
     'Log_Me_In'=>'登录',
     'I_Already_Have_an_Account'=>'登录我的账户',
+    'Pay_Now'=>'支付学费',
+    'Detail'=>'订单详情',
 ];

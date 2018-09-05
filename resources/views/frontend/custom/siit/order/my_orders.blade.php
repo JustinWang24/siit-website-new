@@ -66,12 +66,16 @@
                                             </div>
                                         </div>
                                     @else
-                                        <a href="{{ url('frontend/view_order/'.session('user_data.uuid').'/'.$value->uuid) }}"
-                                           class="button is-small">
+                                        @if($value->status==\App\Models\Utils\OrderStatus::$PENDING)
+                                            <a href="{{ route('frontend.order.pay',['user'=>session('user_data.uuid'),'order'=>$value->uuid]) }}" class="button is-link is-small">
+                                                <span>{{ trans('general.Pay_Now') }}</span>
+                                            </a>&nbsp;
+                                        @endif
+                                        <a href="{{ url('frontend/view_order/'.session('user_data.uuid').'/'.$value->uuid) }}" class="button is-small">
                                             <span class="icon is-small">
                                               <i class="fas fa-pen-square"></i>
                                             </span>
-                                            <span>Detail</span>
+                                            <span>{{ trans('general.Detail') }}</span>
                                         </a>
                                     @endif
                                 </td>
