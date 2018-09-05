@@ -40,6 +40,7 @@ Route::prefix('students')->group(function(){
     Route::post('verify-email','Api\StudentsController@verify_email');
     Route::post('verify-register','Api\StudentsController@verify_register');
     Route::post('search-ajax','Api\StudentsController@search_ajax');
+    Route::post('save-profile-ajax','Api\StudentsController@save_profile_ajax');
 });
 
 // 和 Axcelerate 相关的API接口

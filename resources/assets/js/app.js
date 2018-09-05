@@ -349,7 +349,7 @@ $(document).ready(function(){
                               return;
                             }
                         }
-                          if(this.step.current === 3){
+                        if(this.step.current === 3){
                             // 第一步， 检查是否英语成绩
                             if(!this.englishTestCertificationFileExist && document.getElementById('input_english_test_certificate_image_name').innerHTML===''){
                               // 如果没有提交过英语成绩, 本次也没有上传, 那么提示客户上传
@@ -360,8 +360,29 @@ $(document).ready(function(){
                               );
                               return;
                             }
-                          }
+                        }
                         this.step.current++;
+                        this._saveProfile();
+                    },
+                    _saveProfile: function(){
+                        let inputs = $('#catalog-course-enroll-form').find('input');
+                        let data = [];
+                        _.each(inputs, function(val){
+                            let item = $(val);
+                            let name = item.attr('name');
+                            if(name && name.indexOf('student[') === 0){
+                              let obj = {
+                                name: item.attr('name'),
+                                value: item.val()
+                              };
+                              data.push(obj);
+                            }
+                        });
+                        axios.post(
+                            '/api/students/save-profile-ajax',data
+                        ).then(res=>{
+
+                        })
                     },
                     goPrev: function(e){
                         e.preventDefault();

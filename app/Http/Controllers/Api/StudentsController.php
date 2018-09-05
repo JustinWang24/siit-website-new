@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Mail\UserConfirmEmail;
 use App\Mail\UserVerificationCode;
 use App\Models\Dealer\DealerStudent;
+use App\Models\User\StudentProfile;
 use App\Models\Utils\JsonBuilder;
 use App\Models\Utils\UserGroup;
 use App\User;
@@ -16,6 +17,30 @@ use Illuminate\Support\Facades\Mail;
 
 class StudentsController extends Controller
 {
+    public function save_profile_ajax(Request $request){
+        $data = $request->all();
+        $bean = [];
+
+        foreach ($data as $item) {
+            $name = str_replace('student[','',$item['name']);
+            $name = str_replace(']','',$name);
+            $bean[$name] = $item['value'];
+        }
+
+        $user = isset($bean['user_id']) ? User::GetByUuid($bean['user_id']) : null;
+        if($user){
+            $profile = $user->studentProfile;
+            foreach ($bean as $fieldName=>$value) {
+                if($fieldName !== 'user_id'){
+                    $profile->$fieldName = $value;
+                }
+            }
+            $profile->save();
+            return JsonBuilder::Success();
+        }
+        return JsonBuilder::Error();
+    }
+
     /**
      * 验证用户的邮件是否存在
      * @param Request $request
