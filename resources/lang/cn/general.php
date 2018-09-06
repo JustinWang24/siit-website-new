@@ -121,4 +121,5 @@ return [
     'I_Already_Have_an_Account'=>'登录我的账户',
     'Pay_Now'=>'支付学费',
     'Detail'=>'订单详情',
+    'Save_and_Next'=>'保存并下一步',
 ];

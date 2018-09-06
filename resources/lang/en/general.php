@@ -122,4 +122,5 @@ return [
     'I_Already_Have_an_Account'=>'I Already Have an Account',
     'Pay_Now'=>'Pay Now',
     'Detail'=>'Detail',
+    'Save_and_Next'=>'Save & Next',
 ];
