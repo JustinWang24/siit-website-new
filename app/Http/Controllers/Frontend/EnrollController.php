@@ -157,8 +157,6 @@ class EnrollController extends Controller
                 }
             }
         }
-//        dump($course);
-//        dd($instanceIdAndType);
 
         // 必须要有 Axcelerate 的 instance 数据
         $axcelerateInstance = AxcelerateClient::GetAxcelerateInstanceDetailByIdAndType($instanceIdAndType);
@@ -257,11 +255,7 @@ class EnrollController extends Controller
                 // Todo 1: 根据给定的Email, 去Axcelerate取查找，看是否可以取得对应的 contact ID
                 $contact = $user->getAxcelerateContact();
                 $axcelerateInstance = AxcelerateClient::GetAxcelerateInstanceDetailByIdAndType($enrollData['instance']);
-
                 $errorMsg = 'Sorry, system is busy now, Please try again!';
-
-
-
                 if($contact && $axcelerateInstance){
                     // 获取 Axcelerate Contact 对象成功
                     // todo 保存订单

@@ -53,6 +53,7 @@ class Enrolment extends Resource
             'type' => $this->instance->get('type'),
             // If a new invoice is generated as a result of this booking, use this as the Purchase Order Number.
             'PONumber'=>$order->serial_number,
+            'tentative'=>true,
             // The ID of the Contact that should be set as the marketing agent for the enrolment.
 //            'marketingAgentContactID'=>$agentId,
             // The (invoice item) Service date.
