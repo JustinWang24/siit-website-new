@@ -18,9 +18,7 @@
                                 <div class="card-content pl-0">
                                     <div class="media">
                                         <div class="media-content">
-                                            <a href="{{ url('/page'.$blog->uri) }}"><p class="title is-4">{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn }}</p></a>
-                                            <p class="subtitle is-6"><i></i></p>
-                                            <p class="mt-10 has-text-grey-light">{!! $blog->teasing !!}</p>
+                                            <a href="{{ url('/page'.$blog->uri) }}"><p class="title is-4" style="font-size: 14px;">{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn }}</p></a>
                                         </div>
                                     </div>
                                 </div>
@@ -53,24 +51,22 @@
                     <br>
                     <div class="columns mt-20">
                         @foreach($latestNews as $key=>$blog)
-                                <div class="column">
-                                    <div class="card">
-                                        <div class="card-image">
-                                            <figure>
-                                                <a href="{{ url('/page'.$blog->uri) }}"><img src="{{ $blog->getFeatureImageUrl() }}" alt="{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn  }}"></a>
-                                            </figure>
-                                        </div>
-                                        <div class="card-content pl-0">
-                                            <div class="media">
-                                                <div class="media-content">
-                                                    <a href="{{ url('/page'.$blog->uri) }}"><p class="title is-4">{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn  }}</p></a>
-                                                    <p class="subtitle is-6"><i></i></p>
-                                                    <p class="mt-10 has-text-grey-light">{!! $blog->teasing !!}</p>
-                                                </div>
+                            <div class="column">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <figure>
+                                            <a href="{{ url('/page'.$blog->uri) }}"><img src="{{ $blog->getFeatureImageUrl() }}" alt="{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn  }}"></a>
+                                        </figure>
+                                    </div>
+                                    <div class="pl-0">
+                                        <div class="media">
+                                            <div class="media-content">
+                                                <a href="{{ url('/page'.$blog->uri) }}"><p class="title is-4" style="font-size: 14px;">{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn  }}</p></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         @endforeach
 
                     </div>
