@@ -152,4 +152,6 @@ return [
     'Manage_Password'=>'管理密码',
     'Confirm_Password'=>'确认密码',
     'Update_Password'=>'更新密码',
+    'Local_Students'=>'本地学生',
+    'International_Students'=>'国际学生',
 ];

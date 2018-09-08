@@ -153,4 +153,6 @@ return [
     'Manage_Password'=>'Manage Password',
     'Confirm_Password'=>'Confirm Password',
     'Update_Password'=>'Update Password',
+    'Local_Students'=>'Local Students',
+    'International_Students'=>'International Students',
 ];
