@@ -5,7 +5,7 @@
             {{ app()->getLocale()=='cn' && !empty($categoryTag->name_cn) ? $categoryTag->name_cn : $categoryTag->name }}
         </a>
         @if(count($categoryTag->children) > 0)
-            <div class="navbar-dropdown is-boxed">
+            <div class="navbar-dropdown is-boxed" style="min-width: 95%;">
                 @foreach($categoryTag->children as $subCategory)
                     @php
                         /** @var \App\Models\Catalog\Category $subCategory */
