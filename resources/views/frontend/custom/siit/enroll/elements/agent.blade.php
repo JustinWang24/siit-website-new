@@ -22,21 +22,21 @@
 </div>
 <div class="columns">
     <div class="column">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','agent_name',false,(isset($dealer)&&$dealer ? $dealer->name : null)) }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','agent_name',false,(isset($dealer)&&$dealer ? $dealer->name : null),null,null, (isset($dealer)&&$dealer->name)) }}
     </div>
     <div class="column">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','contact_person',false) }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','contact_person',false,(isset($dealer)&&$dealer ? $dealer->contact_person : null),null,null, (isset($dealer)&&$dealer->contact_person)) }}
     </div>
     <div class="column">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','telephone',false,(isset($dealer)&&$dealer ? $dealer->phone : null)) }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','telephone',false,(isset($dealer)&&$dealer ? $dealer->phone : null),null,null, (isset($dealer)&&$dealer->phone)) }}
     </div>
 </div>
 <div class="columns">
     <div class="column is-8">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','agent_email',false,(isset($dealer)&&$dealer ? $dealer->email : null)) }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','agent_email',false,(isset($dealer)&&$dealer ? $dealer->email : null),null,null, (isset($dealer)&&$dealer->email)) }}
     </div>
     <div class="column">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','agent_fax',false,(isset($dealer)&&$dealer ? $dealer->fax : null)) }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','agent_fax',false,(isset($dealer)&&$dealer ? $dealer->fax : null),null,null, (isset($dealer)&&$dealer->fax)) }}
     </div>
 </div>
 
@@ -45,7 +45,7 @@
 </div>
 <div class="columns">
     <div class="column is-8">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','voucher',false,(isset($dealer)&&$dealer ? $dealer->group_code : null), null, null, (isset($dealer)&&$dealer)) }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('enroll','voucher',false,(isset($dealer)&&$dealer ? $dealer->group_code : null), null, null, (isset($dealer)&&$dealer),null,null, (isset($dealer)&&$dealer->group_code)) }}
     </div>
     <div class="column">
 
