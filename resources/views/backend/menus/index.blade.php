@@ -20,12 +20,7 @@
                     <th>Name</th>
                     <th>菜单中文名</th>
                     <th>Position</th>
-                    <th>Level</th>
-                    <th>Parent</th>
                     <th>Type</th>
-                    <th>CSS</th>
-                    <th>TAG</th>
-                    <th>EXTRA</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
@@ -40,14 +35,9 @@
                             {{ $value->name_cn }}
                         </td>
                         <td>{{ $value->position }}</td>
-                        <td>{{ $value->level }}</td>
-                        <td>{{ $value->parent ? $value->parent->name : null }}</td>
                         <td>
                             {{ $value->link_type == \App\Models\Menu::TYPE_STATIC_CONTENT ? 'Static' : 'Dynamic' }}
                         </td>
-                        <td>{{ $value->css_classes }}</td>
-                        <td>{{ $value->html_tag }}</td>
-                        <td>{{ $value->extra_html }}</td>
                         <td>{{ $value->active ? 'Published' : 'Unpublished' }}</td>
                         <td>
                             <a class="button is-small" href="{{ url('backend/menus/edit/'.$value->id) }}">
@@ -58,10 +48,59 @@
                             </a>
                         </td>
                     </tr>
+                    @if(count($value->children)>0)
+                        @foreach($value->children as $subFirst)
+                        <tr>
+                            <td>
+                                <p class="pl-20">- <a href="{{ $subFirst->getMenuUrl() }}" target="_blank">{{ $subFirst->name }}</a></p>
+                            </td>
+                            <td>
+                                {{ $subFirst->name_cn }}
+                            </td>
+                            <td>{{ $subFirst->position }}</td>
+                            <td>
+                                {{ $subFirst->link_type == \App\Models\Menu::TYPE_STATIC_CONTENT ? 'Static' : 'Dynamic' }}
+                            </td>
+                            <td>{{ $subFirst->active ? 'Published' : 'Unpublished' }}</td>
+                            <td>
+                                <a class="button is-small" href="{{ url('backend/menus/edit/'.$subFirst->id) }}">
+                                    <i class="fa fa-edit"></i>&nbsp;Edit
+                                </a>
+                                <a class="button is-danger is-small btn-delete" href="{{ url('backend/menus/delete/'.$subFirst->id) }}">
+                                    <i class="fa fa-trash"></i>&nbsp;Del
+                                </a>
+                            </td>
+                        </tr>
+                        @if(count($value->children)>0)
+                            @foreach($subFirst->children as $subSecond)
+                                <tr>
+                                    <td>
+                                        <p class="pl-20 ml-20">- <a href="{{ $subSecond->getMenuUrl() }}" target="_blank">{{ $subSecond->name }}</a></p>
+                                    </td>
+                                    <td>
+                                        {{ $subSecond->name_cn }}
+                                    </td>
+                                    <td>{{ $subSecond->position }}</td>
+                                    <td>
+                                        {{ $subSecond->link_type == \App\Models\Menu::TYPE_STATIC_CONTENT ? 'Static' : 'Dynamic' }}
+                                    </td>
+                                    <td>{{ $subSecond->active ? 'Published' : 'Unpublished' }}</td>
+                                    <td>
+                                        <a class="button is-small" href="{{ url('backend/menus/edit/'.$subSecond->id) }}">
+                                            <i class="fa fa-edit"></i>&nbsp;Edit
+                                        </a>
+                                        <a class="button is-danger is-small btn-delete" href="{{ url('backend/menus/delete/'.$subSecond->id) }}">
+                                            <i class="fa fa-trash"></i>&nbsp;Del
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                        @endforeach
+                    @endif
                 @endforeach
                 </tbody>
             </table>
-            {{ $menus->links() }}
         </div>
     </div>
 @endsection
