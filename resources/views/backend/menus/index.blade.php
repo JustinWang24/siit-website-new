@@ -28,7 +28,7 @@
                 <tbody>
                 @foreach($menus as $key=>$value)
                     <tr>
-                        <td>
+                        <td style="color: #ccc;">
                             {{ $key+1 }}:&nbsp;<a href="{{ $value->getMenuUrl() }}" target="_blank">{{ $value->name }}</a>
                         </td>
                         <td>
@@ -51,7 +51,7 @@
                     @if(count($value->children)>0)
                         @foreach($value->children as $idxFirst=>$subFirst)
                         <tr>
-                            <td>
+                            <td style="color: #ccc;">
                                 <p class="pl-20">{{ $key+1 }}-{{ $idxFirst+1 }}: <a href="{{ $subFirst->getMenuUrl() }}" target="_blank">{{ $subFirst->name }}</a></p>
                             </td>
                             <td>
@@ -74,7 +74,7 @@
                         @if(count($value->children)>0)
                             @foreach($subFirst->children as $idxSecond=>$subSecond)
                                 <tr>
-                                    <td>
+                                    <td style="color: #ccc;">
                                         <p class="pl-20 ml-20">{{ $key+1 }}-{{ $idxFirst+1 }}-{{ $idxSecond+1 }}: <a href="{{ $subSecond->getMenuUrl() }}" target="_blank">{{ $subSecond->name }}</a></p>
                                     </td>
                                     <td>
