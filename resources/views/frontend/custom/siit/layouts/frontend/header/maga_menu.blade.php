@@ -1,11 +1,6 @@
 <div class="menu-container">
     <div class="container menu">
         <ul>
-            <li>
-                <a href="/" title="{{ trans('general.menu_home') }}">
-                    {{ trans('general.menu_home') }}
-                </a>
-            </li>
             @foreach($rootMenus as $key=>$rootMenu)
                 <li>
                 @if($rootMenu->name != 'Future Students')
