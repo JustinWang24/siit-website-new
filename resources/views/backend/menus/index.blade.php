@@ -5,7 +5,7 @@
         <div class="columns">
             <div class="column">
                 <h2 class="is-size-4">
-                    {{ trans('admin.menu.menus') }} {{ trans('admin.mgr') }} ({{ count($menus) }})
+                    {{ trans('admin.menu.menus') }} {{ trans('admin.mgr') }}
                 </h2>
             </div>
             <div class="column">
