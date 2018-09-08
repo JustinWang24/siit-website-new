@@ -87,7 +87,7 @@ $magaMenuBgColor: rgb(246, 246, 246);
     box-sizing: border-box;
     .aside{
         .menu-list{
-            line-height: 35px;
+            line-height: 26px;
             a{
                 &:hover{
                     background-color: white;
@@ -224,5 +224,12 @@ Mobile style's
     }
     .menu .show-on-mobile {
         display: block;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    .navbar-dropdown{
+        left: 300px;
+        top: calc(8%) !important;
     }
 }
