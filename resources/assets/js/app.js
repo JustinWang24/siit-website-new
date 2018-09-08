@@ -356,7 +356,7 @@ $(document).ready(function(){
                               window._notify(
                                   this,
                                   'error',
-                                  this.isChinese ? '请上传您的英语考试成绩扫描件' : 'Please provide your passport!'
+                                  this.isChinese ? '请上传您的英语考试成绩扫描件' : 'Please provide your Language Test Result!'
                               );
                               return;
                             }
