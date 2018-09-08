@@ -6,10 +6,10 @@
     <div class="content-title-line">
         <h3 class="is-size-5 pl-10">
             @if($menuName=='my_profile')
-            <i class="far fa-check-square"></i>&nbsp;My Profile
+            <i class="far fa-check-square"></i>&nbsp;{{ trans('general.My_Profile') }}
             @else
             <a href="{{ url('frontend/my_profile/'.session('user_data.uuid')) }}">
-                My Profile
+                {{ trans('general.My_Profile') }}
             </a>
             @endif
         </h3>
@@ -17,10 +17,10 @@
     <div class="content-title-line">
         <h3 class="is-size-5 pl-10">
             @if($menuName=='orders_history')
-                <i class="far fa-check-square"></i>&nbsp;Orders History
+                <i class="far fa-check-square"></i>&nbsp;{{ trans('general.Orders_History') }}
             @else
                 <a href="{{ url('frontend/my_orders/'.session('user_data.uuid')) }}">
-                    Orders History
+                    {{ trans('general.Orders_History') }}
                 </a>
             @endif
         </h3>
@@ -28,10 +28,10 @@
     <div class="content-title-line">
         <h3 class="is-size-5 pl-10">
             @if($menuName=='my_courses')
-                <i class="far fa-check-square"></i>&nbsp;My Courses
+                <i class="far fa-check-square"></i>&nbsp;{{ trans('general.My_Courses') }}
             @else
                 <a href="{{ url('frontend/my_courses') }}">
-                    My Courses
+                    {{ trans('general.My_Courses') }}
                 </a>
             @endif
         </h3>

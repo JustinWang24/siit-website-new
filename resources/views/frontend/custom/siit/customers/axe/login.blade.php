@@ -10,39 +10,17 @@
                         <h3>Log in to Axcelerate</h3>
                     </div>
                     <div class="content-detail-wrap">
-                        <form method="post" action="{{ url('frontend/login-my-courses') }}">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="id" value="{{ $user->uuid }}">
-                            <div class="columns">
-                                <div class="column">
-                                </div>
-                                <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','username',true,null) }}
-                                </div>
-                                <div class="column">
-                                </div>
-                            </div>
-                            <div class="columns">
-                                <div class="column">
-                                </div>
-                                <div class="column">
-                                    {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','password',true,null) }}
-                                </div>
-                                <div class="column">
-                                </div>
-                            </div>
-
-                            <div class="columns">
-                                <div class="column">
-                                </div>
-                                <div class="column">
-                                    <button type="submit" class="button is-link">Submit</button>
-                                    <a target="_blank" class="button is-success pull-right" href="https://admin.axcelerate.com.au/management/">Go to Axcelerate Portal</a>
-                                </div>
-                                <div class="column">
-                                </div>
-                            </div>
-                        </form>
+                        <p>
+                            <a target="_blank" class="button is-success pull-right" href="https://admin.axcelerate.com.au/management/">Axcelerate</a>
+                        </p>
+                    </div>
+                    <div class="content-title-line">
+                        <h3>Log in to Moodle</h3>
+                    </div>
+                    <div class="content-detail-wrap">
+                        <p>
+                            <a target="_blank" class="button is-success pull-right" href="https://apei.moodle.com.au/">Moodle</a>
+                        </p>
                     </div>
                 </div>
             </div>

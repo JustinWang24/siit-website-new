@@ -7,7 +7,7 @@
 
                 <div class="column is-three-quarter content-block content-two-third-right">
                     <div class="content-title-line">
-                        <h3>Shipping Address</h3>
+                        <h3>{{ trans('general.Address') }}</h3>
                     </div>
 
                     <div class="content-detail-wrap">
@@ -19,68 +19,68 @@
 
                     <div class="content-title-line">
                         <br>
-                        <h3>My Contact Detail</h3>
+                        <h3>{{ trans('general.My_Contact_Detail') }}</h3>
                     </div>
                     <div class="content-detail-wrap">
                         <form method="post" action="{{ url('frontend/my_profile') }}">
                             {{ csrf_field() }}
                             <input type="hidden" name="id" value="{{ $user->uuid }}">
                             <div class="field">
-                                <label for="staticEmail" class="label">Email</label>
+                                <label for="staticEmail" class="label">{{ trans('general.Email') }}</label>
                                 <div class="control">
                                     <input type="text" readonly class="input" value="{{ $user->email }}">
                                 </div>
                             </div>
                             <div class="field">
-                                <label class="label">Name</label>
+                                <label class="label">{{ trans('general.Name') }}</label>
                                 <div class="control">
                                     <input type="text" name="name" class="input"  placeholder="Full name" value="{{ $user->name }}">
                                 </div>
                             </div>
 
                             <div class="field">
-                                <label class="label">Phone</label>
+                                <label class="label">{{ trans('general.Phone') }}</label>
                                 <div class="control">
-                                    <input type="text" name="phone" class="input"  placeholder="Phone" value="{{ $user->phone }}">
+                                    <input type="text" name="phone" class="input"  placeholder="Phone" value="{{ $user->phone!=='n.a' ? $user->phone : $user->studentProfile->phone_number }}">
                                 </div>
                             </div>
                             <div class="field">
-                                <label class="label">Address</label>
-                                <input type="text" name="address" class="input" placeholder="1234 Main St" value="{{ $user->address }}">
+                                <label class="label">{{ trans('general.Address') }}</label>
+                                <input type="text" name="address" class="input" placeholder="1234 Main St" value="{{ $user->address!=='n.a n.a' ? $user->address : $user->studentProfile->current_address }}">
                             </div>
 
                             <div class="columns">
                                 <div class="column">
                                     <div class="field">
-                                        <label class="label">City</label>
+                                        <label class="label">{{ trans('general.City') }}</label>
                                         <input type="text" class="input" value="{{ $user->city }}"  name="city">
                                     </div>
                                 </div>
                                 <div class="column">
                                     <div class="field">
-                                        <label for="inputZip" class="label">Postcode</label>
-                                        <input type="text" name="postcode" class="input" placeholder="Postcode" value="{{ $user->postcode }}">
+                                        <label for="inputZip" class="label">{{ trans('general.Postcode') }}</label>
+                                        <input type="text" name="postcode" class="input" placeholder="Postcode" value="{{ $user->postcode!=='n.a' ? $user->postcode : $user->studentProfile->post_code_current }}">
                                     </div>
                                 </div>
                                 <div class="column">
-                                    <label class="label">State</label>
+                                    <label class="label">{{ trans('general.State') }}</label>
                                     <div class="select">
                                         <select name="state">
                                             @foreach(\App\Models\Utils\OptionTool::States() as $key=>$value)
-                                                <option value="{{ $key }}" {{ $key==$user->state ? 'select' : null }}>{{ $value }}</option>
+                                                <option value="{{ $key }}" {{ $key==($user->state!=='n.a' ? $user->state : $user->studentProfile->province_current) ? 'select' : null }}>{{ $value }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="button is-link is-pulled-right">Update Address</button>
+                            <button type="submit" class="button is-link is-pulled-right">{{ trans('general.Update') }}</button>
                         </form>
                     </div>
 
                     <div class="is-clearfix"></div>
                     <hr>
                     <div class="content-title-line">
-                        <h3>Manage Password</h3>
+                        <h3>{{ trans('general.Manage_Password') }}</h3>
                     </div>
                     <div class="content-detail-wrap">
                         <form method="post" action="{{ url('frontend/update_password') }}">
@@ -88,19 +88,19 @@
                             <input type="hidden" name="id" value="{{ $user->uuid }}">
 
                             <div class="field">
-                                <label class="label">New Password</label>
+                                <label class="label">{{ trans('general.New_Password') }}</label>
                                 <div class="control">
-                                    <input type="password" class="input" name="new_password"  placeholder="New Password" value="">
+                                    <input type="password" class="input" name="new_password"  placeholder="{{ trans('general.New_Password') }}" value="">
                                 </div>
                             </div>
                             <div class="field">
-                                <label class="label">Confirm Password</label>
+                                <label class="label">{{ trans('general.Confirm_Password') }}</label>
                                 <div class="control">
-                                    <input type="password" class="input" name="new_password_confirm" placeholder="Confirm Password" value="">
+                                    <input type="password" class="input" name="new_password_confirm" placeholder="{{ trans('general.Confirm_Password') }}" value="">
                                 </div>
                             </div>
 
-                            <button type="submit" class="button is-link is-pulled-right">Update Password</button>
+                            <button type="submit" class="button is-link is-pulled-right">{{ trans('general.Update_Password') }}</button>
                         </form>
                     </div>
                     <div class="is-clearfix"></div>

@@ -108,17 +108,17 @@
                             <hr>
                             <?php $transClass = 'slideRight';  $enterClass='slideRight'; $leaveClass='slideLeft'; ?>
                             <transition name="{{ $transClass }}" enter-active-class="{{ $enterClass }}" leave-active-class="{{ $leaveClass }}">
-                            <div v-show="step.current==1">
+                            <div v-show="step.current===1">
                             @include('frontend.custom.siit.enroll.elements.personal_details')
                             </div>
                             </transition>
                             <transition name="{{ $transClass }}" enter-active-class="{{ $enterClass }}" leave-active-class="{{ $leaveClass }}">
-                                <div v-show="step.current==2">
+                                <div v-show="step.current===2">
                                 @include('frontend.custom.siit.enroll.elements.contact_details')
                                 </div>
                             </transition>
                             <transition name="{{ $transClass }}" enter-active-class="{{ $enterClass }}" leave-active-class="{{ $leaveClass }}">
-                            <div v-show="step.current==3">
+                            <div v-show="step.current===3">
                                 @include('frontend.custom.siit.enroll.elements.english_proficiency')
                                 @include('frontend.custom.siit.enroll.elements.personal_details_passport')
                                 @include('frontend.custom.siit.enroll.elements.exemptions')
@@ -126,19 +126,17 @@
                             </transition>
 
                             <transition name="{{ $transClass }}" enter-active-class="{{ $enterClass }}" leave-active-class="{{ $leaveClass }}">
-                            <div v-show="step.current==4">
+                            <div v-show="step.current===4">
                             @include('frontend.custom.siit.enroll.elements.agent')
                             </div>
                             </transition>
-
-                            <hr>
                             <div class="columns">
                                 <div class="column">
                                     <button :disabled="!prevBtnEnable" class="button is-primary is-large" v-on:click="goPrev($event)"><&nbsp;{{ trans('general.Prev') }}</button>
                                 </div>
                                 <div class="column">
                                     <button v-show="nextBtnEnable" class="button is-link is-large is-pulled-right" v-on:click="goNext($event)">{{ trans('general.Save_and_Next') }}&nbsp;></button>
-                                    <button v-show="showSubmitButton" class="button is-large is-link is-pulled-right" v-on:click="confirmToEnroll($event)">{{ trans('general.Apply_Now') }}</button>
+                                    <button v-show="showSubmitButton&&isAgreementChecked" class="button is-large is-link is-pulled-right" v-on:click="confirmToEnroll($event)">{{ trans('general.Apply_Now') }}</button>
                                 </div>
                             </div>
                         </form>

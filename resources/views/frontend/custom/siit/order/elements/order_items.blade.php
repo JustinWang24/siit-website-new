@@ -1,18 +1,18 @@
 <div class="content-block">
     <div class="content-title-line">
-        <h3>Order Items ({{ count($order->orderItems) }})</h3>
+        <h3>{{ trans('general.Order_Items') }}</h3>
     </div>
     <div class="content-detail-wrap content">
         <table class="table table-hover">
             <thead class="thead-light">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Product</th>
-                <th scope="col">Price</th>
-                <th scope="col">QTY</th>
-                <th scope="col">Subtotal</th>
-                <th scope="col">GST</th>
-                <th scope="col">Total</th>
+                <th scope="col">{{ trans('general.Product') }}</th>
+                <th scope="col">{{ trans('general.Price') }}</th>
+                <th scope="col">{{ trans('general.QTY') }}</th>
+                <th scope="col">{{ trans('general.Subtotal') }}</th>
+                <th scope="col">{{ trans('general.GST') }}</th>
+                <th scope="col">{{ trans('general.Total') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -51,22 +51,6 @@
                     </td>
                 </tr>
             @endforeach
-            <tr>
-                <td>{{ count($order->orderItems)+1 }}</td>
-                <td colspan="2">Delivery Fee</td>
-                <td>
-                    {{ $order->delivery_charge>0 ? 1 : 'Free' }}
-                </td>
-                <td>
-                    {{ config('system.CURRENCY') }} {{ $order->delivery_charge>0 ? number_format($order->delivery_charge/1.1,2) : '0.00' }}
-                </td>
-                <td>
-                    {{ config('system.CURRENCY') }} {{ $order->delivery_charge>0 ? number_format($order->delivery_charge-$order->delivery_charge/1.1,2) : '0.00' }}
-                </td>
-                <td>
-                    {{ config('system.CURRENCY') }} {{ $order->delivery_charge>0 ? number_format($order->delivery_charge,2) : '0.00' }}
-                </td>
-            </tr>
             <tr class="em">
                 <?php
                     $total_final = $order->getTotalFinal();
@@ -77,7 +61,7 @@
 
                 </td>
                 <td>
-                    Total
+                    {{ trans('general.Total') }}
                 </td>
                 <td>
                     {{ config('system.CURRENCY'). ' '.number_format($total_final/1.1,2) }}

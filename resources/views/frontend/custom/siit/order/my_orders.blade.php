@@ -14,12 +14,12 @@
                     <table class="table table-hover">
                         <thead class="thead-light">
                         <tr>
-                            <th scope="col">Order #</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Course</th>
-                            <th scope="col">Total(GST)</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Offer Letter</th>
+                            <th scope="col">{{ trans('general.Order') }}</th>
+                            <th scope="col">{{ trans('general.Date') }}</th>
+                            <th scope="col">{{ trans('general.Course') }}</th>
+                            <th scope="col">{{ trans('general.Total') }}</th>
+                            <th scope="col">{{ trans('general.Status') }}</th>
+                            <th scope="col">{{ trans('general.Offer_Letter') }}</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
@@ -39,7 +39,7 @@
                                 <td>{!! \App\Models\Utils\OrderStatus::GetName($value->status) !!}</td>
                                 <td>
                                     @if($value->getStudentSignature())
-                                        <a target="_blank" href="{{ url('catalog/course/get-offer-letter/'.$value->uuid) }}">Download</a>
+                                        <a target="_blank" href="{{ url('catalog/course/get-offer-letter/'.$value->uuid) }}">{{ trans('general.Download') }}</a>
                                     @endif
                                 </td>
                                 <td>

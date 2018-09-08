@@ -286,7 +286,8 @@ $(document).ready(function(){
                     },
                     isChinese: false,
                     passportFileExist: false,
-                    englishTestCertificationFileExist: false
+                    englishTestCertificationFileExist: false,
+                    isAgreementChecked: false   // 是否学生已经同意了协议
                 },
                 computed: {
                     prevBtnEnable: function(){
@@ -337,30 +338,6 @@ $(document).ready(function(){
                     // 控制表单一页页显示的几个方法
                     goNext: function(e){
                         e.preventDefault();
-                        if(this.step.current === 1){
-                            // 第一步， 检查是否护照提交
-                            if(!this.passportFileExist && document.getElementById('input_passport_first_page_image_name').innerHTML===''){
-                                // 如果没有提交过护照, 本次也没有上传, 那么提示客户上传
-                              window._notify(
-                                  this,
-                                  'error',
-                                  this.isChinese ? '请上传您的护照首页扫描件' : 'Please provide your passport!'
-                              );
-                              return;
-                            }
-                        }
-                        if(this.step.current === 3){
-                            // 第一步， 检查是否英语成绩
-                            if(!this.englishTestCertificationFileExist && document.getElementById('input_english_test_certificate_image_name').innerHTML===''){
-                              // 如果没有提交过英语成绩, 本次也没有上传, 那么提示客户上传
-                              window._notify(
-                                  this,
-                                  'error',
-                                  this.isChinese ? '请上传您的英语考试成绩扫描件' : 'Please provide your Language Test Result!'
-                              );
-                              return;
-                            }
-                        }
                         this.step.current++;
                         this._saveProfile();
                     },
@@ -426,7 +403,7 @@ $(document).ready(function(){
                     },
                     // 从服务器端获取验证码
                     getVerificationCode: function(){
-                        if(this.user.email.trim().length == 0){
+                        if(this.user.email.trim().length === 0){
                             this.emailField.errorMsg = this.isChinese ? '请输入一个有效的电子邮件' : 'Please enter a valid email address';
                             return;
                         }
@@ -437,11 +414,11 @@ $(document).ready(function(){
                             .then((res)=>{
                                 that.emailField.isVerifyingEmail = false;
                                 // 验证方法成功返回数据
-                                if(res.data.error_no == 100){
-                                    if(res.data.data.result == 'not_valid'){
+                                if(res.data.error_no === 100){
+                                    if(res.data.data.result === 'not_valid'){
                                         // 给定的邮件已经不存在
                                         that.emailField.errorMsg = that.isChinese ? '请输入一个有效的电子邮件' : 'Please enter a valid email address';
-                                    }else if(res.data.data.result == 'valid'){
+                                    }else if(res.data.data.result === 'valid'){
                                         if(!res.data.data.emailExisted){
                                             that.vCode = that._decodeVcode(res.data.data.vCode, res.data.data.id);
                                             that.emailField.infoMsg = (that.isChinese ? '验证码已发送到' : 'The verification code is sent to ') + that.user.email;
@@ -462,7 +439,7 @@ $(document).ready(function(){
                     // 在用户提交了验证码和captcha码之后提交到服务器的方法
                     verifyCode: function(){
                         this.verificationField.isVerifyingCode = true;
-                        if(this.vCode == this.user.verificationCode){
+                        if(this.vCode === this.user.verificationCode){
                             // 验证vCode成功
                             this.user.password = Math.floor((Math.random() * 1000000) + 1);
                             let that = this;
@@ -470,7 +447,7 @@ $(document).ready(function(){
                                 '/api/students/verify-register',{
                                 student:this.user
                             }).then((res)=>{
-                                if(res.data.error_no == 100){
+                                if(res.data.error_no === 100){
                                     // 表示注册成功, 从新加载注册页面
                                     window.location.href = that._generateReloadUrl(res.data.data.uuid);
                                 }else{
@@ -496,7 +473,10 @@ $(document).ready(function(){
                     _generateReloadUrl: function(userUuid){
                         let intakeItem = 'unax-';
                         if(this.enrollData.intake_item.length > 0){
-                          intakeItem = this.enrollData.intake_item;
+                            intakeItem = this.enrollData.intake_item;
+                        }else{
+                            // 对于Axcelerate的课程，构造和正确的id
+                            intakeItem = 'ax-' + this.enrollData.course_id;
                         }
                         return '/catalog/course/book/'
                             + intakeItem
@@ -509,6 +489,34 @@ $(document).ready(function(){
                     },
                     confirmToEnroll: function(e){
                         e.preventDefault();
+                        // 第1步， 检查是否护照提交
+                        let passportEl = document.getElementById('passportInputWrap');
+                        let certEl = document.getElementById('certInputWrap');
+                        if(!this.passportFileExist && document.getElementById('input_passport_first_page_image_name').innerHTML===''){
+                              // 如果没有提交过护照, 本次也没有上传, 那么提示客户上传
+                            window._notify(
+                                this,
+                                'error',
+                                this.isChinese ? '请上传您的护照首页扫描件' : 'Please provide your passport!'
+                            );
+                            passportEl.setAttribute("style", "border: 1px solid red;");
+                            return;
+                        }else{
+                            passportEl.setAttribute("style", "border: 1px solid white;");
+                        }
+                        // 第2步， 检查是否英语成绩
+                        if(!this.englishTestCertificationFileExist && document.getElementById('input_english_test_certificate_image_name').innerHTML===''){
+                            // 如果没有提交过英语成绩, 本次也没有上传, 那么提示客户上传
+                            window._notify(
+                                this,
+                                'error',
+                                this.isChinese ? '请上传您的英语考试成绩扫描件' : 'Please provide your proof of language proficiency!'
+                            );
+                            certEl.setAttribute("style", "border: 1px solid red;");
+                            return;
+                        }else{
+                            certEl.setAttribute("style", "border: 1px solid white;");
+                        }
                         // 检查护照和英语成绩是否已经提交了
                         $('#catalog-course-enroll-form').submit();
                     }
