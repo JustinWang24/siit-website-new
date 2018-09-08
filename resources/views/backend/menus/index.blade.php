@@ -29,7 +29,7 @@
                 @foreach($menus as $key=>$value)
                     <tr>
                         <td>
-                            <a href="{{ $value->getMenuUrl() }}" target="_blank">{{ $value->name }}</a>
+                            {{ $key+1 }}:&nbsp;<a href="{{ $value->getMenuUrl() }}" target="_blank">{{ $value->name }}</a>
                         </td>
                         <td>
                             {{ $value->name_cn }}
@@ -49,10 +49,10 @@
                         </td>
                     </tr>
                     @if(count($value->children)>0)
-                        @foreach($value->children as $subFirst)
+                        @foreach($value->children as $idxFirst=>$subFirst)
                         <tr>
                             <td>
-                                <p class="pl-20">- <a href="{{ $subFirst->getMenuUrl() }}" target="_blank">{{ $subFirst->name }}</a></p>
+                                <p class="pl-20">{{ $key+1 }}-{{ $idxFirst+1 }}: <a href="{{ $subFirst->getMenuUrl() }}" target="_blank">{{ $subFirst->name }}</a></p>
                             </td>
                             <td>
                                 {{ $subFirst->name_cn }}
@@ -72,10 +72,10 @@
                             </td>
                         </tr>
                         @if(count($value->children)>0)
-                            @foreach($subFirst->children as $subSecond)
+                            @foreach($subFirst->children as $idxSecond=>$subSecond)
                                 <tr>
                                     <td>
-                                        <p class="pl-20 ml-20">- <a href="{{ $subSecond->getMenuUrl() }}" target="_blank">{{ $subSecond->name }}</a></p>
+                                        <p class="pl-20 ml-20">{{ $key+1 }}-{{ $idxFirst+1 }}-{{ $idxSecond+1 }}: <a href="{{ $subSecond->getMenuUrl() }}" target="_blank">{{ $subSecond->name }}</a></p>
                                     </td>
                                     <td>
                                         {{ $subSecond->name_cn }}
