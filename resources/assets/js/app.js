@@ -537,8 +537,8 @@ $(document).ready(function(){
             }
             let target = $(this).data('content');
             currentCollapsedSub = $(target);
-            currentCollapsedIconPlus = $(this).children('.fa-plus').eq(0);
-            currentCollapsedIconMinus = $(this).children('.fa-minus').eq(0);
+            currentCollapsedIconPlus = $(this).children('.fa-angle-down').eq(0);
+            currentCollapsedIconMinus = $(this).children('.fa-angle-up').eq(0);
 
             currentCollapsedIconPlus.toggle();
             currentCollapsedIconMinus.toggle();
