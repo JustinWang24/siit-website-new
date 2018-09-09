@@ -49,7 +49,7 @@
                             <ul>
                                 @include(_get_frontend_layout_path('frontend.header.courses_submenu'), ['showOnly' => 'Courses'])
                                 @foreach($children as $sub)
-                                    @if($sub->name!='University Pathways' && $sub->name!='Documents and Forms' && $sub->name!='Education Agent')
+                                    @if($sub->name!='University Pathways' && $sub->name!='Education Agent')
                                     @php
                                         $menuUrl = $sub->getMenuUrl();
                                     @endphp
