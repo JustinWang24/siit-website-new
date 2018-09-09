@@ -31,6 +31,7 @@ class InTake extends Model
         'offline_date',
         'title',
         'code',
+        'seats',
         'description',
         'description_cn',
         'last_updated_user_id',

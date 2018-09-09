@@ -277,7 +277,9 @@ $(document).ready(function(){
                     enrollData:{
                         intake_item: null,
                         course_id: null,
-                        instance: null
+                        instance: null,
+                        chosenCourseOptions:'',
+                        currentIntakeId:''
                     },
                     // steps
                     step:{
@@ -315,10 +317,14 @@ $(document).ready(function(){
                 },
                 created: function(){
                     // 获取可能的经销商的ID
-                    this.user.group_id          = $('#current-group-id').val();
-                    this.enrollData.intake_item = $('#current-intake-item').val();
-                    this.enrollData.course_id   = $('#current-course-id').val();
-                    this.enrollData.instance   = $('#current-instance-id').val();
+                    this.user.group_id                  = $('#current-group-id').val();
+                    this.enrollData.intake_item         = $('#current-intake-item').val();
+                    this.enrollData.course_id           = $('#current-course-id').val();
+                    this.enrollData.instance            = $('#current-instance-id').val();
+                    // 非Axcelerate的课程所包含的options与Intake ID
+                    this.enrollData.chosenCourseOptions = $('#chosen-course-options').val();
+                    this.enrollData.currentIntakeId     = $('#current-intake-id').val();
+
                     this.isChinese   = $('#current-lang').val() === 'cn';
                     this.loginAttemptCount = 0;
 
@@ -482,10 +488,11 @@ $(document).ready(function(){
                             + intakeItem
                             + '?agent='
                             + this.user.group_id
-                            + '&sd='
-                            + userUuid
+                            + '&sd=' + userUuid
                             + '&instance=' + this.enrollData.instance
-                            + '&product_id=' + this.enrollData.course_id;
+                            + '&product_id=' + this.enrollData.course_id
+                            + '&c_options=' + this.enrollData.chosenCourseOptions   // 提交course options的id
+                            + '&c_intake=' + this.enrollData.currentIntakeId;       // 提交intake id(非Ax课程)
                     },
                     confirmToEnroll: function(e){
                         e.preventDefault();

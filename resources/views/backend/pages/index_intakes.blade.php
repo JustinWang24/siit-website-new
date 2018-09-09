@@ -18,11 +18,10 @@
                 <thead>
                 <tr>
                     <th>Course</th>
-                    <th>Scheduled/Seats</th>
-                    <th>Online</th>
-                    <th>Offline</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Vacancies</th>
                     <th>Title/Code</th>
-                    <th>Updated By</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -32,16 +31,7 @@
                     <tr>
                         <td>
                             <a href="#" target="_blank">
-                                {{ $value->course->name }}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="{{ url('/backend/intakes/items-manager/'.$value->id) }}">
-                            @foreach($value->intakeItems as $item)
-                                @if($item->seats && $item->scheduled)
-                                    <p>{{ \App\Models\Catalog\IntakeItem::GetLanguageName($item->language_id).', '.$item->seats.', '.$item->scheduled->format('D d-M-y') }}</p>
-                                @endif
-                            @endforeach
+                                {{ $value->course->name }} - {{ $value->course->brand }}
                             </a>
                         </td>
                         <td>
@@ -51,9 +41,11 @@
                             {{ $value->offline_date ? $value->offline_date->format('D d/M/Y') : null }}
                         </td>
                         <td>
+                            {{ $value->seats }}
+                        </td>
+                        <td>
                             {{ $value->title }} {{ $value->code ? '('.$value->code.')' : null }}
                         </td>
-                        <td>{{ $value->account->name }}</td>
                         <td>
                             <a class="button is-small" href="{{ url('backend/intakes/edit/'.$value->id) }}">
                                 <i class="fa fa-edit"></i>&nbsp;Edit

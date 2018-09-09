@@ -19,12 +19,16 @@
             @foreach($order->orderItems as $key=>$value)
                 <tr>
                     <?php
+                    /**
+                     * @var \App\Models\Order\OrderItem $value
+                     */
                     $specialPrice = $value->product->getSpecialPriceGST();
                     $defaultPrice = $value->product->getDefaultPriceGST();
+                    $product = $value->product;
                     ?>
                     <td>{{ $key+1 }}</td>
                     <td>
-                        {{ $value->product->name }}
+                        {{ $product->name }}
                         <div class="option-notes">
                             {!! $value->notes !!}
                         </div>

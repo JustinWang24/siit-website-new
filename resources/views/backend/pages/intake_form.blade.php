@@ -32,7 +32,7 @@
                             <el-select v-model="currentPage.course_id" placeholder="Please choose" class="full-width">
                                 <el-option label="NOT AVAILABLE" value="0"></el-option>
                                 @foreach($courses as $course)
-                                    <el-option label="{{ $course->name }} - {{ $course->name_cn }}" value="{{ $course->id }}"></el-option>
+                                    <el-option label="{{ $course->name }} - {{ $course->name_cn }} - {{ $course->brand }}" value="{{ $course->id }}"></el-option>
                                 @endforeach
                             </el-select>
                         </el-form-item>
@@ -42,13 +42,22 @@
                 <el-form-item label="Title">
                     <el-input placeholder="Optional: Title, it will use course name as default" v-model="currentPage.title"></el-input>
                 </el-form-item>
-                <el-form-item label="Code">
-                    <el-input placeholder="Optional: Employee code" v-model="currentPage.code"></el-input>
-                </el-form-item>
+                <div class="columns">
+                    <div class="column">
+                        <el-form-item label="Vacancies">
+                            <el-input placeholder="Required: Total availble vacancies" v-model="currentPage.seats"></el-input>
+                        </el-form-item>
+                    </div>
+                    <div class="column">
+                        <el-form-item label="Code">
+                            <el-input placeholder="Optional: Employee code" v-model="currentPage.code"></el-input>
+                        </el-form-item>
+                    </div>
+                </div>
 
                 <div class="columns">
                     <div class="column">
-                        <el-form-item label="Online Date" prop="online_date" required>
+                        <el-form-item label="Start Date" prop="online_date" required>
                             <el-date-picker
                                     v-model="currentPage.online_date"
                                     type="date"
@@ -57,7 +66,7 @@
                         </el-form-item>
                     </div>
                     <div class="column">
-                        <el-form-item label="Offline Date">
+                        <el-form-item label="End Date">
                             <el-date-picker
                                     v-model="currentPage.offline_date"
                                     type="date"
@@ -86,7 +95,7 @@
                     ></vuejs-editor>
                 </el-form-item>
                 <el-button type="primary" v-on:click="savePage('currentPage')">
-                    <i class="el-icon-upload2"></i>&nbsp;Save and Next
+                    <i class="el-icon-upload2"></i>&nbsp;Save
                 </el-button>
             </el-form>
         </div>

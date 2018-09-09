@@ -46,6 +46,32 @@
                                     @include(_get_frontend_theme_path('catalog.elements.sections.options'))
                                 </div>
                             @endif
+
+                            <div class="row mt-20">
+                                <h2 class="is-size-4-desktop is-size-4-mobile has-text-grey mt-10">{{ trans('general.Scheduled_Intake') }}</h2>
+                                <div class="field is-horizontal">
+                                    <div class="field-label is-normal">
+                                        <label class="label has-text-left" style="font-size: 18px;">{{ trans('general.Intake') }}</label>
+                                    </div>
+                                    <div class="field-body">
+                                        <div class="field">
+                                            <div class="control">
+                                                <div class="select full-width">
+                                                    <select class="select full-width" name="intake_id">
+                                                        @foreach($product->intakes as $key=>$intake)
+                                                            <option value="{{ $intake->id }}">
+                                                                {{ $intake->title }}
+                                                                {{ $intake->online_date->format('d/M/Y') }} - {{ $intake->offline_date->format('d/M/Y') }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="add-to-cart-form-wrap">
                                 <input type="hidden" name="quantity" value="1"><!-- 一次报名1人 -->
                                 <button type="submit" class="button is-danger">

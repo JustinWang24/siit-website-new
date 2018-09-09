@@ -8,6 +8,7 @@
                 last_updated_user_id: '{{ session('user_data.id') }}',
                 type:'{{ $intake->type ? $intake->type : \App\Models\Catalog\InTake::TYPE_PUBLIC }}',
                 title:'{{ $intake->title }}',
+                seats:'{{ $intake->seats }}',
                 code:'{{ $intake->code }}',
                 course_id:'{{ $intake->course_id ? $intake->course_id : 0 }}',   // 所属的课程，可以为0
                 online_date:'{{ $intake->online_date }}',   // 工种
@@ -58,7 +59,7 @@
                         // 成功
                         that._notify('success','DONE!','Intake Saved!');
                         // 下一步, 添加具体的开学日期, 人数等
-                        window.location.href = '/backend/intakes/items-manager/'+res.data.data.msg;
+                        window.location.href = '/backend/intakes/index';
                     }else{
                         // 失败
                         that._notify('error','Error','Can not save Intake, please try later!');
