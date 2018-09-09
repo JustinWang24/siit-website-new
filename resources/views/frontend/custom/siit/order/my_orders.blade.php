@@ -34,6 +34,15 @@
                                 <td>{{ substr($value->created_at, 0, 11) }}</td>
                                 <td>
                                     {{ count($value->orderItems) }}
+                                    @foreach($value->orderItems as $orderItem)
+                                        @php
+                                        /**
+                                        * @var \App\Models\Order\OrderItem $orderItem
+                                        */
+                                        @endphp
+                                    <p>{{ app()->getLocale()=='cn' ? $orderItem->product->name_cn : $orderItem->product->name }}</p>
+                                    <p>{{ trans('general.Intake') }}: {{ str_replace('00:00:00','',$orderItem->intake_start_date) }}</p>
+                                    @endforeach
                                 </td>
                                 <td>{{ config('system.CURRENCY'). ' '.number_format($value->getTotalFinal(),2) }}</td>
                                 <td>{!! \App\Models\Utils\OrderStatus::GetName($value->status) !!}</td>
