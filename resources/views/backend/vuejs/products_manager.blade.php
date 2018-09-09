@@ -74,7 +74,7 @@
                 serial_name: '<?php echo $product->serial_name; ?>',
                 is_group_product: <?php echo $product->is_group_product ? 'true' : 'false'; ?>,
                 is_configurable_product: <?php echo $product->is_configurable_product ? 'true' : 'false'; ?>,
-                axcelerate_course_id: <?php echo $product->axcelerate_course_id; ?>,
+                axcelerate_course_id: '<?php echo $product->axcelerate_course_id; ?>',
                 // 课程中文
                 name_cn: '<?php echo $product->name_cn; ?>',
                 short_description_cn: '<?php echo str_replace(PHP_EOL,'', $product->short_description_cn); ?>',

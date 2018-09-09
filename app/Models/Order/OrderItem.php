@@ -2,6 +2,7 @@
 
 namespace App\Models\Order;
 
+use App\Models\Catalog\InTake;
 use App\Models\Utils\OrderStatus;
 use Carbon\Carbon;
 use FlipNinja\Axcelerate\Courses\Instance;
@@ -9,6 +10,7 @@ use Gloudemans\Shoppingcart\CartItem;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 use App\Models\Catalog\Product;
+use App\Models\Catalog\Product\OptionItem;
 
 class OrderItem extends Model
 {
@@ -16,7 +18,7 @@ class OrderItem extends Model
         'uuid','serial_number','operator_id',
         'user_id','product_id','operator_name','product_name',
         'subtotal','quantity','price','order_id',
-        'status','payment_type','notes','discount','discount_reason','intake_start_date'
+        'status','payment_type','notes','discount','discount_reason','intake_start_date','intake_id'
     ];
 
     public $dates = ['intake_start_date'];
@@ -45,11 +47,15 @@ class OrderItem extends Model
             // 用来保存订单项中的产品的附加Option所带来的价格增量
             $priceExtra = 0;
 
+            /**
+             * @var InTake $intake
+             */
+            $intake = null;
+
             if($options && count($options)>0){
                 foreach ($options as $key => $option) {
                     // 专门处理产品的Colour
                     if ($key === 'colour'){
-//                        dd($option['extra_money']>0 ? ' +'.config('system.CURRENCY').number_format($option['extra_money'],2) : null);
                         $extra_money = $option['extra_money']>0 ? ' +'.config('system.CURRENCY').number_format($option['extra_money'],2) : null;
                         $name = '<span class="note-option-name">Colour: </span>';
                         $value = '<span class="note-option-value">'
@@ -57,7 +63,45 @@ class OrderItem extends Model
                             .$extra_money
                             .'</span>';
                         $notes .= '<p class="note-option-item">'.$name.$value.'</p>';
-                    }elseif (is_array($option) && isset($option['name']) && isset($option['value'])){
+                    }
+
+                    if($key === 'intake' && !empty($option)){
+                        $intake = InTake::find($option);
+                        if($intake){
+                            $name = '<span class="note-option-name">'.trans('general.Intake').': </span>';
+                            $value = '<span class="note-option-value">'
+                                .$intake->title.' '
+                                .$intake->online_date->format('d/M/Y') . '-' . $intake->offline_date->format('d/M/Y')
+                                .'</span>';
+                            $notes .= '<p class="note-option-item">'.$name.$value.'</p>';
+                            // 把有效的座位减去一个
+                            if($intake->seats > 0){
+                                $intake->seats = $intake->seats - 1;
+                                $intake->save();
+                            }
+                        }
+                    }
+
+                    if($key === 'productOptions' && !empty($option)){
+                        $currentOptions = explode(',',$option);
+                        foreach ($currentOptions as $currentOptionId) {
+                            /**
+                             * @var OptionItem $optionItem
+                             */
+                            $optionItem = OptionItem::find($currentOptionId);
+                            if($optionItem){
+                                $name = '<span class="note-option-name">'.$optionItem->productOption->name.': '.$optionItem->label.'</span>';
+                                if($optionItem->extra_value > 0){
+                                    $value = '<span class="note-option-value">$'.$optionItem->extra_value.'</span>';
+                                }else{
+                                    $value = '<span class="note-option-value"></span>';
+                                }
+                                $notes .= '<p class="note-option-item">'.$name.$value.'</p>';
+                            }
+                        }
+                    }
+
+                    if (is_array($option) && isset($option['name']) && isset($option['value'])){
                         // 处理非 Colour 的选项
                         $name = '<span class="note-option-name">'.$option['name'].'</span>';
                         $value = '<span class="note-option-value">'.$option['value'].'</span>';
@@ -78,6 +122,10 @@ class OrderItem extends Model
                 $intake_start_date = $instance->get('startdate')=='n.a'
                     ? Carbon::tomorrow('Australia/Melbourne')
                     : $instance->get('startdate');
+
+                if (is_string($intake_start_date)){
+                    $intake_start_date = Carbon::parse($intake_start_date);
+                }
             }
 
             $dataOrderItem = [
@@ -98,8 +146,10 @@ class OrderItem extends Model
                 'status'=>OrderStatus::$PENDING,
                 'payment_type'=>$order->payment_type,
                 'notes'=>$notes,
-                'intake_start_date'=>$intake_start_date
+                'in_take_id'=>$intake ? $intake->id : null,
+                'intake_start_date'=>$intake ? $intake->online_date : $intake_start_date
             ];
+//            dd($dataOrderItem);
             $orderItem = self::create($dataOrderItem);
             if($orderItem){
                 return $orderItem->subtotal;

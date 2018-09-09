@@ -37,7 +37,7 @@
                     <a class="navbar-link" href="{{ $rootMenu->link_to=='/' ? '/' : $rootMenu->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($rootMenu->name_cn) ? $rootMenu->name_cn : $rootMenu->name }}">
                         {{ app()->getLocale()=='cn' && !empty($rootMenu->name_cn) ? $rootMenu->name_cn : $rootMenu->name }}
                     </a>
-                    <ul style="width: 60.5%;margin-left: 15%;">
+                    <ul style="width: 50.5%;margin-left: 25%;">
                         <?php
                         $children = $rootMenu->getSubMenus();
                         ?>
@@ -49,7 +49,7 @@
                             <ul>
                                 @include(_get_frontend_layout_path('frontend.header.courses_submenu'), ['showOnly' => 'Courses'])
                                 @foreach($children as $sub)
-                                    @if($sub->name!='University Pathways' && $sub->name!='Documents and Forms' && $sub->name!='Education Agent')
+                                    @if($sub->name!='University Pathways' && $sub->name!='Education Agent')
                                     @php
                                         $menuUrl = $sub->getMenuUrl();
                                     @endphp

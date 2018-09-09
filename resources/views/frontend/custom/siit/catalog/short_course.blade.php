@@ -49,25 +49,6 @@
                                 </div>
                             @endif
 
-                            <div class="row">
-                                <?php
-                                $languages = \App\Models\Catalog\IntakeItem::GetSupportedLanguages();
-                                $today = \Carbon\Carbon::today();
-                                ?>
-                                <hr>
-                                <h2 class="is-size-4-desktop is-size-4-mobile has-text-grey">
-                                    {{ trans('general.Proposed_Language') }}
-                                </h2>
-                                <el-select v-model="intakeItemId" placeholder="{{ trans('general.Please_choose_language') }}" class="full-width">
-                                    @foreach($product->intakes as $intake)
-                                        @foreach($intake->intakeItems as $item)
-                                            @if( $item->scheduled && $item->scheduled > $today && $item->seats && $item->seats>$item->enrolment_count )
-                                                <el-option label="{{ trans('general.'.$languages[$item->language_id]).' - '.$item->scheduled->format('d M Y') }}" value="{{ $item->id }}"></el-option>
-                                            @endif
-                                        @endforeach
-                                    @endforeach
-                                </el-select>
-                            </div>
 
                             <div class="row mt-20">
                                 <h2 class="is-size-4-desktop is-size-4-mobile has-text-grey mt-10">{{ trans('general.Scheduled_Intake') }}</h2>
@@ -80,6 +61,7 @@
                                     </el-option>
                                 </el-select>
                             </div>
+
                             <div class="add-to-cart-form-wrap">
                                 <input type="hidden" name="quantity" value="1"><!-- 一次报名1人 -->
                                 <button v-on:click="enrollNow($event)" type="submit" class="button is-danger" :disabled="selectedAxcelerateInstanceId.length==0 || intakeItemId==0">

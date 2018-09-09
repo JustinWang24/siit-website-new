@@ -2,10 +2,10 @@
     @if($showOnly==$categoryTag->name)
     <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link" href="#" title="{{ app()->getLocale()=='cn' && !empty($categoryTag->name_cn) ? $categoryTag->name_cn : $categoryTag->name }}" style="border-bottom: none;">
-            {{ app()->getLocale()=='cn' && !empty($categoryTag->name_cn) ? $categoryTag->name_cn : $categoryTag->name }}
+            {{ trans('general.Courses') }}
         </a>
         @if(count($categoryTag->children) > 0)
-            <div class="navbar-dropdown is-boxed" style="min-width: 95%;">
+            <div class="navbar-dropdown is-boxed" style="min-width: 112%;">
                 @foreach($categoryTag->children as $subCategory)
                     @php
                         /** @var \App\Models\Catalog\Category $subCategory */

@@ -4,13 +4,11 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Catalog\IntakeItem;
 use App\Models\Catalog\Product;
-use App\Models\Configuration;
 use App\Models\Dealer\DealerOrder;
 use App\Models\Dealer\DealerStudent;
 use App\Models\Group;
 use App\Models\Order\Order;
 use App\Models\Utils\JsonBuilder;
-use App\Models\Utils\ProductType;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -88,8 +86,12 @@ class EnrollController extends Controller
              * 课程没有 axcelerate_course_id 表示非 Axcelerate的课程
              */
             $all = $request->all();
-//            $course = Product::GetByUuid($request->get('product_id'));
-            $this->_handleNotAxcelerateCourse($course, $agent);
+
+            /**
+             * 获取Intake 的ID, 下面的两个方式必能获得，c_intake 这个参数在用户没有登录的情况下会被提交上来
+             */
+            $intakeId = $request->get('intake_id') ? $request->get('intake_id') : $request->get('c_intake');
+            $this->_handleNotAxcelerateCourse($course, $intakeId, $agent);
 
             $productOptions = [];
             foreach ($all as $key=>$value) {
@@ -97,7 +99,13 @@ class EnrollController extends Controller
                     $productOptions[] = $value;
                 }
             }
-            $this->dataForView['productOptions'] = implode(',',$productOptions);
+            if(empty($productOptions)){
+                // 查找一下, 是否是在用户之前没有登录的情况下的提交
+                $this->dataForView['productOptions'] = $request->get('c_options');
+            }else{
+                // 如果用户已经登录的状态, 那么这样设置课程的选项
+                $this->dataForView['productOptions'] = implode(',',$productOptions);
+            }
         }else{
             // Axcelerate 课程
             $this->_handleAxcelerateCourse($intakeItemId,$instanceIdAndType, $agent, $request, $course);
@@ -109,13 +117,15 @@ class EnrollController extends Controller
     /**
      * 处理非 Axcelerate 的课程流程
      * @param Product $course
+     * @param string $intakeId
      * @param Group|null $dealer
      */
-    private function _handleNotAxcelerateCourse(Product $course, Group $dealer=null){
+    private function _handleNotAxcelerateCourse(Product $course, $intakeId, Group $dealer=null){
         // 根据给定的值, 查询经销商 ID 或者 Code
         $this->dataForView['dealer'] = $dealer;
         // 如果该课程已经过期了
         $this->dataForView['intakeItem'] = new IntakeItem();
+        $this->dataForView['intakeId'] = $intakeId; // 表示客户选取的开学日期
         $this->dataForView['instanceIdAndType'] = null;
         $this->dataForView['axcelerateInstance'] = null;
         $this->dataForView['course'] = $course;
@@ -311,6 +321,7 @@ class EnrollController extends Controller
                 $productOptionsId = explode(',',$enrollData['productOptions']);
                 $notes = null;
                 $costFromOption = 0;
+
                 foreach ($productOptionsId as $productOptionId) {
                     /**
                      * @var OptionItem $optionItem

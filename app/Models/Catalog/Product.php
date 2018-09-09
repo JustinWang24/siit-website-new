@@ -182,8 +182,7 @@ class Product extends Model
         $today = Carbon::now()->format('Y-m-d');
         return $this->hasMany(InTake::class,'course_id')
             ->where('type',InTake::TYPE_PUBLIC)
-            ->where('online_date','<=',$today)
-            ->where('offline_date','>',$today)
+            ->where('online_date','>',$today)
             ->orderBy('online_date','asc');
     }
 

@@ -215,8 +215,10 @@ class Order extends Model
                     }
                 }
             }else{
+                // 非Axcelerate课程的订单
                 $orderTotal = $order->total;
                 $dataOrderItems = $cart->content();
+
                 foreach ($dataOrderItems as $key=>$dataOrderItem) {
                     // 这里的 Order Item 是订单的每个子项, 不是具体的options, 别忘了
                     $subTotal = OrderItem::Persistent($order,$dataOrderItem,config('app.name'),$key,$instance);
