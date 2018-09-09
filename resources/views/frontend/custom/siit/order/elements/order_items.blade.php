@@ -34,7 +34,6 @@
                     <td>{{ $key+1 }}</td>
                     <td>
                         {{ $product->name }}
-                        <p>{{ app()->getLocale()=='cn' ? $product->name_cn : $product->name }}</p>
                         <p>{{ trans('general.Intake') }}: {{ str_replace('00:00:00','',$value->intake_start_date) }}</p>
                         <div class="option-notes">
                             {!! $value->notes !!}
