@@ -33,7 +33,6 @@
                                 </th>
                                 <td>{{ substr($value->created_at, 0, 11) }}</td>
                                 <td>
-                                    {{ count($value->orderItems) }}
                                     @foreach($value->orderItems as $orderItem)
                                         @php
                                         /**
