@@ -32,7 +32,7 @@ body{
   background-color: $color-grey;
 }
 .bg-white{
-  background-color: white;
+  background-color: white !important;
 }
 .no-list-style{
   li{
@@ -268,3 +268,4 @@ ul.tight-list{
 @import "category";
 @import "catalog";
 @import "checkout";
+@import "magamenu";

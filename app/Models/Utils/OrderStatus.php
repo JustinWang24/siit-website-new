@@ -44,7 +44,7 @@ class OrderStatus
         $types = self::All();
         $css = self::GetCssClass();
         if($richText){
-            return '<span class="'.$css[$key].'">'.$types[$key].'</span>';
+            return '<span class="'.$css[$key].'">'.trans('general.'.$types[$key]).'</span>';
         }
         return $types[$key];
     }

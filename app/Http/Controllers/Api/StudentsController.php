@@ -17,6 +17,11 @@ use Illuminate\Support\Facades\Mail;
 
 class StudentsController extends Controller
 {
+    /**
+     * 注册的时候， 如果点击下一步， 就会保存学生的profile
+     * @param Request $request
+     * @return string
+     */
     public function save_profile_ajax(Request $request){
         $data = $request->all();
         $bean = [];
@@ -24,12 +29,17 @@ class StudentsController extends Controller
         foreach ($data as $item) {
             $name = str_replace('student[','',$item['name']);
             $name = str_replace(']','',$name);
-            $bean[$name] = $item['value'];
+            $bean[$name] = empty($item['value']) ? '0' : $item['value'];
         }
 
         $user = isset($bean['user_id']) ? User::GetByUuid($bean['user_id']) : null;
         if($user){
             $profile = $user->studentProfile;
+            if(is_null($profile)){
+                // 表示这个学生还没有自己的Profile
+                $profile = new StudentProfile();
+                $profile->user_id = $user->id;
+            }
             foreach ($bean as $fieldName=>$value) {
                 if($fieldName !== 'user_id'){
                     $profile->$fieldName = $value;
@@ -66,9 +76,8 @@ class StudentsController extends Controller
                 $result['vCode'] = $this->transformVcode($vCode,$index);
                 $result['id'] = $index;
                 $result['emailExisted'] = false;
-                if(!env('APP_DEBUG')){
-                    Mail::to($email)
-                        ->send(new UserVerificationCode($vCode,$name));
+                if(!env('APP_DEBUG', false)){
+                    Mail::to($email)->send(new UserVerificationCode($vCode,$name));
                 }
             }
         }
@@ -92,14 +101,12 @@ class StudentsController extends Controller
             'uuid'=>Uuid::uuid4()->toString(),
             'role'=>UserGroup::$GENERAL_CUSTOMER,
             'group_id'=>$data['group_id'],
-            'status'=>false
+            'status'=>true
         ]);
 
         if($user){
             // 如果注册成功，需要给学生发送电子邮件
-            if(!env('APP_DEBUG')){
-                Mail::to(trim($data['email']))->send(new UserConfirmEmail($user, $data['password']));
-            }
+            Mail::to(trim($data['email']))->send(new UserConfirmEmail($user, $data['password']));
             return JsonBuilder::Success(['uuid'=>$user->uuid]);
         }else{
             // 注册失败了

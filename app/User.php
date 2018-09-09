@@ -146,8 +146,14 @@ class User extends Authenticatable
     }
 
     public function addressText(){
-        return $this->address.', '.$this->city.' '.$this->postcode.
-        ', '.$this->state. ', '.$this->country;
+        if(!$this->address){
+            return $this->address.', '.$this->city.' '.$this->postcode.
+                ', '.$this->state. ', '.$this->country;
+        }
+        else{
+            $profile = $this->studentProfile;
+            return $profile->current_address.', '.$profile->province_current.' '.$profile->post_code_current.' '.$profile->country_current;
+        }
     }
 
     /**

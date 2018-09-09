@@ -13,7 +13,8 @@ class Menus extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Request $request){
-        $this->dataForView['menus'] = Menu::orderBy('position','asc')->paginate(config('system.PAGE_SIZE'));
+        $this->dataForView['menus'] = Menu::where('parent_id',0)
+            ->orderBy('position','asc')->paginate(config('system.PAGE_SIZE'));
         $this->dataForView['menuName'] = 'menus';
         return view('backend.menus.index', $this->dataForView);
     }

@@ -4,14 +4,14 @@
         <div class="box pt-20">
             <div class="col is-pulled-left">
                 <h4 class="is-size-4">
-                    Order #: {{ $order->serial_number }} {!! \App\Models\Utils\OrderStatus::GetName($order->status) !!}
+                    {{ trans('general.Order_No') }}: {{ $order->serial_number }} {!! \App\Models\Utils\OrderStatus::GetName($order->status) !!}
                 </h4>
             </div>
             @if(session('user_data.role') == \App\Models\Utils\UserGroup::$FINANCE_CONTROLLER && $order->status == \App\Models\Utils\OrderStatus::$PENDING)
                 <div class="col">
                     <div class="btn-group float-right order-actions-bar" role="group" aria-label="Actions">
                         <a class="btn btn-success" href="{{ url('frontend/my_orders') }}" role="button">
-                            <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>&nbsp;Back
+                            <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>&nbsp;{{ trans('general.Back') }}
                         </a>
                         <a class="btn btn-primary need-confirm"
                            data-msg="Are you sure to approve this order (# {{$order->serial_number}})?"
@@ -28,7 +28,7 @@
             @else
                 <div class="col is-pulled-right" style="margin-right: 1%;">
                     <a class="button is-link is-pulled-right" href="{{ url('frontend/my_orders') }}">
-                        <i class="fas fa-arrow-left"></i>&nbsp;Back
+                        <i class="fas fa-arrow-left"></i>&nbsp;{{ trans('general.Back') }}
                     </a>
                 </div>
             @endif
@@ -50,7 +50,6 @@
         </div>
         <div class="box">
             <div class="col">
-                @include(_get_frontend_theme_path('order.elements.shipment'))
                 @include(_get_frontend_theme_path('order.elements.notes'))
             </div>
             <div class="is-clearfix"></div>
@@ -77,7 +76,7 @@
             @else
                 <div class="col" style="margin-right: 1%;">
                     <a class="button is-link is-pulled-right" href="{{ url('frontend/my_orders') }}" role="button">
-                        <i class="fas fa-arrow-left"></i>&nbsp;Back
+                        <i class="fas fa-arrow-left"></i>&nbsp;{{ trans('general.Back') }}
                     </a>
                 </div>
             @endif
