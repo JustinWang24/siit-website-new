@@ -5,7 +5,7 @@
             {{ trans('general.Courses') }}
         </a>
         @if(count($categoryTag->children) > 0)
-            <div class="navbar-dropdown is-boxed" style="min-width: 95%;">
+            <div class="navbar-dropdown is-boxed" style="min-width: 112%;">
                 @foreach($categoryTag->children as $subCategory)
                     @php
                         /** @var \App\Models\Catalog\Category $subCategory */
