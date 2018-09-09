@@ -17,6 +17,11 @@
             </thead>
             <tbody>
             @foreach($order->orderItems as $key=>$value)
+                @php
+                    /**
+                    * @var \App\Models\Order\OrderItem $value
+                    */
+                @endphp
                 <tr>
                     <?php
                     /**
@@ -29,15 +34,8 @@
                     <td>{{ $key+1 }}</td>
                     <td>
                         {{ $product->name }}
-                        @foreach($value->orderItems as $orderItem)
-                            @php
-                                /**
-                                * @var \App\Models\Order\OrderItem $orderItem
-                                */
-                            @endphp
-                            <p>{{ app()->getLocale()=='cn' ? $orderItem->product->name_cn : $orderItem->product->name }}</p>
-                            <p>{{ trans('general.Intake') }}: {{ str_replace('00:00:00','',$orderItem->intake_start_date) }}</p>
-                        @endforeach
+                        <p>{{ app()->getLocale()=='cn' ? $product->name_cn : $product->name }}</p>
+                        <p>{{ trans('general.Intake') }}: {{ str_replace('00:00:00','',$value->intake_start_date) }}</p>
                         <div class="option-notes">
                             {!! $value->notes !!}
                         </div>
