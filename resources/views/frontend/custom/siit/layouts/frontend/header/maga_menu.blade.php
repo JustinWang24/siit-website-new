@@ -49,14 +49,11 @@
                             <ul>
                                 @include(_get_frontend_layout_path('frontend.header.courses_submenu'), ['showOnly' => 'Courses'])
                                 @foreach($children as $sub)
-                                    @if($sub->name!='University Pathways' && $sub->name!='Education Agent')
-                                    @php
-                                        $menuUrl = $sub->getMenuUrl();
-                                    @endphp
+                                    @if($sub->name!='University Pathways' && $sub->name!='Education Agent' && $sub->isLocalMenuExist())
                                     <div class="aside">
                                         <ul class="menu-list">
                                             <li>
-                                                <a href="{{ $sub->link_to=='/' ? '/' : $sub->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}">
+                                                <a href="{{ $sub->link_to=='/' ? '/' : $sub->getMenuUrl().'-local' }}" title="{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}">
                                                     {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
                                                 </a>
                                             </li>
@@ -94,6 +91,7 @@
                                                 $menuUrl = $sub->getMenuUrl();
                                                 $pathwaySubmenu = strpos($menuUrl,'University-Pathway-Collection') !== false;
                                             @endphp
+                                            @if($sub->isNationMenuExist())
                                             <div class="aside">
                                                 <ul class="menu-list">
                                                     <li>
@@ -103,6 +101,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
+                                            @endif
                                         @endif
                                     @endforeach
                                 </ul>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Utils\ContentTool;
+use App\Models\Page;
 use DB;
 
 class Menu extends Model
@@ -36,6 +37,34 @@ class Menu extends Model
             ? url('/page'.$this->link_to)
             : url($this->link_to);
     }
+
+    public function isLocalMenuExist(){
+        $uri = $this->link_to;
+        if(strpos($uri, 'page')!== false){
+            $uri = substr($this->link_to,5);
+        }
+        $localuri= $uri.'-local';
+        $page = Page::where('uri',$localuri)->get();
+        if(count($page)>0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function isNationMenuExist(){
+        $uri = $this->link_to;
+        if(strpos($uri, 'page')!== false){
+            $uri = substr($this->link_to,5);
+        }
+        $page = Page::where('uri',$uri)->get();
+        if(count($page)>0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
     /**
      * 获取主菜单

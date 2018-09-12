@@ -93,7 +93,7 @@
                                     </a>
                                 </div>
                                 <div class="flex-item">
-                                    <a href="http://http://tiis.edu.au/" title="TIIS" target="_blank">
+                                    <a href="http://tiis.edu.au/" title="TIIS" target="_blank">
                                         <img src="{{ asset('images/frontend/custom/tiis.png') }}" alt="TIIS">
                                     </a>
                                 </div>
