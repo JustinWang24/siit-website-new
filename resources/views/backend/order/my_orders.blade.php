@@ -45,10 +45,10 @@
                             <td>{{ $value->place_order_number }}</td>
                             <td>{{ substr($value->created_at, 0, 11) }}</td>
                             <td>
-                                {{ \App\Models\Utils\UserGroup::RoleName($value->customer->role) }}
+                                {{ \App\Models\Utils\UserGroup::RoleName($value->customer ? $value->customer->role : null) }}
                             </td>
                             <td>
-                                <a href="{{ url('backend/orders/list_by_pm/'.$value->user_id) }}">{{ $value->customer->name }}</a>
+                                <a href="{{ url('backend/orders/list_by_pm/'.$value->user_id) }}">{{$value->customer ? $value->customer->name : null }}</a>
                             </td>
                             <td>
                                 <a href="#" v-on:click="showItems('{{$value->uuid}}')">
