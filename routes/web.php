@@ -18,7 +18,7 @@ Route::get('/terms', 'Frontend\Pages@terms')->name('terms');
 Route::get('/switch-language/{lang?}', 'Frontend\Pages@switch_language')->name('switch_language');
 Route::get('/staff-profile', 'Frontend\Pages@view_staff_profile');
 Route::get('/intake-latest', 'Frontend\Pages@intake_latest')->name('intake_latest');
-
+//Route::get('/api/submenu/{id}','Api\Menus@submenu');
 // 特定的URI
 Route::prefix('page')->group(function(){
     Route::get('/blog', 'Frontend\Pages@blog');
@@ -110,6 +110,8 @@ Route::prefix('backend')->middleware('auth')->group(function(){
     Route::get('menus/edit/{id}','Backend\Menus@edit');
     Route::get('menus/delete/{id}','Backend\Menus@delete');
     Route::post('menus/save','Backend\Menus@persistent');
+
+
 
     // 静态页相关
     Route::get('pages/index','Backend\Pages@index');
@@ -260,3 +262,4 @@ Route::prefix('group')->group(function (){
 });
 
 Route::get('/home', 'Backend\Home@index');
+Route::get('/api/submenu/{id}','Api\Menus@submenu');

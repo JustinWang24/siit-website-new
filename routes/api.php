@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::prefix('page')->group(function(){
     // Save Page
     Route::post('save','Api\Pages@save');
@@ -178,3 +180,4 @@ Route::prefix('dealers')->group(function(){
 Route::prefix('orders')->group(function(){
     Route::any('search-ajax','Api\Orders@search_ajax');
 });
+
