@@ -243,6 +243,34 @@ class Pages extends Controller
         return view(_get_frontend_theme_path('templates.news_list'), $this->dataForView);
     }
 
+    public function events_view($uri){
+        $page = Event::where('uri',$uri)->orWhere('uri', '/'.$uri)->first();
+        if(!$page){
+            // 404 Error
+            return view('frontend.'.config('system.frontend_theme').'.pages.404', $this->dataForView);
+        }
+        $this->dataForView['page'] = $page;
+        $this->dataForView['pageTitle'] = app()->getLocale()=='cn' ? $page->title_cn : $page->title;
+        $this->dataForView['metaKeywords'] = $page->seo_keyword;
+        $this->dataForView['metaDescription'] = $page->seo_description;
+        switch ($page->layout){
+            case ContentTool::$LAYOUT_ONE_COLUMN:
+                $template = 'templates.one_column';
+                break;
+            case ContentTool::$LAYOUT_TWO_COLUMNS_LEFT:
+                $template = 'templates.two_columns_left';
+                break;
+            case ContentTool::$LAYOUT_TWO_COLUMNS_RIGHT:
+                $template = 'templates.two_columns_right';
+                break;
+            default:
+                $template = 'templates.two_columns_left';
+                break;
+        }
+        return view(_get_frontend_theme_path($template), $this->dataForView);
+    }
+
+
     /**
      * 根据给定的Page返回模板文件名
      * @param Page $page

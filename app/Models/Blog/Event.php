@@ -2,11 +2,13 @@
 
 namespace App\Models\Blog;
 
+use App\Models\Page;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Utils\ContentTool;
+use App\Models\Menu;
 
-class Event extends Model
+class Event extends Page
 {
     const PUBLIC_EVENT = 1;     // 公共的 Event
     const PRIVATE_EVENT = 2;    // 私密的 Event
@@ -80,6 +82,4 @@ class Event extends Model
             }
         }
     }
-
-
 }

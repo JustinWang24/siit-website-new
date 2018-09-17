@@ -25,7 +25,7 @@ Route::prefix('page')->group(function(){
     Route::get('/blog/{uri}', 'Frontend\Pages@blog_view');
     Route::get('/news', 'Frontend\Pages@news');
     Route::get('/news/{uri}', 'Frontend\Pages@news_view');
-
+    Route::get('/events/{uri}', 'Frontend\Pages@events_view');
     // 查看某个独立页面内容的路由
     Route::get('/{uri}', 'Frontend\Pages@view');
 });
