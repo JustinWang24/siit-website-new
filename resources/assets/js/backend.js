@@ -155,6 +155,11 @@ if(document.getElementById('my-orders-manager-app')){
 }
 
 $(document).ready(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     if(jQuery('.btn-delete').length > 0){
         jQuery('.btn-delete').on('click',function(e){
             e.preventDefault();
@@ -180,6 +185,21 @@ $(document).ready(function(){
     if($('.copy-txt-btn').length > 0){
         // 激活JS拷贝文本到clipboard
         new ClipboardJS('.copy-txt-btn');
+    }
+    if($('#mainmenu').length>0){
+        $('#mainmenu').on('change',function (e) {
+            //console.log(e);
+            var main_id = e.target.value;
+            if (main_id >1){
+                $.get('/api/submenu/' + main_id, function (data) {
+                //success
+                $('#submenu').empty();
+                $.each(data, function (index, subObj) {
+                    $('#submenu').append('<option value="' + subObj.id + '">' + subObj.name + ' (' + subObj.name_cn + ')' + '</option>');
+                    });
+                });
+            }
+        });
     }
 });
 

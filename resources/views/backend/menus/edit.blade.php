@@ -62,9 +62,10 @@
                             <label class="label">Level</label>
                             <div class="control">
                                 <div class="select full-width">
-                                    <select class="full-width" name="level">
+                                    <select class="full-width" name="level" id="mainmenu">
                                         <option value="1" {{ $menu->level == 1 ? 'selected' : null }}>Main Menu (一级菜单)</option>
-                                        <option value="2" {{ $menu->level > 1 ? 'selected' : null }}>Sub menu(子菜单)</option>
+                                        <option value="2" {{ $menu->level == 2 ? 'selected' : null }}>Sub menu(子菜单)</option>
+                                        <option value="3" {{ $menu->level > 2 ? 'selected' : null }}>Second menu(子菜单)</option>
                                     </select>
                                 </div>
                             </div>
@@ -75,7 +76,7 @@
                             <label class="label">选择上级菜单</label>
                             <div class="control">
                                 <div class="select full-width">
-                                    <select class="full-width" name="parent_id">
+                                    <select class="full-width" name="parent_id" id="submenu">
                                         <option value="0" {{ $menu->level == 0 ? 'selected' : null }}>None (无)</option>
                                         @foreach($menus as $m)
                                             <option value="{{ $m->id }}"  {{ $menu->parent_id == $m->id ? 'selected' : null }}>{{ $m->name }} {{ empty($m->name_cn) ? null : '('.$m->name_cn.')' }}</option>
