@@ -13,7 +13,7 @@
                         <div class="column">
                             <div class="card">
                                 <div class="card-image">
-                                    <a href="{{ url('/page'.$blog->uri) }}"><img style="min-height: 180px;" src="{{ $blog->getFeatureImageUrl() }}" alt="{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn  }}"></a>
+                                    <a href="{{ url('/page'.$blog->uri) }}"><img style="height: 180px;" src="{{ $blog->getFeatureImageUrl() }}" alt="{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn  }}"></a>
                                 </div>
                                 <div class="card-content pl-0">
                                     <div class="media">
@@ -32,7 +32,7 @@
                     <div class="content align-self-center" style="margin: 0 auto;">
                         @foreach($latestEvents as $key=>$event)
                             <div class="box">
-                                <a href="{{ url('/page/events'.$event->uri) }}"><h4 style="margin-bottom: 0.3em;font-size: 24px;">{{ $event->title }}</h4></a>
+                                <a href="{{ url('/page/events'.$event->uri) }}"><h4 style="margin-bottom: 0.3em;font-size: 20px;">{{ $event->title }}</h4></a>
                                 <i class="far fa-clock fa-fw" style="color: #fff;"></i><time datetime="2016-1-1" style="color: #ffffff;">{{ $event->start->format('H:i A - d M Y') }}</time>
                                 <p><i class="far fa-file-alt fa-fw" style="color: #fff;"></i>{!! $event->teasing !!}</p>
                             </div>

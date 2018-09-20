@@ -57,10 +57,10 @@ class Events extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function delete($id){
-        $page = Page::find($id);
+        $page = Event::find($id);
         if($page){
             $page->delete();
         }
-        return redirect('backend/press/index');
+        return redirect('backend/events/index');
     }
 }
