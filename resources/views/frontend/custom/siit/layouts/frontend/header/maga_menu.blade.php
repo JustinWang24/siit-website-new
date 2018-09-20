@@ -25,11 +25,28 @@
                                 $menuUrl = $sub->getMenuUrl();
                                 $pathwaySubmenu = strpos($menuUrl,'University-Pathway-Collection') !== false;
                             @endphp
-                            <li>
-                                <a href="{{ $sub->link_to=='/' ? '/' : $sub->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}">
-                                    {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
-                                </a>
-                            </li>
+                            @if(count($sub->children)>0)
+                                <li>
+                                <div class="navbar-item has-dropdown is-hoverable">
+                                    <a class="navbar-link" href="{{ $sub->link_to=='/' ? '/' : $sub->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}" style="border-bottom: none;width: 100%;">
+                                        {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
+                                    </a>
+                                    <div class="navbar-dropdown is-boxed" style="min-width: 95%;left:250px;">
+                                        @foreach($sub->children as $subChild)
+                                            <a  style="border-bottom: none;padding:0.375rem 1rem;" class="navbar-item" href="{{ $subChild->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($subChild->name_cn) ? $subChild->name_cn : $subChild->name }}">
+                                                {{ app()->getLocale()=='cn' && !empty($subChild->name_cn) ? $subChild->name_cn : $subChild->name }}
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                </li>
+                            @else
+                                <li>
+                                    <a href="{{ $sub->link_to=='/' ? '/' : $sub->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}">
+                                        {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
+                                    </a>
+                                </li>
+                            @endif
                         @endforeach
                     </ul>
                     @endif
