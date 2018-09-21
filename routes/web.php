@@ -14,6 +14,8 @@
 Route::get('/', 'Frontend\Pages@index')->name('home');
 Route::get('/contact-us', 'Frontend\Pages@contact_us')->name('contact_us');
 Route::post('/contact-us', 'Frontend\Pages@contact_us_handler');
+Route::get('/application-form', 'Frontend\Pages@apply');
+Route::post('/application-form', 'Frontend\Pages@apply_handler');
 Route::get('/terms', 'Frontend\Pages@terms')->name('terms');
 Route::get('/switch-language/{lang?}', 'Frontend\Pages@switch_language')->name('switch_language');
 Route::get('/staff-profile', 'Frontend\Pages@view_staff_profile');

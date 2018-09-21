@@ -16,7 +16,7 @@
                                 </a>
                             </p>
                             <p>
-                                <a href="{{ url('/page/intake-dates-2018') }}" title="{{ trans('general.Important_Dates') }}">
+                                <a href="{{ url('/page/school-calendar') }}" title="{{ trans('general.Important_Dates') }}">
                                     {{ trans('general.Important_Dates') }}
                                 </a>
                             </p>
