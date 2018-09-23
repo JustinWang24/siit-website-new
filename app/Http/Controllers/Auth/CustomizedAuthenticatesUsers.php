@@ -44,13 +44,13 @@ trait CustomizedAuthenticatesUsers
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
 
-            $this->sendLockoutResponse($request);
+            return $this->sendLockoutResponse($request);
         }
 
         if ($this->attemptLogin($request)) {
             // 把登录的人的信息保存到session中
             $this->_saveUserInSession(Auth::user());
-            $this->sendLoginResponse($request);
+            return $this->sendLoginResponse($request);
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
@@ -58,7 +58,7 @@ trait CustomizedAuthenticatesUsers
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
 
-        $this->sendFailedLoginResponse($request);
+        return $this->sendFailedLoginResponse($request);
     }
 
     /**
