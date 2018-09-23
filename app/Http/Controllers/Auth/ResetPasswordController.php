@@ -19,7 +19,8 @@ class ResetPasswordController extends Controller
     |
     */
 
-    use ResetsPasswords;
+//    use ResetsPasswords;
+    use CustomResetPasswords;
 
     /**
      * Where to redirect users after resetting their password.

@@ -49,6 +49,8 @@ class CustomersController extends Controller
             $referrer = $request->get('the_referer');
             if($referrer == url('frontend/customers/login')){
                 $referrer = '/';
+            }elseif(strpos($referrer,'password/reset') !== false){
+                $referrer = '/';
             }
             return redirect($referrer);
         }else{

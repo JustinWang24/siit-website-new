@@ -105,6 +105,7 @@ class StudentsController extends Controller
         ]);
 
         if($user){
+            StudentProfile::Persistence([],$user);
             // 如果注册成功，需要给学生发送电子邮件
             Mail::to(trim($data['email']))->send(new UserConfirmEmail($user, $data['password']));
             return JsonBuilder::Success(['uuid'=>$user->uuid]);

@@ -533,3 +533,9 @@ body{
   box-shadow: 10px 10px 34px -4px rgba(0,0,0,0.13);
 }
 
+// 修复导航菜单偏右在mac中无法移动鼠标过去的问题
+@media screen and (min-width: 1024px){
+  .navbar-dropdown {
+    left: 260px;
+  }
+}

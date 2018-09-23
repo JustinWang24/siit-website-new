@@ -31,7 +31,7 @@
                                     <a class="navbar-link" href="{{ $sub->link_to=='/' ? '/' : $sub->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}" style="border-bottom: none;width: 100%;">
                                         {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
                                     </a>
-                                    <div class="navbar-dropdown is-boxed" style="min-width: 95%;left:250px;">
+                                    <div class="navbar-dropdown is-boxed" style="min-width: 95%;left:240px;">
                                         @foreach($sub->children as $subChild)
                                             <a  style="border-bottom: none;padding:0.375rem 1rem;" class="navbar-item" href="{{ $subChild->getMenuUrl() }}" title="{{ app()->getLocale()=='cn' && !empty($subChild->name_cn) ? $subChild->name_cn : $subChild->name }}">
                                                 {{ app()->getLocale()=='cn' && !empty($subChild->name_cn) ? $subChild->name_cn : $subChild->name }}

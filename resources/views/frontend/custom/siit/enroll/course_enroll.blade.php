@@ -48,7 +48,6 @@
                                         <el-button :loading="isDoingLogin" icon="el-icon-arrow-right" type="primary" @click="onSubmit">
                                             {{ trans('enrolment.Log_Me_In') }}
                                         </el-button>
-
                                     </el-form-item>
                                 </div>
                             </div>

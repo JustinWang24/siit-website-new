@@ -30,9 +30,9 @@ trait CustomizedAuthenticatesUsers
 
     /**
      * Handle a login request to the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|void
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function login(Request $request)
     {
@@ -44,13 +44,15 @@ trait CustomizedAuthenticatesUsers
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
 
-            return $this->sendLockoutResponse($request);
+            $this->sendLockoutResponse($request);
         }
 
         if ($this->attemptLogin($request)) {
             // 把登录的人的信息保存到session中
-            $this->_saveUserInSession(Auth::user());
-            return $this->sendLoginResponse($request);
+            $user = Auth::user();
+            dd($user);
+            $this->_saveUserInSession();
+            $this->sendLoginResponse($request);
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
@@ -58,7 +60,7 @@ trait CustomizedAuthenticatesUsers
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
 
-        return $this->sendFailedLoginResponse($request);
+        $this->sendFailedLoginResponse($request);
     }
 
     /**

@@ -427,7 +427,7 @@ $(document).ready(function(){
                                     }else if(res.data.data.result === 'valid'){
                                         if(!res.data.data.emailExisted){
                                             that.vCode = that._decodeVcode(res.data.data.vCode, res.data.data.id);
-                                            that.emailField.infoMsg = (that.isChinese ? '验证码已发送到' : 'The verification code is sent to ') + that.user.email;
+                                            that.emailField.infoMsg = (that.isChinese ? '验证码已发送到' : 'The verification code has been sent to ') + that.user.email;
                                             that.emailField.infoMsg2 = '';
                                             that.showVerificationField = true;
                                             that.captcha = Math.floor((Math.random() * 1000000) + 1) + '';

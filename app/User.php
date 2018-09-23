@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\UserGroup;
+use App\Models\Utils\UserGroup as UserGroupUtil;
 use App\Models\User\StudentProfile;
 use FlipNinja\Axcelerate\Contacts\Contact;
 use Illuminate\Support\Facades\Crypt;
@@ -56,6 +57,14 @@ class User extends Authenticatable
      */
     public static function GetById($id){
         return self::find($id);
+    }
+
+    /**
+     * Is user is student or not
+     * @return bool
+     */
+    public function isStudent(){
+        return $this->role == UserGroupUtil::$GENERAL_CUSTOMER;
     }
 
     /**
