@@ -13,12 +13,12 @@
                         <div class="column">
                             <div class="card">
                                 <div class="card-image">
-                                    <a href="{{ url('/page'.$blog->uri) }}"><img style="height: 180px;" src="{{ $blog->getFeatureImageUrl() }}" alt="{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn  }}"></a>
+                                    <a href="{{ url('/page'.$blog->uri) }}"><img style="height: 180px;" src="{{ $blog->getFeatureImageUrl() }}" alt="{{ app()->getLocale() == 'cn' ? $blog->title_cn  : $blog->title  }}"></a>
                                 </div>
                                 <div class="card-content pl-0">
                                     <div class="media">
                                         <div class="media-content">
-                                            <a href="{{ url('/page'.$blog->uri) }}"><p class="title is-4" style="font-size: 14px;">{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn }}</p></a>
+                                            <a href="{{ url('/page'.$blog->uri) }}"><p class="title is-4" style="font-size: 14px;">{{ app()->getLocale() == 'cn' ? $blog->title_cn  : $blog->title }}</p></a>
                                         </div>
                                     </div>
                                 </div>
@@ -55,13 +55,13 @@
                                 <div class="card">
                                     <div class="card-image">
                                         <figure>
-                                            <a href="{{ url('/page'.$blog->uri) }}"><img src="{{ $blog->getFeatureImageUrl() }}" alt="{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn  }}"></a>
+                                            <a href="{{ url('/page'.$blog->uri) }}"><img src="{{ $blog->getFeatureImageUrl() }}" alt="{{ app()->getLocale() == 'cn' ? $blog->title_cn  : $blog->title  }}"></a>
                                         </figure>
                                     </div>
                                     <div class="pl-0">
                                         <div class="media">
                                             <div class="media-content">
-                                                <a href="{{ url('/page'.$blog->uri) }}"><p class="title is-4" style="font-size: 14px;">{{ app()->getLocale() == 'cn' ? $blog->title  : $blog->title_cn  }}</p></a>
+                                                <a href="{{ url('/page'.$blog->uri) }}"><p class="title is-4" style="font-size: 14px;">{{ app()->getLocale() == 'cn' ? $blog->title_cn  : $blog->title  }}</p></a>
                                             </div>
                                         </div>
                                     </div>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="column is-paddingless">
                     <div class="content">
-                        <img src="{{ asset('/images/frontend/custom/smile1.jpg') }}" alt="" class="image">
+                        <img src="{{ asset('/images/frontend/custom/smile1.jpg') }}" alt="New Brochure" class="image">
                         <div class="box is-paddingless brochure-box">
                             <h2><i>Get 2018 New Brochure</i></h2>
                             <div class="view-more-btn">

@@ -17,7 +17,7 @@
         {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','birthday',true,($studentProfile ? $studentProfile->birthday : null)) }}
     </div>
     <div class="column">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','gender',[2=>trans('enrolment.Unspecified'),1=>trans('general.Male'),0=>trans('general.Female')],($studentProfile ? $studentProfile->gender : 1)) }}
+        {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','gender',[2=>trans('enrolment.Unspecified'),1=>trans('general.Male'),0=>trans('general.Female')],($studentProfile ? $studentProfile->gender : 2)) }}
     </div>
     <div class="column">
         {{ \App\Models\Utils\FormHelper::getInstance()->simpleTextField('student','country_of_citizenship',true,($studentProfile ? $studentProfile->country_of_citizenship : null)) }}

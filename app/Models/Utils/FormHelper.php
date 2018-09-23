@@ -95,7 +95,7 @@ class FormHelper
         }
         $options = '';
         foreach ($fieldOptions as $value=>$text) {
-            $options .= '<option value="'.$value.'" '.($defaultValue===$value?'selected':null).'>'.$text.'</option>';
+            $options .= '<option value="'.$value.'" '.($defaultValue==$value?'selected':null).'>'.$text.'</option>';
         }
         ?>
         <div class="field">
