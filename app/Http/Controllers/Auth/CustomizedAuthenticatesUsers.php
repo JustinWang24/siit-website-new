@@ -49,9 +49,7 @@ trait CustomizedAuthenticatesUsers
 
         if ($this->attemptLogin($request)) {
             // 把登录的人的信息保存到session中
-            $user = Auth::user();
-            dd($user);
-            $this->_saveUserInSession();
+            $this->_saveUserInSession(Auth::user());
             $this->sendLoginResponse($request);
         }
 
