@@ -5,7 +5,22 @@
     <div class="column">
         {{ \App\Models\Utils\FormHelper::getInstance()->simpleSelectField('student','applying_exemptions',['NO','YES'],null,true) }}
     </div>
+</div>
+<div class="columns">
     <div class="column">
-        {{ \App\Models\Utils\FormHelper::getInstance()->simpleFileField('applying_exemptions_files',false,trans('enrolment.applying_exemptions_files'),null,true) }}
+        <el-upload
+                class="upload-demo"
+                action="{{ route('api.files.student.attachment.upload') }}"
+                :on-preview="handlePreview"
+                :on-remove="handleRemove"
+                :before-remove="beforeRemove"
+                :data="{type:'{{ \App\Models\User\Attachment::RECOGNITION_OF_PREVIOUS_LEARNING }}',uuid:currentStudentUuid}"
+                multiple
+                :limit="10"
+                :on-exceed="handleExceed"
+                :file-list="previousLearningDocuments">
+            <el-button size="small" type="default">{{ trans('general.Upload_Support_Documents') }}</el-button>
+            <div slot="tip" class="el-upload__tip">{{ trans('general.Recognition_Upload_Tip') }}</div>
+        </el-upload>
     </div>
 </div>

@@ -54,18 +54,23 @@
 
 <div class="row">
     <h2 class="is-size-4 enrol-subtitle">10: {{ trans('general.Required_files') }}</h2>
+
     <div class="columns">
-        <div class="column m-19" id="passportInputWrap" style="border:solid 1px #fff;">
-            {{ \App\Models\Utils\FormHelper::getInstance()->simpleFileField('passport_first_page_image',false,trans('enrolment.passport_first_page_image')) }}
-            @if($studentProfile && $studentProfile->passport_first_page_image)
-                <p id="existed-passport-file-link"><a target="_blank" href="{{ asset('/storage/'.$studentProfile->passport_first_page_image) }}">{{ trans('enrolment.my_passport_first_page_image') }}</a></p>
-            @endif
-        </div>
-        <div class="column m-19"  id="certInputWrap" style="border:solid 1px #fff;">
-            {{ \App\Models\Utils\FormHelper::getInstance()->simpleFileField('english_test_certificate_image',false,trans('enrolment.english_test_certificate_image')) }}
-            @if($studentProfile && $studentProfile->english_test_certificate_image)
-                <p id="existed-english-test-file-link"><a target="_blank" href="{{ asset('/storage/'.$studentProfile->english_test_certificate_image) }}">{{ trans('enrolment.my_english_test_certificate_image') }}</a></p>
-            @endif
+        <div class="column">
+            <el-upload
+                    class="upload-demo"
+                    action="{{ route('api.files.student.attachment.upload') }}"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :before-remove="beforeRemove"
+                    :data="{type:'{{ \App\Models\User\Attachment::PASSPORT }}',uuid:currentStudentUuid}"
+                    multiple
+                    :limit="10"
+                    :on-exceed="handleExceed"
+                    :file-list="passportDocuments">
+                <el-button size="small" type="default">{{ trans('general.Upload_Support_Documents') }}</el-button>
+                <div slot="tip" class="el-upload__tip">{{ trans('general.Passport_Upload_Tip') }}</div>
+            </el-upload>
         </div>
     </div>
 </div>
