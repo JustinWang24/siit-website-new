@@ -38,8 +38,9 @@ window.Vue = require('vue');
 // 加载Element UI 库
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-// import { Loading } from 'element-ui';
-Vue.use(ElementUI);
+import langEn from 'element-ui/lib/locale/lang/en';
+import locale from 'element-ui/lib/locale';
+Vue.use(ElementUI,{locale});
 
 // 导入子定义的 vue js editor组件
 Vue.component('CatalogViewer', require('./components/catalog-viewer/catalogviewer.vue'));
@@ -255,6 +256,7 @@ $(document).ready(function(){
                         captcha:'',
                         group_id:null
                     },
+                    currentStudentUuid: '',   // 当前学生的uuid
                     hasAccount: true,
                     showVerificationField: false,
                     emailField:{
@@ -286,6 +288,12 @@ $(document).ready(function(){
                         current: 1,
                         total: 4
                     },
+                    // 学生上传过的附件文档的数据定义
+                    passportDocuments:[],
+                    englishProficiencyDocuments:[],
+                    educationDocuments:[],
+                    previousLearningDocuments:[],
+                    // 学生上传过的附件文档数据结束
                     isChinese: false,
                     passportFileExist: false,
                     englishTestCertificationFileExist: false,
@@ -324,8 +332,13 @@ $(document).ready(function(){
                     // 非Axcelerate的课程所包含的options与Intake ID
                     this.enrollData.chosenCourseOptions = $('#chosen-course-options').val();
                     this.enrollData.currentIntakeId     = $('#current-intake-id').val();
+                    // 获取学生的UUID
+                    this.currentStudentUuid    = $('#current-student-uuid').val();
 
                     this.isChinese   = $('#current-lang').val() === 'cn';
+                    if(!this.isChinese){
+                      locale.use(langEn);
+                    }
                     this.loginAttemptCount = 0;
 
                     // 是否已经存在提交过的护照
@@ -336,11 +349,43 @@ $(document).ready(function(){
                     if(document.getElementById('existed-english-test-file-link')){
                         this.englishTestCertificationFileExist = true;
                     }
+                    // 从服务器获取学生曾经提交过的文档
+                    // Todo 获取所有提交过的文档的记录, 然后分别初始化
+                    this._loadUserAttachments();
                 },
                 mounted: function(){
                     $('#course-enroll-app-form').removeClass('is-invisible');
                 },
                 methods:{
+                    // 获取所有提交过的文档的记录, 然后分别初始化
+                    _loadUserAttachments: function(){
+                        // 如果没登录, 那么不需要去获取
+                        if(this.currentStudentUuid.trim().length>0){
+                            axios.post(
+                                '/api/students/load-student-documents-ajax',
+                                {uuid:this.currentStudentUuid}
+                            ).then(res=>{
+                                if(res.data.error_no === 100){
+                                    this.passportDocuments = res.data.data.passport;
+                                    this.englishProficiencyDocuments = res.data.data.english;
+                                    this.educationDocuments = res.data.data.education;
+                                    this.previousLearningDocuments = res.data.data.recognition;
+                                }
+                            });
+                        }
+                    },
+                    handleRemove(file, fileList) {
+                        console.log(file, fileList);
+                    },
+                      handlePreview(file) {
+                        window.open(file.path, '_blank');
+                      },
+                      handleExceed(files, fileList) {
+                        this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+                      },
+                      beforeRemove(file, fileList) {
+                        return this.$confirm(`确定移除 ${ file.name }？`);
+                      },
                     // 控制表单一页页显示的几个方法
                     goNext: function(e){
                         e.preventDefault();

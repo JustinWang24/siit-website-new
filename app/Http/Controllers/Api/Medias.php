@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\User\Attachment;
 use App\Models\Utils\MediaTool;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Utils\JsonBuilder;
@@ -31,6 +33,29 @@ class Medias extends Controller
             'index'=>$request->get('index'),
             'path'=>_buildFrontendAssertPath($path)
         ];
+    }
+
+    /**
+     * 保存学生提交的相关的附件文档
+     * @param Request $request
+     * @return string
+     */
+    public function upload_student_attachment_ajax(Request $request){
+        $studentUuid = $request->get('uuid');
+        $type = $request->get('type');
+        $user = User::GetByUuid($studentUuid);
+        if($user && $request->file('file')){
+            $data = [
+                'user_id' => $user->id,
+                'type'=>$type,
+                'path'=>_buildFrontendAssertPath($request->file('file')->store(_buildUploadFolderPath(),'public')),
+                'name'=>$request->file('file')->getClientOriginalName(),
+            ];
+            if(Attachment::Persistent($data)){
+                return JsonBuilder::Success();
+            }
+        }
+        return JsonBuilder::Error();
     }
 
     /**

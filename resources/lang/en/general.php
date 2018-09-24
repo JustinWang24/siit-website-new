@@ -155,4 +155,7 @@ return [
     'Update_Password'=>'Update Password',
     'Local_Students'=>'Local Students',
     'International_Students'=>'International Students',
+    'Upload_Support_Documents'=>'Upload Support Documents',
+    'English_Proficiency_Upload_Tip'=>'(in Australia or overseas). Applicants must attach certified copies of all relevant English certificates and transcripts.',
+    'Education_Upload_Tip'=>'Note: Applicant must attach certified copies of all relevant academic certificates and transcripts. Certified copies must be stamped and signed by a Justice of Peace. All documents not in English must be accompanied by a NAATI accredited translation.',
 ];

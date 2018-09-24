@@ -124,10 +124,29 @@ class StudentsController extends Controller
      * @return string
      */
     private function transformVcode($vCode,$index){
-
         $firstThree = substr($vCode,0,$index);
         $lastThree = substr($vCode,$index);
         return $lastThree.$firstThree;
+    }
+
+    /**
+     * 加载指定学生的所提交过的附件文档的方法
+     * @param Request $request
+     * @return string
+     */
+    public function load_student_documents_ajax(Request $request){
+        $studentUuid = $request->get('uuid');
+        $user = User::GetByUuid($studentUuid);
+        if($user && (env('APP_DEBUG')) ? true : $user->isStudent()){
+            $data = [
+                'passport'      =>$user->passportDocuments(),
+                'education'     =>$user->documentsForEducationAndAcademicAchievements(),
+                'english'       =>$user->documentsForEnglishLanguageProficiency(),
+                'recognition'   =>$user->documentsForRecognitionOfPriorLearning(),
+            ];
+            return JsonBuilder::Success($data);
+        }
+        return JsonBuilder::Error();
     }
 
     /**
