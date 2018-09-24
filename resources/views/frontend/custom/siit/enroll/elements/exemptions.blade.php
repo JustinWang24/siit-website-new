@@ -19,8 +19,8 @@
                 :limit="10"
                 :on-exceed="handleExceed"
                 :file-list="previousLearningDocuments">
-            <el-button size="small" type="default">{{ trans('general.Upload_Support_Documents') }}</el-button>
-            <div slot="tip" class="el-upload__tip">{{ trans('general.Recognition_Upload_Tip') }}</div>
+            <el-button size="small" type="danger">{{ trans('general.Upload_Support_Documents') }}</el-button>
+            <div slot="tip" class="el-upload__tip has-text-danger">{{ trans('general.Recognition_Upload_Tip') }}</div>
         </el-upload>
     </div>
 </div>
