@@ -30,9 +30,9 @@ trait CustomizedAuthenticatesUsers
 
     /**
      * Handle a login request to the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|void
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function login(Request $request)
     {

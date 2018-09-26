@@ -43,6 +43,7 @@ Route::prefix('students')->group(function(){
     Route::post('verify-register','Api\StudentsController@verify_register');
     Route::post('search-ajax','Api\StudentsController@search_ajax');
     Route::post('save-profile-ajax','Api\StudentsController@save_profile_ajax');
+    Route::post('load-student-documents-ajax','Api\StudentsController@load_student_documents_ajax');
 });
 
 // 和 Axcelerate 相关的API接口
@@ -67,6 +68,8 @@ Route::prefix('images')->group(function(){
 Route::prefix('files')->group(function(){
     // 保存图片
     Route::post('upload','Api\Medias@upload_file_ajax');
+    // 保存图片
+    Route::post('student-attachment','Api\Medias@upload_student_attachment_ajax')->name('api.files.student.attachment.upload');
     // 加载所有的图片
     Route::get('load-all','Api\Medias@load_all_files');
 });

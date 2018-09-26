@@ -4,11 +4,14 @@ namespace App;
 
 use App\Models\Dealer\DealerStudent;
 use App\Models\Group;
+use App\Models\User\PassportAttachment;
+use App\Models\User\Attachment;
 use App\Models\Utils\Axcelerate\AxcelerateClient;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\UserGroup;
+use App\Models\Utils\UserGroup as UserGroupUtil;
 use App\Models\User\StudentProfile;
 use FlipNinja\Axcelerate\Contacts\Contact;
 use Illuminate\Support\Facades\Crypt;
@@ -56,6 +59,86 @@ class User extends Authenticatable
      */
     public static function GetById($id){
         return self::find($id);
+    }
+
+    /**
+     * Is user is student or not
+     * @return bool
+     */
+    public function isStudent(){
+        return $this->role == UserGroupUtil::$GENERAL_CUSTOMER;
+    }
+
+    /**
+     * 当前用户所提交的所有附件
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function attachments(){
+        return $this->hasMany(Attachment::class);
+    }
+
+    /**
+     * 当前用户的护照的相关文件
+     * @return array
+     */
+    public function passportDocuments(){
+        $docs = [];
+        if($this->attachments){
+            foreach ($this->attachments as $attachment) {
+                if($attachment->type === Attachment::PASSPORT){
+                    $docs[] = $attachment;
+                }
+            }
+        }
+        return $docs;
+    }
+
+    /**
+     * 获取当前用户所获得的以前的可转学分的证明文件
+     * @return array
+     */
+    public function documentsForRecognitionOfPriorLearning(){
+        $docs = [];
+        if($this->attachments){
+            foreach ($this->attachments as $attachment) {
+                if($attachment->type === Attachment::RECOGNITION_OF_PREVIOUS_LEARNING){
+                    $docs[] = $attachment;
+                }
+            }
+        }
+        return $docs;
+    }
+
+    /**
+     * 获取当前用户所获得的以前的教育经历或者获奖的证明文件
+     * @return array
+     */
+    public function documentsForEducationAndAcademicAchievements(){
+        $docs = [];
+        if($this->attachments){
+            foreach ($this->attachments as $attachment) {
+                if($attachment->type === Attachment::EDUCATION_AND_ACADEMIC_ACHIEVEMENT){
+                    $docs[] = $attachment;
+                }
+            }
+        }
+        return $docs;
+    }
+
+    /**
+     * 获取当前用户所获得的以前的教育经历或者获奖的证明文件
+     * @return array
+     */
+    public function documentsForEnglishLanguageProficiency(){
+        $docs = [];
+        if($this->attachments){
+            foreach ($this->attachments as $attachment) {
+                if($attachment->type === Attachment::ENGLISH_CERTIFICATES_AND_TRANSCRIPT){
+                    $docs[] = $attachment;
+                }
+            }
+        }
+        return $docs;
     }
 
     /**

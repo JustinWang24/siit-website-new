@@ -158,4 +158,10 @@ return [
     'Update_Password'=>'更新密码',
     'Local_Students'=>'本地学生',
     'International_Students'=>'国际学生',
+    'Upload_Support_Documents'=>'选择并上传所需文件',
+    'Passport_Upload_Tip'=>'请提交你的护照扫描件, 至少包括护照首页以及签证页',
+    'Recognition_Upload_Tip'=>'如果选择 Yes, 请填写申请表以获得豁免，并在课程开始前填写所有证明文件，如单元大纲和资格',
+    'English_Proficiency_Upload_Tip'=>'(在澳大利亚或海外), 申请人必须附上所有相关英文证书和成绩单的核证副本。',
+    'Education_Upload_Tip'=>'注意：申请人必须附上所有相关学历证书和成绩单的核证副本。 经核证的副本必须由和平大法官盖章并签字。 所有非英文文件必须附有NAATI认可的翻译',
+
 ];

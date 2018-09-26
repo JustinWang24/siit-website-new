@@ -48,7 +48,6 @@
                                         <el-button :loading="isDoingLogin" icon="el-icon-arrow-right" type="primary" @click="onSubmit">
                                             {{ trans('enrolment.Log_Me_In') }}
                                         </el-button>
-
                                     </el-form-item>
                                 </div>
                             </div>
@@ -103,7 +102,7 @@
                             <input id="current-course-id" type="hidden" name="enroll[course_id]" value="{{ $course->uuid }}">
                             <input id="current-instance-id" type="hidden" name="enroll[instance]" value="{{ $instanceIdAndType }}">
                             <input id="chosen-course-options" type="hidden" name="enroll[productOptions]" value="{{ isset($productOptions) ? $productOptions : null }}">
-                            <input type="hidden" name="student[user_id]" value="{{ session('user_data.uuid') }}">
+                            <input id="current-student-uuid" type="hidden" name="student[user_id]" value="{{ session('user_data.uuid') }}">
                             <input id="current-group-id" type="hidden" name="student[agent_id]" value="{{ isset($dealer)&&$dealer ? $dealer->group_code : 0  }}">
                             <input id="current-lang" type="hidden" value="{{ app()->getLocale()  }}">
                             <hr>
