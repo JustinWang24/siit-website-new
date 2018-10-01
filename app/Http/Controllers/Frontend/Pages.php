@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Events\Contact\LeadReceived;
 use App\Events\Page\Content\StartLoading;
+use App\Mail\EventApplyToAdmin;
 use App\Models\Catalog\Brand;
 use App\Models\Catalog\InTake;
 use App\Models\Catalog\Product;
@@ -20,6 +21,7 @@ use App\Models\Widget\Block;
 use App\Models\Catalog\Category;
 use App\Models\Blog\Event;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Utils\Axcelerate\AxcelerateClient;
 
 class Pages extends Controller
@@ -191,6 +193,25 @@ class Pages extends Controller
             return JsonBuilder::Success();
         }
         return JsonBuilder::Error();
+    }
+
+    public function apply(){
+        $this->dataForView['pageTitle'] = trans('general.apply-now');
+        $this->dataForView['metaKeywords'] = trans('general.apply-now');
+        $this->dataForView['metaDescription'] = trans('general.apply-now');
+        return view(_get_frontend_theme_path('pages.application'), $this->dataForView);
+    }
+
+    /**
+     * 保存联系我们数据
+     * @param Request $request
+     * @return string
+     */
+    public function apply_handler(Request $request){
+        $data = $request->get('apply');
+        Mail::to($this->siteConfig->contact_person)
+            ->send(new EventApplyToAdmin($data));
+        return back()->with('success','We have received your request!');
     }
 
     /**
