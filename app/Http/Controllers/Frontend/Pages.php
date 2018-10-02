@@ -45,8 +45,8 @@ class Pages extends Controller
 //        $ins = AxcelerateClient::GetCourseManager()->getClassesByCourseId(12816);
 //        $classes = AxcelerateClient::GetCourseManager()->getClassesByCourseId(13852);
 //        dd($classes);
-        $ad = AxcelerateClient::GetContactManager()->find(6224796);
-        dd($ad);
+//        $ad = AxcelerateClient::GetContactManager()->find(6224796);
+//        dd($ad);
 
         $page = Page::where('uri','/')->first();
         $this->dataForView['page'] = $page;
