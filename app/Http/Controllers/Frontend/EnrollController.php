@@ -422,6 +422,12 @@ class EnrollController extends Controller
         $order = Order::GetByUuid($uuid);
         if($order){
             $this->dataForView['order'] = $order;
+            $course = null;
+            foreach ($order->orderItems as $orderItem) {
+                $course = $orderItem->product;
+            }
+            $this->dataForView['course'] = $course;
+            $this->dataForView['order'] = $order;
             $this->dataForView['student'] = $order->customer;
             $this->dataForView['studentProfile'] = $order->customer->studentProfile;
 
@@ -451,6 +457,7 @@ class EnrollController extends Controller
             );
             return JsonBuilder::Success(['r'=>url('/frontend/my_orders/'.session('user_data.uuid'))]);
         }catch (\Exception $exception){
+            dump($exception->getMessage());
             return JsonBuilder::Error();
         }
     }
