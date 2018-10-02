@@ -31,9 +31,9 @@
             </tr>
             <tr>
                 <td>Start Date:</td>
-                <td>{{ $orderItem->intake_start_date }}</td>
+                <td>{{ $orderItem->intake_start_date->format('d/M/Y') }}</td>
                 <td>Finish Date:</td>
-                <td></td>
+                <td>{{ $orderItem->finish_date ? $orderItem->finish_date->format('d/M/Y') : null }}</td>
             </tr>
             <tr style="background-color: #ccc;">
                 <td>Course Fees:</td>

@@ -18,10 +18,10 @@ class OrderItem extends Model
         'uuid','serial_number','operator_id',
         'user_id','product_id','operator_name','product_name',
         'subtotal','quantity','price','order_id',
-        'status','payment_type','notes','discount','discount_reason','intake_start_date','intake_id'
+        'status','payment_type','notes','discount','discount_reason','intake_start_date','intake_id','finish_date'
     ];
 
-    public $dates = ['intake_start_date'];
+    public $dates = ['intake_start_date','finish_date'];
 
     public function product(){
         return $this->belongsTo(Product::class);
@@ -118,6 +118,7 @@ class OrderItem extends Model
             $priceFinal = $theProductPrice + $priceExtra;
 
             $intake_start_date = null;
+            $intake_finish_date = null;
             if($instance){
                 $intake_start_date = $instance->get('startdate')=='n.a'
                     ? Carbon::tomorrow('Australia/Melbourne')
@@ -126,6 +127,10 @@ class OrderItem extends Model
                 if (is_string($intake_start_date)){
                     $intake_start_date = Carbon::parse($intake_start_date);
                 }
+
+                $intake_finish_date = $instance->get('finishdate')=='n.a'
+                    ? null
+                    : $instance->get('finishdate');
             }
 
             $dataOrderItem = [
@@ -147,9 +152,10 @@ class OrderItem extends Model
                 'payment_type'=>$order->payment_type,
                 'notes'=>$notes,
                 'in_take_id'=>$intake ? $intake->id : null,
-                'intake_start_date'=>$intake ? $intake->online_date : $intake_start_date
+                'intake_start_date' =>$intake ? $intake->online_date : $intake_start_date,
+                'finish_date'       =>$intake ? $intake->offline_date : $intake_finish_date
             ];
-//            dd($dataOrderItem);
+
             $orderItem = self::create($dataOrderItem);
             if($orderItem){
                 return $orderItem->subtotal;
