@@ -1,27 +1,53 @@
 <div class="word-page-style">
-    <p style="padding-left: 16px;">-	when a student is in breach of the course progress policy</p>
-    <p style="padding-left: 16px;">-	when a student is continually absent from scheduled course hours</p>
-    <p style="padding-left: 16px;">-	non-payment of outstanding fees</p>
-    <p>In cases where suspension or cancellation of the student’s enrolment is initiated by SIIT, students will be notified and given 20 working days to access SIIT’s internal complaints and appeals process.
-    </p>
-    <p>Students may initiate the deferral, suspension and cancellation of enrolment, including granting of a leave of absence during the course through formal agreement on the following limited circumstances:</p>
-    <p style="padding-left: 16px;">-	compassionate or compelling circumstances</p>
-    <p style="padding-left: 16px;">-	where students do not receive their visa in time</p>
-    <p style="padding-left: 16px;">-	serious illness or injury – where a medical certificate states the student was unable to attend classes.</p>
-    <p style="padding-left: 16px;">-	bereavement of close family members</p>
-    <p style="padding-left: 16px;">-	major political upheaval or natural disaster</p>
-    <p style="padding-left: 16px;">-	a traumatic experience</p>
-    <p><strong>Please note:</strong> <span style="font-style: italic;">Deferring to go home to be married or attend the wedding of a family member is not considered to be compassionate or compelling circumstances which is beyond the control of the student.<span><p>
-    <p>You can find our “Deferral, Suspension and Cancellation policy and procedure” in our Student Handbook as well as on our website at the following link:
-        <a href="http://www.siit.nsw.edu.au/?page_id=1636">http://www.siit.nsw.edu.au/?page_id=1636</a>
-    </p>
-    <br>
-    <p><strong>Privacy</strong></p>
-    <p>
-        SIIT will only use personal information collected for the purpose for which it was provided. This personal information will be kept confidential. SIIT will take reasonable steps to protect all personal information from misuse and loss due to unauthorised access, alteration or disclosure. Under the Freedom of Information Act 1982, you are able to access your student file by placing a request in writing and providing adequate identification. You must allow 48 hours for access to be provided. SIIT will also take reasonable steps to destroy or re-identify personal information if it is no longer needed. Upon signing this application form, you acknowledge and give consent for SIIT to provide your personal information to a Government or legislative body, in accordance with the Privacy Act 1988. In these circumstances, the minimum amount of information required or requested will be disclosed. You consent to SIIT providing your personal information to the Australian Government, designated authorities and the Tuition Protection Services’ Manager. This information may include personal and contact details, course enrolment details and changes.
-    </p>
-    <p>
-        Information collected about you on this form and during your enrolment can be provided, in certain circumstances, to the Australian Government and designated authorities. In other instances, information collected on this form or during your enrolment can be disclosed without your consent where authorized or required by law. Your personal information may be disclosed by SIIT, the Commonwealth including state or territory agencies, in accordance with the Privacy Act 1988.”
-    </p>
+    <ul>
+        <li style="font-weight: bold;">If an international student chooses to access SIIT's complaints and appeals processes, that SIIT
+            will maintain the student’s enrolment whilst the complaints and appeals process is ongoing.</li>
+        <li style="font-weight: bold;">If the internal or external complaint handling or appeal process results in a decision that supports
+            the student, SIIT will immediately implement any decision and/or corrective and preventative
+            action required.</li>
+        <li style="font-weight: bold;">Where an international student has chosen not to access the complaints and appeals processes
+            within the 20 working day period, withdraws from the process, or the process is completed and
+            results in a decision supporting SIIT, that SIIT will notify the Secretary of Department of
+            Education and Training through PRISMS of the student not achieving satisfactory course
+            progress or not meeting attendance requirements as soon as practicable.</li>
+    </ul>
+
+    <p style="font-weight: bold;">Procedure</p>
+    <p>Students have the right to raise any matters of concern relating to training delivery and assessment, the quality
+        of the learning, course amenities, discrimination, sexual harassment and other issues that may arise during their
+        course of study.</p>
+    <p>SIIT uses a systematic approach to dealing with complaints, concerns and appeals. All concerns, complaints
+        and appeals are dealt with fairly, honestly, without bias in a professional and fully documented manner.</p>
+    <p>This policy provides an avenue for most complaints, concerns and appeals to be addressed. However in some
+        cases alternative measures may need to be explored. It is advisable for the student to contact the CEO before
+        lodging a formal complaint, to discuss other avenues available to them.</p>
+    <p>Following steps should be followed when making a complaint or appeal:</p>
+    <ul>
+        <li>The Student should firstly discuss the matter with their trainer/assessor. If they are still not satisfied, the
+            Student may then, have the matter referred to the CEO for consideration.</li>
+        <li>The Student must complete the Complaint and Appeal form. Ensuring that they provide sufficient details
+            about themselves and the course, and the circumstances surrounding the concern, complaint or appeal,
+            who was involved, any appropriate evidence and witnesses etc.</li>
+        <li>The CEO will contact the Student within 24 hours to confirm receipt of this form and to schedule a formal
+            face-to-face meeting with the student. This meeting will take place within 5 working days or earlier from
+            the date of receipt of the complaint or appeal application.</li>
+        <li style="font-weight: bold;">The student will also be given an option to be accompanied or assisted by a support person
+            during this or any other meetings relating to the matter(s). Meeting minutes and appropriate notes
+            will be taken during all meetings. (National Code/Standard 8, Clause 8.1)</li>
+        <li>The CEO will discuss the circumstances with the trainer/assessor or any other staff member and make
+            an informed decision.</li>
+        <li>The student will be contacted with the result within 10 working days from the lodgement of Complaint or
+            Appeal form, the student has further 5 working days to respond to a formal decision.</li>
+        <li>A written statement of the appeal outcome, including reasons for the decision will also be documented
+            and provided to the student via email or face-to-face.</li>
+        <li>A record of this written statement will also be filed in the student admin folder. Furthermore, if internal
+            appeal process results in an outcome that supports the student, SIIT will take appropriate steps and will
+            keep the student informed about the course of action in this regard.</li>
+        <li style="font-weight: bold;">Where a complaint, concern, or appeal cannot be resolved through discussion and conciliation,
+            or if the student is dissatisfied with the college’s decision, they may access external appeals at
+            no cost to them for this referral’ (refer to external agency section for more details regarding this).
+            (National Code/Standard 8, Clauses 8.2 and 8.3).</li>
+    </ul>
+
     @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>

@@ -37,31 +37,48 @@
             </tr>
             <tr style="background-color: #ccc;">
                 <td>Course Fees:</td>
-                <td colspan="3"></td>
+                <td colspan="3">${{ number_format($orderItem->subtotal,2) }}</td>
+                <td>Conditions(if any):</td>
+                <td></td>
             </tr>
         </tbody>
     </table>
     @endforeach
-
-    <p>The enrolment information contained in this letter provides you with important information regarding course arrangements, fees and charges and other relevant course information.</p>
-    <p>Your enrolment is valid for the duration of the course only. Conditions apply for course extension, deferral, leave of absence and withdrawal according to {{ env('APP_NAME') }} policies and procedures.</p>
+    <p>The enrolment information contained in this letter provides you with important information regarding course orientation
+        arrangements, fees and charges and other relevant course information.</p>
+    <p>Your enrolment is valid for the duration of the course only. Conditions apply for course extension, deferral, leave of
+        absence and withdrawal according to SIIT policies and procedures.</p>
     <p>Continuing enrolment will depend on:</p>
     <ol>
+        <li>Meeting all student visa conditions, if applicable, including satisfactory course progress and attendance
+            requirements.</li>
         <li>Agreeing to {{ env('APP_NAME') }}’s policies and procedures and any further conditions of enrolment detailed in the “Offer Acceptance Form” attached to this Letter.</li>
-        <li>Payment of tuition and non-tuition fees by the due date.</li>
+        <li>Payment of tuition and non-tuition fees by the due date(s).</li>
     </ol>
-    <p>Attached you will find the “Offer Acceptance Form”, which provides you with the terms and conditions of your enrolment. If you have paid all the relevant fees to SIIT without signing the “Offer Acceptance Form”, you are deemed to have read, understood and accepted the terms and conditions as part of this offer, therefore please ensure you read carefully through our policies and procedures before making a decision regarding payment and course enrolment.</p>
+    <p>Attached you will find the “Declaration and Acceptance Form”, which provides you with the terms and conditions of
+        your enrolment. If you have paid all the relevant fees to SIIT without signing the “Declaration and Acceptance Form”,
+        you are deemed to have read, understood and accepted the terms and conditions as part of this offer, therefore
+        please ensure you read carefully through our policies and procedures before making a decision regarding payment
+        and course enrolment.</p>
     <p>To accept SIIT’s offer of enrolment, please sign and return the attached “Offer Acceptance Form” and ensure fees are paid by <span class="has-text-danger">start date</span></p>
+    <p>Prior to accepting this offer of enrolment, please check that all details in this Letter of Offer are correct and ensure that
+        you have provided detailed information about any medical conditions or learning needs that you need to draw to the
+        attention of SIIT.</p>
+    <p>On receipt of a completed and signed “Declaration and Acceptance Form” and payment of fees, SIIT will issue a
+        Confirmation of Enrolment for student visa application.</p>
+    <p>Please advise the date of visa grant and your arrival details so final arrangements can be made in preparation for your
+        commencement of studies at SIIT.</p>
+    <p>We agree to deliver and assess this qualification according to the pre-enrolment information provided and information
+        in this Offer Letter. On behalf of Sydney Institute of Interpreting and Translating, I thank you for your interest in this
+        program and extend my best wishes for your study and future career.</p>
 
-    <p>On receipt of a completed and signed “Offer Acceptance Form” and payment of fees, SIIT will enroll you in the course and provide you with all course information.</p>
-
-    <p style="text-decoration: underline;font-style: italic;"><strong>Please note</strong> that this course is a short course aimed to prepare you for the examination and that it does not offer on completion any certificates or awards.</p>
-    <p>We agree to deliver this course according to the pre-enrolment information provided and information in this Offer Letter.</p>
-    <p>On behalf of Sydney Institute of Interpreting and Translating, I thank you for your interest in this program and extend my best wishes for your study and future career.</p>
     <p>Yours sincerely,</p>
     <br>
     <p>Qingyang WEI</p>
     <p>Course Coordinator/Principal Executive Officer</p>
     <p>Sydney Institute of Interpreting and Translating</p>
+    @foreach($order->orderItems as $orderItem)
+    <p>Date issued: {{ $orderItem->created_at->format('d/M/Y') }}</p>
+    @endforeach
     @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>
