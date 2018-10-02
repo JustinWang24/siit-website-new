@@ -32,6 +32,7 @@
                 multiple
                 :limit="10"
                 :on-exceed="handleExceed"
+                :on-success="handleSuccess"
                 :file-list="englishProficiencyDocuments">
             <el-button size="small" type="danger">{{ trans('general.Upload_Support_Documents') }}</el-button>
             <div slot="tip" class="el-upload__tip has-text-danger">{{ trans('general.English_Proficiency_Upload_Tip') }}</div>

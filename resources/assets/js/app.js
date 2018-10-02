@@ -386,6 +386,26 @@ $(document).ready(function(){
                       beforeRemove(file, fileList) {
                         return this.$confirm(`确定移除 ${ file.name }？`);
                       },
+                    handleSuccess: function(res, file, fileList){
+                        if(res.error_no === 100){
+                            switch(res.data.t){
+                                case '4':
+                                    this.passportDocuments.push(file);
+                                    break;
+                                case '3':
+                                    this.previousLearningDocuments.push(file);
+                                    break;
+                                case '2':
+                                    this.englishProficiencyDocuments.push(file);
+                                    break;
+                                case '1':
+                                    this.educationDocuments.push(file);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    },
                     // 控制表单一页页显示的几个方法
                     goNext: function(e){
                         e.preventDefault();

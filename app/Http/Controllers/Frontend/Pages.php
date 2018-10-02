@@ -40,7 +40,7 @@ class Pages extends Controller
 //                $ins = AxcelerateClient::GetCourseManager()->getAll([]);
 //                dd($ins);
 //        $ins = AxcelerateClient::GetCourseManager()->getClassesByCourseId(12816);
-//        $classes = AxcelerateClient::GetCourseManager()->getClassesByCourseId(27031);
+//        $classes = AxcelerateClient::GetCourseManager()->getClassesByCourseId(13852);
 //        dd($classes);
 
         $page = Page::where('uri','/')->first();
