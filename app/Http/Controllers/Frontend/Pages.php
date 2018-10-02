@@ -14,6 +14,7 @@ use App\Models\Staff;
 use App\Models\Utils\ContentTool;
 use App\Models\Utils\JsonBuilder;
 use App\Models\Widget\Slider;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Page;
@@ -44,6 +45,8 @@ class Pages extends Controller
 //        $ins = AxcelerateClient::GetCourseManager()->getClassesByCourseId(12816);
 //        $classes = AxcelerateClient::GetCourseManager()->getClassesByCourseId(13852);
 //        dd($classes);
+        $ad = AxcelerateClient::GetContactManager()->find(6224796);
+        dd($ad);
 
         $page = Page::where('uri','/')->first();
         $this->dataForView['page'] = $page;

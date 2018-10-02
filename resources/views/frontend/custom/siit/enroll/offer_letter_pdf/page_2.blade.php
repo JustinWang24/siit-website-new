@@ -1,7 +1,5 @@
 <div class="word-page-style">
-    <p>Date issued: «Issue_Date»</p>
-    <p>Course payment information («Course»):</p>
-
+    <p>Itemised course payment information ({{ $course->getProductName() }}):</p>
     <table style="width: 100%;border: solid 1px #000;">
         <tbody>
         <tr style="background-color: #1a6bac; color: white;">
@@ -23,8 +21,8 @@
     <p>SIIT’s bank account details for the payment of fees are as follows:</p>
     <table style="width: 100%;border: solid 1px #000;">
         <tbody>
-        <tr style="background-color: #1a6bac; color: white;">
-            <td colspan="2" style="color: white;text-align: center;">Account for Sydney Campus</td>
+        <tr style="background-color: #222222; color: white;">
+            <td colspan="2" style="color: white;text-align: left;">Account for Sydney Campus</td>
         </tr>
         <tr>
             <td>Account Name:</td>
@@ -56,7 +54,7 @@
     <table style="width: 100%;border: solid 1px #000;">
         <tbody>
         <tr style="background-color: #1a6bac; color: white;">
-            <td colspan="2" style="color: white;text-align: center;">Account for Brisbane/Melbourne Campus</td>
+            <td colspan="2" style="background-color: #222222; color: white;">Account for Brisbane/Melbourne Campus</td>
         </tr>
         <tr>
             <td>Account Name:</td>
@@ -94,5 +92,5 @@
         <li>Bank cheque made payable to Sydney Institute of Interpreting and Translating.</li>
         <li>Transfers by EFTPOS using savings or credit cards. These payment facilities are available from SIIT premises. A surcharge fee applies for credit card payments.</li>
     </ul>
-    <p>To confirm payment, students are required to send to SIIT via email (<a href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a>), a copy of the transfer receipt, deposit slip or cheque along with your name, offer number and date of birth.</p>
+    <p>To confirm payment, students are required to send to SIIT via fax (0061 2 89580655) or email (<a href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a>), a copy of the transfer receipt, deposit slip or cheque along with your name, offer number and date of birth.</p>
 </div>

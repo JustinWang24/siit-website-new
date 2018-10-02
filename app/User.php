@@ -149,37 +149,33 @@ class User extends Authenticatable
         $contactManager = AxcelerateClient::GetContactManager();
         $contact = null;
 
-        if(is_null($this->axcelerate_contact_id)){
-            $contact = $contactManager->findByEmail($this->email);
-            if($contact){
-                // 表示从 Axcelerate 获取到了数据, 那么就自动将取得的数据进行更新
-                $this->axcelerate_contact_id = $contact->get('contactid');
-                $this->phone    = $contact->get('mobilephone') ? $contact->get('mobilephone') : $contact->get('phone');
-                $this->address  = $contact->get('address1') . ($contact->get('address2') ? ' '.$contact->get('address2') : '');
-                $this->city     = $contact->get('city');
-                $this->postcode = $contact->get('postcode');
-                $this->state    = $contact->get('state');
-                $this->country  = $contact->get('country');
-                $this->status   = $contact->get('contactactive') == 'n.a' ? false : $contact->get('contactactive');
-                $this->axcelerate_contact_json = $contact->toJson();
-                $this->save();
-            }else{
-                // 表示没有从Axcelerate找到对应的数据，也即表示该用户还没有注册过, 那么就去更新一下
-                $attributes = $this->_convertToAttributesData();
-                if($attributes){
-                    $contact = new Contact($attributes,$contactManager);
-                    if($contact->save($attributes)){
-                        $this->axcelerate_contact_id = $contact->id;
-                        $this->status = true;    // 更新一下状态，保持和 Axcelerate 同步
-                        $this->save();
-                    }else{
-                        // 保存到Axcelerate失败, 那么把contact改会null, 表示获取失败
-                        $contact = null;
-                    }
+        $contact = $contactManager->findByEmail($this->email);
+        if($contact){
+            // 表示从 Axcelerate 获取到了数据, 那么就自动将取得的数据进行更新
+            $this->axcelerate_contact_id = $contact->get('contactid');
+            $this->phone    = $contact->get('mobilephone') ? $contact->get('mobilephone') : $contact->get('phone');
+            $this->address  = $contact->get('address1') . ($contact->get('address2') ? ' '.$contact->get('address2') : '');
+            $this->city     = $contact->get('city');
+            $this->postcode = $contact->get('postcode');
+            $this->state    = $contact->get('state');
+            $this->country  = $contact->get('country');
+            $this->status   = $contact->get('contactactive') == 'n.a' ? false : $contact->get('contactactive');
+            $this->axcelerate_contact_json = $contact->toJson();
+            $this->save();
+        }else{
+            // 表示没有从Axcelerate找到对应的数据，也即表示该用户还没有注册过, 那么就去更新一下
+            $attributes = $this->_convertToAttributesData();
+            if($attributes){
+                $contact = new Contact($attributes,$contactManager);
+                if($contact->save($attributes)){
+                    $this->axcelerate_contact_id = $contact->id;
+                    $this->status = true;    // 更新一下状态，保持和 Axcelerate 同步
+                    $this->save();
+                }else{
+                    // 保存到Axcelerate失败, 那么把contact改会null, 表示获取失败
+                    $contact = null;
                 }
             }
-        }else{
-            $contact = $contactManager->find($this->axcelerate_contact_id);
         }
         return $contact;
     }
@@ -247,17 +243,20 @@ class User extends Authenticatable
         if(!$this->studentProfile){
             return false;
         }
-        return [
+        $data = [
             'givenName'=>$this->studentProfile->given_name,
             'surname'=>$this->studentProfile->family_name,
             'address1'=>$this->address,
             'city'=>$this->city,
             'postcode'=>$this->postcode,
-            'state'=>$this->state,
-            'country'=>$this->country,
             'emailAddress'=>$this->email,
             'sex'=>$this->studentProfile->gender ? 'M' : 'F',
         ];
+
+        if(!empty($this->state) && $this->state !== 'n.a'){
+            $data['state'] = $this->state;
+        }
+        return $data;
     }
 
     /**
