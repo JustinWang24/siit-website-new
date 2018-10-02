@@ -1,0 +1,2 @@
+<p style="text-align: center;font-size: 10px;color: #ccc;margin-top: 40px;">ABN: 30 128 128 503   Sydney Institute of Interpreting and Translating</p>
+<p style="text-align: center;font-size: 10px;color: #ccc;">Offer Letter Short Course V1.0 January {{ date('Y') }}</p>
