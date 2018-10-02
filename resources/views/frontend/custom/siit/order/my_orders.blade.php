@@ -46,7 +46,7 @@
                                 <td>{{ config('system.CURRENCY'). ' '.number_format($value->getTotalFinal(),2) }}</td>
                                 <td>{!! \App\Models\Utils\OrderStatus::GetName($value->status) !!}</td>
                                 <td>
-                                    @if($value->getStudentSignature())
+                                    @if(!$value->getStudentSignature())
                                         <a target="_blank" href="{{ url('catalog/course/get-offer-letter/'.$value->uuid) }}">{{ trans('general.Download') }}</a>
                                     @endif
                                 </td>
