@@ -1,49 +1,49 @@
 <div class="word-page-style">
-    <ul style="padding-left: 16px;">
-        <li>The right to work in a safe, clean, orderly and cooperative environment.</li>
-        <li>The right to have personal property (including computer files and student work) and SIIT’s property protected from damage or other misuse.</li>
-        <li>The right to have any disputes settled in a fair and rational manner (this is accomplished by the Complaints and Appeals Policy and Procedure)</li>
-        <li>The right to work and learn in a supportive environment without interference from others.</li>
-        <li>The right to express and share ideas and to ask questions.</li>
-        <li>The right to be treated with politeness and courtesy at all times.
-        </li>
-    </ul>
-    <p>
-        All students must abide by the following codes of behaviour at all times:
-    </p>
-    <ul style="padding-left: 16px;">
-        <li>Not commit any misconduct</li>
-        <li>Act ethically and honestly in the preparation, conduct, submission and publication of course work, and during all forms of assessment.</li>
-        <li>Submit their work when required and within the given time limit.</li>
-        <li>Behave professionally, ethically and respectfully in all dealings with SIIT’s learning partners, trainers/assessors.</li>
-        <li>Not engage in cheating or plagiarism.</li>
-        <li>Not engage in conduct that is disorderly, disruptive or indecent.</li>
-        <li>Not exhibit behaviour that may be interpreted as being abusive. This includes the wearing of any type of clothing that has offensive or racial words printed on it.</li>
-        <li>Not behave in a manner that disrupts other students during classroom sessions.</li>
-        <li>Follow instructions regarding the proper use of copyright.</li>
-        <li>Not provide false information relating to their identification.</li>
-        <li>Smoke only in the designated areas (outside the building, on the footpath, at least 4m away from the entrance).</li>
-        <li>Not use, possess, sell or distribute any alcohol or illegal substances on SIIT property. Any student doing so will be reported to the Police and dismissed from the training.</li>
-    </ul>
-    <br>
-    <p style="font-weight: bold;">
-        Deferment, Suspension and Cancellation Policy
-    </p>
+    <p style="font-weight: bold;">Complaints and Appeals Policy and Procedure</p>
+    <p style="text-decoration: underline;"><strong>Objective</strong></p>
+    <p>The objective is for SIIT to provide appropriate mechanisms to its students to compliant or appeal about various
+        issues during their course of study. The college will act on each and every concern or appeal lodged by the
+        student.</p>
+    <p style="text-decoration: underline;"><strong>Requirements</strong></p>
+    <p>SIIT uses a systematic approach to dealing with complaints, concerns and appeals. All concerns, complaints
+        and appeals are dealt with fairly, honestly, without bias in a professional and fully documented manner.</p>
+    <p>The procedure for handling complaints, concerns and appeals, is disseminated through to students prior to and
+        at enrolment, we follow a process to look at complaints, concerns, and appeals and deal with them in a fair and
+        equitable manner.</p>
+    <p>Once formal receipt is received by SIIT, the CEO will contact the student within 24 hours to confirm receipt of
+        this application. The matter will be discussed by the CEO and relevant staff and a written response will be
+        provided back to the student within 10 working days from the lodgement of Complaint or Appeal form.</p>
+    <p style="font-weight: bold;">If the student is dissatisfied with the decision of SIIT, they may access external appeals at no cost to
+        them for this referral.</p>
+    <p>This policy is applicable to all SIIT students (local and international).</p>
+    <p style="text-decoration: underline;font-weight: bold;">The availability of this complaints and appeals process, does not remove the right of the student to take
+        action under Australia's consumer protection laws.</p>
 
-    <p>It is the policy of SIIT and the student’s responsibility to complete the course within the agreed course duration. However, unforeseen and unexpected circumstances may occur beyond the student’s control which can affect their ability to complete their course.
-    </p>
-    <p>SIIT may defer a student’s commencement on the following grounds:</p>
-    <p style="padding-left: 16px;">-	when a course is not offered
-    </p>
-    <p>SIIT may suspend a student enrolment due to the following instances:
-    </p>
-    <p style="padding-left: 16px;">-	when a student is deemed to be in breach of the Student Code of Conduct
-    </p>
-    <p style="padding-left: 16px;">-	when a student is deemed to be not making satisfactory course progress and fails to comply with the requirements of the Intervention Plan
-    </p>
-    <p>SIIT may cancel a student enrolment due to the following instances:
-    </p>
-    <p style="padding-left: 16px;">-	when a student demonstrates serious breach of the Student Code of Conduct
-    </p>
+    <p style="font-weight: bold;">Policy and Procedure</p>
+    <p>SIIT ensures that all students will have access to a fair and equitable process for dealing with complaints
+        /concerns and will provide an avenue for students to appeal against such decisions, which affect the student’s
+        progress. There is no charge for the student to access the internal complaints and appeal process.</p>
+    <p>Every effort will be made by SIIT to resolve the student’s complaints or concern. To this end, the CEO is the
+        person to refer formal complaints/concerns. At the time of enrolment the complaints, relevant procedure and
+        appeals policy will be outlined to the students.</p>
+    <p>Where complaint/concern cannot be resolved internally, SIIT will refer the student to an external agency (please
+        refer below for more information regarding external agency). There will be no cost to the student for this referral.</p>
+    <p>Where complaint/concern cannot be resolved internally, SIIT will refer the student to an external agency (please
+        refer below for more information regarding external agency). There will be no cost to the student for this referral.</p>
+    <ul>
+        <li>All prospective students will be provided with a copy of the Complaints and Appeals Policy and
+            Procedure document (included in the Student Handbook and the Letter of Offer).</li>
+        <li>All complaints, concerns, or appeals will be handled professionally and confidentially in order to achieve
+            a satisfactory resolution.</li>
+        <li>All parties will have a clear understanding of the steps involved in the complaints/concerns and appeals
+            procedure.</li>
+        <li>Current students are provided with details of external authorities they can approach if they are not
+            satisfied with college’s decision.</li>
+        <li>All complaints/concerns and appeals will be managed fairly and equitably and as efficiently as possible.</li>
+        <li>All complaints/concerns and appeals and outcomes will be documented in writing.</li>
+        <li>SIIT will attempt to resolve any complaints, concerns and appeals fairly and equitably within 10 working
+            days from the lodgement of Complaint or Appeal form.</li>
+        <li>Any parties may be accompanied and assisted by a support person at relevant meetings.</li>
+    </ul>
     @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>

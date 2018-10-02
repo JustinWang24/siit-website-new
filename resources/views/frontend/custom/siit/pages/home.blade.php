@@ -95,18 +95,15 @@
                     <h2><span class="super-bold">SUCCESS</span></h2>
                     <br>
                     <div class="box">
-                        <h3>Consectetur adipiscing elit, Consectetur adipiscing elit</h3>
+                        <h3>APEI - A Step Stone to Professional Career</h3>
                         <div class="columns">
-                            <div class="column">
-                                <p>
-                                    Duis pretium felis at dui fringilla convallis. Phasellus eleifend sollicitudin vestibulum. Nulla faucibus urna sed porta efficitur. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut maximus arcu non nisl pulvinar egestas. Quisque vestibulum, purus ac rutrum accumsan, ipsum tellus commodo diam, non tristique felis ante et eros. Aenean blandit fringilla purus, in aliquet enim mattis eget.
-                                </p>
-                            </div>
-                            <div class="column">
-                                <p>
-                                    Duis pretium felis at dui fringilla convallis. Phasellus eleifend sollicitudin vestibulum. Nulla faucibus urna sed porta efficitur. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut maximus arcu non nisl pulvinar egestas. Quisque vestibulum, purus ac rutrum accumsan, ipsum tellus commodo diam, non tristique felis ante et eros. Aenean blandit fringilla purus, in aliquet enim mattis eget.
-                                </p>
-                            </div>
+                            <p style="padding-left: 1em">
+                                Australian Professional Education Institute Pty Ltd trading as Sydney Institute of Interpreting and Translating (SIIT) was established as a registered training organization in April 2009.
+                            </p>
+                            <p style="padding-left: 1em">The growing “ever-smaller” global village, where exchanges of information across languages and cultures now occur across all spheres of human society, leads to an increasing demand for the services of professional interpreters and translators.
+                            </p>
+                            <p style="padding-left: 1em" >SIIT was established for the purpose of training qualified interpreters and translators across a variety of language streams. And SIIT has been dedicated to this mission of producing professional interpreters and translators.
+                            </p>
                         </div>
                     </div>
                 </div>
