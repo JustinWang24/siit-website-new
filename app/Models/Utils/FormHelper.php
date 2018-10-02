@@ -64,7 +64,7 @@ class FormHelper
 
         $type = $fieldName=='password'?'password':'text';
         if($fieldName == 'birthday' || strpos($fieldName,'date') !== false){
-//          $type = 'date';
+            $type = 'date';
             $placeholder .= ' 1999-01-31';
         }
         ?>

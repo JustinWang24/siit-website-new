@@ -36,7 +36,7 @@ class Medias extends Controller
     }
 
     /**
-     * 保存学生提交的相关的附件文档
+     * 保存学生提交的相关的附件文档, 返回文件的类型
      * @param Request $request
      * @return string
      */
@@ -52,7 +52,7 @@ class Medias extends Controller
                 'name'=>$request->file('file')->getClientOriginalName(),
             ];
             if(Attachment::Persistent($data)){
-                return JsonBuilder::Success();
+                return JsonBuilder::Success(['t'=>$type,'p'=>$data['path']]);
             }
         }
         return JsonBuilder::Error();
