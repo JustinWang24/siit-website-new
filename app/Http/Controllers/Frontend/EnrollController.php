@@ -401,7 +401,19 @@ class EnrollController extends Controller
         $this->dataForView['siteConfig'] = $this->siteConfig;
 
         // 获取学生最后一个待定的订单
-        $this->dataForView['order'] = Order::where('user_id',session('user_data.id'))->orderBy('id','desc')->first();
+        $order = Order::where('user_id',session('user_data.id'))->orderBy('id','desc')->first();
+        $this->dataForView['order'] = $order;
+
+        if($order){
+            $course = null;
+            foreach ($order->orderItems as $orderItem) {
+                $course = $orderItem->product;
+            }
+        }else{
+            $course = new Product();
+        }
+        $this->dataForView['course'] = $course;
+
         $student = User::GetById(session('user_data.id'));
         $this->dataForView['student'] = $student;
         $this->dataForView['studentProfile'] = $student->studentProfile;
