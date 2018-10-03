@@ -569,3 +569,24 @@ body{
     left: 260px;
   }
 }
+.ct-box{
+  margin-bottom:0.8em;
+  text-align:center;
+  h3{
+    font-weight: bold;
+    margin-bottom:0.4em;
+    background-color: #4a91bfa3;
+    color: #fff;
+  }
+  ul{
+    margin:0;
+    text-align: left;
+    display: inline-block;
+    padding: 0;
+    li{
+      text-decoration: none;
+      line-height:1.5em;
+      margin:0;
+    }
+  }
+}
