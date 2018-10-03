@@ -2,95 +2,143 @@
     <p>Itemised course payment information ({{ $course->getProductName() }}):</p>
     <table style="width: 100%;border: solid 1px #000;">
         <tbody>
-        <tr style="background-color: #1a6bac; color: white;">
+        <tr style="background-color: #222222; color: white;">
             <td style="color: white;">Item</td>
             <td style="color: white;">Fee</td>
         </tr>
         @foreach($order->orderItems as $orderItem)
-            <tr>
-                <td>Course Fees*</td>
+            <tr style="margin-bottom: 0.5em">
+                <td><strong>Course Fees*</strong></td>
                 <td>${{ number_format($orderItem->subtotal,2) }}</td>
             </tr>
         @endforeach
+        <tr>
+            <td>Administration Fee (included in course fees, non-refundable)</td>
+            <td>$300.00</td>
+        </tr>
+        <tr>
+            <td>Course Materials Fee (included in course fees, non-refundable)</td>
+            <td>$500.00</td>
+        </tr>
+        <tr>
+            <td>First installment (prior to enrolment)</td>
+            <td>$1500.00</td>
+        </tr>
+        <tr>
+            <td>Second installment (within TWO weeks from date of commencement)</td>
+            <td>$8,300.00</td>
+        </tr>
+        <tr>
+            <td>Late payment of instalment fees – penalty (if applicable)</td>
+            <td>$200.00 per week</td>
+        </tr>
+        <tr>
+            <td>Overseas Student Health Cover (compulsory)</td>
+            <td>$428.00</td>
+        </tr>
+        <tr>
+            <td><strong>Total Fees* </strong>(including OSHC)</td>
+            <td>$10228.00</td>
+        </tr>
+        <tr>
+            <td colspan="2"><strong>Payment Option:</strong>Under new legislation and as part of the ESOS Framework
+            and the National Code 2018, students may choose to make full payment of
+            course fees prior to or at the time of enrolment. Should you wish and agree to
+            pay more than the initial fee of $1500 prior to starting your course, please state
+            how much you want to pay and sign in the space provided.</td></tr>
+        <tr>
+            <td colspan="2"><strong>Other fees and charges:</strong></td></tr>
+        <tr>
+            <td>Change of course (fee payable upon acceptance of a change of course to a
+                different discipline or level. Only applicable if a CoE was already issued for the
+                previous course – <strong>non refundable)</strong></td>
+            <td>$250.00</td>
+        </tr>
+        <tr>
+            <td>Change of course (fee payable upon acceptance of a change of course to a
+                different discipline or level. Only applicable if a CoE was already issued for the
+                previous course - <strong>non refundable)</strong></td>
+            <td>$250.00</td>
+        </tr>
+        <tr>
+            <td>Course materials fee (initially included in the course fees, to be charged if
+                student has lost or requires a second copy of the course materials).</td>
+            <td>$500.00/qualification</td>
+        </tr>
+        <tr>
+            <td>Late submission assessment fee – (if not discussed with assessor prior to
+                for no more than assessment due date – extensions are accepted 2 weeks from the
+                assessment due date. If later than 2 weeks, the fee will be charged).</td>
+            <td>$200.00/unit of competency</td>
+        </tr>
+        <tr>
+            <td>CRe-assessment fee (first and second attempt to one assessment are included in
+                the course fees, only from the third attempt thereafter the fee will be charged)</td>
+            <td>$200.00/unit of competency</td>
+        </tr>
+        <tr style="margin-bottom: 0.5em;">
+            <td>Late assessment (if duration of course ceased and the student did not complete
+                assessments within the agreed course duration).</td>
+            <td>$200.00/unit of competency</td>
+        </tr>
+
+        <tr><td colspan="2"><strong>Recognition of Prior Learning RPL/RCC</strong></td></tr>
+        <tr>
+            <td>Initial interview</td>
+            <td>$250.00</td>
+        </tr>
+        <tr>
+            <td>Recognition of every unit seeking RPL</td>
+            <td>$200.00/unit</td>
+        </tr>
+        <tr>
+            <td>Credit Transfer (per qualification or unit only – as requested in the credit
+                transfer application – includes verification with the issuing RTO)</td>
+            <td>$200.00/qualification or unit</td>
+        </tr>
+        <tr style="margin-bottom: 0.5em;">
+            <td>Any gap training required – to be charged at unit level</td>
+            <td>Applicable subject/unit fee</td>
+        </tr>
+
+        <tr><td colspan="2"><strong>Re-issuing of Qualifications</strong></td></tr>
+        <tr>
+            <td>Re-Issue Transcript only</td>
+            <td>$30.00</td>
+        </tr>
+        <tr>
+            <td>Re-Issue Certificate only </td>
+            <td>$30.00</td>
+        </tr>
+        <tr>
+            <td>Re-issue complete Testamur (Certificate and Transcript)</td>
+            <td>$60.00</td>
+        </tr>
+        <tr>
+            <td>Postage for Certificates (if other than normal and if requested by the student)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Registered Mail</td>
+            <td style="padding-left: 1em;">$25.00</td>
+        </tr>
+        <tr>
+            <td>Courier</td>
+            <td style="padding-left: 1em;">$40.00</td>
+        </tr>
+
+        <tr><td colspan="2"><strong>Other Fees:</strong></td></tr>
+        <tr>
+            <td>Re-issue of Student Card (non-refundable)</td>
+            <td>$20.00</td>
+        </tr>
+        <tr>
+            <td>Graduation Fee</td>
+            <td>To be advised</td>
+        </tr>
+
         </tbody>
     </table>
 
-    <p style="text-decoration: underline;font-style: italic;font-size: 9px;">*SIIT reserves the right to vary its fees and charges at any time without prior notice.</p>
-    <br>
-    <p><strong>Payment Method</strong>:</p>
-    <p>SIIT’s bank account details for the payment of fees are as follows:</p>
-    <table style="width: 100%;border: solid 1px #000;">
-        <tbody>
-        <tr style="background-color: #222222; color: white;">
-            <td colspan="2" style="color: white;text-align: left;">Account for Sydney Campus</td>
-        </tr>
-        <tr>
-            <td>Account Name:</td>
-            <td>Sydney Institute of Interpreting and Translating</td>
-        </tr>
-        <tr>
-            <td>Bank</td>
-            <td>St. George Bank Limited</td>
-        </tr>
-        <tr>
-            <td>Bank Address:</td>
-            <td>4-16 Montgomery Street, Kogarah NSW 2217</td>
-        </tr>
-        <tr>
-            <td>BSB:</td>
-            <td>112 879</td>
-        </tr>
-        <tr>
-            <td>Account No:</td>
-            <td>438 956 947</td>
-        </tr>
-        <tr>
-            <td>SWIFT code:</td>
-            <td>SGBLAU2S</td>
-        </tr>
-        </tbody>
-    </table>
-    <br>
-    <table style="width: 100%;border: solid 1px #000;">
-        <tbody>
-        <tr style="background-color: #1a6bac; color: white;">
-            <td colspan="2" style="background-color: #222222; color: white;">Account for Brisbane/Melbourne Campus</td>
-        </tr>
-        <tr>
-            <td>Account Name:</td>
-            <td>Sydney Institute of Interpreting and Translating</td>
-        </tr>
-        <tr>
-            <td>Bank</td>
-            <td>St. George Bank Limited</td>
-        </tr>
-        <tr>
-            <td>Bank Address:</td>
-            <td>4-16 Montgomery Street, Kogarah NSW 2217</td>
-        </tr>
-        <tr>
-            <td>BSB:</td>
-            <td>112 879</td>
-        </tr>
-        <tr>
-            <td>Account No:</td>
-            <td>467 886 829</td>
-        </tr>
-        <tr>
-            <td>SWIFT code:</td>
-            <td>SGBLAU2S</td>
-        </tr>
-        </tbody>
-    </table>
-
-
-    <p>Fees can be paid using the following methods:</p>
-    <ul>
-        <li>Telegraphic transfer – a common method of payment used by international students. International Telegraphic Transfers will attract a AUD$20.00 processing fee.</li>
-        <li>Bank deposit at any branch of the St. George bank.</li>
-        <li>Online transfer to SIIT’s St. George bank account.</li>
-        <li>Bank cheque made payable to Sydney Institute of Interpreting and Translating.</li>
-        <li>Transfers by EFTPOS using savings or credit cards. These payment facilities are available from SIIT premises. A surcharge fee applies for credit card payments.</li>
-    </ul>
-    <p>To confirm payment, students are required to send to SIIT via fax (0061 2 89580655) or email (<a href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a>), a copy of the transfer receipt, deposit slip or cheque along with your name, offer number and date of birth.</p>
+    @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>

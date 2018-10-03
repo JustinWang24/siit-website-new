@@ -36,8 +36,10 @@
                 <td style="border-right: solid 1px #000;">{{ $orderItem->finish_date ? $orderItem->finish_date->format('d/M/Y') : null }}</td>
             </tr>
             <tr style="background-color: #ccc;">
-                <td style="border-right: solid 1px #000;">Course Fees:</td>
-                <td colspan="3"></td>
+                <td>Course Fees:</td>
+                <td>${{ number_format($orderItem->subtotal,2) }}</td>
+                <td>Conditions(if any):</td>
+                <td></td>
             </tr>
         </tbody>
     </table>
