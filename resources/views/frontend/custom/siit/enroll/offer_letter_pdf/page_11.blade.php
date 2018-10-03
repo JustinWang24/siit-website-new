@@ -66,5 +66,4 @@
         <li>a migration outcome from undertaking any course offered will be secured for the student or on behalf of
             the student</li>
     </ol>
-    @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>

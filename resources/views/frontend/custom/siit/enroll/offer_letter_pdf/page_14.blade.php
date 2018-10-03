@@ -40,5 +40,4 @@
         collected on this form or during your enrolment can be disclosed without your consent where authorized or
         required by law. Your personal information may be disclosed by SIIT, the Commonwealth including the TPS, or
         state or territory agencies, in accordance with the Privacy Act 1988.”</p>
-    @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>

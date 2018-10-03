@@ -52,5 +52,4 @@
         </strong>
     </p>
     <br>
-    @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>

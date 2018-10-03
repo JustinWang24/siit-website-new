@@ -48,6 +48,4 @@
             no cost to them for this referral’ (refer to external agency section for more details regarding this).
             (National Code/Standard 8, Clauses 8.2 and 8.3).</li>
     </ul>
-
-    @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>

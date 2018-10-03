@@ -112,5 +112,4 @@
         letter or email will be sent to you to advise you of the documents required to finalise your enrolment.
     </p>
     <br>
-    @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>

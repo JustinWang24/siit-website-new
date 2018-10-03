@@ -45,5 +45,4 @@
             days from the lodgement of Complaint or Appeal form.</li>
         <li>Any parties may be accompanied and assisted by a support person at relevant meetings.</li>
     </ul>
-    @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>
