@@ -106,14 +106,14 @@
     <p>SIIT will make this policy and intervention strategy available to staff as well and will induct trainers and student support service staff appropriately.</p>
     <p>
         SIIT will identify and contact students at risk of not meeting the course progress and attendance requirements by contacting them via email/telephone/letter, as deemed fit.</p>
-    <p>A copy of the Course Progress and Intervention Policy and Procedure can be found also on our website at the following link: {{ url('/page/assessments-and-policy') }}</p>
+    <p>A copy of the Course Progress and Intervention Policy and Procedure can be found also on our website at the following link: <a href="{{ url('/page/SIIT-policy-and-procedures') }}" target="_blank">{{ url('/page/SIIT-policy-and-procedures') }}</a></p>
     <br>
     <h3>Assessments (due dates and late submissions)</h3>
     <p>
         As completion of assessments relates to your course progress and to you successfully completing your qualification, you MUST complete your assignments as outlined in your timetable and as instructed by your trainer/assessor. It is vital that you submit your assessments on or before the due date to allow time for marking, review and feedback from the trainer/assessor. Should you be required to provide more evidence or re- sit your assessments, you will need to discuss and arrange a time with your trainer/assessor. Late submission of assessments MUST be arranged and agreed on prior to the due date with your trainer/assessor. Your trainer /assessor will inform our Academic Team about the late submission request to note it on your course progress record. An extension of no more than 2 weeks will be given in certain circumstances.
     </p>
     <p>Please note: Late submissions without trainer’s approval, incur a late submission fee of $200.00/unit.</p>
-    <p>For more information you can find our “Assessment Policy and Procedure” in our Student Handbook as well as on our website at the following link: {{ url('/page/assessments-and-policy') }}</p>
+    <p>For more information you can find our “Assessment Policy and Procedure” in our Student Handbook as well as on our website at the following link: <a href="{{ url('/page/SIIT-policy-and-procedures') }}" target="_blank">{{ url('/page/SIIT-policy-and-procedures') }}</a></p>
 
     <h3>Issuing your Qualification</h3>
     <p>On completion of all assessment requirements you will be issued with a certificate together with a Statement of Attainment listing all the units you have completed as part of the qualification. Should you not complete all the units of competency listed under the PSP60816 Advanced Diploma of Translating curriculum, you will be issued with a Statement of Attainment listing only the units you have completed. SIIT will issue the certificate /statement of attainment within 30 days from the date of the completion of the last assessments (signature of student and date of submission to be provided on all the assessments). Below is the list of units of competency you are required to complete to qualify for a full qualification.</p>
@@ -201,7 +201,7 @@
     <p>1. the Student is government sponsored and that government sponsor provides written support for the change as it considers the change to be in the Student's best interests; or
     </p><p>2. SIIT has ceased to be registered or the course in which the Student is enrolled has ceased to be registered; or
     </p><p>3. SIIT has a sanction imposed on it that prevents the Student from continuing their principal course.
-    </p><p>For more information on this matter, you can find our Student Transfer Policy and Procedure on our website at the following link: {{ url('/page/assessments-and-policy') }}</p>
+    </p><p>For more information on this matter, you can find our Student Transfer Policy and Procedure on our website at the following link: <a href="{{ url('/page/SIIT-policy-and-procedures') }}" target="_blank">{{ url('/page/SIIT-policy-and-procedures') }}</a></p>
 
     <h3>Deferment, Suspension and Cancellation Policy</h3>
     <p>It is the policy of SIIT and the student’s responsibility to complete the course within the agreed course duration. However, unforeseen and unexpected circumstances may occur beyond the student’s control which can affect their ability to complete their course.
