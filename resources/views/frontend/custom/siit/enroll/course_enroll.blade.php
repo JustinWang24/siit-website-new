@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="column">
                                     <el-form-item label="{{ trans('enrolment.Password') }}">
-                                        <el-input v-model="user.password" placeholder="{{ trans('enrolment.Password') }}" type="password"></el-input>
+                                        <el-input type="password" v-model="user.password" placeholder="{{ trans('enrolment.Password') }}"></el-input>
                                         <a href="{{ url('frontend/customers/forget-password') }}" target="_blank">{{ trans('general.Forget_password') }}</a>
                                     </el-form-item>
                                 </div>
