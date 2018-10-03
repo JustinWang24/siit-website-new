@@ -37,7 +37,7 @@
             </tr>
             <tr style="background-color: #ccc;">
                 <td>Course Fees:</td>
-                <td colspan="3">${{ number_format($orderItem->subtotal,2) }}</td>
+                <td>${{ number_format($orderItem->subtotal,2) }}</td>
                 <td>Conditions(if any):</td>
                 <td></td>
             </tr>

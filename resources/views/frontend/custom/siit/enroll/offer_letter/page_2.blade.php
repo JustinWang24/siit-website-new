@@ -1,7 +1,5 @@
 <div class="word-page-style">
-    @foreach($order->orderItems as $orderItem)
-    <p>Itemised course payment information ({{ $orderItem->product->name }}):</p>
-    @endforeach
+    <p>Itemised course payment information ({{ $course->getProductName() }}):</p>
     <table style="width: 100%;border: solid 1px #000;">
         <tbody>
         <tr style="background-color: #222222; color: white;">
