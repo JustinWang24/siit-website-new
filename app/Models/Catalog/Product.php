@@ -709,11 +709,17 @@ class Product extends Model
      * @return Product
      */
     public static function GetByUuid($uuid){
-        return self::where(
-            'uuid',
-            ProductType::RestoreProductUuidWithoutTail($uuid)
-        )->orWhere('id',$uuid)
-            ->first();
+        if(strlen($uuid)>10){
+            return self::where(
+                'uuid',
+                ProductType::RestoreProductUuidWithoutTail($uuid)
+            )->first();
+        }else{
+            return self::where(
+                'uuid',
+                ProductType::RestoreProductUuidWithoutTail($uuid)
+            )->orWhere('id',$uuid)->first();
+        }
     }
 
     /**
