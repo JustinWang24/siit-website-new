@@ -44,5 +44,4 @@
     by contacting them via email/telephone/letter, as deemed fit.</p>
     <p>A copy of the Course Progress and Intervention Policy and Procedure can be found also on our website at the
     following link: <a href="{{ url('/page/SIIT-policy-and-procedures') }}" target="_blank">{{ url('/page/SIIT-policy-and-procedures') }}</a></p>
-    @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>

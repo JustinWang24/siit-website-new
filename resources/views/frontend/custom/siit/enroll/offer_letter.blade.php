@@ -2,7 +2,7 @@
 @section('content')
     <div class="container mb-20 mt-20">
         <div class="content pt-20 mt-20" id="offer-letter-app">
-            @for($i=1;$i<16;$i++)
+            @for($i=1;$i<17;$i++)
                 @include('frontend.custom.siit.enroll.offer_letter.page_'.$i)
                 <br>
             @endfor

@@ -78,5 +78,4 @@
     </ul>
     <p>To confirm payment, students are required to send to SIIT via fax (0061 2 89580655) or email (<a href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a>), a copy of the transfer receipt, deposit slip or cheque along with your name, offer number and date of
         birth.</p>
-    @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>

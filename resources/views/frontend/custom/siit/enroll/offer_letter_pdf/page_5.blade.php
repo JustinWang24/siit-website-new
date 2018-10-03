@@ -29,6 +29,4 @@
         Services Officer.</p>
     <p style="padding-left: 16px;">4. The Student Services Officer will then provide a written outcome to the student regarding refund
         application. This feedback is provided within 28 days.</p>
-
-    @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>

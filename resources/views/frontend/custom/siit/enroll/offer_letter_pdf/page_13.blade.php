@@ -39,5 +39,4 @@
     <p style="padding-left: 16px;">-	when a student is in breach of the course progress policy</p>
     <p style="padding-left: 16px;">-	when a student is continually absent from scheduled course hours</p>
     <p style="padding-left: 16px;">-	non-payment of outstanding fees</p>
-    @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>

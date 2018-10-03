@@ -48,5 +48,4 @@
         Ombudsman (OSO) .</p>
     <p>OSO investigates complaints about problems that overseas students or intending overseas students may have
         with private education and training in Australia.</p>
-    @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>

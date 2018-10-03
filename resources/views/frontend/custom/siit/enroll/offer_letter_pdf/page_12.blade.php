@@ -33,5 +33,4 @@
         <li>Not use, possess, sell or distribute any alcohol or illegal substances on SIIT property. Any student doing so will be reported to the Police and dismissed from the training.</li>
     </ul>
     <br>
-    @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>
