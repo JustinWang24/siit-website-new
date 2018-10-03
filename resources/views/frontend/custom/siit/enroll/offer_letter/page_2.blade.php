@@ -4,7 +4,7 @@
     @endforeach
     <table style="width: 100%;border: solid 1px #000;">
         <tbody>
-        <tr style="background-color: #1a6bac; color: white;">
+        <tr style="background-color: #222222; color: white;">
             <td style="color: white;">Item</td>
             <td style="color: white;">Fee</td>
         </tr>
@@ -43,12 +43,13 @@
             <td>$10228.00</td>
         </tr>
         <tr>
-            <td><strong>Payment Option:</strong>Under new legislation and as part of the ESOS Framework
+            <td colspan="2"><strong>Payment Option:</strong>Under new legislation and as part of the ESOS Framework
             and the National Code 2018, students may choose to make full payment of
             course fees prior to or at the time of enrolment. Should you wish and agree to
             pay more than the initial fee of $1500 prior to starting your course, please state
             how much you want to pay and sign in the space provided.</td></tr>
-        <tr><td><strong>Other fees and charges:</strong></td></tr>
+        <tr>
+            <td colspan="2"><strong>Other fees and charges:</strong></td></tr>
         <tr>
             <td>Change of course (fee payable upon acceptance of a change of course to a
                 different discipline or level. Only applicable if a CoE was already issued for the
@@ -58,7 +59,7 @@
         <tr>
             <td>Change of course (fee payable upon acceptance of a change of course to a
                 different discipline or level. Only applicable if a CoE was already issued for the
-                previous course – <strong>non refundable)</strong></td>
+                previous course - <strong>non refundable)</strong></td>
             <td>$250.00</td>
         </tr>
         <tr>
@@ -83,7 +84,7 @@
             <td>$200.00/unit of competency</td>
         </tr>
 
-        <tr><td><strong>Recognition of Prior Learning RPL/RCC</strong></td></tr>
+        <tr><td colspan="2"><strong>Recognition of Prior Learning RPL/RCC</strong></td></tr>
         <tr>
             <td>Initial interview</td>
             <td>$250.00</td>
@@ -102,7 +103,7 @@
             <td>Applicable subject/unit fee</td>
         </tr>
 
-        <tr><td><strong>Re-issuing of Qualifications</strong></td></tr>
+        <tr><td colspan="2"><strong>Re-issuing of Qualifications</strong></td></tr>
         <tr>
             <td>Re-Issue Transcript only</td>
             <td>$30.00</td>
@@ -128,7 +129,7 @@
             <td style="padding-left: 1em;">$40.00</td>
         </tr>
 
-        <tr><td><strong>Other Fees:</strong></td></tr>
+        <tr><td colspan="2"><strong>Other Fees:</strong></td></tr>
         <tr>
             <td>Re-issue of Student Card (non-refundable)</td>
             <td>$20.00</td>

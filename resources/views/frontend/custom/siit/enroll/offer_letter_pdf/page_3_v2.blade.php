@@ -5,34 +5,38 @@
     <p>This policy applies to all students who do not wish to continue their studies at SIIT and thus have requested for refund of tuition fees and other fees.</p>
     <p>An application for refund of fees paid must be done by the student in writing. This form may be submitted electronically, in person or by mail. A copy of refund application form is available on SIIT website or can be collected from SIIT Student Services Officer. Students who are off-shore or interstate can contact SIIT at <a href="mailto:{{ $siteConfig->contact_email }}">{{ $siteConfig->contact_email }}</a> regarding any refunds.</p>
     <br>
-    <p style="text-decoration: underline;">The table below indicates a list of refund items:</p>
+    <h3 style="text-decoration: underline;">The table below indicates a list of refund items:</h3>
 
 
     <table style="width: 100%;border: solid 1px #000;">
         <tbody>
-        <tr style="background-color: #222222; color: white;">
-            <td>Description of items</td>
-            <td>Refund status</td>
+        <tr style="background-color: #222222;">
+            <td style="color: white;">Description of items</td>
+            <td style="color: white;">Refund status</td>
         </tr>
         <tr>
-            <td>Enrolment fee</td>
+            <td>Administration fee ($300.00)</td>
             <td>Non-refundable</td>
         </tr>
         <tr>
-            <td>Course material fee</td>
+            <td>Course material fee ($500.00)</td>
             <td>Non-refundable</td>
+        </tr>
+        <tr>
+            <td>Visa refused prior to course commencement</td>
+            <td>Full refund less enrolment and course material fees</td>
         </tr>
         <tr>
             <td>Withdrawal of course 10 weeks or more prior to course commencement</td>
-            <td>80% refund less enrolment and course material fees</td>
+            <td>80% refund of fees already paid, less administration fees</td>
         </tr>
         <tr>
             <td>Withdrawal of course between 4 to 10 weeks prior to course commencement</td>
-            <td>50% refund less enrolment and course material fees</td>
+            <td>50% refund of fees already paid, less administration fees</td>
         </tr>
         <tr>
             <td>Withdrawal of course less than 4 weeks prior to course commencement</td>
-            <td>30% refund less enrolment and course material fees</td>
+            <td>30% refund of fees already paid, less administration fees</td>
         </tr>
         <tr>
             <td>Withdrawal of course after course commencement</td>
@@ -47,13 +51,18 @@
             <td>Non-refundable</td>
         </tr>
         <tr>
+            <td>Compulsory Health Insurance (Student Visa only) If SIIT withdraws its offer to deliver the course before the course commencement date</td>
+            <td>Refer to the OSHC provider
+                Full refund including enrolment and course material fee</td>
+        </tr>
+        <tr>
             <td>If SIIT withdraws its offer to deliver the course before or after the course commencement date</td>
-            <td>Full refund less enrolment and course material fees</td>
+            <td>Partial refund on a pro-rata basis (the unused portion of the tuition fee will be refunded)</td>
         </tr>
         </tbody>
     </table>
 
-    <p style="text-decoration: underline;"><strong>Please note:</strong></p>
+    <p><strong>Please note:</strong></p>
     <ol>
         <li>
             <p>If the student is able to demonstrate compassionate or compelling circumstances, the amount refunded to the student can be higher than the one specified in the table above at SIIT’s discretion.</p>
@@ -71,5 +80,4 @@
         <li>If the student is not happy with SIIT refund policy or its complaint and appeal policy, the student has the right to seek external advice and pursue its action under the Australia’s consumer protection laws.</li>
         <li>SIIT will only refund any monies due to the student in the student’s nominated bank account or to the student in person.</li>
     </ol>
-    @include('frontend.custom.siit.enroll.offer_letter.page_foot')
 </div>
