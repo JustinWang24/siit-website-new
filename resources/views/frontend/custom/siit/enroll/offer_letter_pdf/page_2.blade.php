@@ -1,5 +1,7 @@
 <div class="word-page-style">
-    <p>Itemised course payment information ({{ $course->getProductName() }}):</p>
+    @foreach($order->orderItems as $orderItem)
+    <p>Itemised course payment information ({{ $orderItem->product->name }}):</p>
+    @endforeach
     <table style="width: 100%;border: solid 1px #000;">
         <tbody>
         <tr style="background-color: #1a6bac; color: white;">
@@ -86,7 +88,7 @@
 
     <p>Fees can be paid using the following methods:</p>
     <ul>
-        <li>Telegraphic transfer – a common method of payment used by international students. International Telegraphic Transfers will attract a AUD$20.00 processing fee.</li>
+        <li>Telegraphic transfer - a common method of payment used by international students. International Telegraphic Transfers will attract a AUD$20.00 processing fee.</li>
         <li>Bank deposit at any branch of the St. George bank.</li>
         <li>Online transfer to SIIT’s St. George bank account.</li>
         <li>Bank cheque made payable to Sydney Institute of Interpreting and Translating.</li>
