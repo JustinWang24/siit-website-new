@@ -4,6 +4,7 @@
 
     <div class="content">
         <div class="columns is-marginless">
+            @if($agentObject->isDesktop())
             <div class="column is-one-fifth left-side-bar-wrap">
                 <?php
                     // 检查一下当前的页面, 如果是2栏的布局，那么试着根据页面的URI, 结合菜单的结构, 自动生成左边可以使用的INDEX
@@ -40,6 +41,7 @@
                     </div>
                 @endforeach
             </div>
+            @endif
             <div class="column is-four-fifths">
                 @if(!empty($page->feature_image))
                     <img src="{{ $page->getFeatureImageUrl() }}" alt="{{ $page->title }}" style="width: 100%;">
