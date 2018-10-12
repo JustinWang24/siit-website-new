@@ -22,7 +22,7 @@ class Groups extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Request $request){
-        $this->dataForView['groups'] = Group::where('id','>',1)->orderBy('name','asc')->paginate(config('system.PAGE_SIZE'));
+        $this->dataForView['groups'] = Group::where('id','>',1)->orderBy('id','asc')->paginate(config('system.PAGE_SIZE'));
         $this->dataForView['menuName'] = 'groups';
         return view('backend.groups.index', $this->dataForView);
     }
