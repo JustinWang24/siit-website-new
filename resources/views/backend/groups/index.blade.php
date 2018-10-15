@@ -72,6 +72,7 @@
                         <td>
                             <p>{{ $value->extra }}</p>
                             <p>Discount: {{ $value->discount_rate }}%</p>
+                            
                             <p>Commission: {{ $value->commission }}%</p>
                         </td>
                         <td>
