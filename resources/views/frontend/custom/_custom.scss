@@ -589,3 +589,70 @@ body{
     }
   }
 }
+.footer{
+  width: 100%;
+}
+@media screen and (max-width: 376px){
+  .navbar-brand{
+    height: unset;
+    max-width: unset;
+  }
+  .company-brief-wrap .container .first-visiting h2,
+  .campus-life-wrap .container .first-visiting h2,
+  .story-success-wrap .container .first-visiting h2,
+  .we-social-wrap .container .first-visiting h2 {
+    font-size: 30px;
+    color: white;
+    display: inline-block;
+    line-height: unset;
+  }
+  .company-brief-wrap .container .first-visiting,
+  .campus-life-wrap .container .first-visiting,
+  .story-success-wrap .container .first-visiting,
+  .we-social-wrap .container .first-visiting {
+    padding-top: 20px;
+  }
+
+  .company-brief-wrap .container,
+  .campus-life-wrap .container,
+  .story-success-wrap .container,
+  .we-social-wrap .container {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  .campus-life-wrap .container .content .brochure-box{
+    width: unset;
+    right: 0;
+  }
+  .content h2{
+    margin-bottom: 0;
+    font-size: 1.2em;
+  }
+  .campus-life-wrap .container .content .brochure-box .view-more-btn{
+    margin-right: 0;
+  }
+  .story-success-wrap .container .box h3{
+    font-size: 18px;
+  }
+  .user-profile-manager-app .content-two-third-right{
+    width: 100%;
+    float: unset;
+  }
+  .content-half{
+    width:100%;
+    float: unset;
+  }
+  #my-orders-manager-app{
+    .table{
+      font-size: 11px;
+    }
+    .content table td, .content table th{
+      padding:0.3em;
+    }
+    margin: 0 !important;
+    padding: 0 !important;
+    .tag:not(body){
+      font-size: 0.9em;
+    }
+  }
+}

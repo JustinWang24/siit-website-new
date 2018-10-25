@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="button is-link is-pulled-right">{{ trans('general.Update') }}</button>
+                            <button type="submit" class="button is-link is-pulled-right">{{ trans('general.Update_Password') }}</button>
                         </form>
                     </div>
 

@@ -7,6 +7,28 @@
         @endif
     </section>
     <!-- e-commerce -->
+    @if(empty(session('user_data')))
+        <section class="menu-section mb-10 mt-10">
+            <a class="has-text-white navbar-item" href="{{ url('/frontend/customers/login') }}" title="{{ trans('general.student_login') }}">
+                <i class="fas fa-sign-in-alt"></i>   {{ trans('general.student_login') }}
+            </a>
+        </section>
+    @elseif(!empty(session('user_data.uuid')))
+        <section class="menu-section mb-10 mt-10">
+            <ul class="menu-section-list">
+                <li>
+                    <a class="has-text-grey-light"  href="{{ url('/frontend/my_profile/'.session('user_data.uuid')) }}" title="{{ trans('general.my_dashboard') }}">
+                        <i class="fas fa-tachometer-alt"></i>&nbsp;{{ trans('general.my_dashboard') }}
+                    </a>
+                </li>
+                <li>
+                    <a class="has-text-grey-light"  onclick="event.preventDefault();document.getElementById('logout-form').submit();" title="{{ trans('general.menu_logout') }}">
+                        <i class="fas fa-sign-out-alt"></i>&nbsp;{{ trans('general.menu_logout') }}
+                    </a>
+                </li>
+            </ul>
+        </section>
+    @endif
     @if(isset($categoriesTree) && count($categoriesTree) > 0)
         <section class="menu-section mb-10 mt-10">
         <a class="has-text-white navbar-item" href="#">
@@ -36,11 +58,19 @@
             </h3>
             <ul class="menu-section-list">
                 @foreach($children as $sub)
-                    <li>
-                        <a class="has-text-grey-light" href="{{ url($sub->link_to=='/' ? '/' : '/page'.$sub->link_to) }}">
-                            {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
-                        </a>
-                    </li>
+                    @if($sub->link_to == '/offer-acceptance-and-payment')
+                        <li>
+                            <a class="has-text-grey-light" href="{{ url('/page/offer-acceptance-and-payment') }}">
+                                {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
+                            </a>
+                        </li>
+                    @else
+                        <li>
+                            <a class="has-text-grey-light" href="{{ url($sub->link_to==('/frontend/customers/login' || 'https://apei.moodle.com.au/') ? $sub->link_to : '/page'.$sub->link_to) }}">
+                                {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
+                            </a>
+                        </li>
+                    @endif
                 @endforeach
             </ul>
         @endif
