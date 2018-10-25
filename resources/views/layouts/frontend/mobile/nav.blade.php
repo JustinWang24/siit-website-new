@@ -47,12 +47,12 @@
         }
         ?>
         @if(count($children) == 0)
-            <a class="has-text-white {{ $rootMenu->css_classes }}" href="{{ url($rootMenu->link_to=='/' ? '/' : '/page'.$rootMenu->link_to) }}">
+            <a class="has-text-white {{ $rootMenu->css_classes }}" href="{{ url($rootMenu->link_to=='/' ? '/' : $rootMenu->getMenuUrl()) }}">
                 {{ app()->getLocale()=='cn' && !empty($rootMenu->name_cn) ? $rootMenu->name_cn : $rootMenu->name }}
             </a>
         @else
             <h3 class="menu-section-title">
-                <a class="has-text-white" href="{{ url($rootMenu->link_to=='/' ? '/' : '/page'.$rootMenu->link_to) }}">
+                <a class="has-text-white" href="{{ url($rootMenu->link_to=='/' ? '/' :  $rootMenu->getMenuUrl()) }}">
                     {{ app()->getLocale()=='cn' && !empty($rootMenu->name_cn) ? $rootMenu->name_cn : $rootMenu->name }}
                 </a>
             </h3>
@@ -66,7 +66,7 @@
                         </li>
                     @else
                         <li>
-                            <a class="has-text-grey-light" href="{{ url($sub->link_to==('/frontend/customers/login' || 'https://apei.moodle.com.au/') ? $sub->link_to : '/page'.$sub->link_to) }}">
+                            <a class="has-text-grey-light" href="{{ url(($sub->link_to=='/frontend/customers/login' || $sub->link_to=='https://apei.moodle.com.au/') ? $sub->link_to :  $sub->getMenuUrl()) }}">
                                 {{ app()->getLocale()=='cn' && !empty($sub->name_cn) ? $sub->name_cn : $sub->name }}
                             </a>
                         </li>
