@@ -642,4 +642,11 @@ body{
     width:100%;
     float: unset;
   }
+  #my-orders-manager-app{
+    .table{
+      font-size: 11px;
+    }
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 }
