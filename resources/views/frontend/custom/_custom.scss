@@ -646,7 +646,13 @@ body{
     .table{
       font-size: 11px;
     }
+    .content table td, .content table th{
+      padding:0.3em;
+    }
     margin: 0 !important;
     padding: 0 !important;
+    .tag:not(body){
+      font-size: 0.9em;
+    }
   }
 }
