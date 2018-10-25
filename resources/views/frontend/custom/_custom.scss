@@ -628,6 +628,11 @@ body{
     margin-bottom: 0;
     font-size: 1.2em;
   }
+  .content table{
+    display: block;
+    overflow: scroll;
+    max-width: 100%;
+  }
   .campus-life-wrap .container .content .brochure-box .view-more-btn{
     margin-right: 0;
   }
@@ -642,6 +647,7 @@ body{
     width:100%;
     float: unset;
   }
+
   #my-orders-manager-app{
     .table{
       font-size: 11px;
@@ -655,4 +661,9 @@ body{
       font-size: 0.9em;
     }
   }
+
+  .page-content-wrap, .page-title-wrap{
+    padding-left:0;
+  }
+
 }
