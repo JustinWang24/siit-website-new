@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-@include('layouts.frontend.head')
+@include(_get_frontend_layout_path('frontend.head'))
 <body class="has-navbar-fixed-top">
 @if($agentObject->isPhone())
     <!-- Mobile Version -->
