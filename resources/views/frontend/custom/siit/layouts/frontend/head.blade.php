@@ -11,6 +11,7 @@
     ?>
     <link rel="shortcut icon" href="{{ asset('images/frontend/fav.ico') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="google-site-verification" content="GB1sVmIJPO5oYfrM75LxVzUM6t2mHjA2Kd6_knq6UaM" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
     <style amp-custom>
@@ -37,4 +38,14 @@
         }
         ?>
     </style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128555729-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-128555729-1');
+    </script>
+
 </head>
