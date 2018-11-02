@@ -9,7 +9,7 @@
         echo file_get_contents(app_path().'/../public/css/app.css');
      */
     ?>
-
+    <link rel="shortcut icon" href="{{ asset('images/frontend/fav.ico') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">

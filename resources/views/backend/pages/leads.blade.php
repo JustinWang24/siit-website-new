@@ -19,7 +19,7 @@
                     <th>Name</th>
                     <th>Phone</th>
                     <th>Email</th>
-                    <th>Product</th>
+                    <th>Date</th>
                     <th>Message</th>
                     <th>Actions</th>
                 </tr>
@@ -37,7 +37,7 @@
                             <a href="mailto:{{ $value->email }}">{{ $value->email }}</a>
                         </td>
                         <td>
-                            {{ $value->product ? $value->product->name : null }}
+                            {{ $value->created_at->format('H:i - d M Y') }}
                         </td>
                         <td>
                             {!! $value->message !!}
