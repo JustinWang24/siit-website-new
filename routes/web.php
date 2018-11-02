@@ -20,6 +20,10 @@ Route::get('/terms', 'Frontend\Pages@terms')->name('terms');
 Route::get('/switch-language/{lang?}', 'Frontend\Pages@switch_language')->name('switch_language');
 Route::get('/staff-profile', 'Frontend\Pages@view_staff_profile');
 Route::get('/intake-latest', 'Frontend\Pages@intake_latest')->name('intake_latest');
+Route::get('/sitemap.xml',function(){
+    return response()->view(_get_frontend_theme_path('pages.sitemap'))
+        ->header('Content-Type', 'xml');
+});
 //Route::get('/api/submenu/{id}','Api\Menus@submenu');
 // 特定的URI
 Route::prefix('page')->group(function(){
