@@ -240,6 +240,10 @@ $(document).ready(function(){
         });
     }
 
+    if($('#single_image').length>0){
+        $("a#single_image").fancybox();
+    }
+
     // 处理file 类型的表单field
 
 

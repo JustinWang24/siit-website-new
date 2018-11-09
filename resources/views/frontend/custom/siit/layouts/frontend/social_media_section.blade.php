@@ -10,7 +10,7 @@
                     <a href="{{ strpos($siteConfig->twitter,'http') !== false ? $siteConfig->twitter : 'https://'.$siteConfig->twitter }}" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="#" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
+                    <a href="{{ asset('images/wechat.jpg') }}" id="single_image" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
                         <i class="fab fa-weixin"></i>
                     </a>
                     <a href="https://www.weibo.com/siithome?s=6cm7D0" target="_blank" class="has-text-white is-size-2-desktop is-size-3-mobile mr-20">
