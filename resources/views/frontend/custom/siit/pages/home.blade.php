@@ -89,21 +89,24 @@
     <section class="section is-paddingless story-success-wrap">
         <div class="container">
             <div class="columns is-marginless">
-                <div class="column is-two-thirds first-visiting">
-                    <h2>STORY</h2>
-                    <h2>OF</h2>
-                    <h2><span class="super-bold">SUCCESS</span></h2>
+                <div class="column first-visiting">
+                    <h2>STORY OF SUCCESS</h2>
                     <br>
                     <div class="box">
-                        <h3>APEI - A Step Stone to Professional Career</h3>
+                        <h3>SIIT - A BRIDGE ACROSS CULTURES</h3>
                         <div class="columns">
-                            <p style="padding-left: 1em">
-                                Australian Professional Education Institute Pty Ltd trading as Sydney Institute of Interpreting and Translating (SIIT) was established as a registered training organization in April 2009.
-                            </p>
-                            <p style="padding-left: 1em">The growing “ever-smaller” global village, where exchanges of information across languages and cultures now occur across all spheres of human society, leads to an increasing demand for the services of professional interpreters and translators.
-                            </p>
-                            <p style="padding-left: 1em" >SIIT was established for the purpose of training qualified interpreters and translators across a variety of language streams. And SIIT has been dedicated to this mission of producing professional interpreters and translators.
-                            </p>
+                            <div class="column">
+                                <p>Sydney Institute of Interpreting and Translating (SIIT) is a registered training organisation with campuses in Brisbane, Melbourne and Sydney.</p>
+                                <p>The academic programs offered at SIIT, including NAATI Endorsed Diploma of Interpreting, Advanced Diploma of Interpreting, Advanced Diploma of Translating, are built around the needs of the students.</p>
+                                <p>The growing “ever-smaller” global village, where exchanges of information across languages and cultures now occur across all spheres of human society, leads to an increasing demand for the services of professional interpreters and translators, supervisors, coordinators and teachers etc.
+                                </p>
+                            </div>
+                            <div class="column">
+                                <p> Over the last ten years, SIIT has seen more than Fifteen Thousand graduates working in a variety of industries around the globe making use of its skills and knowledge gained at SIIT across a variety of language streams include Mandarin, Cantonese, Hindi, Punjabi, Nepali, Korean and Vietnamese.</p>
+                                <p>SIIT has provided interpreters for a variety of industry groups over the years.</br>
+                                    2016 SIIT provided 150 Mandarin-speaking interpreters to the Sino-Australian Agriculture Forum held in Sydney.</p>
+                                <p>SIIT graduates and trainers and assessors acted as interpreters for numerous high-level business meetings between China and Australia.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
