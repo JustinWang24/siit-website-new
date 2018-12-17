@@ -47,9 +47,6 @@ class Pages extends Controller
 //        dd($classes);
 //        $ad = AxcelerateClient::GetContactManager()->find(6224796);
 //        dd($ad);
-        $contact = AxcelerateClient::GetContactManager()->findByEmail('yaning@siit.nsw.edu.au');
-
-        dd($contact);
 
         $page = Page::where('uri','/')->first();
         $this->dataForView['page'] = $page;
