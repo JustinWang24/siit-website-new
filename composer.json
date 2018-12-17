@@ -44,7 +44,8 @@
             "app/Helper/ThirdParty/myob"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "SmartBro\\Voucher\\": "packages/smartbro/laravel-voucher/src/"
         },
         "files": ["app/Helper/General.php"]
     },

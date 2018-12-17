@@ -239,23 +239,44 @@ class User extends Authenticatable
      * 把User对象实例转换为Axcelerate contact 需要的所需格式
      * @return array|bool
      */
-    private function _convertToAttributesData(){
+    public function _convertToAttributesData(){
         if(!$this->studentProfile){
             return false;
         }
+//        $data = [
+//            'givenName'=>$this->studentProfile->given_name,
+//            'surname'=>$this->studentProfile->family_name,
+//            'address1'=>$this->address,
+//            'city'=>$this->city,
+//            'postcode'=>$this->postcode,
+//            'emailAddress'=>$this->email,
+//            'sex'=>$this->studentProfile->gender ? 'M' : 'F',
+//        ];
+
+        $row = $this->studentProfile;
+
         $data = [
-            'givenName'=>$this->studentProfile->given_name,
-            'surname'=>$this->studentProfile->family_name,
-            'address1'=>$this->address,
-            'city'=>$this->city,
-            'postcode'=>$this->postcode,
+            'givenName'=>$row->given_name,
+            'surname'=>$row->family_name,
+            'sex'=>$row->gender ? 'M':'F',
+            'title'=>$row->gender ? 'Mr':'Ms',
             'emailAddress'=>$this->email,
-            'sex'=>$this->studentProfile->gender ? 'M' : 'F',
+            'phone'=>$row->phone_number,
+            'mobilephone'=>$row->phone_number,
+            'USI'=>$row->USI,
+            'country'=>$row->country_of_citizenship,
+            'address1'=>$row->home_address,
+            'state'=>$row->province,
+            'postcode'=>$row->post_code,
+            'scountry'=>$row->country_current,
+            'saddress1'=>$row->current_address,
+            'sstate'=>$row->province_current,
+            'spostcode'=>$row->post_code_current,
         ];
 
-        if(!empty($this->state) && $this->state !== 'n.a'){
-            $data['state'] = $this->state;
-        }
+//        if(!empty($this->state) && $this->state !== 'n.a'){
+//            $data['state'] = $this->state;
+//        }
         return $data;
     }
 

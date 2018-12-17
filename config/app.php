@@ -160,7 +160,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+
+        // Self developed packages
+        SmartBro\Voucher\VoucherServiceProvider::class
     ],
 
     /*

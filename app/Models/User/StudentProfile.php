@@ -2,7 +2,9 @@
 
 namespace App\Models\User;
 
+use App\Models\Utils\Axcelerate\AxcelerateClient;
 use App\User;
+use FlipNinja\Axcelerate\Contacts\Contact;
 use Illuminate\Database\Eloquent\Model;
 
 class StudentProfile extends Model
@@ -36,6 +38,28 @@ class StudentProfile extends Model
         foreach ($data as $fieldName => $fieldValue) {
             $row->$fieldName = $fieldValue;
         }
-        return $row->save();
+
+        try{
+            $row->save();
+
+            // 构造ax需要的数据结构
+            $contactData = $user->_convertToAttributesData();
+
+            $manager = AxcelerateClient::GetContactManager();
+            $contact = $manager->findByEmail($user->email);
+
+            if($contact && $contact->id){
+                // Axcelerate中已经存在了这个用户， 那么更新操作
+                $contact->update($contactData);
+            }else{
+                $contact = new Contact($contactData, $manager);
+                if($contact->save($contactData)){
+                    $user->axcelerate_contact_id = $contact->id;
+                    $user->save();
+                }
+            }
+        }catch (\Exception $exception){
+            return false;
+        }
     }
 }
