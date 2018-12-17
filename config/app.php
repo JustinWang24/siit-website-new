@@ -163,7 +163,7 @@ return [
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
 
         // Self developed packages
-        SmartBro\Voucher\VoucherServiceProvider::class
+//        SmartBro\Voucher\VoucherServiceProvider::class
     ],
 
     /*
