@@ -31,6 +31,9 @@
                 <a class="navbar-item {{ $menuName=='orders' ? 'is-active' : null }}" href="{{ url('/backend/orders') }}">
                     <i class="fas fa-chart-line"></i>&nbsp;{{ trans('admin.menu.orders') }}
                 </a>
+                <a class="navbar-item {{ $menuName=='voucher' ? 'is-active' : null }}" href="{{ route('admin.voucher.mgr') }}">
+                    <i class="fas fa-ticket-alt"></i>&nbsp;{{ trans('admin.menu.voucher') }}
+                </a>
             @endif
         </div>
         <div class="navbar-end">

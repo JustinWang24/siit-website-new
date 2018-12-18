@@ -117,8 +117,6 @@ Route::prefix('backend')->middleware('auth')->group(function(){
     Route::get('menus/delete/{id}','Backend\Menus@delete');
     Route::post('menus/save','Backend\Menus@persistent');
 
-
-
     // 静态页相关
     Route::get('pages/index','Backend\Pages@index');
     Route::get('pages/add','Backend\Pages@add');
@@ -253,6 +251,12 @@ Route::prefix('backend')->middleware('auth')->group(function(){
     Route::get('brands/edit/{id}', 'Backend\Brands@edit');
     Route::get('brands/delete/{id}', 'Backend\Brands@delete');
     Route::post('brands/save','Backend\Brands@save');
+
+    /**
+     * 品牌管理
+     */
+    Route::get('voucher-manager', 'Backend\VouchersController@index')->name('admin.voucher.mgr');
+    Route::post('voucher-generator', 'Backend\VouchersController@generator')->name('admin.voucher.generator');
 });
 
 Route::prefix('group')->group(function (){

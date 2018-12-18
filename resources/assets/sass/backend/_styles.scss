@@ -171,3 +171,9 @@ $color-block-border: #f5f6f6;
     }
   }
 }
+
+.no-list-style{
+  li{
+    list-style: none !important;
+  }
+}

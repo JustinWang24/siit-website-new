@@ -22,6 +22,7 @@ return [
         'events'=>'Events',
         'staff'=>'Staff',
         'intakes'=>'Intakes',
+        'voucher'=>'Voucher',
     ],
     'new'=>[
         'menu'=>'Create Menu',
@@ -42,6 +43,7 @@ return [
         'events'=>'Create Event',
         'staff'=>'New Staff',
         'intakes'=>'New Intake',
+        'voucher'=>'New Vouchers',
     ],
     'mgr'=>'Management',
     'edit'=>[
