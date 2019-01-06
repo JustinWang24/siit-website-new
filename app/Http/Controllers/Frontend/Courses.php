@@ -4,15 +4,19 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Utils\Axcelerate\AxcelerateClient;
 use App\User;
-use FlipNinja\Axcelerate\Contacts\Contact;
 use FlipNinja\Axcelerate\Users\AxUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use App\Models\Order\Order;
 
 class Courses extends Controller
 {
-
+    /**
+     * 列出学生的课程列表
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function my_courses(Request $request){
         $this->dataForView['menuName'] = 'my_courses';
         $user = User::GetById($request->session()->get('user_data.id'));
@@ -22,41 +26,48 @@ class Courses extends Controller
         }
 
         $this->dataForView['user'] = $user;
-        if($this->_needLoginToAxcelerate()){
-            // todo 检查是否有自动登录的可能
-            // 获取登录Axe的信息
-            $loginDetail = $user->getDecryptAxeLoginDetail();
-            // 定义是否登录成功的标志
-            $axLoginSuccess = false;
 
-            if(!empty($loginDetail)){
-                // todo 保存过信息, 则去尝试登录
-                $axUser = $this->_tryToLoginToAxe($user);
-                if($axUser){
-                    if($axUser->isLoggedIn()){
-                        // 把需要的ax相关登录信息保存到session中
-                        $this->_saveAxUserInSession($axUser);
-                        $axLoginSuccess = true;
-                    }else{
-                        // 不算登录成功
-                        $request->session()->flash('msg',['content'=>$axUser->getLoginErrorMessage(),'status'=>'danger']);
-                        // 检查是否需要用户强行更新密码
-                        if($axUser->FLAG_NEED_TO_CHANGE_PASSWORD){
-                            return view(_get_frontend_theme_path('customers.axe.change_password'),$this->dataForView);
-                        }
-                    }
-                }
-            }
+        // 列出学生所有的订单中的课程
+        $this->dataForView['orders'] = Order::where('user_id','=',$user->id)
+            ->orderBy('id','desc')
+            ->paginate(100);
 
-            if(!$axLoginSuccess){
-                // todo 没有保存过信息, 或者自动登录失败, 则显示登录表单
-                return view(_get_frontend_theme_path('customers.axe.login'),$this->dataForView);
-            }
-            // 自动登录成功了
-        }
+        return view(_get_frontend_theme_path('customers.axe.login'),$this->dataForView);
 
-        // todo 不需要登录操作或者登录已经成功
-        AxcelerateClient::GetInstance()->courses()->enrolments($user->axcelerate_contact_json);
+//        if($this->_needLoginToAxcelerate()){
+//            // 获取登录Axe的信息
+//            $loginDetail = $user->getDecryptAxeLoginDetail();
+//            // 定义是否登录成功的标志
+//            $axLoginSuccess = false;
+//
+//            if(!empty($loginDetail)){
+//                // 保存过信息, 则去尝试登录
+//                $axUser = $this->_tryToLoginToAxe($user);
+//                if($axUser){
+//                    if($axUser->isLoggedIn()){
+//                        // 把需要的ax相关登录信息保存到session中
+//                        $this->_saveAxUserInSession($axUser);
+//                        $axLoginSuccess = true;
+//                    }else{
+//                        // 不算登录成功
+//                        $request->session()->flash('msg',['content'=>$axUser->getLoginErrorMessage(),'status'=>'danger']);
+//                        // 检查是否需要用户强行更新密码
+//                        if($axUser->FLAG_NEED_TO_CHANGE_PASSWORD){
+//                            return view(_get_frontend_theme_path('customers.axe.change_password'),$this->dataForView);
+//                        }
+//                    }
+//                }
+//            }
+//
+//            if(!$axLoginSuccess){
+//                // 没有保存过信息, 或者自动登录失败, 则显示登录表单
+//                return view(_get_frontend_theme_path('customers.axe.login'),$this->dataForView);
+//            }
+//            // 自动登录成功了
+//        }
+//
+//        // 不需要登录操作或者登录已经成功
+//        AxcelerateClient::GetInstance()->courses()->enrolments($user->axcelerate_contact_json);
     }
 
     /**
