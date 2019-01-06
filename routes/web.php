@@ -227,6 +227,7 @@ Route::prefix('backend')->middleware('auth')->group(function(){
      * 订单管理的路由
      */
     Route::get('orders', 'Backend\Orders@my_orders')->name('orders');
+    Route::get('orders/list-by-student', 'Backend\Orders@list_by_student')->name('orders.list.by.student');
     Route::get('orders/view/{orderId}', 'Backend\Orders@view');
     Route::post('orders/ajax_search', 'Backend\Orders@ajax_search');
     Route::get('orders/ajax_issue_invoice/{id}', 'Backend\Orders@ajax_issue_invoice');  // 切换订单的状态到发票已开的状态

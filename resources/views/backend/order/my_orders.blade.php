@@ -48,7 +48,7 @@
                                 {{ \App\Models\Utils\UserGroup::RoleName($value->customer ? $value->customer->role : null) }}
                             </td>
                             <td>
-                                <a href="{{ url('backend/orders/list_by_pm/'.$value->user_id) }}">{{$value->customer ? $value->customer->name : null }}</a>
+                                <a href="{{ route('orders.list.by.student',['order'=>$value->uuid]) }}">{{$value->customer ? $value->customer->name : null }}</a>
                             </td>
                             <td>
                                 <a href="#" v-on:click="showItems('{{$value->uuid}}')">

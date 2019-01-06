@@ -36,6 +36,26 @@ class Orders extends Controller
     }
 
     /**
+     * 查看某个学生的订单
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function list_by_student(Request $request){
+        $order = Order::GetByUuid($request->get('order'));
+        if($order){
+            $this->dataForView['orders'] = Order::where('user_id','=',$order->user_id)
+                ->orderBy('id','desc')
+                ->paginate(100);
+            $this->dataForView['vuejs_libs_required'] = ['my_orders'];
+            $this->dataForView['menuName'] = 'orders';
+            return view(
+                'backend.order.my_orders',
+                $this->dataForView
+            );
+        }
+    }
+
+    /**
      * 后台查看订单详情
      * @param $orderId
      * @param Request $request
