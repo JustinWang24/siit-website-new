@@ -76,6 +76,7 @@
                 <form method="post" action="{{ url('/frontend/place_order_checkout') }}" id="payment-form">
                     {{ csrf_field() }}
                     <input type="hidden" name="payment_method" value="pm-place-order" id="payment-method-input">
+                    <input type="hidden" name="from_pay_order_request" value="{{ isset($from_pay_order_request) ? $from_pay_order_request : false }}">
                     <input type="hidden" name="order" value="{{ $order->uuid }}">
                     @include(_get_frontend_theme_path('checkout.elements.payments'))
                     <input type="hidden" name="customerUuid" v-model="customer">

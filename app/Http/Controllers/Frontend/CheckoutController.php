@@ -35,6 +35,9 @@ class CheckoutController extends Controller
         $this->dataForView['order'] = $order;
         $this->dataForView['user'] = $customer;
 
+        // 学生在自己的后台点击付款，才会把这个参数设置为true，因此表示确认的支付订单
+        $this->dataForView['from_pay_order_request'] = true;
+
         $this->dataForView['vuejs_libs_required'] = [
             'payment_accordion',
             'guest_checkout'
@@ -83,13 +86,13 @@ class CheckoutController extends Controller
                     // 保留提交的订单留言
                     if(!empty($request->get('notes'))){
                         $order->notes .= PHP_EOL . $request->get('notes');
-
                     }
-                    $order->status = OrderStatus::$COMPLETE;
-                    $order->save();
-                    // 保存支付方式
-//                    PaymentTool::GetMethodTypeById($request->get('payment_method'));
 
+                    // 学生在自己的后台点击付款，才会把这个参数设置为true，因此表示确认的支付订单
+                    if($request->has('from_pay_order_request') && $request->get('from_pay_order_request') === '1'){
+                        $order->status = OrderStatus::$COMPLETE;
+                    }
+                    $order->save();
 
                     /**
                      * 订单生成成功, 发布订单创建事件
