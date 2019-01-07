@@ -69,9 +69,7 @@ Route::prefix('frontend')->group(function () {
     Route::post('customer/quick-checkout-register', 'Frontend\CustomersController@quick_checkout_register');
     Route::get('wholesalers/register', 'Frontend\CustomersController@register_wholesale');
     Route::post('wholesalers/register', 'Frontend\CustomersController@save_wholesale');
-});
 
-Route::prefix('frontend')->middleware(['auth'])->group(function () {
     // 支付订单, 从我的订单历史中而来
     Route::get('pay_order','Frontend\CheckoutController@pay_order')
         ->name('frontend.order.pay');
