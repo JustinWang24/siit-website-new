@@ -18,11 +18,11 @@
                 <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Dealer</th>
+                    <th>Agents</th>
+                    <th>Contact</th>
                     <th>Address</th>
-                    <th>Status</th>
+                    <th>Passport</th>
+                    <th>Cert</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -33,23 +33,45 @@
                     @endphp
                     <tr>
                         <td>
-                            {{ $value->name }}
+                            <span class="{{ $value->status ? '':'has-text-danger' }}">{{ $value->name }}</span>
                         </td>
-                        <td>
-                            <a href="mailto:{{ $value->email }}">{{ $value->email }}</a>
-                        </td>
-                        <td>{{ $value->phone }}</td>
                         <td>
                             @foreach($value->dealers as $ds)
-                            @php
-                                /** @var \App\Models\Dealer\DealerStudent $ds **/
-                            @endphp
-                            <p><a href="{{ route('admin.view.group.students',['group'=>$ds->group_id]) }}" target="_blank">{{ $ds->group->name }}</a></p>
+                                @php
+                                    /** @var \App\Models\Dealer\DealerStudent $ds **/
+                                @endphp
+                                <p><a href="{{ route('admin.view.group.students',['group'=>$ds->group_id]) }}" target="_blank">{{ $ds->group->name }}</a></p>
                             @endforeach
                         </td>
-                        <td>{{ $value->address ? $value->addressText() : null }}</td>
                         <td>
-                            {{ $value->status ? 'Active':'Suspend' }}
+                            <p>
+                                <a href="mailto:{{ $value->email }}">{{ $value->email }}</a>
+                            </p>
+                            <p>
+                                {{ $value->phone && strlen($value->phone) > 4 ? $value->phone : null }}
+                            </p>
+                        </td>
+                        <td>
+                            @if($value->address)
+                            <p>{{ $value->address }}</p>
+                            <p>{{ $value->city.' '.$value->postcode.', '.$value->state }}</p>
+                            <p>{{ $value->country }}</p>
+                            @endif
+                        </td>
+
+                        <td>
+                            @foreach(\App\Models\User\StudentProfile::$passportFields as $idx => $passportField)
+                                @if($value->studentProfile->$passportField)
+                                    <a href="{{ asset('storage/'.$value->studentProfile->$passportField) }}" target="_blank">Passport Page {{ $idx+1 }}</a>
+                                @endif
+                            @endforeach
+                        </td>
+                        <td>
+                            @foreach(\App\Models\User\StudentProfile::$certsFields as $idx => $certsField)
+                                @if($value->studentProfile->$certsField)
+                                    <a href="{{ asset('storage/'.$value->studentProfile->$certsField) }}" target="_blank">Certification {{ $idx+1 }}</a>
+                                @endif
+                            @endforeach
                         </td>
                         <td>
                             <a class="button is-small" href="{{ url('backend/customers/edit/'.$value->id) }}">
