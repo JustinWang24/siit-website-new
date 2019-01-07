@@ -70,10 +70,10 @@
                                 @if($value->studentProfile)
                                     @if(is_array($value->studentProfile->$certsField))
                                         @foreach($value->studentProfile->$certsField as $key=>$link)
-                                            <a href="{{ asset('storage/'.$link) }}" target="_blank">Certification {{ $idx+1 }} - {{ $key }}</a>
+                                    <p><a href="{{ asset('storage/'.$link) }}" target="_blank">Certification {{ $idx+1 }} - {{ $key }}</a></p>
                                         @endforeach
                                     @else
-                                    <a href="{{ asset('storage/'.$value->studentProfile->$certsField) }}" target="_blank">Certification {{ $idx+1 }}</a>
+                                    <p><a href="{{ asset('storage/'.$value->studentProfile->$certsField) }}" target="_blank">Certification {{ $idx+1 }}</a></p>
                                     @endif
                                 @endif
                             @endforeach
