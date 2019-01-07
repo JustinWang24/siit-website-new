@@ -475,8 +475,25 @@ class CustomersController extends Controller
             foreach (StudentProfile::$certsFields  as $certsField) {
                 if($request->hasFile($certsField)){
                     // 个人护照
-                    $profile->$certsField = $request->file($certsField)
-                        ->store($storagePath, 'public');
+                    if($certsField == 'applying_exemptions_files'){
+                        $uploaded = $request->file('applying_exemptions_files');
+                        $files = [];
+                        if(is_array($uploaded)){
+                            foreach ($uploaded as $key=>$file) {
+                                $path = $file->store($storagePath,'public');
+                                $files[] = $path;
+                            }
+                        }else{
+                            if($uploaded){
+                                $path = $uploaded->store($storagePath,'public');
+                                $files[] = $path;
+                            }
+                        }
+                        $profile->applying_exemptions_files = $files;
+                    }else{
+                        $profile->$certsField = $request->file($certsField)
+                            ->store($storagePath, 'public');
+                    }
                 }
             }
 

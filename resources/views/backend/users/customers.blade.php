@@ -58,7 +58,6 @@
                             <p>{{ $value->country }}</p>
                             @endif
                         </td>
-
                         <td>
                             @foreach(\App\Models\User\StudentProfile::$passportFields as $idx => $passportField)
                                 @if($value->studentProfile && $value->studentProfile->$passportField)
@@ -68,8 +67,14 @@
                         </td>
                         <td>
                             @foreach(\App\Models\User\StudentProfile::$certsFields as $idx => $certsField)
-                                @if($value->studentProfile && $value->studentProfile->$certsField)
+                                @if($value->studentProfile)
+                                    @if(is_array($value->studentProfile->$certsField))
+                                        @foreach($value->studentProfile->$certsField as $key=>$link)
+                                            <a href="{{ asset('storage/'.$link) }}" target="_blank">Certification {{ $idx+1 }} - {{ $key }}</a>
+                                        @endforeach
+                                    @else
                                     <a href="{{ asset('storage/'.$value->studentProfile->$certsField) }}" target="_blank">Certification {{ $idx+1 }}</a>
+                                    @endif
                                 @endif
                             @endforeach
                         </td>
