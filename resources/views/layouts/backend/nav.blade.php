@@ -67,7 +67,7 @@
             @if(env('activate_ecommerce', false))
             <li>
                 <a class="{{ $menuName=='customers' ? 'is-active' : null }}" href="{{ url('/backend/customers') }}">
-                    <i class="fa fa-user"></i>Customers
+                    <i class="fa fa-user"></i>Students Account
                 </a>
             </li>
             <li>

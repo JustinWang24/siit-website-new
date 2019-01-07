@@ -61,14 +61,14 @@
 
                         <td>
                             @foreach(\App\Models\User\StudentProfile::$passportFields as $idx => $passportField)
-                                @if($value->studentProfile->$passportField)
+                                @if($value->studentProfile && $value->studentProfile->$passportField)
                                     <a href="{{ asset('storage/'.$value->studentProfile->$passportField) }}" target="_blank">Passport Page {{ $idx+1 }}</a>
                                 @endif
                             @endforeach
                         </td>
                         <td>
                             @foreach(\App\Models\User\StudentProfile::$certsFields as $idx => $certsField)
-                                @if($value->studentProfile->$certsField)
+                                @if($value->studentProfile && $value->studentProfile->$certsField)
                                     <a href="{{ asset('storage/'.$value->studentProfile->$certsField) }}" target="_blank">Certification {{ $idx+1 }}</a>
                                 @endif
                             @endforeach
