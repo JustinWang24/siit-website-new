@@ -170,13 +170,13 @@
                                                 <label class="label">{{ trans('student.'.$certsField) }}</label>
                                                 <div class="file">
                                                     <label class="file-label">
-                                                        <input class="file-input" type="file" name="{{ $certsField }}">
+                                                        <input class="file-input" type="file" name="{{ $certsField == 'applying_exemptions_files' ? 'applying_exemptions_files[]' : $certsField }}" {{ $certsField == 'applying_exemptions_files' ? 'multiple' : null }}>
                                                         <span class="file-cta">
                                                       <span class="file-icon">
                                                         <i class="fas fa-upload"></i>
                                                       </span>
                                                       <span class="file-label">
-                                                        Choose a file…
+                                                        Choose {{ $certsField == 'applying_exemptions_files' ? 'files' : 'a file' }} ...
                                                       </span>
                                                     </span>
                                                     </label>
@@ -184,7 +184,13 @@
                                             </div>
                                             <div class="field" style="width: 50%;float:left;">
                                                 @if(!empty($studentProfileArray[$certsField]))
+                                                    @if(is_array($studentProfileArray[$certsField]))
+                                                        @foreach($studentProfileArray[$certsField] as $itemId=>$certItem)
+                                                            <p><a href="{{ asset('storage/'.$certItem) }}" target="_blank">Uploaded File {{ $itemId+1 }}</a></p>
+                                                        @endforeach
+                                                    @else
                                                 <a href="{{ asset('storage/'.$studentProfileArray[$certsField]) }}" target="_blank">Uploaded File</a>
+                                                    @endif
                                                 @endif
                                             </div>
                                         </div>

@@ -91,5 +91,5 @@ return [
     'passport_first_page_image'=>'First page of your passport',
     'passport_expiry_date'=>'Page of your passport with expire date',
     'english_test_certificate_image'=>'Scores of your English test certification',
-    'applying_exemptions_files'=>'Applying exemptions file',
+    'applying_exemptions_files'=>'Applying exemptions files',
 ];
