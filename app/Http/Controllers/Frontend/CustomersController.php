@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Models\Utils\UserGroup as UserGroupTool;
 use App\Events\UserCreated;
+use Illuminate\Support\Facades\Auth;
 use Ramsey\Uuid\Uuid;
 use Hash;
 use App\Models\Newsletter\UserSubscribe;
@@ -411,9 +412,13 @@ class CustomersController extends Controller
     public function my_profile($uuid=null, Request $request){
         if($uuid && $uuid == session('user_data.uuid')){
             // 表示当前的用户是正常的
+            /**
+             * @var User $user
+             */
             $user = User::find(session('user_data.id'));
             $this->dataForView['menuName'] = 'my_profile';
             $this->dataForView['user'] = $user;
+            $this->dataForView['studentProfileArray'] = $user->studentProfile->toArray();
             $this->dataForView['vuejs_libs_required'] = ['my_profile'];
             return view(
                 _get_frontend_theme_path('customers.my_profile'),
@@ -443,6 +448,24 @@ class CustomersController extends Controller
                 return redirect('frontend/my_profile/'.session('user_data.uuid'));
             }
         }
+    }
+
+    public function update_my_profile(Request $request){
+        /**
+         * @var User $user
+         */
+        $user = User::find(session('user_data.id'));
+        $profile = $user->studentProfile;
+        $sp = $request->get('sp');
+        foreach ($sp as $fieldName=>$value) {
+            $profile->$fieldName = $value;
+        }
+        if($profile->save()){
+            session()->flash('msg', ['content' => 'Your profile has been updated successfully!', 'status' => 'success']);
+        }else{
+            session()->flash('msg', ['content' => 'System is busy, please try later!', 'status' => 'danger']);
+        }
+        return redirect('frontend/my_profile/'.session('user_data.uuid'));
     }
 
     /**

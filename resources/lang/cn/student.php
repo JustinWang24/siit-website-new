@@ -1,5 +1,6 @@
 <?php
 return [
+    'Profile'=>'学生资料',
     'family_name'=>'姓氏',
     'family_name_placeholder'=>'姓氏',
     'given_name'=>'名',
@@ -77,4 +78,7 @@ return [
     'heard_from'=>'您从哪里知道我们?',
     'heard_from_placeholder'=>'',
     '_placeholder'=>'',
+    'enrolled_at_siit_previously'=>'Dis you enrolled at SIIT before?',
+    'seeking_credits_transfer'=>'Seeking credits transfer?',
+    'is_english_your_first_language'=>'Is English your first language?',
 ];

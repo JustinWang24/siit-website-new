@@ -7,18 +7,6 @@
 
                 <div class="column is-three-quarter content-block content-two-third-right">
                     <div class="content-title-line">
-                        <h3>{{ trans('general.Address') }}</h3>
-                    </div>
-
-                    <div class="content-detail-wrap">
-                        <div class="content-line">
-                            <label><i class="fas fa-map-signs has-text-danger"></i></label>
-                            <label class="value">{{ $user->addressText() }}</label>
-                        </div>
-                    </div>
-
-                    <div class="content-title-line">
-                        <br>
                         <h3>{{ trans('general.My_Contact_Detail') }}</h3>
                     </div>
                     <div class="content-detail-wrap">
@@ -105,6 +93,55 @@
                     </div>
                     <div class="is-clearfix"></div>
                     <br>
+                    <div class="content-title-line">
+                        <h3>{{ trans('student.Profile') }}</h3>
+                    </div>
+                    <div class="content-detail-wrap">
+                        @php
+                        $arrayToIgnored = ['id','user_id','agent_id','gender','disability_required','created_at','updated_at','siit_student_id','authorize_to_agent','heard_from','visa_category'];
+                        $passportFields = ['passport_first_page_image','passport_expiry_date'];
+                        $certsFields = ['english_test_certificate_image','document_evidence','applying_exemptions_files'];
+                        $dropDownsFields = ['is_pr','enrolled_at_siit_previously','seeking_credits_transfer','is_english_your_first_language','applying_exemptions','complete_any_secondary_study','hold_certificate_of_english_proficiency'];
+                        @endphp
+
+                        <form method="post" action="{{ url('frontend/update_my_profile') }}">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="id" value="{{ $user->uuid }}">
+                            <div>
+                                @foreach($studentProfileArray as $fieldName=>$fieldValue)
+                                    @if(!in_array($fieldName, $arrayToIgnored) && !in_array($fieldName, $passportFields) && !in_array($fieldName, $certsFields) && !in_array($fieldName, $dropDownsFields))
+                                    <div class="column is-6-desktop is-12-mobile"  style="width: 45%;float: left;margin: 1%;">
+                                        <div class="field">
+                                            <label class="label">{{ trans('student.'.$fieldName) }}</label>
+                                            <div class="control">
+                                                <input type="text" class="input" name="sp[{{ $fieldName }}]"  value="{{ $fieldValue }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                            <div>
+                                @foreach($dropDownsFields as $fieldName)
+                                    <div class="column is-6-desktop is-12-mobile"  style="width: 45%;float: left;margin: 1%;">
+                                        <div class="field">
+                                            <label class="label">{{ trans('student.'.$fieldName) }}</label>
+                                            <div class="control">
+                                                <div class="select">
+                                                <select name="sp[{{ $fieldName }}]">
+                                                    <option value="0" {{ $studentProfileArray[$fieldName] == 0 ? 'selected' : null }}>NO</option>
+                                                    <option value="1" {{ $studentProfileArray[$fieldName] == 1 ? 'selected' : null }}>YES</option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <button type="submit" class="button is-link is-pulled-right">{{ trans('general.Submit') }}</button>
+                        </form>
+
+                    </div>
                 </div>
             </div>
         </div>

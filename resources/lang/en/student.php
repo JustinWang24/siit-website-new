@@ -1,5 +1,6 @@
 <?php
 return [
+    'Profile'=>'Profile',
     'family_name'=>'Family Name',
     'family_name_placeholder'=>'Family Name',
     'given_name'=>'Given Name',
@@ -84,4 +85,7 @@ return [
     'applying_exemptions_placeholder'=>'',
     'heard_from'=>'Where did you heard about us?',
     'heard_from_placeholder'=>'',
+    'enrolled_at_siit_previously'=>'Dis you enrolled at SIIT before?',
+    'seeking_credits_transfer'=>'Seeking credits transfer?',
+    'is_english_your_first_language'=>'Is English your first language?',
 ];

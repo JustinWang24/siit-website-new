@@ -94,6 +94,7 @@ Route::prefix('frontend')->group(function () {
     Route::get('my_profile/{userUuid?}','Frontend\CustomersController@my_profile');
     Route::post('my_profile/{userUuid?}','Frontend\CustomersController@my_profile');
     Route::post('update_password','Frontend\CustomersController@update_password');
+    Route::post('update_my_profile','Frontend\CustomersController@update_my_profile')->name('student.update.profile.post');
 
     Route::get('view_order/{userUuid}/{orderUuid}','Frontend\Orders@view_order');
 
