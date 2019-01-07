@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,7 +9,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', 'Frontend\Pages@index')->name('home');
 Route::get('/contact-us', 'Frontend\Pages@contact_us')->name('contact_us');
 Route::post('/contact-us', 'Frontend\Pages@contact_us_handler');
@@ -72,6 +70,7 @@ Route::prefix('frontend')->group(function () {
     Route::get('wholesalers/register', 'Frontend\CustomersController@register_wholesale');
     Route::post('wholesalers/register', 'Frontend\CustomersController@save_wholesale');
 });
+
 Route::prefix('frontend')->middleware(['auth'])->group(function () {
     // 支付订单, 从我的订单历史中而来
     Route::get('pay_order','Frontend\CheckoutController@pay_order')
