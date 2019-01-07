@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Utils\Axcelerate\AxcelerateClient;
+use App\Models\Utils\OrderStatus;
 use App\User;
 use FlipNinja\Axcelerate\Users\AxUser;
 use Illuminate\Http\Request;
@@ -29,10 +30,11 @@ class Courses extends Controller
 
         // 列出学生所有的订单中的课程
         $this->dataForView['orders'] = Order::where('user_id','=',$user->id)
+//            ->where('status','=',OrderStatus::$COMPLETE)
             ->orderBy('id','desc')
             ->paginate(100);
 
-        return view(_get_frontend_theme_path('customers.axe.login'),$this->dataForView);
+        return view(_get_frontend_theme_path('customers.my_courses'),$this->dataForView);
 
 //        if($this->_needLoginToAxcelerate()){
 //            // 获取登录Axe的信息

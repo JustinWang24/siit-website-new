@@ -7,20 +7,32 @@
 
                 <div class="column is-three-quarter content-block content-two-third-right">
                     <div class="content-title-line">
-                        <h3>Log in to Axcelerate</h3>
+                        <h3>My Courses</h3>
                     </div>
                     <div class="content-detail-wrap">
-                        <p>
-                            <a target="_blank" class="button is-success pull-right" href="https://admin.axcelerate.com.au/management/">Axcelerate</a>
-                        </p>
-                    </div>
-                    <div class="content-title-line">
-                        <h3>Log in to Moodle</h3>
-                    </div>
-                    <div class="content-detail-wrap">
-                        <p>
-                            <a target="_blank" class="button is-success pull-right" href="https://apei.moodle.com.au/">Moodle</a>
-                        </p>
+                        <ul>
+                            @if($orders && count($orders)>0)
+                                @foreach($orders as $order)
+                                    @php
+/** @var \App\Models\Order\Order $order */
+                                    @endphp
+                                <li style="margin-bottom: 30px;">
+                                    @foreach($order->orderItems as $orderItem)
+                                        @php
+                                            /** @var \App\Models\Order\OrderItem $orderItem */
+                                        @endphp
+                                        <h6>{{ $orderItem->product->getProductName() }} ({{ $orderItem->product->getBrand()->name }})
+                                            {{ $orderItem->intake_start_date? $orderItem->intake_start_date->format('d-M-Y'):null }}
+                                            {{ $orderItem->finish_date? ' - '.$orderItem->finish_date->format('d-M-Y'):null }}
+                                        </h6>
+                                        {!! $orderItem->notes !!}
+                                    @endforeach
+                                </li>
+                                @endforeach
+                            @else
+                            <li>You don't have any course yet!</li>
+                            @endif
+                        </ul>
                     </div>
                 </div>
             </div>
