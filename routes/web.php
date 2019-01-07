@@ -60,7 +60,7 @@ Route::prefix('catalog')->group(function(){
 
 // 前端页面显示相关路由组
 Route::prefix('frontend')->group(function () {
-    // 用户登录与注册
+// 用户登录与注册
     Route::post('customer/is_email_exist', 'Frontend\CustomersController@is_email_exist');
     Route::get('customers/login', 'Frontend\CustomersController@login')->name('customer_login');
     Route::post('customers/login', 'Frontend\CustomersController@login_check');
@@ -71,7 +71,8 @@ Route::prefix('frontend')->group(function () {
     Route::post('customer/quick-checkout-register', 'Frontend\CustomersController@quick_checkout_register');
     Route::get('wholesalers/register', 'Frontend\CustomersController@register_wholesale');
     Route::post('wholesalers/register', 'Frontend\CustomersController@save_wholesale');
-
+});
+Route::prefix('frontend')->middleware(['auth'])->group(function () {
     // 支付订单, 从我的订单历史中而来
     Route::get('pay_order','Frontend\CheckoutController@pay_order')
         ->name('frontend.order.pay');
@@ -94,7 +95,7 @@ Route::prefix('frontend')->group(function () {
     Route::get('my_profile/{userUuid?}','Frontend\CustomersController@my_profile');
     Route::post('my_profile/{userUuid?}','Frontend\CustomersController@my_profile');
     Route::post('update_password','Frontend\CustomersController@update_password');
-    Route::post('update_my_profile','Frontend\CustomersController@update_my_profile')->name('student.update.profile.post');
+    Route::any('update_my_profile','Frontend\CustomersController@update_my_profile')->name('student.update.profile.post');
 
     Route::get('view_order/{userUuid}/{orderUuid}','Frontend\Orders@view_order');
 
@@ -106,7 +107,7 @@ Route::prefix('frontend')->group(function () {
 
 Auth::routes();
 
-Route::prefix('backend')->middleware('auth')->group(function(){
+Route::prefix('backend')->middleware(['auth'])->group(function(){
     // 联系的 Leads 列表
     Route::get('leads','Backend\Pages@leads');
     Route::get('leads/delete/{id}','Backend\Pages@lead_delete');
@@ -265,7 +266,9 @@ Route::prefix('group')->group(function (){
     Route::get('login', 'Group\Index@login')->name('group.login');
     Route::post('login', 'Group\Index@login_action')->name('group.login.action');
     Route::post('logout', 'Group\Index@logout')->name('group.logout');
+});
 
+Route::prefix('group')->middleware(['auth'])->group(function (){
     // 经销商主页
     Route::get('portal', 'Group\Index@portal')->name('group.portal');
     Route::get('students', 'Group\Index@students')->name('group.students');
@@ -273,5 +276,5 @@ Route::prefix('group')->group(function (){
     Route::get('payments', 'Group\Index@payments')->name('group.payments');
 });
 
-Route::get('/home', 'Backend\Home@index');
+Route::middleware(['auth'])->get('/home', 'Backend\Home@index');
 Route::get('/api/submenu/{id}','Api\Menus@submenu');
