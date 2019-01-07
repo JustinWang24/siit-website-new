@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class StudentProfile extends Model
 {
+    public static $passportFields = ['passport_first_page_image','passport_expiry_date'];
+    public static $certsFields = ['english_test_certificate_image','document_evidence','applying_exemptions_files'];
+
     protected $casts = [
         'applying_exemptions_files' => 'array', // 可能保存多个文件的路径
         'gender' => 'boolean',

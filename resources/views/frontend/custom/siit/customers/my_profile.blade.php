@@ -99,12 +99,10 @@
                     <div class="content-detail-wrap">
                         @php
                         $arrayToIgnored = ['id','user_id','agent_id','gender','disability_required','created_at','updated_at','siit_student_id','authorize_to_agent','heard_from','visa_category'];
-                        $passportFields = ['passport_first_page_image','passport_expiry_date'];
-                        $certsFields = ['english_test_certificate_image','document_evidence','applying_exemptions_files'];
                         $dropDownsFields = ['is_pr','enrolled_at_siit_previously','seeking_credits_transfer','is_english_your_first_language','applying_exemptions','complete_any_secondary_study','hold_certificate_of_english_proficiency'];
                         @endphp
 
-                        <form method="post" action="{{ url('frontend/update_my_profile') }}">
+                        <form method="post" action="{{ url('frontend/update_my_profile') }}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <input type="hidden" name="id" value="{{ $user->uuid }}">
                             <div>
@@ -137,6 +135,61 @@
                                         </div>
                                     </div>
                                 @endforeach
+                            </div>
+                            <div>
+                                @foreach($passportFields as $passportField)
+                                    <div class="column is-12">
+                                        <div class="field" style="width: 50%;float:left;">
+                                            <label class="label">{{ trans('student.'.$passportField) }}</label>
+                                            <div class="file">
+                                                <label class="file-label">
+                                                    <input class="file-input" type="file" name="{{ $passportField }}">
+                                                    <span class="file-cta">
+                                                      <span class="file-icon">
+                                                        <i class="fas fa-upload"></i>
+                                                      </span>
+                                                      <span class="file-label">
+                                                        Choose a file…
+                                                      </span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div style="width: 50%;float:left;">
+                                            @if(!empty($studentProfileArray[$passportField]))
+                                                <img src="{{ asset('storage/'.$studentProfileArray[$passportField]) }}" style="width: 200px;">
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="is-clearfix"></div>
+                                @endforeach
+
+                                    @foreach($certsFields as $certsField)
+                                        <div class="column is-12">
+                                            <div class="field" style="width: 50%;float:left;">
+                                                <label class="label">{{ trans('student.'.$certsField) }}</label>
+                                                <div class="file">
+                                                    <label class="file-label">
+                                                        <input class="file-input" type="file" name="{{ $certsField }}">
+                                                        <span class="file-cta">
+                                                      <span class="file-icon">
+                                                        <i class="fas fa-upload"></i>
+                                                      </span>
+                                                      <span class="file-label">
+                                                        Choose a file…
+                                                      </span>
+                                                    </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="field" style="width: 50%;float:left;">
+                                                @if(!empty($studentProfileArray[$certsField]))
+                                                <a href="{{ asset('storage/'.$studentProfileArray[$certsField]) }}" target="_blank">Uploaded File</a>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="is-clearfix"></div>
+                                    @endforeach
                             </div>
                             <button type="submit" class="button is-link is-pulled-right">{{ trans('general.Submit') }}</button>
                         </form>

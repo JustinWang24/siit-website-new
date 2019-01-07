@@ -81,4 +81,6 @@ return [
     'enrolled_at_siit_previously'=>'Dis you enrolled at SIIT before?',
     'seeking_credits_transfer'=>'Seeking credits transfer?',
     'is_english_your_first_language'=>'Is English your first language?',
+    'passport_first_page_image'=>'您的护照首页',
+    'passport_expiry_date'=>'您的护照有效期页',
 ];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Customer\Wholesaler;
+use App\Models\User\StudentProfile;
 use App\Models\Utils\JsonBuilder;
 use App\Models\Utils\UserGroup;
 use Illuminate\Http\Request;
@@ -420,6 +421,9 @@ class CustomersController extends Controller
             $this->dataForView['user'] = $user;
             $this->dataForView['studentProfileArray'] = $user->studentProfile->toArray();
             $this->dataForView['vuejs_libs_required'] = ['my_profile'];
+            $this->dataForView['passportFields'] = StudentProfile::$passportFields;
+            $this->dataForView['certsFields'] = StudentProfile::$certsFields;
+
             return view(
                 _get_frontend_theme_path('customers.my_profile'),
                 $this->dataForView
@@ -455,17 +459,38 @@ class CustomersController extends Controller
          * @var User $user
          */
         $user = User::find(session('user_data.id'));
-        $profile = $user->studentProfile;
-        $sp = $request->get('sp');
-        foreach ($sp as $fieldName=>$value) {
-            $profile->$fieldName = $value;
+        if($user){
+            $profile = $user->studentProfile;
+
+            $storagePath = _buildUploadFolderPath();
+            // 可能上传的文件
+            foreach (StudentProfile::$passportFields as $passportField) {
+                if($request->hasFile($passportField)){
+                    // 个人护照
+                    $profile->$passportField = $request->file($passportField)
+                        ->store($storagePath, 'public');
+                }
+            }
+
+            foreach (StudentProfile::$certsFields  as $certsField) {
+                if($request->hasFile($certsField)){
+                    // 个人护照
+                    $profile->$certsField = $request->file($certsField)
+                        ->store($storagePath, 'public');
+                }
+            }
+
+            $sp = $request->get('sp');
+            foreach ($sp as $fieldName=>$value) {
+                $profile->$fieldName = $value;
+            }
+            if($profile->save()){
+                session()->flash('msg', ['content' => 'Your profile has been updated successfully!', 'status' => 'success']);
+            }else{
+                session()->flash('msg', ['content' => 'System is busy, please try later!', 'status' => 'danger']);
+            }
+            return redirect('frontend/my_profile/'.session('user_data.uuid'));
         }
-        if($profile->save()){
-            session()->flash('msg', ['content' => 'Your profile has been updated successfully!', 'status' => 'success']);
-        }else{
-            session()->flash('msg', ['content' => 'System is busy, please try later!', 'status' => 'danger']);
-        }
-        return redirect('frontend/my_profile/'.session('user_data.uuid'));
     }
 
     /**
