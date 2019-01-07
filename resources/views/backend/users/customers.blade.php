@@ -53,15 +53,17 @@
                         </td>
                         <td>
                             @if($value->address)
-                            <p>{{ $value->address }}</p>
-                            <p>{{ $value->city.' '.$value->postcode.', '.$value->state }}</p>
-                            <p>{{ $value->country }}</p>
+                            <p class="is-marginless">{{ $value->address }}</p>
+                            <p class="is-marginless">{{ $value->city.' '.$value->postcode.', '.$value->state }}</p>
+                            <p class="is-marginless">{{ $value->country }}</p>
                             @endif
                         </td>
                         <td>
                             @foreach(\App\Models\User\StudentProfile::$passportFields as $idx => $passportField)
                                 @if($value->studentProfile && $value->studentProfile->$passportField)
+                                    <p class="is-marginless">
                                     <a href="{{ asset('storage/'.$value->studentProfile->$passportField) }}" target="_blank">Passport Page {{ $idx+1 }}</a>
+                                    </p>
                                 @endif
                             @endforeach
                         </td>
@@ -70,10 +72,10 @@
                                 @if($value->studentProfile)
                                     @if(is_array($value->studentProfile->$certsField))
                                         @foreach($value->studentProfile->$certsField as $key=>$link)
-                                    <p><a href="{{ asset('storage/'.$link) }}" target="_blank">Certification {{ $idx+1 }} - {{ $key+1 }}</a></p>
+                                    <p class="is-marginless"><a href="{{ asset('storage/'.$link) }}" target="_blank">Certification {{ $idx+1 }} - {{ $key+1 }}</a></p>
                                         @endforeach
                                     @else
-                                    <p><a href="{{ asset('storage/'.$value->studentProfile->$certsField) }}" target="_blank">Certification {{ $idx+1 }}</a></p>
+                                    <p class="is-marginless"><a href="{{ asset('storage/'.$value->studentProfile->$certsField) }}" target="_blank">Certification {{ $idx+1 }}</a></p>
                                     @endif
                                 @endif
                             @endforeach
