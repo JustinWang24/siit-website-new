@@ -83,4 +83,5 @@ return [
     'is_english_your_first_language'=>'Is English your first language?',
     'passport_first_page_image'=>'您的护照首页',
     'passport_expiry_date'=>'您的护照有效期页',
+    'english_test_certificate_image'=>'您的英语考试成绩的扫描件',
 ];
