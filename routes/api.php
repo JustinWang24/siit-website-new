@@ -72,6 +72,8 @@ Route::prefix('files')->group(function(){
     Route::post('student-attachment','Api\Medias@upload_student_attachment_ajax')->name('api.files.student.attachment.upload');
     // 加载所有的图片
     Route::get('load-all','Api\Medias@load_all_files');
+    // 下载文件
+    Route::get('download','Api\Medias@download')->name('download.file');
 });
 
 /**
@@ -183,4 +185,3 @@ Route::prefix('dealers')->group(function(){
 Route::prefix('orders')->group(function(){
     Route::any('search-ajax','Api\Orders@search_ajax');
 });
-

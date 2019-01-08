@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User\Attachment;
+use App\Models\User\StudentProfile;
 use App\Models\Utils\MediaTool;
 use App\User;
 use Illuminate\Http\Request;
@@ -10,6 +11,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Utils\JsonBuilder;
 use App\Models\Media;
 use App\Models\Catalog\Product;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class Medias extends Controller
 {
@@ -267,5 +270,38 @@ class Medias extends Controller
         }else{
             return JsonBuilder::Error();
         }
+    }
+
+    /**
+     * 文件下载链接
+     * @param Request $request
+     * @return mixed
+     */
+    public function download(Request $request){
+        $user = DB::table('users')->select(['id','uuid','name'])->where('uuid','=',$request->get('u'))->first();
+        $index = $request->has('index') ? intval($request->get('index')) : null;
+        if($user){
+            if($request->get('from') == 'sp'){
+                $field = $request->get('f');
+                $sp = DB::table('student_profiles')->select(['id',$field])->where('user_id','=',$user->id)->first();
+                $path = $sp->$field ?? null;
+                if($path){
+                    if(!is_null($index)){
+                        // 表示取回的字段应该是个json对象的数组，保存了多个文件的路径
+                        $json = json_decode($path,true);
+                        $path = $json[$index];
+                    }
+                    $tmp = explode('.',$path);
+                    $extName = $tmp[count($tmp) - 1];
+                    $fileName = (str_replace(' ','_',$user->name)).'_'.$field;
+
+                    if(!is_null($index)){
+                        $fileName .= '_'.($index+1);
+                    }
+                    return Storage::disk('public')->download($path, $fileName.'.'.$extName);
+                }
+            }
+        }
+        return "File not exist";
     }
 }

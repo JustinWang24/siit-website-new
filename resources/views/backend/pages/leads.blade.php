@@ -48,7 +48,6 @@
                 @endforeach
                 </tbody>
             </table>
-
             {{ $leads->links() }}
         </div>
     </div>

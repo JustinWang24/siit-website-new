@@ -62,7 +62,7 @@
                             @foreach(\App\Models\User\StudentProfile::$passportFields as $idx => $passportField)
                                 @if($value->studentProfile && $value->studentProfile->$passportField)
                                     <p class="is-marginless">
-                                    <a href="{{ asset('storage/'.$value->studentProfile->$passportField) }}" target="_blank">Passport Page {{ $idx+1 }}</a>
+                                    <a href="{{ route('download.file',['u'=>$value->uuid,'from'=>'sp','f'=>$passportField]) }}">Passport Page {{ $idx+1 }}</a>
                                     </p>
                                 @endif
                             @endforeach
@@ -72,10 +72,10 @@
                                 @if($value->studentProfile)
                                     @if(is_array($value->studentProfile->$certsField))
                                         @foreach($value->studentProfile->$certsField as $key=>$link)
-                                    <p class="is-marginless"><a href="{{ asset('storage/'.$link) }}" target="_blank">Certification {{ $idx+1 }} - {{ $key+1 }}</a></p>
+                                    <p class="is-marginless"><a href="{{ route('download.file',['u'=>$value->uuid,'from'=>'sp','f'=>$certsField,'index'=>$key]) }}">Certification {{ $idx+1 }} - {{ $key+1 }}</a></p>
                                         @endforeach
                                     @else
-                                    <p class="is-marginless"><a href="{{ asset('storage/'.$value->studentProfile->$certsField) }}" target="_blank">Certification {{ $idx+1 }}</a></p>
+                                    <p class="is-marginless"><a href="{{ route('download.file',['u'=>$value->uuid,'from'=>'sp','f'=>$certsField]) }}">Certification {{ $idx+1 }}</a></p>
                                     @endif
                                 @endif
                             @endforeach
