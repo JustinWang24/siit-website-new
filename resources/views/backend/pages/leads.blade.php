@@ -16,10 +16,9 @@
             <table class="table full-width is-hoverable">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Date</th>
+                    <th width="120">Name</th>
+                    <th width="120">Contact</th>
+                    <th width="120">Date</th>
                     <th>Message</th>
                     <th>Actions</th>
                 </tr>
@@ -31,13 +30,11 @@
                             {{ $value->name }}
                         </td>
                         <td>
-                            {{ $value->phone }}
+                            <p><a href="mailto:{{ $value->email }}">{{ $value->email }}</a></p>
+                            <p>{{ $value->phone }}</p>
                         </td>
                         <td>
-                            <a href="mailto:{{ $value->email }}">{{ $value->email }}</a>
-                        </td>
-                        <td>
-                            {{ $value->created_at->format('H:i - d M Y') }}
+                            {{ $value->created_at->format('d-M-Y') }}
                         </td>
                         <td>
                             {!! $value->message !!}
